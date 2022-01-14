@@ -1,0 +1,56 @@
+/* Whole document: */
+body{
+  font-family: Helvetica;
+  font-size: 10pt;
+}
+/* Headers */
+h1{
+  font-size: 12pt;
+}
+/* Headers */
+h2,h3,h4,h5,h6{
+  font-size: 11pt;
+}
+/*stop the url printing in links*/
+a[href^="http"]:not([class="uri"])::after {
+  content: "";
+}
+
+@page {
+size: 8.5in 11in;
+}
+
+@page:left {
+  margin-left: 30mm;
+  margin-right: 30mm;
+  margin-top: 30mm;
+  margin-bottom: 30mm;
+}
+
+@page:right {
+  margin-left: 30mm;
+  margin-right: 30mm;
+  margin-top: 30mm;
+  margin-bottom: 30mm;
+}
+
+.title {
+  font-size: 18px;
+  color: Black;
+  text-align: center;
+}
+.author { /* Header 4 - and the author and data headers use this too  */
+  font-size: 13px;
+  color: Black;
+  text-align: center;
+}
+.date{ /* Header 4 - and the author and data headers use this too  */
+  font-size: 12px;
+  color: Black;
+  text-align: center;
+}
+
+/*set the caption size - this might work with my_kable2 but not sure*/
+/* .caption p {
+   font-size: 10px;
+}*/

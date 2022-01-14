@@ -1,0 +1,43 @@
+
+
+# Background
+
+
+## Project Location
+
+```{r overview-map, fig.cap = 'Overview map of Study Areas',eval=T}
+knitr::include_graphics("fig/logo.png")
+```
+
+<br>
+
+```{r hydrology-plot, fig.cap = 'Hydrograph for Bulkley River at Quick (Station #08EE004) and near Houston (Station #08EE003).', fig.show="hold", out.width= c("49.5%","1%","49.5%"), eval=T}
+knitr::include_graphics("fig/logo.png")
+knitr::include_graphics("fig/pixel.png")
+knitr::include_graphics("fig/logo.png")
+```
+
+
+`r if(gitbook_on){knitr::asis_output("<br>")} else knitr::asis_output("<br><br><br><br>")`
+
+
+```{r fiss-species-table, eval=F}
+fiss_species_table <- readr::read_csv(paste0(getwd(), '/data/extracted_inputs/fiss_species_table.csv'))
+  # filter(`Species Code` != 'CT') %>% 
+# fiss_species_table %>%  
+#   my_kable(caption_text = 'Fish species recorded in the Bulkley River and Morice River watershed groups.')
+
+
+if(gitbook_on){
+fiss_species_table %>% 
+  my_kable_scroll(caption_text = 'Fish species recorded in the Bulkley River and Morice River watershed groups.')
+} else fiss_species_table[1:41, ] %>% 
+  my_kable(caption_text = 'Fish species recorded in the Bulkley River and Morice River watershed groups.')
+
+if(identical(gitbook_on, FALSE)){fiss_species_table[42:nrow(fiss_species_table), ] %>% 
+  my_kable()}
+
+```
+
+
+

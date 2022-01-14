@@ -1,0 +1,7 @@
+
+# Session Info {-}
+
+
+```{r session info, comment="", class.source = 'fold-show'}
+xfun::session_info()
+```

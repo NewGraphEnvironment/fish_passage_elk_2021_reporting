@@ -1,0 +1,1 @@
+Workflows for pre-processing of field data so it aligns with bcfishpass outputs. These are often 2 way workflows where we use output csv spreadsheets to update our raw input datasheets.  It may be a bit confusing to follow but we try to document it just the same.

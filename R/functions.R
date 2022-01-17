@@ -247,3 +247,33 @@ import_pscis_all <- function(){
     purrr::set_names(c('pscis_phase1', 'pscis_phase2', 'pscis_reassessments', 'pscis_all'))
   return(all)
 }
+
+fpr_photos_backup <- function(filename = 'al'){
+  ##get teh name of the folder we are in
+  bname <- basename(dirname(dirname(getwd())))
+  ##here we back everything up to the D drive
+  targetdir = paste0("D:/New_Graph/backups/photos/", bname, "/")
+  dir.create(targetdir)
+
+  targetdir = paste0("D:/New_Graph/backups/photos/", bname, "/", filename)
+  dir.create(targetdir)
+
+
+  ##path to the photos
+  path <- paste0("C:/Users/allan/OneDrive/New_Graph/Current/", bname, '/data/photos/', filename)
+
+  filestocopy <- list.files(path = path,
+                            full.names = T)
+
+  #copy over the photos in the al folder -- this is done already
+  file.copy(from=filestocopy, to=targetdir,
+            overwrite = F, recursive = FALSE,
+            copy.mode = TRUE)
+}
+
+## we  want to convert our png to jpeg in case we want them for something
+fpr_img_resize_convert <- function(img){
+  image <- image_read(img)
+  image_scaled <- image_scale(image,"1440x1080!")
+  image_write(image_scaled, path = paste0(path, '/', tools::file_path_sans_ext(basename(img)), '.JPG'), format = 'jpg')
+}

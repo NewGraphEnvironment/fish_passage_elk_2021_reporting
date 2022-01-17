@@ -220,6 +220,15 @@ import_pscis <- function(workbook_name = 'pscis_phase1.xlsm'){ ##new template.  
     mutate(across(all_of(sig_fig0), round, 0)) %>%
     mutate(across(all_of(sig_fig1), round, 1)) %>%
     mutate(across(all_of(sig_fig2), round, 2)) %>%
-    tibble::rowid_to_column()
+    tibble::rowid_to_column() %>%
+    mutate(rowid = rowid + 4,
+           pscis_crossing_id = as.numeric(pscis_crossing_id),
+           my_crossing_reference = as.numeric(my_crossing_reference)
+           ) %>%
+    mutate(
+      aggregated_crossings_id = case_when(!is.na(pscis_crossing_id) ~ pscis_crossing_id,
+                                          my_crossing_reference > 200000000 ~ my_crossing_reference,  ##date based id's are greater than this number
+                                          T ~ my_crossing_reference + 1000000000)
+    )
 }
 

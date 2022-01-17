@@ -15,11 +15,11 @@ source('R/private_info.R')
 dat1 <- import_pscis(workbook_name = 'pscis_phase1.xlsm')
   # filter(!my_crossing_reference %in% dups)
 
-dat2 <- import_pscis(workbook_name = 'pscis_phase2.xlsm') %>%
-  mutate(
-    aggregated_crossings_id = case_when(!is.na(pscis_crossing_id) ~ pscis_crossing_id,
-                                        my_crossing_reference > 200000000 ~ my_crossing_reference,
-                                        T ~ my_crossing_reference + 1000000000))
+dat2 <- import_pscis(workbook_name = 'pscis_phase2.xlsm')
+  # mutate(
+  #   aggregated_crossings_id = case_when(!is.na(pscis_crossing_id) ~ pscis_crossing_id,
+  #                                       my_crossing_reference > 200000000 ~ my_crossing_reference,  ##
+  #                                       T ~ my_crossing_reference + 1000000000))
 
 dat3 <- import_pscis(workbook_name = 'pscis_reassessments.xlsm')
 

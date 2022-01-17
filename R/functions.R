@@ -232,3 +232,18 @@ import_pscis <- function(workbook_name = 'pscis_phase1.xlsm'){ ##new template.  
     )
 }
 
+
+import_pscis_all <- function(){
+  dat1 <- import_pscis(workbook_name = 'pscis_phase1.xlsm')
+  # filter(!my_crossing_reference %in% dups)
+  dat2 <- import_pscis(workbook_name = 'pscis_phase2.xlsm')
+  dat3 <- import_pscis(workbook_name = 'pscis_reassessments.xlsm')
+  pscis <- bind_rows(
+    dat1,
+    dat2,
+    dat3
+  )
+  all <- list(dat1, dat2, dat3, pscis) %>%
+    purrr::set_names(c('pscis_phase1', 'pscis_phase2', 'pscis_reassessments', 'pscis'))
+  return(all)
+}

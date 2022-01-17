@@ -4,6 +4,7 @@ source('R/private_info.R')
 
 
 ###these scripts will pull out the utms from bcfishpass https://github.com/smnorris/bcfishpass generated modelled crossings
+##we improved on this in the 103-extract-rd-tenure script by add an aggregated_crossings_id.  We could use that method next time!!
 
 ##make a dataframe to pull info from the db
 ##we should probably break each row out and determine the crs by the utm_zone attribute
@@ -15,18 +16,10 @@ source('R/private_info.R')
 
 # dups <- c(4600183, 4600069, 4600367, 4605732, 4600070)
 
-dat1 <- import_pscis(workbook_name = 'pscis_phase1.xlsm') %>%
-  tibble::rowid_to_column() %>%
-  mutate(rowid = rowid + 4) #our rows start at 5
-  # filter(!my_crossing_reference %in% dups)
+dat1 <- import_pscis(workbook_name = 'pscis_phase1.xlsm')
+dat2 <- import_pscis(workbook_name = 'pscis_phase2.xlsm')
+dat3 <- import_pscis(workbook_name = 'pscis_reassessments.xlsm')
 
-dat2 <- import_pscis(workbook_name = 'pscis_phase2.xlsm') %>%
-  tibble::rowid_to_column() %>%
-  mutate(rowid = rowid + 4) #our rows start at 5
-
-dat3 <- import_pscis(workbook_name = 'pscis_reassessments.xlsm') %>%
-  tibble::rowid_to_column() %>%
-  mutate(rowid = rowid + 4) #our rows start at 5
 
 dat_prep <- bind_rows(
   dat1,
@@ -103,8 +96,8 @@ id_joined <- left_join(
 
 
 ##now export csvs for each of the sources
-id_joined %>%
-  filter(source %like% 'phase1') %>%
+test <- id_joined %>%
+  filter(source %like% 'phase1')
   write_csv("data/inputs_extracted/temp/utms_modelled_phase1.csv")
 
 

@@ -244,6 +244,6 @@ import_pscis_all <- function(){
     dat3
   )
   all <- list(dat1, dat2, dat3, pscis) %>%
-    purrr::set_names(c('pscis_phase1', 'pscis_phase2', 'pscis_reassessments', 'pscis'))
+    purrr::set_names(c('pscis_phase1', 'pscis_phase2', 'pscis_reassessments', 'pscis_all'))
   return(all)
 }

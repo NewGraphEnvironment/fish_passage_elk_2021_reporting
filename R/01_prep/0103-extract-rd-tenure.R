@@ -14,11 +14,9 @@ source('R/private_info.R')
 
 
 pscis_list <- import_pscis_all()
-
 pscis_phase1 <- pscis_list %>% pluck('pscis_phase1')
 pscis_phase2 <- pscis_list %>% pluck('pscis_phase2')
 pscis_reassessments <- pscis_list %>% pluck('pscis_reassessments')
-
 pscis_all <- pscis_list %>% pluck('pscis')
 
 pscis_all_sf <- pscis_all %>%

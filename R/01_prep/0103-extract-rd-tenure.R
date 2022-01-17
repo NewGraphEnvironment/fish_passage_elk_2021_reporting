@@ -15,7 +15,11 @@ source('R/private_info.R')
 dat1 <- import_pscis(workbook_name = 'pscis_phase1.xlsm')
   # filter(!my_crossing_reference %in% dups)
 
-dat2 <- import_pscis(workbook_name = 'pscis_phase2.xlsm')
+dat2 <- import_pscis(workbook_name = 'pscis_phase2.xlsm') %>%
+  mutate(
+    aggregated_crossings_id = case_when(!is.na(pscis_crossing_id) ~ pscis_crossing_id,
+                                        my_crossing_reference > 200000000 ~ my_crossing_reference,
+                                        T ~ my_crossing_reference + 1000000000))
 
 dat3 <- import_pscis(workbook_name = 'pscis_reassessments.xlsm')
 
@@ -252,60 +256,31 @@ dat_joined4$source_wkb <- col_new
 
 ##build tables to populate the pscis spreadsheets
 pscis1_rd_tenure <- left_join(
-  select(dat1, my_crossing_reference),
+  select(dat1, rowid, my_crossing_reference),
   dat_joined4 %>% filter(source_wkb %ilike% 'phase1') %>% select(my_crossing_reference, my_road_tenure),
   by = 'my_crossing_reference'
 ) %>%
-  # distinct(my_crossing_reference, my_road_tenure) %>%
-  tibble::rownames_to_column() %>%
-  mutate(rowname = as.integer(rowname)) %>%
-  mutate(rowname = rowname + 4) %>%
-  mutate(my_road_tenure = case_when(rowname %in% 48:52 ~ 'Teck', T ~ my_road_tenure))  ## a custom hack to account for the known teck sites
+  mutate(my_road_tenure = case_when(rowid %in% 48:52 ~ 'Teck', T ~ my_road_tenure))  ## a custom hack to account for the known teck sites (52)
 
 
 ##burn it all to a file we can input to pscis submission spreadsheet
 pscis1_rd_tenure %>% readr::write_csv(file = paste0(getwd(), '/data/inputs_extracted/pscis1_rd_tenure.csv'))
 
 pscis_reassessments_rd_tenure <- left_join(
-  select(dat3, pscis_crossing_id),
+  select(dat3, rowid, pscis_crossing_id),
   dat_joined4 %>% filter(source_wkb %ilike% 'reassess') %>% select(pscis_crossing_id, my_road_tenure),
   by = 'pscis_crossing_id'
-) %>%
-  distinct(pscis_crossing_id, my_road_tenure) %>%
-  tibble::rownames_to_column() %>%
-  mutate(rowname = as.integer(rowname)) %>%
-  mutate(rowname = rowname + 4)
+)
 
 ##burn it all to a file we can input to pscis submission spreadsheet
 pscis_reassessments_rd_tenure %>% readr::write_csv(file = paste0(getwd(), '/data/inputs_extracted/pscis_reassessmeents_rd_tenure.csv'))
 ##we need to qa which are our modelled crossings at least for our phase 2 crossings
 
-
-
-###hack attack!!!!!!!
-# dat_phase2 <- dat2 %>%
-#   mutate(
-#   aggregated_crossings_id = case_when(!is.na(pscis_crossing_id) ~ pscis_crossing_id,
-#                                       my_crossing_reference > 200000000 ~ my_crossing_reference,
-#                                       T ~ my_crossing_reference + 1000000000))
-#
-# dat_joined4_updated <- dat_joined4 %>%
-#   mutate(
-#   aggregated_crossings_id = case_when(!is.na(pscis_crossing_id) ~ pscis_crossing_id,
-#                                       my_crossing_reference > 200000000 ~ my_crossing_reference,
-#                                       T ~ my_crossing_reference + 1000000000))
-
-
-
 pscis2_rd_tenure <- left_join(
-  select(dat_phase2, aggregated_crossings_id),
+  select(dat2, rowid, aggregated_crossings_id, pscis_crossing_id, my_crossing_reference),
   dat_joined4 %>% filter(source_wkb %ilike% 'phase2') %>% select(aggregated_crossings_id, my_road_tenure),
   by = 'aggregated_crossings_id'
 ) %>%
-  distinct(aggregated_crossings_id, my_road_tenure) %>%
-  tibble::rownames_to_column() %>%
-  mutate(rowname = as.integer(rowname)) %>%
-  mutate(rowname = rowname + 4) %>%
   mutate(my_road_tenure = case_when(aggregated_crossings_id == 50063 ~ 'FLNR DRM 5466', T ~ my_road_tenure)) ##not sure why this harvey xing not showing up
 
 

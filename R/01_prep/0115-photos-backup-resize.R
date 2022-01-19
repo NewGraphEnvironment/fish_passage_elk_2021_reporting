@@ -4,6 +4,7 @@
 ##convert our pngs to jpg
 ##make a composite image of all the most relevant culvert shots for easy display in leaflet yo
 ##get rid of the AAE files from the iphone.
+##need to move over 61504 for second day of survey with nupqu
 
 source('R/functions.R')
 source('R/packages.R')
@@ -17,6 +18,7 @@ pscis_reassessments <- pscis_list %>% pluck('pscis_reassessments')
 pscis_all <- pscis_list %>% pluck('pscis_all')
 
 ##back up your photos onto the D drive.
+##this function needs to be abstracted more so that we can use it the other way as part of the photo sorting scripts.
 
 fpr_photos_backup(filename = 'al')
 fpr_photos_backup(filename = 'tammy')
@@ -88,7 +90,8 @@ folderstocreate %>%
 
 ##we have special cases that do not have excel inputs
 
-folders_special_cases <- c(197542, 4605826)
+folders_special_cases <- c(197542, 4605826, 1086, 2606, 1063,
+                           2021101301, 4600761, 2021101302, 4600992)  ##and some we are hacking in so we don't need to run the whole file
 
 folders_special_cases %>%
   purrr::map(fpr_make_photo_folders)

@@ -204,7 +204,7 @@ make_html_tbl <- function(df) {
 openHTML <- function(x) browseURL(paste0('file://', file.path(getwd(), x)))
 
 ##function to import pscis info
-import_pscis <- function(workbook_name = 'pscis_phase1.xlsm'){ ##new template.  could change file back to .xls
+fpr_import_pscis <- function(workbook_name = 'pscis_phase1.xlsm'){ ##new template.  could change file back to .xls
   sig_fig0 <- c('length_or_width_meters')
   sig_fig1 <- c('culvert_slope_percent', 'stream_width_ratio')
   sig_fig2 <- c('outlet_drop_meters')
@@ -233,40 +233,43 @@ import_pscis <- function(workbook_name = 'pscis_phase1.xlsm'){ ##new template.  
 }
 
 
-import_pscis_all <- function(){
-  dat1 <- import_pscis(workbook_name = 'pscis_phase1.xlsm')
-  # filter(!my_crossing_reference %in% dups)
-  dat2 <- import_pscis(workbook_name = 'pscis_phase2.xlsm')
-  dat3 <- import_pscis(workbook_name = 'pscis_reassessments.xlsm')
-  pscis <- bind_rows(
-    dat1,
-    dat2,
-    dat3
-  )
-  all <- list(dat1, dat2, dat3, pscis) %>%
-    purrr::set_names(c('pscis_phase1', 'pscis_phase2', 'pscis_reassessments', 'pscis_all'))
-  return(all)
-}
+# import_pscis_all <- function(){
+#   dat1 <- import_pscis(workbook_name = 'pscis_phase1.xlsm')
+#   # filter(!my_crossing_reference %in% dups)
+#   dat2 <- import_pscis(workbook_name = 'pscis_phase2.xlsm')
+#   dat3 <- import_pscis(workbook_name = 'pscis_reassessments.xlsm')
+#   pscis <- bind_rows(
+#     dat1,
+#     dat2,
+#     dat3
+#   )
+#   all <- list(dat1, dat2, dat3, pscis) %>%
+#     purrr::set_names(c('pscis_phase1', 'pscis_phase2', 'pscis_reassessments', 'pscis_all'))
+#   return(all)
+# }
 
+
+
+##back photos to another place.  Going to split into two functions
 fpr_photos_backup <- function(filename = 'al'){
   ##get teh name of the folder we are in
-  bname <- basename(dirname(dirname(getwd())))
+  project_name <- basename(dirname(dirname(getwd())))
   ##here we back everything up to the D drive
-  targetdir = paste0("D:/New_Graph/backups/photos/", bname, "/")
-  dir.create(targetdir)
+  dir_backup_prj = paste0("D:/New_Graph/backups/photos/", project_name, "/")
+  dir.create(dir_backup_prj)
 
-  targetdir = paste0("D:/New_Graph/backups/photos/", bname, "/", filename)
-  dir.create(targetdir)
+  dir_backup_photos = paste0("D:/New_Graph/backups/photos/", project_name, "/", filename)
+  dir.create(dir_backup_photos)
 
 
   ##path to the photos
-  path <- paste0("C:/Users/allan/OneDrive/New_Graph/Current/", bname, '/data/photos/', filename)
+  path_photos <- paste0("C:/Users/allan/OneDrive/New_Graph/Current/", project_name, '/data/photos/', filename)
 
-  filestocopy <- list.files(path = path,
+  filestocopy <- list.files(path = path_photos,
                             full.names = T)
 
   #copy over the photos in the al folder -- this is done already
-  file.copy(from=filestocopy, to=targetdir,
+  file.copy(from=filestocopy, to=dir_backup_photos,
             overwrite = F, recursive = FALSE,
             copy.mode = TRUE)
 }
@@ -282,3 +285,32 @@ fpr_img_resize_convert <- function(img){
 fpr_make_photo_folders <- function(xing){
   dir.create(paste0(getwd(), '/data/photos/', xing))
 }
+
+
+fpr_time_interval_idx <- function(date_input, intervs){
+  which(date_input %within% intervs)
+}
+
+
+##get the photo sorting specific metadata from the photos in the file
+fpr_photo_sort_metadat <- function(input_file){
+  exifr::read_exif(input_file,recursive=T) %>%
+    purrr::set_names(., nm = tolower(names(.))) %>%
+    select(sourcefile, datetimeoriginal) %>%
+    mutate(datetimeoriginal = lubridate::ymd_hms(datetimeoriginal))
+}
+
+##get the names of your pscis files
+fpr_pscis_wkb_paths <- function(){
+  list.files(path = 'data', pattern = "pscis", all.files = F) %>%
+    grep(pattern = '~', invert = T, value = T)
+}
+
+fpr_import_pscis_all <- function(){
+  wkbs_paths <- fpr_pscis_wkb_paths()
+
+  pscis_list <- wkbs_paths %>%
+    map(fpr_import_pscis) %>%
+    purrr::set_names(nm = tools::file_path_sans_ext(wkbs_paths))
+}
+

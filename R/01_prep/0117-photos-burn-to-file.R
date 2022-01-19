@@ -1,0 +1,188 @@
+##here is a test to see if we can automate placing photos in the right folders
+# 11:20
+
+source('R/functions.R')
+source('R/packages.R')
+source('R/private_info.R')
+
+
+pscis_list <- import_pscis_all()
+pscis_phase1 <- pscis_list %>% pluck('pscis_phase1')
+pscis_phase2 <- pscis_list %>% pluck('pscis_phase2')
+pscis_reassessments <- pscis_list %>% pluck('pscis_reassessments')
+pscis_all <- pscis_list %>% pluck('pscis_all')
+
+
+##here is where we tested the concept
+# ##tibble with our intervals and dates
+# int_df <- tibble('int' = c(interval(ymd(20090101), ymd(20090201)),
+#                            interval(ymd(20100101), ymd(20100201))),
+#                  'date' = c(ymd(20090102), ymd(20090202))
+# ) %>%
+#   tibble::rowid_to_column()
+#
+# ##pull out vectors
+# dates <- int_df %>% pull(date)
+# intervs <- int_df %>% pull(int)
+#
+# ##give index of interval
+# fpr_time_interval_idx <- function(date_input){
+#   which(date_input %within% intervs)
+# }
+#
+#
+# ##make a tibble of the index of the row with the folder containing the interval
+# lst <- dates %>%
+#   map(fpr_time_interval_idx) %>%
+#   purrr::set_names(nm = int_df$rowid) %>%
+#   as_tibble_col(column_name = "value")
+
+
+##get date times from input files
+pscis_all_time_prep <- pscis_all %>%
+  mutate(time_start = str_squish(str_extract(assessment_comment, "[^.]*$")),
+         date_time_start = lubridate::ymd_hm(paste0(date, ' ', time_start))) %>%
+  mutate(camera_id = stringr::word(crew_members, 1),
+         camera_id = case_when(camera_id == 'AI' ~ 'al',  ##need to match the photo file names
+                               camera_id == 'KP' ~ 'kyle')) %>%
+  arrange(date_time_start) %>%
+  tibble::rowid_to_column(var = 'time_idx_start') %>%
+  mutate(time_idx_end = time_idx_start + 1)
+  ##identify who had the camera as this is the first initials in the crew_members
+
+
+##test to see results
+# unique(pscis_all_time_prep$camera_id)
+
+##join with the end time
+pscis_all_time <- left_join(
+  pscis_all_time_prep,
+  select(pscis_all_time_prep, time_idx_start, date_end = date, time_end = time_start),
+  by = c('time_idx_end' = 'time_idx_start')
+) %>%
+  mutate(
+    ##we have no value for the last date and time so need to insert
+    time_end = case_when(time_idx_end == max(time_idx_end) ~ '23:00', T ~ time_end),
+    date_end = case_when(time_idx_end == max(time_idx_end) ~ date, T ~ date_end),
+    date_time_end = lubridate::ymd_hm(paste0(date_end, ' ', time_end)),
+    time_interv = interval(date_time_start, date_time_end))
+
+
+##this works but grabs the photos from the subfolders too...
+# photo_meta_all <- exifr::read_exif("C:/Users/allan/OneDrive/New_Graph/Current/2021-041-nupqu-elk-fish-passage/data/photos/brody" ,
+#                                    recursive= T) %>%
+#   purrr::set_names(., nm = tolower(names(.)))
+#
+# test <- fpr_photo_sort_metadat(input_file = "C:/Users/allan/OneDrive/New_Graph/Current/2021-041-nupqu-elk-fish-passage/data/photos/brody")
+
+##lets pass it a list of folders to do the sorting on
+lst_folders <- c("C:/Users/allan/OneDrive/New_Graph/Current/2021-041-nupqu-elk-fish-passage/data/photos/al",
+                 "C:/Users/allan/OneDrive/New_Graph/Current/2021-041-nupqu-elk-fish-passage/data/photos/kyle",
+                 "C:/Users/allan/OneDrive/New_Graph/Current/2021-041-nupqu-elk-fish-passage/data/photos/brody",
+                 "C:/Users/allan/OneDrive/New_Graph/Current/2021-041-nupqu-elk-fish-passage/data/photos/tammy")
+
+photo_meta <- lst_folders %>%
+  map(fpr_photo_sort_metadat) %>%
+  purrr::set_names(nm = basename(lst_folders)) %>%
+  bind_rows(.id = 'camera_id') %>%
+  tibble::rowid_to_column()
+
+
+
+# photo_meta <- photo_meta_all %>%
+#   select(sourcefile, datetimeoriginal) %>%
+#   mutate(datetimeoriginal = lubridate::ymd_hms(datetimeoriginal)) %>%
+#   tibble::rowid_to_column()
+
+##make a list of the times of each photo and run it through our function with our interval list
+photo_time_lst <- photo_meta %>%
+  pull(datetimeoriginal)
+intervs <- pscis_all_time %>%
+  pull(time_interv)
+
+##make a tibble of the index of the row with the folder containing the interval
+photo_folders_idx <- photo_time_lst %>%
+  map(fpr_time_interval_idx) %>%
+  purrr::set_names(nm = photo_meta$rowid) %>%
+  as_tibble_col(column_name = "site_idx")
+
+photo_meta_tojoin <- bind_cols(
+  photo_meta,
+  photo_folders_idx
+) %>%
+  #filter out .mov
+  filter(!sourcefile %ilike% '.mov') %>%
+  mutate(site_idx = as.numeric(site_idx))  ##this will only work when we only have one result per photo! bound to break
+
+
+##we have a few special cases no lets make some conditions
+#need to be careful because there can be duplicate names from different cameras!
+ids_coal <- paste0('kyle_TC_0', 2266:2277, '.JPG')
+ids_hartley <- paste0('kyle_TC_0', 2244:2265, '.JPG')
+ids_parker_50067 <- paste0('kyle_IMG_', 3678:3684, '.JPG')
+ids_bighorn_4605514 <- paste0('kyle_TC_0', 2875:2949, '.JPG')
+ids_harmer_dam_1063 <- paste0('al_IMG_', 6763:6767, '.JPG')
+ids_elkford_dam_al_2606 <- paste0('al_IMG_', 7187:7193, '.JPG')
+ids_elkford_dam_brody_2606 <- c('brody_TimePhoto_20211014_153720.JPG',
+                                'brody_TimePhoto_20211014_153813.JPG',
+                                'brody_TimePhoto_20211014_153820.JPG',
+                                'brody_TimePhoto_20211014_153832.JPG',
+                                'brody_TimePhoto_20211014_153902.JPG',
+                                'brody_TimePhoto_20211014_153907.JPG',
+                                'brody_TimePhoto_20211014_153944.JPG')
+ids_dont_copy01 <- c(
+  paste0('kyle_IMG_', 3062:3142, '.JPG'),
+  paste0('kyle_IMG_', 3260:3269, '.JPG'),
+  paste0('kyle_IMG_', 3410:3415, '.JPG'),
+  paste0('kyle_IMG_', 3476:3479, '.JPG'),
+  paste0('kyle_IMG_', 3567:3576, '.JPG'),
+  paste0('kyle_IMG_', 3877:3891, '.JPG'),
+  paste0('al_IMG_', 6969:6985, '.JPG'),
+  paste0('al_IMG_', 6744:6750, '.JPG'),
+  paste0('al_IMG_', 7170:7180, '.JPG'),
+  paste0('al_IMG_', 7248:7260, '.JPG'),
+  paste0('al_IMG_', 7375:7384, '.JPG')
+)
+
+
+##join on the name of the folder we paste to
+photo_folder_targets <- left_join(
+  photo_meta_tojoin,
+  pscis_all_time %>% select(time_idx_start, pscis_crossing_id, my_crossing_reference),
+  by = c('site_idx' = 'time_idx_start')  ##rememberthat rowid is for the input excel files!!
+) %>%
+  #make a column to hold all the ids.  there are no duplicates in this dataset
+  mutate(
+    photo_basename = basename(sourcefile),
+    photo_fullname = paste0(source, '_', photo_basename),
+    folder_to_id = case_when(!is.na(pscis_crossing_id) ~ pscis_crossing_id,
+                             !is.na(my_crossing_reference) ~ my_crossing_reference),
+    folder_to_id = as.character(folder_to_id),
+    ##we have a few special cases no lets make some conditions
+    folder_to_id = case_when(photo_fullname %in% ids_coal ~ '61504',
+                             photo_fullname %in% ids_hartley ~ '197542',
+                             photo_fullname %in% ids_parker_50067 ~ '50067',
+                             photo_fullname %in% ids_bighorn_4605514 ~ '4605514',
+                             photo_fullname %in% ids_harmer_dam_1063 ~ '1063',
+                             photo_fullname %in% ids_elkford_dam_al_2606 ~ 2606,
+                             photo_fullname %in% ids_elkford_dam_brody_2606 ~ 2606,
+                             photo_fullname %in% ids_dont_copy01 ~ NA_character_,
+                             T ~ folder_to_id),
+    folder_to_path = paste0(getwd(), '/data/photos/', folder_to_id, '/', camera_id, '_', photo_basename)  ##we could add the source to the name of the photo if we wanted....
+  ) %>%
+  filter(
+    !sourcefile %ilike% 'not_used' & !is.na(folder_to_id)  ##filter out some photos that shouldn't or don't move
+  )
+
+
+test <- photo_folder_targets %>%
+  filter(folder_to_id == 4602514) #my_crossing_reference
+
+test2 <- pscis_all_time %>%
+  filter(my_crossing_reference == 4602514) #my_crossing_reference
+####################------------------------CArefuL - TEST first yo-----------------------------------------##############################
+
+#copy over the photos to their respective folders
+file.copy(from=photo_folder_targets$sourcefile, to=photo_folder_targets$folder_to_path,
+          overwrite = F, recursive = FALSE,
+          copy.mode = TRUE)

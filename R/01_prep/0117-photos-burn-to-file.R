@@ -74,8 +74,9 @@ pscis_all_time_kyle <- left_join(
 ##we do not include nupqu becasue their photos are already sorted into folders
 lst_folders <- c("C:/Users/allan/OneDrive/New_Graph/Current/2021-041-nupqu-elk-fish-passage/data/photos/al",
                  "C:/Users/allan/OneDrive/New_Graph/Current/2021-041-nupqu-elk-fish-passage/data/photos/kyle",
-                 "C:/Users/allan/OneDrive/New_Graph/Current/2021-041-nupqu-elk-fish-passage/data/photos/brody",
-                 "C:/Users/allan/OneDrive/New_Graph/Current/2021-041-nupqu-elk-fish-passage/data/photos/tammy")
+                 "C:/Users/allan/OneDrive/New_Graph/Current/2021-041-nupqu-elk-fish-passage/data/photos/brody"
+                 "C:/Users/allan/OneDrive/New_Graph/Current/2021-041-nupqu-elk-fish-passage/data/photos/tammy"
+                 )
 
 
 ##########everything should be functions to pass list of camera_ids
@@ -215,17 +216,14 @@ photo_folder_targets_transfer <- photo_folder_targets %>%
     !is.na(folder_to_id)  ##filter out some photos that shouldn't or don't move
   )
 
-
-
-
-test <- photo_folder_targets %>%
-  filter(folder_to_id == "61504")
+# test <- photo_folder_targets %>%
+#   filter(folder_to_id == "2021101302")
 
 ####################------------------------CArefuL - TEST first yo-----------------------------------------##############################
 
 ##test a bunch first!!!!!!!
-test <- photo_folder_targets %>%
-  filter(folder_to_id == 4600087) #my_crossing_reference
+# test <- photo_folder_targets %>%
+#   filter(folder_to_id == 4600087) #my_crossing_reference
 
 
 #copy over the photos to their respective folders
@@ -240,7 +238,7 @@ test <- photo_folder_targets %>%
 ##we will script the backup and resizing to an intermediary file next time
 file.rename(from=photo_folder_targets_transfer$sourcefile, to=photo_folder_targets_transfer$folder_to_path)
 
-
+# unique(photo_folder_targets_transfer$folder_to_id)
 # test <- photo_folder_targets_delete %>% head()
 
 

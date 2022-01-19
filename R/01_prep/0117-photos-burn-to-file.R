@@ -1,6 +1,7 @@
 ##here is a test to see if we can automate placing photos in the right folders
 ###To do
 #everything should be functions to pass list of camera_ids
+##script backup and resizing as part of process - this will also deal with file ending names!
 
 source('R/functions.R')
 source('R/packages.R')
@@ -22,7 +23,7 @@ time_prep <- pscis_all %>%
 
 ##because two people are going at the same time we need to do everything seperate for kyle and al - abstract later
 time_prep_al <- time_prep %>%
-  filter(camera_id == 'al') %>%
+  filter(camera_id != 'kyle') %>%
   arrange(date_time_start) %>%
   tibble::rowid_to_column(var = 'time_idx_start') %>%
   mutate(time_idx_end = time_idx_start + 1)
@@ -70,6 +71,7 @@ pscis_all_time_kyle <- left_join(
 # test <- fpr_photo_sort_metadat(input_file = "C:/Users/allan/OneDrive/New_Graph/Current/2021-041-nupqu-elk-fish-passage/data/photos/brody")
 
 ##lets pass it a list of folders to do the sorting on
+##we do not include nupqu becasue their photos are already sorted into folders
 lst_folders <- c("C:/Users/allan/OneDrive/New_Graph/Current/2021-041-nupqu-elk-fish-passage/data/photos/al",
                  "C:/Users/allan/OneDrive/New_Graph/Current/2021-041-nupqu-elk-fish-passage/data/photos/kyle",
                  "C:/Users/allan/OneDrive/New_Graph/Current/2021-041-nupqu-elk-fish-passage/data/photos/brody",
@@ -104,6 +106,9 @@ intervs_al <- pscis_all_time_al %>%
   pull(time_interv)
 intervs_kyle <- pscis_all_time_kyle %>%
   pull(time_interv)
+
+##see which intervals
+# lubridate::int_overlaps(intervs_al, intervs_kyle)
 
 
 
@@ -143,13 +148,13 @@ ids_parker_50067 <- paste0('kyle_IMG_', 3678:3684, '.JPG')
 ids_bighorn_4605514 <- paste0('kyle_TC_0', 2875:2949, '.JPG')
 ids_harmer_dam_1063 <- paste0('al_IMG_', 6763:6767, '.JPG')
 ids_elkford_dam_al_2606 <- paste0('al_IMG_', 7187:7193, '.JPG')
-ids_elkford_dam_brody_2606 <- c('brody_TimePhoto_20211014_153720.JPG',
-                                'brody_TimePhoto_20211014_153813.JPG',
-                                'brody_TimePhoto_20211014_153820.JPG',
-                                'brody_TimePhoto_20211014_153832.JPG',
-                                'brody_TimePhoto_20211014_153902.JPG',
-                                'brody_TimePhoto_20211014_153907.JPG',
-                                'brody_TimePhoto_20211014_153944.JPG')
+ids_elkford_dam_brody_2606 <- c('brody_TimePhoto_20211014_153720.jpg',  ##file name endings!!!!
+                                'brody_TimePhoto_20211014_153813.jpg',
+                                'brody_TimePhoto_20211014_153820.jpg',
+                                'brody_TimePhoto_20211014_153832.jpg',
+                                'brody_TimePhoto_20211014_153902.jpg',
+                                'brody_TimePhoto_20211014_153907.jpg',
+                                'brody_TimePhoto_20211014_153944.jpg')
 ids_dont_copy01 <- c(
   paste0('kyle_IMG_', 3062:3142, '.JPG'),
   paste0('kyle_IMG_', 3260:3269, '.JPG'),
@@ -180,7 +185,7 @@ photo_folder_targets_kyle <- left_join(
 
 photo_folder_targets <- bind_rows(
   photo_folder_targets_al,
-  photo_folder_targets_al
+  photo_folder_targets_kyle
 )  %>%
   #make a column to hold all the ids.  there are no duplicates in this dataset
   mutate(
@@ -202,29 +207,51 @@ photo_folder_targets <- bind_rows(
     folder_to_path = paste0(getwd(), '/data/photos/', folder_to_id, '/', camera_id, '_', photo_basename)  ##we could add the source to the name of the photo if we wanted....
   ) %>%
   filter(
-    !sourcefile %ilike% 'not_used' & !is.na(folder_to_id)  ##filter out some photos that shouldn't or don't move
+    !sourcefile %ilike% 'not_used'   ##filter out some photos that shouldn't or don't move
+  )
+
+photo_folder_targets_transfer <- photo_folder_targets %>%
+  filter(
+    !is.na(folder_to_id)  ##filter out some photos that shouldn't or don't move
   )
 
 
-test <- photo_folder_targets %>%
-  filter(folder_to_id == 4602514) #my_crossing_reference
 
-test2 <- pscis_all_time %>%
-  filter(my_crossing_reference == 4602514) #my_crossing_reference
+
+test <- photo_folder_targets %>%
+  filter(folder_to_id == "61504")
+
 ####################------------------------CArefuL - TEST first yo-----------------------------------------##############################
 
+##test a bunch first!!!!!!!
+test <- photo_folder_targets %>%
+  filter(folder_to_id == 4600087) #my_crossing_reference
+
+
 #copy over the photos to their respective folders
-file.copy(from=photo_folder_targets$sourcefile, to=photo_folder_targets$folder_to_path,
-          overwrite = F, recursive = FALSE,
-          copy.mode = TRUE)
+# file.copy(from=photo_folder_targets$sourcefile, to=photo_folder_targets$folder_to_path,
+#           overwrite = F, recursive = FALSE,
+#           copy.mode = TRUE)
+
+# test <- photo_folder_targets %>%
+#   head()
+
+##in this one we move them vs. copy.  Need to be sure they are backed up first!!!!
+##we will script the backup and resizing to an intermediary file next time
+file.rename(from=photo_folder_targets_transfer$sourcefile, to=photo_folder_targets_transfer$folder_to_path)
 
 
+# test <- photo_folder_targets_delete %>% head()
 
 
+##we also can erase the photos we said not to move since they are backed up and
+##we want to see any left overs
+photo_folder_targets_delete <- photo_folder_targets %>%
+  filter(
+    is.na(folder_to_id)  ##filter out some photos that shouldn't or don't move
+  )
 
-
-
-
+file.remove(photo_folder_targets_delete$sourcefile)
 
 
 

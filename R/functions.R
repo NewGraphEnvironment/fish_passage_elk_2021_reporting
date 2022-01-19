@@ -277,3 +277,8 @@ fpr_img_resize_convert <- function(img){
   image_scaled <- image_scale(image,"1440x1080!")
   image_write(image_scaled, path = paste0(path, '/', tools::file_path_sans_ext(basename(img)), '.JPG'), format = 'jpg')
 }
+
+##function that builds the folders
+fpr_make_photo_folders <- function(xing){
+  dir.create(paste0(getwd(), '/data/photos/', xing))
+}

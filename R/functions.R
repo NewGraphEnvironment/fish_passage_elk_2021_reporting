@@ -314,3 +314,54 @@ fpr_import_pscis_all <- function(){
     purrr::set_names(nm = tools::file_path_sans_ext(wkbs_paths))
 }
 
+fpr_photo_qa <- function(site_id){
+  list.files(path = paste0(getwd(), '/data/photos/', site_id), full.names = T) %>%
+    stringr::str_subset(., 'barrel|outlet|upstream|downstream|road|inlet') %>%
+    as_tibble() %>%
+    mutate(x = case_when(
+      value %ilike% 'road' ~ 'road',
+      value %ilike% 'inlet' ~ 'inlet',
+      value %ilike% 'upstream' ~ 'upstream',
+      value %ilike% 'barrel' ~ 'barrel',
+      value %ilike% 'outlet' ~ 'outlet',
+      value %ilike% 'downstream' ~ 'downstream'
+    )) %>%
+    select(-value)
+}
+
+##here we stack up and down then side to side for reporting - this works!
+fpr_photo_amalg_cv <- function(site_id){
+  photos_images1 <- list.files(path = paste0(getwd(), '/data/photos/', site_id), full.names = T) %>%
+    stringr::str_subset(., 'upstream|road|inlet') %>%
+    as_tibble() %>%
+    mutate(sort = case_when(
+      value %ilike% 'road' ~ 1,
+      value %ilike% 'inlet' ~ 2,
+      value %ilike% 'upstream' ~ 3,
+      # value %ilike% 'barrel' ~ 4,
+      # value %ilike% 'outlet' ~ 5,
+      # value %ilike% 'downstream' ~ 6,
+    )) %>%
+    arrange(sort) %>%
+    pull(value) %>%
+    image_read()
+  photos_images2 <- list.files(path = paste0(getwd(), '/data/photos/', site_id), full.names = T) %>%
+    stringr::str_subset(., 'barrel|outlet|downstream') %>%
+    as_tibble() %>%
+    mutate(sort = case_when(
+      # value %ilike% 'road' ~ 1,
+      # value %ilike% 'inlet' ~ 2,
+      # value %ilike% 'upstream' ~ 3,
+      value %ilike% 'barrel' ~ 4,
+      value %ilike% 'outlet' ~ 5,
+      value %ilike% 'downstream' ~ 6,
+    )) %>%
+    arrange(sort) %>%
+    pull(value) %>%
+    image_read()
+  photos_stack1 <-image_append(image_scale(photos_images1, "x420"), stack = T) ##1/3 the width 373.33 and half the original height
+  photos_stack2 <- image_append(image_scale(photos_images2, "x420"), stack = T)
+  photos_stack <- c(photos_stack1, photos_stack2)
+  photos_stacked <- image_append(image_scale(photos_stack), stack = F)
+  image_write(photos_stacked, path = paste0(getwd(), '/data/photos/', site_id, '/crossing_all.JPG'), format = 'jpg')
+}

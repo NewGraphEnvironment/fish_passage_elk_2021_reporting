@@ -36,10 +36,8 @@ photo_missing <- photo_names %>%
 ##once you review the test results and make sure they are all there you are good then run your function over the list
 ## test on a small sample
 # test <- photo_names$site_id %>% head()
-
-
-test %>%
-  map(fpr_photo_amalg_cv)
+# test %>%
+#   map(fpr_photo_amalg_cv)
 
 ## make the amalgamated photos for each of the crossings
 photo_names$site_id %>%

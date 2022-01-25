@@ -104,6 +104,8 @@ filestocopy_list <- path_to_photos %>%
   purrr::map(fpr_photos_paths_to_copy) %>%
   purrr::set_names(basename(folderstocreate))
 
+
+
 ##view which files do not have any photos to paste
 empty_idx <- which(!lengths(filestocopy_list))
 
@@ -112,6 +114,29 @@ fpr_filter_list <- function(idx){
 }
 
 empty_files <- empty_idx %>% fpr_filter_list()
+
+
+###here we back up a csv that gives us the new location and name of the original JPG photos.
+## Not ideal becasue we did some sorting by hand without adding name of camera to the file name but a start on reproducability notheless
+
+fpr_photos_all <- function(target){
+  list.files(path = target,
+             pattern =  '.*\\.(jpg|png|jpeg)$', #".JPG$"
+             recursive = TRUE,
+             ignore.case = T,
+             full.names = T,
+             include.dirs = T) %>%
+    as_tibble()
+}
+
+photos_all <- path_to_photos %>%
+  purrr::map(fpr_photos_all) %>%
+  purrr::set_names(folderstocopy) %>%
+  bind_rows(.id = 'folder')
+
+##burn to csv
+photos_all %>%
+  readr::write_csv(file = paste0(getwd(), '/data/photos/photo_sort_tracking.csv'))
 
 fpr_photo_change_name <- function(filenames_to_change){
   gsub(filenames_to_change, pattern = paste0(getwd(), '/data/photos/'), replacement = targetdir)
@@ -138,4 +163,9 @@ mapply(fpr_copy_over_photos,
 file.copy(from = 'data/pscis_phase1.xlsm',
           to = paste0(targetdir, 'pscis_phase1.xlsm'))
 
+##going to make a few notes here about the submission process
+## we need to work in microsoft edge and put sites in "Internet Explorer mode pages" and set exceptions for uploading to soft and esf
+## https://www.env.gov.bc.ca/csd/imb/soft/soft.shtml
+## https://logon7.gov.bc.ca/clp-cgi/capBceid/logon.cgi?flags=1111:1,8&TARGET=$SM$https%3a%2f%2fapps%2enrs%2egov%2ebc%2eca%2fext%2fesf%2fsubmissionWelcome%2edo
 
+##chack on your submission here https://apps.nrs.gov.bc.ca/ext/esf/submissionSearch.do?action=detail&submissionId=2117684

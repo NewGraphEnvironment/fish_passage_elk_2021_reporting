@@ -5,12 +5,13 @@ source('R/functions.R')
 
 
 ##get list of files (site_ids) in the photo folder
-site_id_list <- list.files(path = paste0(getwd(), '/data/photos/'), full.names = T) %>%
+site_id_list <- list.files(path = paste0(getwd(), '/data/photos/'),
+                           full.names = T) %>%
   basename()
 
 
 
-##we had a couple of extra litte files in the folder that were a problem. make sure the file is only photo folders
+##we had a couple of extra little files in the folder that were a problem. make sure the file is only photo folders
 
 photo_names <- site_id_list %>%
   map(fpr_photo_qa) %>%

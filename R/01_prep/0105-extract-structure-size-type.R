@@ -3,11 +3,10 @@
 source('R/packages.R')
 source('R/functions.R')
 
-pscis_list <- import_pscis_all()
-pscis_phase1 <- pscis_list %>% pluck('pscis_phase1')
-pscis_phase2 <- pscis_list %>% pluck('pscis_phase2')
-pscis_reassessments <- pscis_list %>% pluck('pscis_reassessments')
-pscis_all <- pscis_list %>% pluck('pscis_all')
+
+pscis_list <- fpr_import_pscis_all()
+
+pscis_all <- bind_rows(pscis_list)
 
 
 ##assign a value that we want to call standard fill
@@ -33,6 +32,8 @@ tab_backwater <- pscis_all %>%  ##changed this to pscis2!
            outlet_drop_meters < 0.3 &
            stream_width_ratio_score < 1.2 &
            culvert_slope_percent <= 2 )
+
+##we actually have 1 but it is not going to be worth it because it is very unlikely to be fish habitat
 
 ##need to tweak the span so that we add 4 to the width if it is over 6m...
 

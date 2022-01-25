@@ -1,6 +1,6 @@
 ##lets use magick to:
 ## back up original photos ont he d drive
-##resize teh photos in our main file
+##resize teh photos in our main file - moved to custom size of 1728 x 972 with image resizer (90% of large)
 ##convert our pngs to jpg
 ##make a composite image of all the most relevant culvert shots for easy display in leaflet yo
 ##get rid of the AAE files from the iphone.

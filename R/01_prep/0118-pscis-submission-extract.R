@@ -22,7 +22,7 @@ path_to_photos <- paste0(getwd(), '/data/photos/', folderstocopy)
 # this time We do it now in the sorted folders
 fpr_photos_ext_to_change <- function(target){
   list.files(path = target,
-             pattern = ".jpg$",
+             pattern = '.*\\.(jpg|png|jpeg)$',
              recursive = TRUE,
              ignore.case = F, ##note this is false!!
              full.names = T,
@@ -36,7 +36,7 @@ ext_change_from <- path_to_photos %>%
 
 ##could reconsider the name of this function as could be confusing
 fpr_photo_change_ext <- function(filenames_to_change){
-  gsub(filenames_to_change, pattern = 'jpg', replacement = 'JPG')
+  gsub(filenames_to_change, pattern = '(.jpg|.png|.jpeg)', replacement = '.JPG') #.*\\.(jpg|png|jpeg)$
 }
 
 ext_change_to <- ext_change_from %>%
@@ -55,8 +55,6 @@ fpr_photo_rename_ext <- function(filescopy, filespaste){
 # mapply(fpr_photo_rename_ext,
 #        filescopy = test_from,
 #        filespaste = test_to)
-
-
 
 
 ##########!!!!!!!!!!!!!!run the rename - hashed out for safety!!!!!!!!!!!!!!!!!############
@@ -116,15 +114,17 @@ fpr_filter_list <- function(idx){
 empty_files <- empty_idx %>% fpr_filter_list()
 
 
-###here we back up a csv that gives us the new location and name of the original JPG photos.
-## Not ideal becasue we did some sorting by hand without adding name of camera to the file name but a start on reproducability notheless
-
-fpr_photos_all <- function(target){
+##-----------------------------rename long names-------------------------------------------
+## we have seen an issue with very long photo names getting rejected from PSCIS submisson
+## find the long names and truncate them
+## hold a record of the orignal and shortened named so we can repeat?
+## Maybe not necessary if we run this each time but necessary on this job since we hand bombed earlier (doh)...
+fpr_photos_all<- function(target, full_names = T){
   list.files(path = target,
              pattern =  '.*\\.(jpg|png|jpeg)$', #".JPG$"
              recursive = TRUE,
              ignore.case = T,
-             full.names = T,
+             full.names = full_names, ##this is false
              include.dirs = T) %>%
     as_tibble()
 }
@@ -132,7 +132,13 @@ fpr_photos_all <- function(target){
 photos_all <- path_to_photos %>%
   purrr::map(fpr_photos_all) %>%
   purrr::set_names(folderstocopy) %>%
-  bind_rows(.id = 'folder')
+  bind_rows(.id = 'folder') %>%
+  mutate(photo_name = str_squish(str_extract(value, "[^/]*$")),
+         photo_name_length = stringr::str_length(photo_name))
+
+
+###here we back up a csv that gives us the new location and name of the original JPG photos.
+## Not ideal becasue we did some sorting by hand without adding name of camera to the file name but a start on reproducability notheless
 
 ##burn to csv
 photos_all %>%

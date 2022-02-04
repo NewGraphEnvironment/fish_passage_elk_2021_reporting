@@ -55,7 +55,7 @@ my_flextable <- function(df,  ...){ ##left_just_col = 2 was an option
 }
 
 ##function to trim up sheet and get names (was previously source from altools package)
-at_trim_xlsheet2 <- function(df, column_last = ncol(df)) {
+fpr_trim_xlsheet <- function(df, column_last = ncol(df)) {
   df %>%
     dplyr::select(1:column_last) %>% ##get rid of the extra columns.  should be more abstract
     janitor::row_to_names(which.max(complete.cases(.))) %>%
@@ -200,6 +200,19 @@ make_html_tbl <- function(df) {
     )
 }
 
+fpr_make_html_tbl <- function(df) {
+  # df2 <- df %>%
+  #   dplyr::mutate(`Image link` = cell_spec('crossing', "html", link = `Image link`))
+  df2 <- select(df, -shape, -label) %>% janitor::remove_empty() #removed color
+  df %>%
+    mutate(html_tbl = knitr::kable(df2, 'html', escape = F) %>%
+             kableExtra::row_spec(0:nrow(df2), extra_css = "border: 1px solid black;") %>% # All cells get a border
+             kableExtra::row_spec(0, background = "yellow") %>%
+             kableExtra::column_spec(column = ncol(df2) - 1, width_min = '0.5in') %>%
+             kableExtra::column_spec(column = ncol(df2), width_min = '4in')
+    )
+}
+
 
 openHTML <- function(x) browseURL(paste0('file://', file.path(getwd(), x)))
 
@@ -211,7 +224,7 @@ fpr_import_pscis <- function(workbook_name = 'pscis_phase1.xlsm'){ ##new templat
   readxl::read_excel(path = paste0(getwd(),"/data/", workbook_name),
                      sheet = 'PSCIS Assessment Worksheet') %>%
     # purrr::set_names(janitor::make_clean_names(names(.))) %>%
-    at_trim_xlsheet2() %>% ##recently added function above and pulled the altools package as it was a week link
+    fpr_trim_xlsheet() %>% ##recently added function above and pulled the altools package as it was a week link
     rename(date = date_of_assessment_yyyy_mm_dd) %>%
     mutate(date = janitor::excel_numeric_to_date(as.numeric(date))) %>%
     filter(!is.na(date)) %>%
@@ -364,4 +377,17 @@ fpr_photo_amalg_cv <- function(site_id){
   photos_stack <- c(photos_stack1, photos_stack2)
   photos_stacked <- image_append(image_scale(photos_stack), stack = F)
   image_write(photos_stacked, path = paste0(getwd(), '/data/photos/', site_id, '/crossing_all.JPG'), format = 'jpg')
+}
+
+
+fpr_import_hab_con <- function(path = "./data/habitat_confirmations.xls"){
+  readxl::excel_sheets(path = path) %>%
+    purrr::set_names() %>%
+    purrr::map(read_excel,
+               path = path,
+               .name_repair = janitor::make_clean_names) %>%
+    purrr::set_names(janitor::make_clean_names(names(.))) %>%
+    purrr::map(at_trim_xlsheet2) %>% #moved to functions from https://github.com/NewGraphEnvironment/altools to reduce dependencies
+    purrr::map(plyr::colwise(type.convert))
+
 }

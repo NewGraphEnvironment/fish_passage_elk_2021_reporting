@@ -161,6 +161,8 @@ fpr_copy_over_photos <- function(filescopy, filespaste){
             copy.mode = TRUE)
 }
 
+
+##!!!!!!!!!!!!!!!copy over the photos!!!!!!!!!!!!!!!!!!!!!!!
 mapply(fpr_copy_over_photos,
        filescopy =  filestocopy_list,
        filespaste = filestopaste_list)
@@ -168,6 +170,23 @@ mapply(fpr_copy_over_photos,
 ##also move over the pscis file
 file.copy(from = 'data/pscis_phase1.xlsm',
           to = paste0(targetdir, 'pscis_phase1.xlsm'))
+
+
+
+##!!!!!!!!!!!!!this is a special case !!!!!!!!!!!!!!!!!to test if magick might be better for resizing than powertools
+# for now we just resize 4600992  as these are the last photos that won't load to pscis. Next time we need to do everytng at once if this works
+##this scales everything and converts everything to jpg
+
+fpr_img_resize_convert <- function(img, path_write = path, folder = '4600992'){
+  image <- image_read(img)
+  image_scaled <- image_scale(image,"1024!x1024!")
+  image_write(image_scaled, path = paste0(path_write, folder, '/', tools::file_path_sans_ext(basename(img)), '.JPG'), format = 'jpg')
+}
+
+
+filestocopy_list %>%
+  pluck('4600992') %>% ##we need to filter or files wit 4600992
+  purrr::map(fpr_img_resize_convert, path_write = targetdir)
 
 ##going to make a few notes here about the submission process
 ## we need to work in microsoft edge and put sites in "Internet Explorer mode pages" and set exceptions for uploading to soft and esf

@@ -1,37 +1,6 @@
 source('R/functions.R')
 source('R/packages.R')
 source('R/private_info.R')
-# source('R/0255-load-pscis.R')
-
-
-##make a dataframe to pull info from the db
-##we should probably break each row out and determine the crs by the utm_zone attribute
-##lets do both phases at once to create a file for feeding back to bcfishpass
-
-
-##this is weird but we know these will be dups because we check at the end of this script.
-##lets pull these out of these files at the start
-
-# # dups <- c(4600183, 4600069, 4600367, 4605732, 4600070)
-#
-# dat1 <- import_pscis(workbook_name = 'pscis_phase1.xlsm')
-#   # filter(!my_crossing_reference %in% dups)
-#
-# dat2 <- import_pscis(workbook_name = 'pscis_phase2.xlsm')
-#
-# dat3 <- import_pscis(workbook_name = 'pscis_reassessments.xlsm')
-#
-# dat <- bind_rows(
-#   dat1,
-#   dat2,
-#   dat3
-# ) %>%
-#   distinct(.keep_all = T) %>%
-#   sf::st_as_sf(coords = c("easting", "northing"),
-#                crs = 26909, remove = F) %>% ##don't forget to put it in the right crs buds
-#   sf::st_transform(crs = 3005) ##convert to match the bcfishpass format
-
-
 
 pscis_all <- bind_rows(fpr_import_pscis_all())
 
@@ -72,8 +41,6 @@ dbGetQuery(conn,
            WHERE table_name='crossings'") #modelled_stream_crossings #modelled_crossings_closed_bottom
 
 
-# test <- dbGetQuery(conn, "SELECT * FROM bcfishpass.waterfalls")
-
 # add a unique id - we could just use the reference number
 dat$misc_point_id <- seq.int(nrow(dat))
 
@@ -81,8 +48,8 @@ dat$misc_point_id <- seq.int(nrow(dat))
 # load to database
 sf::st_write(obj = dat, dsn = conn, Id(schema= "ali", table = "misc"))
 
-
-
+# we are using fish_passage.modelled_crossings_closed_bottom but this table is deprecated. Should revise to pull from files raw but that's lots of work
+# and this data should be fine so whatever
 # sf doesn't automagically create a spatial index or a primary key
 res <- dbSendQuery(conn, "CREATE INDEX ON ali.misc USING GIST (geometry)")
 dbClearResult(res)
@@ -101,9 +68,6 @@ CROSS JOIN LATERAL
    ORDER BY
      a.geometry <-> geom
    LIMIT 1) AS b")
-
-
-##swapped out fish_passage.modelled_crossings_closed_bottom for bcfishpass.barriers_anthropogenic
 
 ##join the modelling data to our pscis submission info
 dat_joined <- left_join(

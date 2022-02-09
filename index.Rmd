@@ -8,7 +8,7 @@ author: |
  |
  | Prepared by
  | Al Irvine, B.Sc., R.P.Bio.
- | New Graph Environment
+ | New Graph Environment Ltd.
 
 date: |
  |

@@ -213,7 +213,7 @@ div.csl-indent {
 <h1><span class="header-section-number">2</span> Background</h1>
 <div id="project-location" class="section level2" number="2.1">
 <h2><span class="header-section-number">2.1</span> Project Location</h2>
-<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb6-1"><a href="background.html#cb6-1" aria-hidden="true" tabindex="-1"></a>knitr<span class="sc">::</span><span class="fu">include_graphics</span>(<span class="st">&quot;fig/logo.png&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb5-1"><a href="background.html#cb5-1" aria-hidden="true" tabindex="-1"></a>knitr<span class="sc">::</span><span class="fu">include_graphics</span>(<span class="st">&quot;fig/logo.png&quot;</span>)</span></code></pre></div>
 <div class="figure"><span style="display:block;" id="fig:overview-map"></span>
 <img src="fig/logo.png" alt="Overview map of Study Areas" width="100%" />
 <p class="caption">
@@ -221,9 +221,9 @@ Figure 2.1: Overview map of Study Areas
 </p>
 </div>
 <p><br></p>
-<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb7-1"><a href="background.html#cb7-1" aria-hidden="true" tabindex="-1"></a>knitr<span class="sc">::</span><span class="fu">include_graphics</span>(<span class="st">&quot;fig/logo.png&quot;</span>)</span>
-<span id="cb7-2"><a href="background.html#cb7-2" aria-hidden="true" tabindex="-1"></a>knitr<span class="sc">::</span><span class="fu">include_graphics</span>(<span class="st">&quot;fig/pixel.png&quot;</span>)</span>
-<span id="cb7-3"><a href="background.html#cb7-3" aria-hidden="true" tabindex="-1"></a>knitr<span class="sc">::</span><span class="fu">include_graphics</span>(<span class="st">&quot;fig/logo.png&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb6-1"><a href="background.html#cb6-1" aria-hidden="true" tabindex="-1"></a>knitr<span class="sc">::</span><span class="fu">include_graphics</span>(<span class="st">&quot;fig/logo.png&quot;</span>)</span>
+<span id="cb6-2"><a href="background.html#cb6-2" aria-hidden="true" tabindex="-1"></a>knitr<span class="sc">::</span><span class="fu">include_graphics</span>(<span class="st">&quot;fig/pixel.png&quot;</span>)</span>
+<span id="cb6-3"><a href="background.html#cb6-3" aria-hidden="true" tabindex="-1"></a>knitr<span class="sc">::</span><span class="fu">include_graphics</span>(<span class="st">&quot;fig/logo.png&quot;</span>)</span></code></pre></div>
 <div class="figure"><span style="display:block;" id="fig:hydrology-plot"></span>
 <img src="fig/logo.png" alt="Hydrograph for Bulkley River at Quick (Station #08EE004) and near Houston (Station #08EE003)." width="49.5%" /><img src="fig/pixel.png" alt="Hydrograph for Bulkley River at Quick (Station #08EE004) and near Houston (Station #08EE003)." width="1%" /><img src="fig/logo.png" alt="Hydrograph for Bulkley River at Quick (Station #08EE004) and near Houston (Station #08EE003)." width="49.5%" />
 <p class="caption">
@@ -231,20 +231,20 @@ Figure 2.2: Hydrograph for Bulkley River at Quick (Station #08EE004) and near Ho
 </p>
 </div>
 <p><br></p>
-<div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb8-1"><a href="background.html#cb8-1" aria-hidden="true" tabindex="-1"></a>fiss_species_table <span class="ot">&lt;-</span> readr<span class="sc">::</span><span class="fu">read_csv</span>(<span class="fu">paste0</span>(<span class="fu">getwd</span>(), <span class="st">&#39;/data/extracted_inputs/fiss_species_table.csv&#39;</span>))</span>
-<span id="cb8-2"><a href="background.html#cb8-2" aria-hidden="true" tabindex="-1"></a>  <span class="co"># filter(`Species Code` != &#39;CT&#39;) %&gt;% </span></span>
-<span id="cb8-3"><a href="background.html#cb8-3" aria-hidden="true" tabindex="-1"></a><span class="co"># fiss_species_table %&gt;%  </span></span>
-<span id="cb8-4"><a href="background.html#cb8-4" aria-hidden="true" tabindex="-1"></a><span class="co">#   my_kable(caption_text = &#39;Fish species recorded in the Bulkley River and Morice River watershed groups.&#39;)</span></span>
-<span id="cb8-5"><a href="background.html#cb8-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-6"><a href="background.html#cb8-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-7"><a href="background.html#cb8-7" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span>(gitbook_on){</span>
-<span id="cb8-8"><a href="background.html#cb8-8" aria-hidden="true" tabindex="-1"></a>fiss_species_table <span class="sc">%&gt;%</span> </span>
-<span id="cb8-9"><a href="background.html#cb8-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">my_kable_scroll</span>(<span class="at">caption_text =</span> <span class="st">&#39;Fish species recorded in the Bulkley River and Morice River watershed groups.&#39;</span>)</span>
-<span id="cb8-10"><a href="background.html#cb8-10" aria-hidden="true" tabindex="-1"></a>} <span class="cf">else</span> fiss_species_table[<span class="dv">1</span><span class="sc">:</span><span class="dv">41</span>, ] <span class="sc">%&gt;%</span> </span>
-<span id="cb8-11"><a href="background.html#cb8-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">my_kable</span>(<span class="at">caption_text =</span> <span class="st">&#39;Fish species recorded in the Bulkley River and Morice River watershed groups.&#39;</span>)</span>
-<span id="cb8-12"><a href="background.html#cb8-12" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-13"><a href="background.html#cb8-13" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span>(<span class="fu">identical</span>(gitbook_on, <span class="cn">FALSE</span>)){fiss_species_table[<span class="dv">42</span><span class="sc">:</span><span class="fu">nrow</span>(fiss_species_table), ] <span class="sc">%&gt;%</span> </span>
-<span id="cb8-14"><a href="background.html#cb8-14" aria-hidden="true" tabindex="-1"></a>  <span class="fu">my_kable</span>()}</span></code></pre></div>
+<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb7-1"><a href="background.html#cb7-1" aria-hidden="true" tabindex="-1"></a>fiss_species_table <span class="ot">&lt;-</span> readr<span class="sc">::</span><span class="fu">read_csv</span>(<span class="fu">paste0</span>(<span class="fu">getwd</span>(), <span class="st">&#39;/data/extracted_inputs/fiss_species_table.csv&#39;</span>))</span>
+<span id="cb7-2"><a href="background.html#cb7-2" aria-hidden="true" tabindex="-1"></a>  <span class="co"># filter(`Species Code` != &#39;CT&#39;) %&gt;% </span></span>
+<span id="cb7-3"><a href="background.html#cb7-3" aria-hidden="true" tabindex="-1"></a><span class="co"># fiss_species_table %&gt;%  </span></span>
+<span id="cb7-4"><a href="background.html#cb7-4" aria-hidden="true" tabindex="-1"></a><span class="co">#   my_kable(caption_text = &#39;Fish species recorded in the Bulkley River and Morice River watershed groups.&#39;)</span></span>
+<span id="cb7-5"><a href="background.html#cb7-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-6"><a href="background.html#cb7-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-7"><a href="background.html#cb7-7" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span>(gitbook_on){</span>
+<span id="cb7-8"><a href="background.html#cb7-8" aria-hidden="true" tabindex="-1"></a>fiss_species_table <span class="sc">%&gt;%</span> </span>
+<span id="cb7-9"><a href="background.html#cb7-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">my_kable_scroll</span>(<span class="at">caption_text =</span> <span class="st">&#39;Fish species recorded in the Bulkley River and Morice River watershed groups.&#39;</span>)</span>
+<span id="cb7-10"><a href="background.html#cb7-10" aria-hidden="true" tabindex="-1"></a>} <span class="cf">else</span> fiss_species_table[<span class="dv">1</span><span class="sc">:</span><span class="dv">41</span>, ] <span class="sc">%&gt;%</span> </span>
+<span id="cb7-11"><a href="background.html#cb7-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">my_kable</span>(<span class="at">caption_text =</span> <span class="st">&#39;Fish species recorded in the Bulkley River and Morice River watershed groups.&#39;</span>)</span>
+<span id="cb7-12"><a href="background.html#cb7-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-13"><a href="background.html#cb7-13" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span>(<span class="fu">identical</span>(gitbook_on, <span class="cn">FALSE</span>)){fiss_species_table[<span class="dv">42</span><span class="sc">:</span><span class="fu">nrow</span>(fiss_species_table), ] <span class="sc">%&gt;%</span> </span>
+<span id="cb7-14"><a href="background.html#cb7-14" aria-hidden="true" tabindex="-1"></a>  <span class="fu">my_kable</span>()}</span></code></pre></div>
 
 </div>
 </div>

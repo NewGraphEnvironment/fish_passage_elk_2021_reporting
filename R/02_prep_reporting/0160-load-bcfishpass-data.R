@@ -114,7 +114,7 @@ query <- "select col_description((table_schema||'.'||table_name)::regclass::oid,
 WHERE table_schema = 'bcfishpass'
 and table_name = 'crossings';"
 
-bcfishpass_comments <- st_read(conn, query =  query) %>%
+bcfishpass_column_comments <- st_read(conn, query =  query) %>%
   select(column_name, column_comment)
 
 # porphyryr <- st_read(conn, query =
@@ -152,7 +152,7 @@ rws_list_tables(conn)
 rws_write(bcfishpass_elkr, exists = F, delete = TRUE,
           conn = conn, x_name = "bcfishpass")
 # add the comments
-rws_write(bcfishpass_comments, exists = F, delete = TRUE,
+rws_write(bcfishpass_column_comments, exists = F, delete = TRUE,
           conn = conn, x_name = "bcfishpass_column_comments")
 # rws_drop_table("my_pscis_modelledcrossings_streams_xref", conn = conn)
 # rws_write(my_pscis_modelledcrossings_streams_xref, exists = FALSE, delete = TRUE,

@@ -29,7 +29,7 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   
-<link rel="prev" href="background.html"/>
+<link rel="prev" href="appendix---phase-1-fish-passage-assessment-data-and-photos.html"/>
 <link rel="next" href="session-info.html"/>
 <script src="libs/header-attrs-2.10/header-attrs.js"></script>
 <script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
@@ -51,6 +51,23 @@
 
 <link href="libs/anchor-sections-1.0.1/anchor-sections.css" rel="stylesheet" />
 <script src="libs/anchor-sections-1.0.1/anchor-sections.js"></script>
+<script src="libs/kePrint-0.0.1/kePrint.js"></script>
+<link href="libs/lightable-0.0.1/lightable.css" rel="stylesheet" />
+<script src="libs/htmlwidgets-1.5.3/htmlwidgets.js"></script>
+<link href="libs/leaflet-1.3.1/leaflet.css" rel="stylesheet" />
+<script src="libs/leaflet-1.3.1/leaflet.js"></script>
+<link href="libs/leafletfix-1.0.0/leafletfix.css" rel="stylesheet" />
+<script src="libs/proj4-2.6.2/proj4.min.js"></script>
+<script src="libs/Proj4Leaflet-1.0.1/proj4leaflet.js"></script>
+<link href="libs/rstudio_leaflet-1.3.1/rstudio_leaflet.css" rel="stylesheet" />
+<script src="libs/leaflet-binding-2.0.4.1/leaflet.js"></script>
+<script src="libs/leaflet-providers-1.9.0/leaflet-providers_1.9.0.js"></script>
+<script src="libs/leaflet-providers-plugin-2.0.4.1/leaflet-providers-plugin.js"></script>
+<link href="libs/lfx-fullscreen-1.0.2/lfx-fullscreen-prod.css" rel="stylesheet" />
+<script src="libs/lfx-fullscreen-1.0.2/lfx-fullscreen-prod.js"></script>
+<link href="libs/leaflet-minimap-3.3.1/Control.MiniMap.min.css" rel="stylesheet" />
+<script src="libs/leaflet-minimap-3.3.1/Control.MiniMap.min.js"></script>
+<script src="libs/leaflet-minimap-3.3.1/Minimap-binding.js"></script>
 
 <script type="text/javascript">
 
@@ -80,70 +97,6 @@ document.addEventListener('DOMContentLoaded', toggle_R);
 </script>
 
 
-<style type="text/css">
-pre > code.sourceCode { white-space: pre; position: relative; }
-pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
-pre > code.sourceCode > span:empty { height: 1.2em; }
-.sourceCode { overflow: visible; }
-code.sourceCode > span { color: inherit; text-decoration: inherit; }
-pre.sourceCode { margin: 0; }
-@media screen {
-div.sourceCode { overflow: auto; }
-}
-@media print {
-pre > code.sourceCode { white-space: pre-wrap; }
-pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
-}
-pre.numberSource code
-  { counter-reset: source-line 0; }
-pre.numberSource code > span
-  { position: relative; left: -4em; counter-increment: source-line; }
-pre.numberSource code > span > a:first-child::before
-  { content: counter(source-line);
-    position: relative; left: -1em; text-align: right; vertical-align: baseline;
-    border: none; display: inline-block;
-    -webkit-touch-callout: none; -webkit-user-select: none;
-    -khtml-user-select: none; -moz-user-select: none;
-    -ms-user-select: none; user-select: none;
-    padding: 0 4px; width: 4em;
-    color: #aaaaaa;
-  }
-pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
-div.sourceCode
-  {   }
-@media screen {
-pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
-}
-code span.al { color: #ff0000; font-weight: bold; } /* Alert */
-code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
-code span.at { color: #7d9029; } /* Attribute */
-code span.bn { color: #40a070; } /* BaseN */
-code span.bu { } /* BuiltIn */
-code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
-code span.ch { color: #4070a0; } /* Char */
-code span.cn { color: #880000; } /* Constant */
-code span.co { color: #60a0b0; font-style: italic; } /* Comment */
-code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
-code span.do { color: #ba2121; font-style: italic; } /* Documentation */
-code span.dt { color: #902000; } /* DataType */
-code span.dv { color: #40a070; } /* DecVal */
-code span.er { color: #ff0000; font-weight: bold; } /* Error */
-code span.ex { } /* Extension */
-code span.fl { color: #40a070; } /* Float */
-code span.fu { color: #06287e; } /* Function */
-code span.im { } /* Import */
-code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
-code span.kw { color: #007020; font-weight: bold; } /* Keyword */
-code span.op { color: #666666; } /* Operator */
-code span.ot { color: #007020; } /* Other */
-code span.pp { color: #bc7a00; } /* Preprocessor */
-code span.sc { color: #4070a0; } /* SpecialChar */
-code span.ss { color: #bb6688; } /* SpecialString */
-code span.st { color: #4070a0; } /* String */
-code span.va { color: #19177c; } /* Variable */
-code span.vs { color: #4070a0; } /* VerbatimString */
-code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
-</style>
 
 <style type="text/css">
 /* Used with Pandoc 2.11+ new --citeproc when CSL is used */
@@ -187,6 +140,10 @@ div.csl-indent {
 <li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Acknowledgement</a></li>
 <li class="chapter" data-level="1" data-path="intro.html"><a href="intro.html"><i class="fa fa-check"></i><b>1</b> Introduction</a></li>
 <li class="chapter" data-level="2" data-path="background.html"><a href="background.html"><i class="fa fa-check"></i><b>2</b> Background</a></li>
+<li class="chapter" data-level="3" data-path="methods.html"><a href="methods.html"><i class="fa fa-check"></i><b>3</b> Methods</a></li>
+<li class="chapter" data-level="4" data-path="results-and-discussion.html"><a href="results-and-discussion.html"><i class="fa fa-check"></i><b>4</b> Results and Discussion</a></li>
+<li class="chapter" data-level="5" data-path="recommendations.html"><a href="recommendations.html"><i class="fa fa-check"></i><b>5</b> Recommendations</a></li>
+<li class="chapter" data-level="" data-path="appendix---phase-1-fish-passage-assessment-data-and-photos.html"><a href="appendix---phase-1-fish-passage-assessment-data-and-photos.html"><i class="fa fa-check"></i>Appendix - Phase 1 Fish Passage Assessment Data and Photos</a></li>
 <li class="chapter" data-level="" data-path="references.html"><a href="references.html"><i class="fa fa-check"></i>References</a></li>
 <li class="chapter" data-level="" data-path="session-info.html"><a href="session-info.html"><i class="fa fa-check"></i>Session Info</a></li>
 <li class="divider"></li>
@@ -213,13 +170,121 @@ div.csl-indent {
 <h1>References</h1>
 <div id="refs" class="references csl-bib-body hanging-indent">
 <div class="csl-entry">
+Allaire, JJ, Yihui Xie, Jonathan McPherson, Javier Luraschi, Kevin Ushey, Aron Atkins, Hadley Wickham, Joe Cheng, Winston Chang, and Richard Iannone. 2021. <em>Rmarkdown: Dynamic Documents for r</em>. <a href="https://CRAN.R-project.org/package=rmarkdown">https://CRAN.R-project.org/package=rmarkdown</a>.
+</div>
+<div class="csl-entry">
+BC Species &amp; Ecosystem Explorer. 2020a. <span>“Oncorhynchus Clarkii Lewisi (<span>Cutthroat Trout</span>, Lewisi Subspecies).”</span> 2020. <a href="https://a100.gov.bc.ca/pub/eswp/reports.do?elcode=AFCHA02088">https://a100.gov.bc.ca/pub/eswp/reports.do?elcode=AFCHA02088</a>.
+</div>
+<div class="csl-entry">
+———. 2020b. <span>“Salvelinus Confluentus (<span>Bull Trout</span>).”</span> 2020. <a href="https://a100.gov.bc.ca/pub/eswp/reports.do?elcode=AFCHA05020">https://a100.gov.bc.ca/pub/eswp/reports.do?elcode=AFCHA05020</a>.
+</div>
+<div class="csl-entry">
+Bell, M. C. 1991. <span>“Fisheries <span>Handbook</span> of <span>Engineering Requirements</span> and <span>Biological Criteria</span>.”</span> <a href="https://www.fs.fed.us/biology/nsaec/fishxing/fplibrary/Bell_1991_Fisheries_handbook_of_engineering_requirements_and.pdf">https://www.fs.fed.us/biology/nsaec/fishxing/fplibrary/Bell_1991_Fisheries_handbook_of_engineering_requirements_and.pdf</a>.
+</div>
+<div class="csl-entry">
+Blank, Matt D., Kevin M. Kappenman, Kathryn Plymesser, Katharine Banner, and Joel Cahoon. 2020. <span>“Swimming <span>Performance</span> of <span>Rainbow Trout</span> and <span>Westslope Cutthroat Trout</span> in an <span>Open</span>-<span>Channel Flume</span>.”</span> <em>Journal of Fish and Wildlife Management</em> 11 (1): 217–25. <a href="https://doi.org/10.3996/052019-JFWM-040">https://doi.org/10.3996/052019-JFWM-040</a>.
+</div>
+<div class="csl-entry">
+Bourne, Christina, Dan Kehler, Yolanda Wiersma, and David Cote. 2011. <span>“Barriers to Fish Passage and Barriers to Fish Passage Assessments: <span>The</span> Impact of Assessment Methods and Assumptions on Barrier Identification and Quantification of Watershed Connectivity.”</span> <em>Aquatic Ecology</em> 45: 389–403. <a href="https://doi.org/10.1007/s10452-011-9362-z">https://doi.org/10.1007/s10452-011-9362-z</a>.
+</div>
+<div class="csl-entry">
+Boyer, Matthew C, Clint C Muhlfeld, and Fred W Allendorf. 2008. <span>“Rainbow Trout ( <span><em>Oncorhynchus</em></span><span> <em>Mykiss</em></span> ) Invasion and the Spread of Hybridization with Native Westslope Cutthroat Trout ( <span><em>Oncorhynchus</em></span><span> <em>Clarkii Lewisi</em></span> ).”</span> <em>Canadian Journal of Fisheries and Aquatic Sciences</em> 65 (4): 658–69. <a href="https://doi.org/10.1139/f08-001">https://doi.org/10.1139/f08-001</a>.
+</div>
+<div class="csl-entry">
 Bramblett, Robert, Mason Bryant, Brenda Wright, and Robert White. 2002. <span>“Seasonal Use of Small Tributary and Main-Stem Habitats by Juvenile Steelhead, Coho Salmon, and Dolly Varden in a Southeastern Alaska Drainage Basin.”</span> <em>Transactions of the American Fisheries Society</em> 131: 498–506. <a href="https://doi.org/10.1577/1548-8659(2002)131&lt;0498:SUOSTA&gt;2.0.CO;2">https://doi.org/10.1577/1548-8659(2002)131&lt;0498:SUOSTA&gt;2.0.CO;2</a>.
+</div>
+<div class="csl-entry">
+Brown, Richard S., and William C. Mackay. 1995. <span>“Spawning Ecology of Cutthroat Trout ( <span><em>Oncorhynchus</em></span><span> <em>Clarki</em></span> ) in the <span>Ram River</span>, <span>Alberta</span>.”</span> <em>Canadian Journal of Fisheries and Aquatic Sciences</em> 52 (5): 983–92. <a href="https://doi.org/10.1139/f95-097">https://doi.org/10.1139/f95-097</a>.
+</div>
+<div class="csl-entry">
+Clarkin, K, A Connor, M Furniss, B Gubernick, M Love, K Moynan, and S WilsonMusser. 2005. <span>“National <span>Inventory</span> and <span>Assessment Procedure For Identifying Barriers</span> to <span>Aquatic Organism Passage</span> at <span>Road</span>-<span>Stream Crossings</span>.”</span> <span>United States Department of Agriculture, Forest Service, National Technology and Development Program</span>. <a href="https://www.fs.fed.us/biology/nsaec/fishxing/publications/PDFs/NIAP.pdf">https://www.fs.fed.us/biology/nsaec/fishxing/publications/PDFs/NIAP.pdf</a>.
+</div>
+<div class="csl-entry">
+Cope, Scott, C. J Schwarz, and A Prince. 2017. <span>“Upper <span>Fording River Westslope Cutthrout Trout Population Monitoring Project</span>: 2017.”</span> <a href="https://www.teck.com/media/Upper-Fording-River-Westslope-Cutthroat-Trout-Population-Monitoring-Project,-2012-2017-(December-2017).pdf">https://www.teck.com/media/Upper-Fording-River-Westslope-Cutthroat-Trout-Population-Monitoring-Project,-2012-2017-(December-2017).pdf</a>.
 </div>
 <div class="csl-entry">
 Cote, David, P Frampton, M Langdon, and R Collier. 2005. <em>Fish Passage and Stream Habitat Restoration in <span>Terra Nova National Park</span> Highway Culverts</em>.
 </div>
 <div class="csl-entry">
+Davidson, A, H Tepper, J Bisset, K Anderson, P. J Tschaplinski, A Chirico, A Waterhouse, et al. 2018. <span>“Aquatic <span>Ecosystems Cumulative Effects Assessment Report</span>.”</span> <a href="https://www2.gov.bc.ca/assets/gov/environment/natural-resource-stewardship/cumulative-effects/final_ev_cemf_aquatic_ecosystems_cea_report_24072018.pdf">https://www2.gov.bc.ca/assets/gov/environment/natural-resource-stewardship/cumulative-effects/final_ev_cemf_aquatic_ecosystems_cea_report_24072018.pdf</a>.
+</div>
+<div class="csl-entry">
 Diebel, M. W., M. Fedora, S. Cogswell, and J. R. O’Hanley. 2015. <span>“Effects of <span>Road Crossings</span> on <span>Habitat Connectivity</span> for <span>Stream</span>-<span>Resident Fish</span>: <span>STREAM</span>-<span>RESIDENT FISH HABITAT CONNECTIVITY</span>.”</span> <em>River Research and Applications</em> 31 (10): 1251–61. <a href="https://doi.org/10.1002/rra.2822">https://doi.org/10.1002/rra.2822</a>.
+</div>
+<div class="csl-entry">
+Elk Valley Cumulative Effects Management Framework Working Group. 2018. <span>“Elk <span>Valley Cumulative Effects Assessment</span> and <span>Management Report</span>.”</span> <a href="https://www2.gov.bc.ca/assets/gov/environment/natural-resource-stewardship/cumulative-effects/final_elk_valley_ceam_12122018.pdf">https://www2.gov.bc.ca/assets/gov/environment/natural-resource-stewardship/cumulative-effects/final_elk_valley_ceam_12122018.pdf</a>.
+</div>
+<div class="csl-entry">
+Environment, and Climate Change Canada. 2020. <span>“National <span>Water Data Archive</span>: <span>HYDAT</span>.”</span> Service description. <span>aem</span>. 2020. <a href="https://www.canada.ca/en/environment-climate-change/services/water-overview/quantity/monitoring/survey/data-products-services/national-archive-hydat.html">https://www.canada.ca/en/environment-climate-change/services/water-overview/quantity/monitoring/survey/data-products-services/national-archive-hydat.html</a>.
+</div>
+<div class="csl-entry">
+Fish Passage Technical Working Group. 2011. <span>“A <span>Checklist</span> for <span>Fish Habitat Confirmation Prior</span> to the <span>Rehabilitation</span> Fo a <span>Stream Crossing</span>.”</span> <a href="https://www2.gov.bc.ca/assets/gov/environment/natural-resource-stewardship/land-based-investment/forests-for-tomorrow/checklist-for-fish-habitat-confirmation-201112.pdf">https://www2.gov.bc.ca/assets/gov/environment/natural-resource-stewardship/land-based-investment/forests-for-tomorrow/checklist-for-fish-habitat-confirmation-201112.pdf</a>.
+</div>
+<div class="csl-entry">
+———. 2014. <span>“Fish <span>Passage Strategic Approach</span>: <span>Protocl</span> for <span>Prioritizing Sites</span> for <span>Fish Passage Remediation</span>.”</span> <a href="https://www2.gov.bc.ca/assets/gov/environment/plants-animals-and-ecosystems/fish-fish-habitat/fish-passage/strategic20approach20july202014.pdf">https://www2.gov.bc.ca/assets/gov/environment/plants-animals-and-ecosystems/fish-fish-habitat/fish-passage/strategic20approach20july202014.pdf</a>.
+</div>
+<div class="csl-entry">
+FLNRORD. 2020a. <span>“Digital <span>Road Atlas</span> (<span>DRA</span>) - <span>Master Partially</span>-<span>Attributed Roads</span> - <span>Data Catalogue</span>.”</span> 2020. <a href="https://catalogue.data.gov.bc.ca/dataset/digital-road-atlas-dra-master-partially-attributed-roads">https://catalogue.data.gov.bc.ca/dataset/digital-road-atlas-dra-master-partially-attributed-roads</a>.
+</div>
+<div class="csl-entry">
+———. 2020b. <span>“Forest <span>Tenure Road Section Lines</span> - <span>Data Catalogue</span>.”</span> 2020. <a href="https://catalogue.data.gov.bc.ca/dataset/forest-tenure-road-section-lines">https://catalogue.data.gov.bc.ca/dataset/forest-tenure-road-section-lines</a>.
+</div>
+<div class="csl-entry">
+Grainger, Karen L. 2011. <span>“2011 <span>Fish Passage Culvert Assessments</span> Within the <span>Rocky Mountain Resource District</span>.”</span>
+</div>
+<div class="csl-entry">
+Irvine, A. 2016. <span>“Columbia <span>Basin Fish Passage Data Analysis</span>.”</span> <a href="http://a100.gov.bc.ca/pub/acat/documents/r50900/F-F16-24-FinalReport-Masse-FishPassage_1475094712285_5091517509.pdf">http://a100.gov.bc.ca/pub/acat/documents/r50900/F-F16-24-FinalReport-Masse-FishPassage_1475094712285_5091517509.pdf</a>.
+</div>
+<div class="csl-entry">
+Kemp, P. S., and J. R. O’Hanley. 2010. <span>“Procedures for Evaluating and Prioritising the Removal of Fish Passage Barriers: A Synthesis: <span>EVALUATION OF FISH PASSAGE BARRIERS</span>.”</span> <em>Fisheries Management and Ecology</em>, no–. <a href="https://doi.org/10.1111/j.1365-2400.2010.00751.x">https://doi.org/10.1111/j.1365-2400.2010.00751.x</a>.
+</div>
+<div class="csl-entry">
+<span>“Ktunaxa <span>Nation</span>.”</span> 2020. 2020. <a href="https://www.ktunaxa.org/">https://www.ktunaxa.org/</a>.
+</div>
+<div class="csl-entry">
+Lamson, Heather. 2020. <span>“Evaluation of <span>Current Westslope Cutthroat Trout Hybridization Levels</span> in the <span>Upper Kootenay Drainage</span>.”</span> <a href="http://a100.gov.bc.ca/pub/acat/public/viewReport.do?reportId=58888">http://a100.gov.bc.ca/pub/acat/public/viewReport.do?reportId=58888</a>.
+</div>
+<div class="csl-entry">
+Mahlum, Shad, David Cote, Yolanda Wiersma, Dan Kehler, and K. Clarke. 2014. <span>“Evaluating the <span>Barrier Assessment Technique Derived</span> from <span>FishXing Software</span> and the <span>Upstream Movement</span> of <span>Brook Trout</span> Through <span>Road Culverts</span>.”</span> <em>Transactions of the American Fisheries Society</em> 143. <a href="https://doi.org/10.1080/00028487.2013.825641">https://doi.org/10.1080/00028487.2013.825641</a>.
+</div>
+<div class="csl-entry">
+Masse Environmental Consultants Ltd. 2015. <span>“Fish <span>Habitat Confirmation Assessments</span> â€“ <span>East Kootenay Area Project Pd15tfe010</span>.”</span> <a href="https://a100.gov.bc.ca/pub/acat/public/viewReport.do?reportId=49504">https://a100.gov.bc.ca/pub/acat/public/viewReport.do?reportId=49504</a>.
+</div>
+<div class="csl-entry">
+Ministry of Forests, Lands. 2020. <span>“Elk <span>Valley Cumulative Effects Management Framework</span> - <span>Province</span> of <span>British Columbia</span>.”</span> <span>Province of British Columbia</span>. 2020. <a href="https://www2.gov.bc.ca/gov/content/environment/natural-resource-stewardship/cumulative-effects-framework/regional-assessments/kootenay-boundary/elk-valley-cemf">https://www2.gov.bc.ca/gov/content/environment/natural-resource-stewardship/cumulative-effects-framework/regional-assessments/kootenay-boundary/elk-valley-cemf</a>.
+</div>
+<div class="csl-entry">
+MoE. 2011. <span>“Field Assessment for Determining Fish Passage Status of Closed Bottom Structures.”</span> <span>BC Ministry of Environment (MoE)</span>. <a href="https://www2.gov.bc.ca/assets/gov/environment/natural-resource-stewardship/land-based-investment/forests-for-tomorrow/field-assessment-for-determining-fish-passage-status-of-cbs.pdf">https://www2.gov.bc.ca/assets/gov/environment/natural-resource-stewardship/land-based-investment/forests-for-tomorrow/field-assessment-for-determining-fish-passage-status-of-cbs.pdf</a>.
+</div>
+<div class="csl-entry">
+———. 2020a. <span>“Known <span>BC</span> Fish Observations and <span>BC</span> Fish Distributions.”</span> Ministry of Environment and Climate Change Strategy - Knowledge Management. 2020. <a href="https://catalogue.data.gov.bc.ca/dataset/known-bc-fish-observations-and-bc-fish-distributions">https://catalogue.data.gov.bc.ca/dataset/known-bc-fish-observations-and-bc-fish-distributions</a>.
+</div>
+<div class="csl-entry">
+———. 2020b. <span>“Provincial <span>Obstacles</span> to <span>Fish Passage</span> - <span>Data Catalogue</span>.”</span> Ministry of Environment and Climate Change Strategy - Knowledge Management. 2020. <a href="https://catalogue.data.gov.bc.ca/dataset/provincial-obstacles-to-fish-passage">https://catalogue.data.gov.bc.ca/dataset/provincial-obstacles-to-fish-passage</a>.
+</div>
+<div class="csl-entry">
+———. 2020c. <span>“Stream <span>Inventory Sample Sites</span>.”</span> Ministry of Environment and Climate Change Strategy - Knowledge Management. 2020. <a href="https://catalogue.data.gov.bc.ca/dataset/stream-inventory-sample-sites">https://catalogue.data.gov.bc.ca/dataset/stream-inventory-sample-sites</a>.
+</div>
+<div class="csl-entry">
+Norris, Simon. 2020. <em>Bcfishobs</em>. <span>Hillcrest Geographics</span>. <a href="https://github.com/smnorris/bcfishpass">https://github.com/smnorris/bcfishpass</a>.
+</div>
+<div class="csl-entry">
+———. (2019) 2021. <em>Smnorris/Fwapg</em>. <a href="https://github.com/smnorris/fwapg">https://github.com/smnorris/fwapg</a>.
+</div>
+<div class="csl-entry">
+———. (2016) 2021. <em>Smnorris/Bcdata</em>. <a href="https://github.com/smnorris/bcdata">https://github.com/smnorris/bcdata</a>.
+</div>
+<div class="csl-entry">
+———. (2018) 2021. <em>Smnorris/Bcfishobs</em>. <a href="https://github.com/smnorris/bcfishobs">https://github.com/smnorris/bcfishobs</a>.
+</div>
+<div class="csl-entry">
+———. (2020) 2021. <em>Smnorris/Bcfishpass</em>. <a href="https://github.com/smnorris/bcfishpass">https://github.com/smnorris/bcfishpass</a>.
+</div>
+<div class="csl-entry">
+QGIS Development Team. 2009. <em>QGIS Geographic Information System</em>. Open Source Geospatial Foundation. <a href="http://qgis.osgeo.org">http://qgis.osgeo.org</a>.
+</div>
+<div class="csl-entry">
+R Core Team. 2020. <em>R: A Language and Environment for Statistical Computing</em>. Vienna, Austria: R Foundation for Statistical Computing. <a href="https://www.R-project.org/">https://www.R-project.org/</a>.
 </div>
 <div class="csl-entry">
 Roni, Phil, Karrie Hanson, and Timothy Beechie. 2008. <span>“Global <span>Review</span> of the <span>Physical</span> and <span>Biological Effectiveness</span> of <span>Stream Habitat Rehabilitation Techniques</span>.”</span> <em>North American Journal of Fisheries Management</em> 28: 856–90. <a href="https://doi.org/10.1577/M06-169.1">https://doi.org/10.1577/M06-169.1</a>.
@@ -228,18 +293,36 @@ Roni, Phil, Karrie Hanson, and Timothy Beechie. 2008. <span>“Global <span>Revi
 Saldi-Caromile, K, K Bates, P Skidmore, J Barenti, and D Pineo. 2004. <span>“Stream <span>Habitat Restoration Guidelines</span>: <span>Final Draft</span>.”</span> <a href="https://wdfw.wa.gov/sites/default/files/publications/00043/wdfw00043.pdf">https://wdfw.wa.gov/sites/default/files/publications/00043/wdfw00043.pdf</a>.
 </div>
 <div class="csl-entry">
+Schmetterling, David. 2001. <span>“Seasonal <span>Movements</span> of <span>Fluvial Westslope Cutthroat Trout</span> in the <span>Blackfoot River Drainage</span>, <span>Montana</span>.”</span> <em>North American Journal of Fisheries Management</em> 21: 507–20. <a href="https://doi.org/10.1577/1548-8675(2001)021&lt;0507:SMOFWC&gt;2.0.CO;2">https://doi.org/10.1577/1548-8675(2001)021&lt;0507:SMOFWC&gt;2.0.CO;2</a>.
+</div>
+<div class="csl-entry">
+Schweigert, J. F, John Robert Post, Canada, Environment, limate Change Canada, Canadian Wildlife Service, and Committee on the Status of Endangered Wildlife in Canada. 2017. <em><span>COSEWIC</span> Assessment and Status Report on the <span>Westslope Cutthroat Trout</span>, <span>Oncorhynchus</span> Clarkii Lewisi, <span>Saskatchewan</span>-<span>Nelson River</span> Populations, <span>Pacific</span> Populations, in <span>Canada</span>.</em> <span>Ottawa</span>: <span>Environment and Climate Change Canada</span>. <a href="http://publications.gc.ca/collections/collection_2017/eccc/CW69-14-506-2017-eng.pdf">http://publications.gc.ca/collections/collection_2017/eccc/CW69-14-506-2017-eng.pdf</a>.
+</div>
+<div class="csl-entry">
+Shaw, Edward A., Eckart Lange, James D. Shucksmith, and David N. Lerner. 2016. <span>“Importance of Partial Barriers and Temporal Variation in Flow When Modelling Connectivity in Fragmented River Systems.”</span> <em>Ecological Engineering</em> 91: 515–28. <a href="https://doi.org/10.1016/j.ecoleng.2016.01.030">https://doi.org/10.1016/j.ecoleng.2016.01.030</a>.
+</div>
+<div class="csl-entry">
 Slaney, P. A, Daiva O Zaldokas, and Watershed Restoration Program (B.C.). 1997. <em>Fish Habitat Rehabilitation Procedures</em>. <span>Vancouver, B.C.</span>: <span>Watershed Restoration Program</span>. <a href="https://www.for.gov.bc.ca/hfd/library/FFIP/Slaney_PA1997_A.pdf">https://www.for.gov.bc.ca/hfd/library/FFIP/Slaney_PA1997_A.pdf</a>.
 </div>
 <div class="csl-entry">
 Swales, Stephen, and C. Levings. 1989. <span>“Role of <span>Off</span>-<span>Channel Ponds</span> in the <span>Life Cycle</span> of <span>Coho Salmon</span> ( <span>Oncorhynchus</span> Kisutch ) and <span>Other Juvenile Salmonids</span> in the <span>Coldwater River</span>, <span>British Columbia</span>.”</span> <em>Canadian Journal of Fisheries and Aquatic Sciences - CAN J FISHERIES AQUAT SCI</em> 46: 232–42. <a href="https://doi.org/10.1139/f89-032">https://doi.org/10.1139/f89-032</a>.
 </div>
+<div class="csl-entry">
+Thompson, Richard. 2013. <span>“Assessing <span>Fish Passage</span> at <span>Culverts</span> â€“ the Method, Its Metrics and Preliminary Findings from over 4,000 Assessments.”</span> <a href="https://www2.gov.bc.ca/assets/gov/environment/plants-animals-and-ecosystems/fish-fish-habitat/fish-passage/assessing_fish_passage_at_culverts.pdf">https://www2.gov.bc.ca/assets/gov/environment/plants-animals-and-ecosystems/fish-fish-habitat/fish-passage/assessing_fish_passage_at_culverts.pdf</a>.
 </div>
-<div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb8-1"><a href="references.html#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="co">#https://github.com/rstudio/bookdown/issues/8 how to put the references wherever we want.</span></span>
-<span id="cb8-2"><a href="references.html#cb8-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-3"><a href="references.html#cb8-3" aria-hidden="true" tabindex="-1"></a><span class="co"># `r if (knitr::is_html_output()){ &#39;</span></span>
-<span id="cb8-4"><a href="references.html#cb8-4" aria-hidden="true" tabindex="-1"></a><span class="co"># # References {-}</span></span>
-<span id="cb8-5"><a href="references.html#cb8-5" aria-hidden="true" tabindex="-1"></a><span class="co"># &lt;div id=&quot;refs&quot;&gt;&lt;/div&gt;</span></span>
-<span id="cb8-6"><a href="references.html#cb8-6" aria-hidden="true" tabindex="-1"></a><span class="co"># &#39;}`</span></span></code></pre></div>
+<div class="csl-entry">
+Vast Resource Solutions Inc. 2013. <span>“Fish <span>Habitat Assessments</span> for <span>Fish Passage Restoration</span> in the <span>Kootenay Business Area</span>.”</span> 2013. <a href="http://a100.gov.bc.ca/pub/acat/documents/r50151/PD13TFE005_1457969740338_7968134938.pdf">http://a100.gov.bc.ca/pub/acat/documents/r50151/PD13TFE005_1457969740338_7968134938.pdf</a>.
+</div>
+<div class="csl-entry">
+VAST Resource Solutions Inc. 2013. <span>“2012 <span>Fish Passage Assessments</span> in <span>BCTS Kootenay Business Area</span> (<span>Pd13tfe006</span>).”</span> <a href="http://a100.gov.bc.ca/appsdata/acat/documents/r43047/PD13TFE006_VAST_FinalReport_1405379598103_5374008940.pdf">http://a100.gov.bc.ca/appsdata/acat/documents/r43047/PD13TFE006_VAST_FinalReport_1405379598103_5374008940.pdf</a>.
+</div>
+<div class="csl-entry">
+Washington Department of Fish &amp; Wildlife. 2009. <span>“Fish <span>Passage Barrier</span> and <span>Surface Water Diversion Screening Assessment</span> and <span>Prioritization Manual</span>.”</span> <span>Washington Department of Fish and Wildlife. Olympia, Washington.</span> <a href="https://wdfw.wa.gov/sites/default/files/publications/00061/wdfw00061.pdf">https://wdfw.wa.gov/sites/default/files/publications/00061/wdfw00061.pdf</a>.
+</div>
+<div class="csl-entry">
+Xie, Yihui. 2016. <em>Bookdown: Authoring Books and Technical Documents with <span>R</span> Markdown</em>. Boca Raton, Florida: Chapman; Hall/CRC. <a href="https://bookdown.org/yihui/bookdown">https://bookdown.org/yihui/bookdown</a>.
+</div>
+</div>
 
 </div>
             </section>
@@ -247,7 +330,7 @@ Swales, Stephen, and C. Levings. 1989. <span>“Role of <span>Off</span>-<span>C
           </div>
         </div>
       </div>
-<a href="background.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="appendix---phase-1-fish-passage-assessment-data-and-photos.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
 <a href="session-info.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
@@ -303,6 +386,20 @@ gitbook.start({
 });
 </script>
 
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "true";
+    if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
 </body>
 
 </html>

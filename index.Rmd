@@ -23,7 +23,7 @@ output:
 nocite: |
 
 documentclass: book
-bibliography: [book.bib, packages.bib]
+bibliography: [book.bib, references.bib, packages.bib]
 biblio-style: apalike
 link-citations: no
 github-repo: rstudio/bookdown-demo
@@ -33,17 +33,15 @@ description: "My Description."
 ---
 
 
-```{r setup, include = TRUE, echo =T, message=FALSE, warning=FALSE}
+```{r setup, include = TRUE, echo =F, message=FALSE, warning=FALSE}
 gitbook_on <- TRUE
 # gitbook_on <- FALSE  ##we just need turn  this on and off to switch between gitbook and pdf via paged.js
 
 
-knitr::opts_chunk$set(echo=T, message=FALSE, warning=FALSE, dpi=60, out.width = "100%")
+knitr::opts_chunk$set(echo=F, message=FALSE, warning=FALSE, dpi=60, out.width = "100%")
 options(scipen=999)
 options(knitr.kable.NA = '--') #'--'
 options(knitr.kable.NAN = '--')
-
-
 
 ```
 
@@ -61,7 +59,8 @@ font_set <- 9
 
 ```{r}
 source('R/packages.R')
-# source('R/functions.R')
+source('R/functions.R')
+source('R/tables.R')
 ```
 
 

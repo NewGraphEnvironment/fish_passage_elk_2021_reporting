@@ -38,7 +38,7 @@ preview_chapter('index.Rmd')
 # {file.rename('0600-appendix.Rmd', 'data/0600-appendix.Rmd')
 
 #################################################################################################
-##go to the index.Rmd and change gitbook_on <- FALSE
+##go to the index.Rmd and change gitbook_on <- FALSE We also need to turn echo=F in the setup chunk header
 #################################################################################################
 
 ##   then make our printable pdf

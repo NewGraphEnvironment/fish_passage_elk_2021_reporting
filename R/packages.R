@@ -42,6 +42,5 @@ pacman::p_load(
 
 
 pacman::p_load_gh("poissonconsulting/fwapgr",
-                  "crsh/citr",
-                  "rstudio/pagedown")
+                  "crsh/citr")
                   # "poissonconsulting/subfoldr2")

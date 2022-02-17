@@ -30,7 +30,7 @@
   
   
 <link rel="prev" href="intro.html"/>
-<link rel="next" href="references.html"/>
+<link rel="next" href="methods.html"/>
 <script src="libs/header-attrs-2.10/header-attrs.js"></script>
 <script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
@@ -51,6 +51,23 @@
 
 <link href="libs/anchor-sections-1.0.1/anchor-sections.css" rel="stylesheet" />
 <script src="libs/anchor-sections-1.0.1/anchor-sections.js"></script>
+<script src="libs/kePrint-0.0.1/kePrint.js"></script>
+<link href="libs/lightable-0.0.1/lightable.css" rel="stylesheet" />
+<script src="libs/htmlwidgets-1.5.3/htmlwidgets.js"></script>
+<link href="libs/leaflet-1.3.1/leaflet.css" rel="stylesheet" />
+<script src="libs/leaflet-1.3.1/leaflet.js"></script>
+<link href="libs/leafletfix-1.0.0/leafletfix.css" rel="stylesheet" />
+<script src="libs/proj4-2.6.2/proj4.min.js"></script>
+<script src="libs/Proj4Leaflet-1.0.1/proj4leaflet.js"></script>
+<link href="libs/rstudio_leaflet-1.3.1/rstudio_leaflet.css" rel="stylesheet" />
+<script src="libs/leaflet-binding-2.0.4.1/leaflet.js"></script>
+<script src="libs/leaflet-providers-1.9.0/leaflet-providers_1.9.0.js"></script>
+<script src="libs/leaflet-providers-plugin-2.0.4.1/leaflet-providers-plugin.js"></script>
+<link href="libs/lfx-fullscreen-1.0.2/lfx-fullscreen-prod.css" rel="stylesheet" />
+<script src="libs/lfx-fullscreen-1.0.2/lfx-fullscreen-prod.js"></script>
+<link href="libs/leaflet-minimap-3.3.1/Control.MiniMap.min.css" rel="stylesheet" />
+<script src="libs/leaflet-minimap-3.3.1/Control.MiniMap.min.js"></script>
+<script src="libs/leaflet-minimap-3.3.1/Minimap-binding.js"></script>
 
 <script type="text/javascript">
 
@@ -80,70 +97,6 @@ document.addEventListener('DOMContentLoaded', toggle_R);
 </script>
 
 
-<style type="text/css">
-pre > code.sourceCode { white-space: pre; position: relative; }
-pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
-pre > code.sourceCode > span:empty { height: 1.2em; }
-.sourceCode { overflow: visible; }
-code.sourceCode > span { color: inherit; text-decoration: inherit; }
-pre.sourceCode { margin: 0; }
-@media screen {
-div.sourceCode { overflow: auto; }
-}
-@media print {
-pre > code.sourceCode { white-space: pre-wrap; }
-pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
-}
-pre.numberSource code
-  { counter-reset: source-line 0; }
-pre.numberSource code > span
-  { position: relative; left: -4em; counter-increment: source-line; }
-pre.numberSource code > span > a:first-child::before
-  { content: counter(source-line);
-    position: relative; left: -1em; text-align: right; vertical-align: baseline;
-    border: none; display: inline-block;
-    -webkit-touch-callout: none; -webkit-user-select: none;
-    -khtml-user-select: none; -moz-user-select: none;
-    -ms-user-select: none; user-select: none;
-    padding: 0 4px; width: 4em;
-    color: #aaaaaa;
-  }
-pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
-div.sourceCode
-  {   }
-@media screen {
-pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
-}
-code span.al { color: #ff0000; font-weight: bold; } /* Alert */
-code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
-code span.at { color: #7d9029; } /* Attribute */
-code span.bn { color: #40a070; } /* BaseN */
-code span.bu { } /* BuiltIn */
-code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
-code span.ch { color: #4070a0; } /* Char */
-code span.cn { color: #880000; } /* Constant */
-code span.co { color: #60a0b0; font-style: italic; } /* Comment */
-code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
-code span.do { color: #ba2121; font-style: italic; } /* Documentation */
-code span.dt { color: #902000; } /* DataType */
-code span.dv { color: #40a070; } /* DecVal */
-code span.er { color: #ff0000; font-weight: bold; } /* Error */
-code span.ex { } /* Extension */
-code span.fl { color: #40a070; } /* Float */
-code span.fu { color: #06287e; } /* Function */
-code span.im { } /* Import */
-code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
-code span.kw { color: #007020; font-weight: bold; } /* Keyword */
-code span.op { color: #666666; } /* Operator */
-code span.ot { color: #007020; } /* Other */
-code span.pp { color: #bc7a00; } /* Preprocessor */
-code span.sc { color: #4070a0; } /* SpecialChar */
-code span.ss { color: #bb6688; } /* SpecialString */
-code span.st { color: #4070a0; } /* String */
-code span.va { color: #19177c; } /* Variable */
-code span.vs { color: #4070a0; } /* VerbatimString */
-code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
-</style>
 
 <style type="text/css">
 /* Used with Pandoc 2.11+ new --citeproc when CSL is used */
@@ -187,6 +140,10 @@ div.csl-indent {
 <li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Acknowledgement</a></li>
 <li class="chapter" data-level="1" data-path="intro.html"><a href="intro.html"><i class="fa fa-check"></i><b>1</b> Introduction</a></li>
 <li class="chapter" data-level="2" data-path="background.html"><a href="background.html"><i class="fa fa-check"></i><b>2</b> Background</a></li>
+<li class="chapter" data-level="3" data-path="methods.html"><a href="methods.html"><i class="fa fa-check"></i><b>3</b> Methods</a></li>
+<li class="chapter" data-level="4" data-path="results-and-discussion.html"><a href="results-and-discussion.html"><i class="fa fa-check"></i><b>4</b> Results and Discussion</a></li>
+<li class="chapter" data-level="5" data-path="recommendations.html"><a href="recommendations.html"><i class="fa fa-check"></i><b>5</b> Recommendations</a></li>
+<li class="chapter" data-level="" data-path="appendix---phase-1-fish-passage-assessment-data-and-photos.html"><a href="appendix---phase-1-fish-passage-assessment-data-and-photos.html"><i class="fa fa-check"></i>Appendix - Phase 1 Fish Passage Assessment Data and Photos</a></li>
 <li class="chapter" data-level="" data-path="references.html"><a href="references.html"><i class="fa fa-check"></i>References</a></li>
 <li class="chapter" data-level="" data-path="session-info.html"><a href="session-info.html"><i class="fa fa-check"></i>Session Info</a></li>
 <li class="divider"></li>
@@ -211,9 +168,21 @@ div.csl-indent {
             <section class="normal" id="section-">
 <div id="background" class="section level1" number="2">
 <h1><span class="header-section-number">2</span> Background</h1>
+<p>As a result of high-level direction from the provincial government, a Fish Passage Strategic Approach protocol has been developed for British Columbia to ensure that the greatest opportunities for restoration of fish passage are pursued. A Fish Passage Technical Working Group has been formed to coordinate the protocol and data is continuously amalgamated within the Provincial Steam Crossing Inventory System (PSCIS). The strategic approach protocol involves a four-phase process as described in <span class="citation">Fish Passage Technical Working Group (2014)</span> :</p>
+<ul>
+<li>Phase 1: Fish Passage Assessment – Fish stream crossings within watersheds with high fish values are assessed to determine barrier status of structures and document a general assessment of adjacent habitat quality and quantity.</li>
+<li>Phase 2: Habitat Confirmation – Assessments of crossings prioritized for follow up in Phase 1 studies are conducted to confirm quality and quantity of habitat upstream and down as well as to scope for other potential nearby barriers that could affect the practicality of remediation.</li>
+<li>Phase 3: Design – Site plans and designs are drawn for priority crossings where high value fish habitat has been confirmed.</li>
+<li>Phase 4: Remediation – Reconnection of isolated habitats through replacement, rehabilitation or removal of prioritized crossing structure barriers.</li>
+</ul>
+<p><br></p>
+<p>The Canadian Wildlife Federation has been working on a watershed connectivity remediation plan for the Elk River watershed that incorporates the provincial Strategic Approach and local knowledge of the watershed to prioritize barriers for remediation, to restore connectivity for westslope cutthroat trout and other species in a strategic manner. Nupqu Limited Partnership was retained to conduct fish passage assessments and habitat confirmations to fill data gaps in support of this work.</p>
 <div id="project-location" class="section level2" number="2.1">
 <h2><span class="header-section-number">2.1</span> Project Location</h2>
-<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb5-1"><a href="background.html#cb5-1" aria-hidden="true" tabindex="-1"></a>knitr<span class="sc">::</span><span class="fu">include_graphics</span>(<span class="st">&quot;fig/logo.png&quot;</span>)</span></code></pre></div>
+<p>To focus the project within habitat considered high value for conservation of westslope cutthrout trout, the study area included the upper Elk River watershed upstream of the Kookanusa Reservoir (Figure <a href="background.html#fig:overview-map">2.1</a>).</p>
+<p><br></p>
+<p>The Elk River has a mean annual discharge of 26 m<sup>3</sup>/s at station 08NK016 near Sparwood and 47.3 m<sup>3</sup>/s at station 08NK016 near Fernie with flow patterns typical of high elevation watersheds on the west side of the Rocky Mountains which receive large amounts of precipitation as snow leading to peak levels of discharge during snowmelt, typically from May to July (Figures <a href="background.html#fig:hydrology-plot">2.2</a> - <a href="background.html#fig:hydrology-stats2">2.4</a>) <span class="citation">(Environment and Canada 2020)</span>.</p>
+<p><br></p>
 <div class="figure"><span style="display:block;" id="fig:overview-map"></span>
 <img src="fig/logo.png" alt="Overview map of Study Areas" width="100%" />
 <p class="caption">
@@ -221,31 +190,702 @@ Figure 2.1: Overview map of Study Areas
 </p>
 </div>
 <p><br></p>
-<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb6-1"><a href="background.html#cb6-1" aria-hidden="true" tabindex="-1"></a>knitr<span class="sc">::</span><span class="fu">include_graphics</span>(<span class="st">&quot;fig/logo.png&quot;</span>)</span>
-<span id="cb6-2"><a href="background.html#cb6-2" aria-hidden="true" tabindex="-1"></a>knitr<span class="sc">::</span><span class="fu">include_graphics</span>(<span class="st">&quot;fig/pixel.png&quot;</span>)</span>
-<span id="cb6-3"><a href="background.html#cb6-3" aria-hidden="true" tabindex="-1"></a>knitr<span class="sc">::</span><span class="fu">include_graphics</span>(<span class="st">&quot;fig/logo.png&quot;</span>)</span></code></pre></div>
 <div class="figure"><span style="display:block;" id="fig:hydrology-plot"></span>
-<img src="fig/logo.png" alt="Hydrograph for Bulkley River at Quick (Station #08EE004) and near Houston (Station #08EE003)." width="49.5%" /><img src="fig/pixel.png" alt="Hydrograph for Bulkley River at Quick (Station #08EE004) and near Houston (Station #08EE003)." width="1%" /><img src="fig/logo.png" alt="Hydrograph for Bulkley River at Quick (Station #08EE004) and near Houston (Station #08EE003)." width="49.5%" />
+<img src="fig/hydrograph_08NK016.png" alt="Hydrograph for Elk River near Sparwood (Station #08NK016) and near Fernie (Station #08NK002)." width="49.5%" /><img src="fig/pixel.png" alt="Hydrograph for Elk River near Sparwood (Station #08NK016) and near Fernie (Station #08NK002)." width="1%" /><img src="fig/hydrograph_08NK002.png" alt="Hydrograph for Elk River near Sparwood (Station #08NK016) and near Fernie (Station #08NK002)." width="49.5%" />
 <p class="caption">
-Figure 2.2: Hydrograph for Bulkley River at Quick (Station #08EE004) and near Houston (Station #08EE003).
+Figure 2.2: Hydrograph for Elk River near Sparwood (Station #08NK016) and near Fernie (Station #08NK002).
 </p>
 </div>
 <p><br></p>
-<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb7-1"><a href="background.html#cb7-1" aria-hidden="true" tabindex="-1"></a>fiss_species_table <span class="ot">&lt;-</span> readr<span class="sc">::</span><span class="fu">read_csv</span>(<span class="fu">paste0</span>(<span class="fu">getwd</span>(), <span class="st">&#39;/data/extracted_inputs/fiss_species_table.csv&#39;</span>))</span>
-<span id="cb7-2"><a href="background.html#cb7-2" aria-hidden="true" tabindex="-1"></a>  <span class="co"># filter(`Species Code` != &#39;CT&#39;) %&gt;% </span></span>
-<span id="cb7-3"><a href="background.html#cb7-3" aria-hidden="true" tabindex="-1"></a><span class="co"># fiss_species_table %&gt;%  </span></span>
-<span id="cb7-4"><a href="background.html#cb7-4" aria-hidden="true" tabindex="-1"></a><span class="co">#   my_kable(caption_text = &#39;Fish species recorded in the Bulkley River and Morice River watershed groups.&#39;)</span></span>
-<span id="cb7-5"><a href="background.html#cb7-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-6"><a href="background.html#cb7-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-7"><a href="background.html#cb7-7" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span>(gitbook_on){</span>
-<span id="cb7-8"><a href="background.html#cb7-8" aria-hidden="true" tabindex="-1"></a>fiss_species_table <span class="sc">%&gt;%</span> </span>
-<span id="cb7-9"><a href="background.html#cb7-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">my_kable_scroll</span>(<span class="at">caption_text =</span> <span class="st">&#39;Fish species recorded in the Bulkley River and Morice River watershed groups.&#39;</span>)</span>
-<span id="cb7-10"><a href="background.html#cb7-10" aria-hidden="true" tabindex="-1"></a>} <span class="cf">else</span> fiss_species_table[<span class="dv">1</span><span class="sc">:</span><span class="dv">41</span>, ] <span class="sc">%&gt;%</span> </span>
-<span id="cb7-11"><a href="background.html#cb7-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">my_kable</span>(<span class="at">caption_text =</span> <span class="st">&#39;Fish species recorded in the Bulkley River and Morice River watershed groups.&#39;</span>)</span>
-<span id="cb7-12"><a href="background.html#cb7-12" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-13"><a href="background.html#cb7-13" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span>(<span class="fu">identical</span>(gitbook_on, <span class="cn">FALSE</span>)){fiss_species_table[<span class="dv">42</span><span class="sc">:</span><span class="fu">nrow</span>(fiss_species_table), ] <span class="sc">%&gt;%</span> </span>
-<span id="cb7-14"><a href="background.html#cb7-14" aria-hidden="true" tabindex="-1"></a>  <span class="fu">my_kable</span>()}</span></code></pre></div>
+<div class="figure"><span style="display:block;" id="fig:hydrology-stats1"></span>
+<img src="fig/hydrology_stats_08NK016.png" alt="Elk River Near Sparwood (Station #08NK016 - Lat 49.86562 Lon -114.86868). Available daily discharge data from 1950 to 2020." width="100%" />
+<p class="caption">
+Figure 2.3: Elk River Near Sparwood (Station #08NK016 - Lat 49.86562 Lon -114.86868). Available daily discharge data from 1950 to 2020.
+</p>
+</div>
+<p><br></p>
+<div class="figure"><span style="display:block;" id="fig:hydrology-stats2"></span>
+<img src="fig/hydrology_stats_08NK002.png" alt="Elk River At Fernie (Station #08NK002 - Lat 49.50347 Lon -115.07013). Available daily discharge data from 1970 to 2020." width="100%" />
+<p class="caption">
+Figure 2.4: Elk River At Fernie (Station #08NK002 - Lat 49.50347 Lon -115.07013). Available daily discharge data from 1970 to 2020.
+</p>
+</div>
+<p><br></p>
+<div id="ktunaxa-nation" class="section level3" number="2.1.1">
+<h3><span class="header-section-number">2.1.1</span> Ktunaxa Nation</h3>
+<p>The project location is within the traditional territory of the Ktunaxa Nation <span class="citation">(<span>“Ktunaxa <span>Nation</span>”</span> 2020)</span> with Elk River components within an area known as Qukin ʔamakʔis, or Raven’s Land <span class="citation">(Ministry of Forests 2020)</span>. When Europeans settled in the Kootenay Region around 200 hundred years ago, the Indian Reserves were created which lead to the seven Indian Bands:</p>
+<ul>
+<li>ʔakisq̓nuk- Columbia Lake Band (Windermere, BC);</li>
+<li>ʔaq̓am- St. Mary’s Band (Cranbrook, BC);</li>
+<li>ʔakink̓umǂasnuqǂiʔit- Tobacco Plains Band (Grasmere, BC);</li>
+<li>yaqan nuʔkiy- Lower Kootenay Band (Creston, BC);</li>
+<li>kyaknuqǂiʔit- Shuswap Band (Invermere, BC);</li>
+<li>ʔaq̓anqmi- Kootenai Tribe of Idaho (Bonners Ferry, Idaho);</li>
+<li>k̓upawi¢q̓nuk- Ksanka Band (Elmo, Montana)</li>
+</ul>
+<p><br></p>
+<p><span class="citation"><span>“Ktunaxa <span>Nation</span>”</span> (2020)</span> report the vision statement of the Ktunaxa as:</p>
+<p><br></p>
+<p>“Kȼmak̓qa ksukⱡuⱡa·k kuk̓qani ȼ k̓itqakiⱡ haqa ksiʔⱡ ȼxa ʔa·kⱡukqaʔis ksukiⱡq̓ukaʔmi·k kiʔin Ktunaxa naʔs ʔamak̓ʔis. Qus pik̓aksȼ naʔs ȼxaⱡ yaqanakiⱡ haqaʔki. K̓itqawiȼmu kakiⱡwiȼkiⱡ ʔamakʔis k̓isnikȼik kȼxaⱡ qa kiⱡkk̓axuxami·k k̓itqakiⱡ haqa ȼ k̓isʔin ʔaknumuȼtiⱡʔis.”</p>
+<p><br></p>
+<p>The vision statement has been translated to english as:</p>
+<p><br></p>
+<p>“Strong, healthy citizens and communities, speaking our languages and celebrating who we are and our history in our ancestral homelands, working together, managing our lands and resources, within a self-sufficient, self-governing Nation.”</p>
+<p><br></p>
+</div>
+<div id="elk-valley-cumulative-effects-management-framework" class="section level3" number="2.1.2">
+<h3><span class="header-section-number">2.1.2</span> Elk Valley Cumulative Effects Management Framework</h3>
+<p>First Nations, stakeholders, proponents and provincial and municipal governments have recognized that the region has been impacted by historic and current coal operations as well as other stresses such as forestry operations, wildfire, residential development, recreational activities and transportation. To assess the historic, current and potential future conditions of valued ecosystem components and to support resource management decisions within the region, the Provincial Cumulative Effects Framework and the Elk Valley Cumulative Effects Management Framework (EV-CEMF) have been formed under joint management between the Ktunaxa Nation Council and the B.C. Ministry of Forests, Lands, Natural Resource Operations and Rural Development (FLNRORD). A working group consisting of the Ktunaxa Nation Council, industry, community, organizations, and provincial government ministries has been formed to provide guidance and oversight for EV-CEMF activities. Valued component technical reports for Grizzly Bear, Riparian and westslope cutthroat trout <span class="citation">(Davidson et al. 2018)</span>, bighorn sheep, and old and mature forest have been drafted, integrated into an overarching Cumulative Effects Assessment and Management Report <span class="citation">(Elk Valley Cumulative Effects Management Framework Working Group 2018)</span> and endorsed by the Working Group. These reports describe the historical, current, and future assessment of cumulative effects in the Elk Valley and provide management and mitigation recommendations. Next steps for the framework include the development of an Implementation Plan to identify priority actions and spatial locations to focus management and mitigation of cumulative effects in the valley which may include actions to address aquatic habitat connectivity issues <span class="citation">(Ministry of Forests 2020)</span>.</p>
+<p><br></p>
+</div>
+</div>
+<div id="fisheries" class="section level2" number="2.2">
+<h2><span class="header-section-number">2.2</span> Fisheries</h2>
+<p>Fish species recorded in the Elk River watershed group are detailed in Table <a href="background.html#tab:fiss-species-table">2.1</a> <span class="citation">(MoE 2020a)</span>. Bull trout and westslope cutthrout trout are considered of special concern (blue-listed) provincially and westslope cutthrout trout (Pacific populations) are are listed under the <em>Species at Risk Act</em> by the Committee on the Status of Endangered Wildlife in Canada as a species of special concern <span class="citation">(BC Species &amp; Ecosystem Explorer 2020b, 2020a; Schweigert et al. 2017)</span>. The focus of 2020 field work was to assess potential impacts of road-stream crossings on habitat connectivity for westslope cutthrout trout.</p>
+<p><br></p>
+<table class="table table-condensed table-responsive" style="font-size: 11px; margin-left: auto; margin-right: auto;">
+<caption style="font-size: initial !important;">
+<span id="tab:fiss-species-table">Table 2.1: </span>Fish species recorded in the study areas (FISS 2020).
+</caption>
+<thead>
+<tr>
+<th style="text-align:left;">
+Scientific Name
+</th>
+<th style="text-align:left;">
+Species Name
+</th>
+<th style="text-align:left;">
+Species Code
+</th>
+<th style="text-align:left;">
+BC List
+</th>
+<th style="text-align:left;">
+Provincial FRPA
+</th>
+<th style="text-align:left;">
+COSEWIC
+</th>
+<th style="text-align:left;">
+SARA
+</th>
+<th style="text-align:left;">
+Upper Elk
+</th>
+<th style="text-align:left;">
+Flathead
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+Catostomus catostomus
+</td>
+<td style="text-align:left;">
+Longnose Sucker
+</td>
+<td style="text-align:left;">
+LSU
+</td>
+<td style="text-align:left;">
+Yellow
+</td>
+<td style="text-align:left;">
+–
+</td>
+<td style="text-align:left;">
+–
+</td>
+<td style="text-align:left;">
+–
+</td>
+<td style="text-align:left;">
+Yes
+</td>
+<td style="text-align:left;">
+Yes
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Catostomus columbianus
+</td>
+<td style="text-align:left;">
+Bridgelip Sucker
+</td>
+<td style="text-align:left;">
+BSU
+</td>
+<td style="text-align:left;">
+Yellow
+</td>
+<td style="text-align:left;">
+–
+</td>
+<td style="text-align:left;">
+–
+</td>
+<td style="text-align:left;">
+–
+</td>
+<td style="text-align:left;">
+Yes
+</td>
+<td style="text-align:left;">
+–
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Catostomus commersonii
+</td>
+<td style="text-align:left;">
+White Sucker
+</td>
+<td style="text-align:left;">
+WSU
+</td>
+<td style="text-align:left;">
+Yellow
+</td>
+<td style="text-align:left;">
+–
+</td>
+<td style="text-align:left;">
+–
+</td>
+<td style="text-align:left;">
+–
+</td>
+<td style="text-align:left;">
+Yes
+</td>
+<td style="text-align:left;">
+–
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Catostomus macrocheilus
+</td>
+<td style="text-align:left;">
+Largescale Sucker
+</td>
+<td style="text-align:left;">
+CSU
+</td>
+<td style="text-align:left;">
+Yellow
+</td>
+<td style="text-align:left;">
+–
+</td>
+<td style="text-align:left;">
+–
+</td>
+<td style="text-align:left;">
+–
+</td>
+<td style="text-align:left;">
+–
+</td>
+<td style="text-align:left;">
+Yes
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Cottus cognatus
+</td>
+<td style="text-align:left;">
+Slimy Sculpin
+</td>
+<td style="text-align:left;">
+CCG
+</td>
+<td style="text-align:left;">
+Yellow
+</td>
+<td style="text-align:left;">
+–
+</td>
+<td style="text-align:left;">
+–
+</td>
+<td style="text-align:left;">
+–
+</td>
+<td style="text-align:left;">
+–
+</td>
+<td style="text-align:left;">
+Yes
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Cottus confusus
+</td>
+<td style="text-align:left;">
+Shorthead Sculpin
+</td>
+<td style="text-align:left;">
+CCN
+</td>
+<td style="text-align:left;">
+Blue
+</td>
+<td style="text-align:left;">
+–
+</td>
+<td style="text-align:left;">
+SC (Nov 2010)
+</td>
+<td style="text-align:left;">
+1-SC
+</td>
+<td style="text-align:left;">
+–
+</td>
+<td style="text-align:left;">
+Yes
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Cottus hubbsi
+</td>
+<td style="text-align:left;">
+Mottled Sculpin
+</td>
+<td style="text-align:left;">
+CBA
+</td>
+<td style="text-align:left;">
+Blue
+</td>
+<td style="text-align:left;">
+–
+</td>
+<td style="text-align:left;">
+SC (Nov 2010)
+</td>
+<td style="text-align:left;">
+1-SC (Jun 2003)
+</td>
+<td style="text-align:left;">
+–
+</td>
+<td style="text-align:left;">
+Yes
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Cottus sp. 9
+</td>
+<td style="text-align:left;">
+Rocky Mountain Sculpin
+</td>
+<td style="text-align:left;">
+CRM
+</td>
+<td style="text-align:left;">
+Red
+</td>
+<td style="text-align:left;">
+–
+</td>
+<td style="text-align:left;">
+SC (Apr 2010)
+</td>
+<td style="text-align:left;">
+1-SC (May 2017)
+</td>
+<td style="text-align:left;">
+–
+</td>
+<td style="text-align:left;">
+Yes
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Oncorhynchus clarkii
+</td>
+<td style="text-align:left;">
+Cutthroat Trout
+</td>
+<td style="text-align:left;">
+CT
+</td>
+<td style="text-align:left;">
+No Status
+</td>
+<td style="text-align:left;">
+–
+</td>
+<td style="text-align:left;">
+–
+</td>
+<td style="text-align:left;">
+–
+</td>
+<td style="text-align:left;">
+Yes
+</td>
+<td style="text-align:left;">
+Yes
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Oncorhynchus clarkii lewisi
+</td>
+<td style="text-align:left;">
+Westslope Cutthroat Trout
+</td>
+<td style="text-align:left;">
+WCT
+</td>
+<td style="text-align:left;">
+Blue
+</td>
+<td style="text-align:left;">
+Y (Jun 2006)
+</td>
+<td style="text-align:left;">
+SC (Nov 2016)
+</td>
+<td style="text-align:left;">
+1-SC (Feb 2010)
+</td>
+<td style="text-align:left;">
+Yes
+</td>
+<td style="text-align:left;">
+Yes
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Oncorhynchus mykiss
+</td>
+<td style="text-align:left;">
+Rainbow Trout
+</td>
+<td style="text-align:left;">
+RB
+</td>
+<td style="text-align:left;">
+Yellow
+</td>
+<td style="text-align:left;">
+–
+</td>
+<td style="text-align:left;">
+–
+</td>
+<td style="text-align:left;">
+–
+</td>
+<td style="text-align:left;">
+Yes
+</td>
+<td style="text-align:left;">
+Yes
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Oncorhynchus nerka
+</td>
+<td style="text-align:left;">
+Kokanee
+</td>
+<td style="text-align:left;">
+KO
+</td>
+<td style="text-align:left;">
+Yellow
+</td>
+<td style="text-align:left;">
+–
+</td>
+<td style="text-align:left;">
+–
+</td>
+<td style="text-align:left;">
+–
+</td>
+<td style="text-align:left;">
+Yes
+</td>
+<td style="text-align:left;">
+Yes
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Prosopium williamsoni
+</td>
+<td style="text-align:left;">
+Mountain Whitefish
+</td>
+<td style="text-align:left;">
+MW
+</td>
+<td style="text-align:left;">
+Yellow
+</td>
+<td style="text-align:left;">
+–
+</td>
+<td style="text-align:left;">
+–
+</td>
+<td style="text-align:left;">
+–
+</td>
+<td style="text-align:left;">
+Yes
+</td>
+<td style="text-align:left;">
+Yes
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Rhinichthys cataractae
+</td>
+<td style="text-align:left;">
+Longnose Dace
+</td>
+<td style="text-align:left;">
+LNC
+</td>
+<td style="text-align:left;">
+Yellow
+</td>
+<td style="text-align:left;">
+–
+</td>
+<td style="text-align:left;">
+–
+</td>
+<td style="text-align:left;">
+–
+</td>
+<td style="text-align:left;">
+Yes
+</td>
+<td style="text-align:left;">
+Yes
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Richardsonius balteatus
+</td>
+<td style="text-align:left;">
+Redside Shiner
+</td>
+<td style="text-align:left;">
+RSC
+</td>
+<td style="text-align:left;">
+Yellow
+</td>
+<td style="text-align:left;">
+–
+</td>
+<td style="text-align:left;">
+–
+</td>
+<td style="text-align:left;">
+–
+</td>
+<td style="text-align:left;">
+Yes
+</td>
+<td style="text-align:left;">
+–
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Salvelinus confluentus pop. 26
+</td>
+<td style="text-align:left;">
+Bull Trout
+</td>
+<td style="text-align:left;">
+BT
+</td>
+<td style="text-align:left;">
+Blue
+</td>
+<td style="text-align:left;">
+–
+</td>
+<td style="text-align:left;">
+–
+</td>
+<td style="text-align:left;">
+–
+</td>
+<td style="text-align:left;">
+Yes
+</td>
+<td style="text-align:left;">
+Yes
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Salvelinus fontinalis
+</td>
+<td style="text-align:left;">
+Brook Trout
+</td>
+<td style="text-align:left;">
+EB
+</td>
+<td style="text-align:left;">
+Exotic
+</td>
+<td style="text-align:left;">
+–
+</td>
+<td style="text-align:left;">
+–
+</td>
+<td style="text-align:left;">
+–
+</td>
+<td style="text-align:left;">
+Yes
+</td>
+<td style="text-align:left;">
+–
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+–
+</td>
+<td style="text-align:left;">
+Cutthroat/Rainbow cross
+</td>
+<td style="text-align:left;">
+CRS
+</td>
+<td style="text-align:left;">
+–
+</td>
+<td style="text-align:left;">
+–
+</td>
+<td style="text-align:left;">
+–
+</td>
+<td style="text-align:left;">
+–
+</td>
+<td style="text-align:left;">
+Yes
+</td>
+<td style="text-align:left;">
+–
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+–
+</td>
+<td style="text-align:left;">
+Sculpin (General)
+</td>
+<td style="text-align:left;">
+CC
+</td>
+<td style="text-align:left;">
+–
+</td>
+<td style="text-align:left;">
+–
+</td>
+<td style="text-align:left;">
+–
+</td>
+<td style="text-align:left;">
+–
+</td>
+<td style="text-align:left;">
+–
+</td>
+<td style="text-align:left;">
+Yes
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+–
+</td>
+<td style="text-align:left;">
+Sucker (General)
+</td>
+<td style="text-align:left;">
+SU
+</td>
+<td style="text-align:left;">
+–
+</td>
+<td style="text-align:left;">
+–
+</td>
+<td style="text-align:left;">
+–
+</td>
+<td style="text-align:left;">
+–
+</td>
+<td style="text-align:left;">
+Yes
+</td>
+<td style="text-align:left;">
+Yes
+</td>
+</tr>
+</tbody>
+</table>
+<p><br></p>
+<div id="westslope-cutthrout-trout" class="section level3" number="2.2.1">
+<h3><span class="header-section-number">2.2.1</span> Westslope Cutthrout Trout</h3>
+<p>There are multiple life history strategies for westslope cutthrout trout including stream-resident, fluvial and adfluvial. All have habitat requirements during life history stages that include cold clean water and varied forms of cover (undercut banks, pool-riffle habitat and riparian vegetation). Stream-resident fish inhabitat headwater streams above barriers, complete their life cycle within a relatively small range and typically remain relatively small (i.e. &lt;200mm in length). Fluvial fish are migratory subpopulations that migrate between small spawning/rearing tributaries and larger adult rearing rivers. Lengths of fluvial fish generally reach more than 400mm. Finally, adfluvial subpopulations rear in lakes and migrate to spawning/rearing tributaries with lengths often exceeding 500mm <span class="citation">(Schweigert et al. 2017)</span>.</p>
+<p><br></p>
+<p>Spawning habitat for resident and fluvial subpopulations are documented as within the tailouts of deep pools at moderate to high-flow events within small, low-gradient streams with cold well-oxygenated water and clean unsilted gravels <span class="citation">(Schmetterling 2001)</span>. Proximity to large woody debris, boulder or bedrock cover is important for spawning fish while residing in spawning tributaries as high mortality may result when suitable cover is lacking. The dominant substrate used for spawning is gravel (1.8 - 3.3cm diameter) with spawning occurring in late May and June towards the end of the spring freshet with rising water temperatures between 7-11<span class="math inline">\(^\circ\)</span>C. Nine of 11 westslope cutthrout trout radio-tagged in the Blackfoot River drainage, Montana by <span class="citation">Schmetterling (2001)</span> made movements to tributaries presumable for spawning. While in tributaries, fish movements to spawning sites averaged 12.5km where they stayed within an approximately 100m reach during the spawning period for between 15 and 63 days.</p>
+<p><br></p>
+<p>Small perennial streams with a diversity of cover are important for juvenile rearing with young-of-year fish inhabiting low energy lateral habitats (i.e. shallow riffle or backwatered areas) with cover available. Larger juveniles move into pools with social dominance behaviors prevalent and based on fish size. Availability of pool habitat is important and limiting for parr which have large territories <span class="citation">(Schweigert et al. 2017; Schmetterling 2001)</span>.</p>
+<p><br></p>
+<p>The suitability of overwintering habitat is determined by groundwater influx and the absence of anchor ice with fluvial adults congregating in slow deep pools in the winter. Boulders and other large in-stream structures or off-channel habitat (beaver bonds and sloughs) provide cover for juveniles with adfluvial fish overwintering in lakes <span class="citation">(Schweigert et al. 2017; Brown and Mackay 1995; Cope, Schwarz, and Prince 2017)</span>.</p>
+<p><br></p>
+<p>In a swimming performance study conducted in an open-channel flume <span class="citation">Blank et al. (2020)</span> estimated the overall average swim speeds of westlope cutthrout trout (150mm - 290mm in length) at 0.84m/s with a maximum observed swim speed of 3.55m/s.</p>
+<p><br></p>
+<p>The greatest threats to westslope cutthrout trout are hybridization with non-native rainbow trout and degradation of the environment due to forestry, hydroelectric development, mining, urbanization and agriculture <span class="citation">(Schweigert et al. 2017)</span>. <span class="citation">Lamson (2020)</span> sampled over 2000 trout in the Upper Kootenay watershed from 2014 to 2019 with results of genotyping indicating consistently high levels of westslope cutthrout trout allele purity (i.e. very low levels of rainbow trout, yellowstone cutthrout trout or coastal cutthrout trout genetic introgression) throughout the Elk River watershed areas upstream of the Elko Dam. <span class="citation">Boyer, Muhlfeld, and Allendorf (2008)</span> sampled 31 sites in the upper Flathead River system within the United States (27 sites) and Canada (4 sites). Genetic introgression declined with latitude with no evidence of rainbow trout allelles within any westslope cutthrout trout sampled within the Canadian portion of the upper Flathead River.</p>
+<p><br></p>
+<p>A summary of historical westslope cutthrout trout observations in the Elk River watershed group by average gradient category of associated stream segment is provided in Figure <a href="background.html#fig:fish-wct-bar">2.5</a>. Of 4003 observations, 93% were within stream segments with average gradients ranging from 0 - 8%. A total of 73% of historic observations were within stream segments with gradients between 0 - 3%, 12% were within stream segments with gradients ranging from 3 - 5% and 8% were within stream segments with gradients between 5 - 8% <span class="citation">(MoE 2020a; Norris 2020)</span>.</p>
+<p><br></p>
+<div class="figure"><span style="display:block;" id="fig:fish-wct-bar"></span>
+<img src="Template_files/figure-html/fish-wct-bar-1.png" alt="Summary of historic westslope cutthrout trout observations vs. stream gradient category." width="100%" />
+<p class="caption">
+Figure 2.5: Summary of historic westslope cutthrout trout observations vs. stream gradient category.
+</p>
+</div>
 
+</div>
 </div>
 </div>
             </section>
@@ -254,7 +894,7 @@ Figure 2.2: Hydrograph for Bulkley River at Quick (Station #08EE004) and near Ho
         </div>
       </div>
 <a href="intro.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="references.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="methods.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>
@@ -309,6 +949,20 @@ gitbook.start({
 });
 </script>
 
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "true";
+    if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
 </body>
 
 </html>

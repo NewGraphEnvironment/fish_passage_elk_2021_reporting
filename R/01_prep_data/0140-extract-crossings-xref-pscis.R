@@ -22,7 +22,7 @@ xref_pscis_my_crossing_modelled <- dat %>%
   purrr::set_names(nm = tolower(names(.))) %>%
   dplyr::filter(funding_project_number == "ENV07_Elk") %>% ##we don't need these - funding_project_number == "Bulkley_6-288_Reassessments"
   select(external_crossing_reference, stream_crossing_id) %>%
-  mutate(external_crossing_reference = as.integer(external_crossing_reference)) %>%
+  sf::st_drop_geometry() %>%
   readr::write_csv(file = paste0(getwd(), '/data/inputs_extracted/xref_pscis_my_crossing_modelled.csv'))
 
 ####--------------bring in the habitat data and build csv to copy and paste corrected PSCIS ids in fisheries submission spreadsheet------------------

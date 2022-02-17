@@ -144,6 +144,23 @@ id_joined2 %>%
 dbDisconnect(conn = conn)
 
 
+##here a quick one to get our hab utms for the upstream sites. We need to derive the downstream sites from the hab_con tracks.
+# This relies on the data/tables.R file so is maybe cart before the horse but oh well!
+source('R/tables.R')
+hab_loc_utms <- left_join(
+  hab_loc %>%
+    tidyr::separate(alias_local_name, into = c('site', 'location', 'ef'), remove = F) %>%
+    mutate(site_id = paste0(site, '_', location)) %>% mutate(site = as.numeric(site)),
+  pscis_phase2 %>% select(pscis_crossing_id, easting, northing),
+  by = c('site' = 'pscis_crossing_id')
+) %>%
+  mutate(easting = case_when(site_id %ilike% '_ds' ~ NA_real_,
+                             T ~ easting),
+         northing = case_when(site_id %ilike% '_ds' ~ NA_real_,
+                              T ~ northing)) %>%
+  select(site_id, easting, northing) %>%
+  tibble::rowid_to_column() %>%
+  write_csv("data/inputs_extracted/temp/utms_hab_loc.csv", na = '')
 
 
 

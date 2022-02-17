@@ -1,3 +1,8 @@
+---
+output: html_document
+editor_options: 
+  chunk_output_type: inline
+---
 # Results and Discussion
 
 `r if(gitbook_on)knitr::asis_output("Results of Planning, Phase 1 and Phase 2 assessments are summarized in Figure \\@ref(fig:map-interactive) with additional details provided in sections below.")` 
@@ -194,17 +199,9 @@ tab_overview %>%
 `r if(gitbook_on){knitr::asis_output("")} else knitr::asis_output("\\pagebreak")`
 
 
-
 ```{r}
 
-```
-
-
-
-
-```{r}
-
-make_tab_cv(dat = pscis_phase2) %>% 
+fpr_make_tab_cv(dat = pscis_phase2) %>% 
   my_kable(caption_text = 'Summary of Phase 2 fish passage reassessments.')
 ```
 
@@ -243,14 +240,14 @@ tab_hab_summary %>%
 ```
 
 
-```{r fish-histogram, fig.cap= 'Histogram of westslope cutthrout trout captured during electrofishing surveys.', eval = F}
+```{r fish-histogram, fig.cap= 'Histogram of westslope cutthrout trout captured during electrofishing surveys.', eval =F}
 knitr::include_graphics("fig/fish_histogram.png")
 
 ```
 
 <br>
 
-```{r plot-fish-all, fig.cap='Boxplots of densities (fish/100m2) of fish captured by life stage and site for data collected during habitat confirmation assessments.', eval=T}
+```{r plot-fish-all, fig.cap='Boxplots of densities (fish/100m2) of fish captured by life stage and site for data collected during habitat confirmation assessments.', eval=F}
 plot_fish_box_all2 <- function(dat = hab_fish_dens){#, sp = 'RB'
   dat %>%
     filter(
@@ -277,26 +274,45 @@ plot_fish_box_all2()
 
 ```{r plot-model-all, fig.cap='Summary of potential habitat upstream of habitat confirmation assessment sites estimated based on modelled channel width and upstream channel length.', eval=T}
 
-
 bcfp_xref_plot <- xref_bcfishpass_names %>% 
-  filter(!is.na(id_join) &
-           bcfishpass %ilike% 'below' &
-           !bcfishpass %ilike% 'all' &
-           (bcfishpass %ilike% 'rearing' | 
-              bcfishpass %ilike% 'spawning')) 
+  filter(
+    !is.na(id_join) &
+      !bcfishpass %ilike% 'slopeclass' &
+      # !bcfishpass %ilike% '30' &
+      !bcfishpass %ilike% 'wetland' &
+      !bcfishpass %ilike% 'Lake' &
+      !bcfishpass %ilike% 'waterbodies' &
+      !bcfishpass %ilike% 'network' &
+      (bcfishpass %ilike% 'below' |
+         bcfishpass %ilike% 'rearing_km' | 
+         bcfishpass %ilike% 'spawning_km' |
+         # bcfishpass %ilike% 'slopeclass' |
+         bcfishpass %ilike% 'stream')
+  ) %>% 
+  select(-column_comment)
 
-bcfishpass_phase2_plot_prep <- bcfishpass_all %>% 
+#            !bcfishpass %ilike% 'all' &
+#            (bcfishpass %ilike% 'rearing' | 
+#               bcfishpass %ilike% 'spawning')) 
+# 
+# bcfp_xref_plot <- xref_bcfishpass_names %>% 
+#   filter((bcfishpass %ilike% 'rearing_km' | 
+#               bcfishpass %ilike% 'spawning_km') &
+#            !is.na(id_join)) %>% 
+#   select(-column_comment) 
+
+bcfishpass_phase2_plot_prep <- bcfishpass %>% 
   mutate(across(where(is.numeric), round, 1)) %>%
     filter(stream_crossing_id %in% (pscis_phase2 %>% pull(pscis_crossing_id))) %>% 
   select(stream_crossing_id, all_of(bcfp_xref_plot$bcfishpass)) %>% 
-  filter(stream_crossing_id != 197665) %>% 
+  # filter(stream_crossing_id != 197665) %>% 
   mutate(stream_crossing_id = as.factor(stream_crossing_id)) %>% 
-  pivot_longer(cols = ch_spawning_belowupstrbarriers_km:st_rearing_belowupstrbarriers_km)  %>% 
-  filter(value > 0.0 &
+  pivot_longer(cols = wct_stream_km:wct_rearing_belowupstrbarriers_km)  %>% 
+  filter(
+    value > 0.0 &
            !is.na(value)
-         , !name %ilike% 'sk'
          ) %>% 
-  mutate(name = stringr::str_replace_all(name, '_belowupstrbarriers_km', ''),
+  mutate(name = stringr::str_replace_all(name, '_belowupstrbarriers_km', 'belowupstrbarriers km'),
          name = stringr::str_replace_all(name, '_rearing', ' rearing'),
          name = stringr::str_replace_all(name, '_spawning', ' spawning'))
     # rename('Habitat type' = name,
@@ -314,7 +330,3 @@ bcfishpass_phase2_plot_prep <- bcfishpass_all %>%
 
 
 ```
-
-
-
-

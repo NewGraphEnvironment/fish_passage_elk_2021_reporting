@@ -9,8 +9,7 @@ pscis_list <- fpr_import_pscis_all()
 pscis_phase1 <- pscis_list %>% pluck('pscis_phase1')
 pscis_phase2 <- pscis_list %>% pluck('pscis_phase2') %>%
   arrange(pscis_crossing_id)
-pscis_reassessments <- pscis_list %>% pluck('pscis_reassessments') %>%
-  arrange(pscis_crossing_id)
+pscis_reassessments <- pscis_list %>% pluck('pscis_reassessments')
 pscis_all_prep <- fpr_import_pscis_all() %>%
   bind_rows()
 
@@ -921,7 +920,7 @@ tab_hab_summary <- left_join(
 ####--------------------cost estimates phase1
 ##make the cost estimates
 tab_cost_est_prep <- left_join(
-  pscis_rd,
+  pscis_rd %>%  arrange(aggregated_crossings_id),
   select(tab_cost_rd_mult, my_road_class, my_road_surface, cost_m_1000s_bridge, cost_embed_cv),
   by = c('my_road_class','my_road_surface')
 )
@@ -1016,7 +1015,7 @@ tab_cost_est_prep4 <- left_join(
   by = c('pscis_crossing_id' = 'site')
 )
 
-tab_cost_est_prep4 %>% filter(stream_name %ilike% 'parker')
+# tab_cost_est_prep4 %>% filter(stream_name %ilike% 'parker')
 
 
 tab_cost_est_prep5 <- left_join(

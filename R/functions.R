@@ -46,13 +46,13 @@ fit_to_page_landscape <- function(ft, pgwidth = 12){
 }
 
 
-my_flextable <- function(df,  ...){ ##left_just_col = 2 was an option
-  flextable::autofit(flextable::flextable(
-    df,
-    defaults = list(fontname = 'tahoma'))) %>%
-    flextable::theme_booktabs(fontsize = 8) %>% ##changed from flextable::my_theme_booktabs(fontsize = 9) %>%
-    fit_to_page()
-}
+# my_flextable <- function(df,  ...){ ##left_just_col = 2 was an option
+#   flextable::autofit(flextable::flextable(
+#     df,
+#     defaults = list(fontname = 'tahoma'))) %>%
+#     flextable::theme_booktabs(fontsize = 8) %>% ##changed from flextable::my_theme_booktabs(fontsize = 9) %>%
+#     fit_to_page()
+# }
 
 ##function to trim up sheet and get names (was previously source from altools package)
 fpr_trim_xlsheet <- function(df, column_last = ncol(df)) {

@@ -101,13 +101,21 @@ query <- "SELECT *
 
 ##import and grab the coordinates - this is already done
 bcfishpass_elkr <- st_read(conn, query =  query) %>%
-  st_transform(crs = 26910) %>%  ##simon has the coordinates backwards so we redo
-  mutate(utm_zone = 11,
-         easting = sf::st_coordinates(.)[,1],
-         northing = sf::st_coordinates(.)[,2]) %>%
+  # st_transform(crs = 26911) %>%  #before the coordinates were switched but now they look fine...
+  # mutate(
+  #        easting = sf::st_coordinates(.)[,1],
+  #        northing = sf::st_coordinates(.)[,2]) %>%
   st_drop_geometry()
 
 
+
+query <- "select col_description((table_schema||'.'||table_name)::regclass::oid, ordinal_position) as column_comment,
+* from information_schema.columns
+WHERE table_schema = 'bcfishpass'
+and table_name = 'crossings';"
+
+bcfishpass_comments <- st_read(conn, query =  query) %>%
+  select(column_name, column_comment)
 
 # porphyryr <- st_read(conn, query =
 # "SELECT * FROM bcfishpass.crossings
@@ -136,13 +144,16 @@ my_pscis_modelledcrossings_streams_xref <- dat_joined %>%
 conn <- rws_connect("data/bcfishpass.sqlite")
 rws_list_tables(conn)
 ##archive the last version for now
-# bcfishpass_archive <- readwritesqlite::rws_read_table("bcfishpass_morr_bulk", conn = conn)
+# bcfishpass_archive <- readwritesqlite::rws_read_table("bcfishpass", conn = conn)
 # rws_drop_table("bcfishpass_archive", conn = conn) ##if it exists get rid of it - might be able to just change exists to T in next line
 # rws_write(bcfishpass_archive, exists = F, delete = TRUE,
-#           conn = conn, x_name = paste0("bcfishpass_morr_bulk_archive_", "_", format(Sys.time(), "%Y-%m-%d-%H%m")))
-# rws_drop_table("bcfishpass_morr_bulk", conn = conn) ##now drop the table so you can replace it
+#           conn = conn, x_name = paste0("bcfishpass_archive_", format(Sys.time(), "%Y-%m-%d-%H%m")))
+# rws_drop_table("bcfishpass", conn = conn) ##now drop the table so you can replace it
 rws_write(bcfishpass_elkr, exists = F, delete = TRUE,
           conn = conn, x_name = "bcfishpass")
+# add the comments
+rws_write(bcfishpass_comments, exists = F, delete = TRUE,
+          conn = conn, x_name = "bcfishpass_column_comments")
 # rws_drop_table("my_pscis_modelledcrossings_streams_xref", conn = conn)
 # rws_write(my_pscis_modelledcrossings_streams_xref, exists = FALSE, delete = TRUE,
 #           conn = conn, x_name = "my_pscis_modelledcrossings_streams_xref")

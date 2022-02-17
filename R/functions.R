@@ -387,7 +387,216 @@ fpr_import_hab_con <- function(path = "./data/habitat_confirmations.xls"){
                path = path,
                .name_repair = janitor::make_clean_names) %>%
     purrr::set_names(janitor::make_clean_names(names(.))) %>%
-    purrr::map(at_trim_xlsheet2) %>% #moved to functions from https://github.com/NewGraphEnvironment/altools to reduce dependencies
+    purrr::map(fpr_trim_xlsheet) %>% #moved to functions from https://github.com/NewGraphEnvironment/altools to reduce dependencies
     purrr::map(plyr::colwise(type.convert))
 
+}
+
+####---------------make the report table-----
+##grab a df with the names of the left hand side of the table
+fpr_make_tab_summary <- function(df){
+  tab_results_left <- xref_names %>%
+    filter(id_side == 1)
+  ##get the data
+  tab_pull_left <- df %>%
+    select(pull(tab_results_left,spdsht)) %>%
+    # slice(1) %>%
+    t() %>%
+    as.data.frame() %>%
+    tibble::rownames_to_column()
+
+  left <- left_join(tab_pull_left, xref_names, by = c('rowname' = 'spdsht'))
+
+  tab_results_right <- xref_names %>%
+    filter(id_side == 2)
+
+  ##get the data
+  tab_pull_right<- df %>%
+    select(pull(tab_results_right,spdsht)) %>%
+    # slice(1) %>%
+    t() %>%
+    as.data.frame() %>%
+    tibble::rownames_to_column()
+
+  right <- left_join(tab_pull_right, xref_names, by = c('rowname' = 'spdsht'))
+
+  tab_joined <- left_join(
+    select(left, report, V1, id_join),
+    select(right, report, V1, id_join),
+    by = 'id_join'
+  ) %>%
+    select(-id_join) %>%
+    purrr::set_names(c('Location and Stream Data', '-', 'Crossing Characteristics', '--'))
+  return(tab_joined)
+}
+
+####---------------make a table for the comments---------------
+fpr_make_tab_summary_comments <- function(df){
+  df %>%
+    # sf::st_drop_geometry() %>%
+    select(assessment_comment) %>%
+    # slice(1) %>%
+    set_names('Comment')
+}
+
+####--------------phase1 summary tables--------------------------
+fpr_print_tab_summary_all <- function(tab_sum, comments, photos){
+  kable(tab_sum, booktabs = T) %>%
+    kableExtra::kable_styling(c("condensed"), full_width = T, font_size = 11) %>%
+    kableExtra::add_footnote(label = paste0('Comments: ', comments[[1]]), notation = 'none') %>% #this grabs the comments out
+    kableExtra::add_footnote(label = paste0('Photos: PSCIS ID ', photos[[2]],
+                                            '. From top left clockwise: Road/Site Card, Barrel, Outlet, Downstream, Upstream, Inlet.',
+                                            photos[[1]]), notation = 'none')
+  # kableExtra::add_footnote(label = '<br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>', escape = F, notation = 'none')
+}
+
+####--------------phase1 summary tables pdf--------------------------
+fpr_print_tab_summary_all_pdf <- function(tab_sum, comments, photos){
+  kable(tab_sum, booktabs = T) %>%
+    kableExtra::kable_styling(c("condensed"), full_width = T, font_size = 11) %>%
+    kableExtra::add_footnote(label = paste0('Comments: ', comments[[1]]), notation = 'none') %>% #this grabs the comments out
+    kableExtra::add_footnote(label = paste0('Photos: PSCIS ID ', photos[[2]],
+                                            '. From top left clockwise: Road/Site Card, Barrel, Outlet, Downstream, Upstream, Inlet.',
+                                            photos[[1]]), notation = 'none') %>%
+    kableExtra::add_footnote(label = '<br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>', escape = F, notation = 'none')
+}
+
+my_overview_info <- function(dat = pscis_phase2, site = my_site){
+  dat %>% filter(pscis_crossing_id == site)
+}
+
+##transpose the data so you can get ranges and filter
+my_habitat_info <- function(dat = hab_site, sit = my_site){
+  left_join(
+    hab_site %>%
+      filter(site == sit & location == 'us') %>%
+      select(site, everything()) %>%
+      t() %>%
+      as.data.frame() %>%  # as_tibble() %>%
+      tibble::rownames_to_column() %>%
+      rename(us = V1),
+
+    hab_site %>%
+      filter(site == sit & location == 'ds') %>%
+      select(site, everything()) %>%
+      t() %>%
+      as.data.frame() %>%  # as_tibble() %>%
+      tibble::rownames_to_column() %>%
+      rename(ds = V1),
+    by = 'rowname'
+  ) %>%
+    mutate(rowname = stringr::str_replace_all(rowname, '_', ' '))
+}
+
+##transpose the data so you can get ranges and filter
+my_habitat_info2 <- function(dat = hab_site, sit = my_site,
+                             loc = 'us'){
+  dat %>%
+    filter(site == sit & location == loc) %>%
+    select(site, everything()) %>%
+    t() %>%
+    as.data.frame() %>%  # as_tibble() %>%
+    tibble::rownames_to_column() %>%
+    rename(v = V1) %>%
+    mutate(rowname = stringr::str_replace_all(rowname, '_', ' '))
+  # filter(column == row) %>%
+  # pull(v)
+}
+
+##transpose the data so you can get ranges and filter
+my_habitat_info3 <- function(dat = hab_site, sit = my_site,
+                             loc = 'us', row = 'site'){
+  dat %>%
+    filter(site == sit & location == loc) %>%
+    select(site, everything()) %>%
+    t() %>%
+    as.data.frame() %>%  # as_tibble() %>%
+    tibble::rownames_to_column() %>%
+    # rename(v = V1) %>%
+    mutate(rowname = stringr::str_replace_all(rowname, '_', ' ')) %>%
+    filter(rowname == row) %>%
+    pull(V1)
+}
+
+my_pscis_info <- function(dat = pscis_phase2, site = my_site){
+  dat %>%
+    filter(pscis_crossing_id == site) %>%
+    mutate(stream_name = stringr::str_replace_all(stream_name, 'Tributary', 'tributary'))
+}
+
+
+my_bcfishpass <- function(dat = bcfishpass_phase2, site = my_site, round_dig = 0){
+  dat %>%
+    mutate(across(where(is.numeric), round, round_dig)) %>%
+    filter(stream_crossing_id == site) %>%
+    distinct(stream_crossing_id, .keep_all = T)
+}
+
+# my_bcfishpass <- function(dat = bcfishpass_phase2, site = my_site){
+#   dat %>%
+#     mutate(across(where(is.numeric), round, 0)) %>%
+#     filter(pscis_crossing_id == site) %>%
+#     distinct(pscis_crossing_id, .keep_all = T)
+# }
+
+my_watershed_area <- function(dat = wsheds, site = my_site){
+  dat %>%
+    filter(pscis_crossing_id == my_site) %>%
+    pull(area_km)
+}
+
+##we needed to back off this b/c maps not ready
+my_mapsheet <- function(){
+  paste0('https://hillcrestgeo.ca/outgoing/fishpassage/projects/bulkley/FishPassage_', my_bcfishpass() %>%
+           pull(dbm_mof_50k_grid), '.pdf')
+}
+
+# my_mapsheet <- function(){
+#   paste0('https://hillcrestgeo.ca/outgoing/fishpassage/projects/elk/confirmations')
+# }
+
+my_priority_info <- function(dat = habitat_confirmations_priorities, sit = my_site, loc = 'us'){
+  dat %>%
+    filter(site == sit & location == loc)
+}
+
+
+
+
+my_cost_estimate <- function(dat = tab_cost_est_phase2, site = my_site){
+  dat %>%
+    filter(pscis_crossing_id == site) %>%
+    distinct(pscis_crossing_id, .keep_all = T)
+}
+
+##this will pull out fish species names from our fish species codes
+my_fish_sp <- function(sit = my_site, col_to_pull = quo(observedspp_upstr), df = bcfishpass_phase2){
+  str_to_pull <- stringr::str_replace_all((my_bcfishpass(dat = df, site = sit) %>% pull(!!col_to_pull)), c("\\{" = "","\\}" = "")) %>%
+    strsplit(., ",") %>% unlist()
+  fishbc::freshwaterfish %>%
+    filter(Code %in% str_to_pull &
+             !Code %in% c('SST','TR')) %>%
+    pull(CommonName) %>%
+    stringr::str_to_lower() %>%
+    knitr::combine_words()
+}
+
+####-------culvert details summary---------------
+fpr_make_tab_cv <- function(dat = pscis){
+  tab_culvert_prep <- dat %>%
+    select(pscis_crossing_id, continuous_embeddedment_yes_no,
+           outlet_drop_meters, diameter_or_span_meters,
+           stream_width_ratio, culvert_slope_percent,
+           length_or_width_meters,
+           final_score, barrier_result)
+
+  names_report <- left_join(
+    as_tibble(names(tab_culvert_prep)),
+    select(xref_names, spdsht, report),
+    by = c('value' = 'spdsht')
+  ) %>%
+    pull(report)
+
+  tab_culvert <- tab_culvert_prep %>%
+    purrr::set_names(nm = names_report)
 }

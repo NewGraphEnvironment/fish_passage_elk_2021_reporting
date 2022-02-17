@@ -124,7 +124,7 @@ tab_cost_rd_mult <- pscis_rd %>%
                                          1,
                                        T ~ 2)) %>%
   # mutate(road_type_mult = road_class_mult * road_surface_mult) %>%
-  mutate(cost_m_1000s_bridge = road_surface_mult * road_class_mult * 15,  #changed from 12.5 due to inflation
+  mutate(cost_m_1000s_bridge = road_surface_mult * road_class_mult * 17.5,  #changed from 12.5 due to inflation
          cost_embed_cv = road_surface_mult * road_class_mult * 25) %>%
   # mutate(cost_1000s_for_10m_bridge = 10 * cost_m_1000s_bridge) %>%
   distinct( .keep_all = T) %>%

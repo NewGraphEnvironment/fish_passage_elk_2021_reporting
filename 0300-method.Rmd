@@ -16,27 +16,16 @@ source('R/tables.R')
 Priorities for site assessment locations were provided by Canadian Wildlife Federation with some additional sites selected by field crews based on background literature, fisheries information, PSCIS, `bcfishpass` [@norris2021smnorrisbcfishpass] outputs and field reconnaissance. `bcfishpass` is an open-source code repository that models aquatic connectivity based on a suite of hard coded (maximum stream slope downstream, PSCIS barrier information, [dam locations](https://github.com/smnorris/bcdams) and user defined parameters ([gradient/width/discharge](https://github.com/smnorris/bcfishpass/tree/main/02_model/parameters_wcrp)).  Details of the general methodology can be found [here](https://github.com/smnorris/bcfishpass) and may be updated over time as the tool evolves.  Once a development environment is properly setup, the software builds a local `postgresql` database through the utilization of other open-source tools such as [`bcdata`](https://github.com/smnorris/bcdata) [@norris2021smnorrisbcdata], [`bcfishobs`](https://github.com/smnorris/bcfishobs) [@norris2021smnorrisbcfishobs], and [`fwapg`](https://github.com/smnorris/fwapg) [@norris2021smnorrisfwapg] to provide connectivity models developed from analysis of the BC Freshwater Atlas, road layers,  fisheries information, Pacific Climate Impacts Consortium stream discharge data, measured and [modeled estimates of channel width](https://www.poissonconsulting.ca/temporary-hidden-link/859859031/channel-width-21b/) and numerous other standardized datasets downloaded directly from the [BC Data Catalogue](https://catalogue.data.gov.bc.ca/) application programming interface using `bcdata`.
 
 
- 
 <br>
 
 ### Accessible Habitat 
 
-The `Fish Habitat Model` calculates the average gradient of BC Freshwater Atlas stream network lines at minimum 100m long intervals starting from the downstream end of the streamline segment and working upstream.  The network lines are broken into max gradient categories with new segments created if and when the average slope of the stream line segment exceeds user provided thresholds. For this project, the user provided gradient thresholds used to delineate "potentially accessible habitat" were based on estimated max gradients that salmon (15%) and steelhead (20%) are likely to be capable of ascending. Although not housed within `bcfishpass` at the time of reporting, plans were in place to port over of the latest model version (V2.3.1) of the stream profile analysis tools from `FWAToolsArchive` into `bcfishpass`.  
+`bcfishpass` calculates the average gradient of BC Freshwater Atlas stream network lines at minimum 100m long intervals starting from the downstream end of the streamline segment and working upstream.  The network lines are broken into max gradient categories with new segments created if and when the average slope of the stream line segment exceeds user provided thresholds. For this project, the user provided gradient thresholds used to delineate "potentially accessible habitat" were based on estimated max gradients that westslope cutthrout trout (20%) are likely to be capable of ascending. `bcfishpass` identifes natural barriers (ex. steep gradients for extended distances) and hydroelectric dams to classifying the accessibility upstream by fish [@norris2021smnorrisbcfishpass]. On potentially accessible streams, scripts identify known barriers (ex. waterfalls >5m high) and additional anthropogenic features which are primarily road/railway stream crossings (i.e. culverts) that are potentially barriers. To prioritize these features for assessment or remediation, scripts report on how much modelled potentially accessible aquatic habitat the barriers may obstruct. The model can be refined with known fish observations upstream of identified barriers and for each crossing location, the area of lake and wetland habitat upstream, species documented upstream/downstream, an estimate of watershed area (on 2nd order and higher streams), estimates of discharge, mean annual precipitation weighted to upstream watershed area and channel width.  This, information, can be used to provides an indication of the potential quantity and quality of habitat potentially gained should fish passage be restored by comparing to user defined thresholds for the aforementioned parameters. 
 
 <br>
 
 
-Through this initiative, the Provincial Fish Passage Remediation Program and connectivity restoration planning led by Canadian Wildlife Federation and funded by the British Columbia Salmon Restoration and Innovation Fund, `bcfishpass` has been designed to prioritize potential fish passage barriers for assessment or remediation. The software is under continual development and has been designed and constructed by @norris2021smnorrisbcfishpass using of sql and python based shell script libraries to generate a simple model of aquatic habitat connectivity.  The model identifes natural barriers (ex. steep gradients for extended distances) and hydroelectric dams to classifying the accessibility upstream by fish [@norris2021smnorrisbcfishpass]. On potentially accessible streams, scripts identify known barriers (ex. waterfalls >5m high) and additional anthropogenic features which are primarily road/railway stream crossings (i.e. culverts) that are potentially barriers. To prioritize these features for assessment or remediation, scripts report on how much modelled potentially accessible aquatic habitat the barriers may obstruct. The model can be refined with known fish observations upstream of identified barriers and for each crossing location, the area of lake and wetland habitat upstream, species documented upstream/downstream, an estimate of watershed area (on 2nd order and higher streams), mean annual precipitation weighted to upstream watershed area and channel width can be collated using `bcfishpass`, `fwapg` and `bcfishobs`.  This, information, can be used to provides an indication of the potential quantity and quality of habitat potentially gained should fish passage be restored by comparing to user defined thresholds for the aforementioned parameters. A discussion of the methodology to derive channel width is below.
- 
- <br>
-
-Gradient, channel size and stream discharge are key determinants of channel morphology and subsequently fish distribution. High value  rearing, overwintering  and spawning habitat preferred by numerous species/life stages of fish are often located within channel types that have relatively low gradients and large channel widths (also quantified by the amount of flow in the stream).  Following delineation of "potentially accessible habitat", the average gradient of each stream segment within habitat classified as below the 15% and 20% thresholds was calculated and summed within species and life stage specific gradient categories.  Average gradient of stream line segments can be calculated from elevations contained in the provincial freshwater atlas streamline dataset. To obtain estimates of channel width upstream of crossing locations, Where available, `bcfishpass` was utilized to pull average channel gradients from Fisheries Information Summary System (FISS) site assessment data [@moeStreamInventorySample] or PSCIS assessment data [@moe2021PSCISAssessments] and associate with stream segment lines. When both FISS and PSCIS values were associated with a particular stream segment, FISS channel width was used.  When multiple FISS sites were associated with a particular stream segment a mean of the average channel widths was taken.  To model channel width for 2nd order and above stream segments without associated FISS or PSCIS sites, first `fwapg` was used to estimate the drainage area upstream of the segment.  Then, rasters from ClimateBC [@wang_etal2012ClimateWNAHighResolution] were sampled for each stream segments and a mean annual precipitation weighted by upstream watershed area was calculated. Mean annual precipitation was then combined with the channel widths and BEC zone information (gathered through a spatial query tied to the bottom of the stream segment) into a dataset (n = 22990) for analysis fo the relationship between these variables.  The details of this analysis and resulting formula used to estimate channel width on stream segments in the Bukley River and Morice River watersheds is included as a technical appendix at `r if(gitbook_on){knitr::asis_output("[here](https://github.com/NewGraphEnvironment/fish_passage_bulkley_2020_reporting/blob/master/docs/channel-width-21.pdf)")} else knitr::asis_output("https://github.com/NewGraphEnvironment/fish_passage_bulkley_2020_reporting/raw/master/docs/channel-width-21.pdf")`. 
-
-<br>
-
-
-
-`bcfishpass` and associated tools have been designed to be flexible in analysis, accepting user defined gradient, channel width and stream discharge categories [@moeStreamInventorySample].  Although currently in draft form, and subject to development revisions, gradient and channel width thresholds for habitat with the highest intrinsic value for a number of fish species in the Bulkley River and Morice River watersheds groups have been specified and applied to model habitat upstream of stream crossing locations with the highest intrinsic value (Table \@ref(tab:tab-fish-spawning-rearing)).  Thresholds were derived based on a literature review with references provided in Table \@ref(tab:tab-fish-spawning-rearing-references). 
+`bcfishpass` and associated tools have been designed to be flexible in analysis, accepting user defined gradient, channel width and stream discharge categories [@moeStreamInventorySample].  Although currently in draft form, and subject to development revisions, Canadian Wildlife Federation assigned gradient and discharge thresholds for habitat with the highest intrinsic value for westslope cutthrout trout have been estimated and applied to model habitat upstream of stream crossing locations (Table \@ref(tab:tab-fish-spawning-rearing)).  Thresholds were derived based on a literature review with references provided in Table \@ref(tab:tab-fish-spawning-rearing-references). 
 
 
 
@@ -45,6 +34,8 @@ Gradient, channel size and stream discharge are key determinants of channel morp
 
 ```{r tab-fish-spawning-rearing}
 #`r if(identical(gitbook_on, FALSE)){knitr::asis_output("<br><br><br>")}`
+
+# bcfishpass_spawn_rear_model imported in tables.R
 bcfishpass_spawn_rear_model %>% 
   mutate(Species = fishbc::fbc_common_name(species_code), 
          spawn_gradient_max = round(spawn_gradient_max * 100 ,1),
@@ -53,17 +44,19 @@ bcfishpass_spawn_rear_model %>%
          `Spawning Gradient  Max (%)`= spawn_gradient_max,
          `Spawning Width Min (m)` = spawn_channel_width_min,
          # `Spawning Width Max (m)` = spawn_channel_width_max,
-         # `Spawning MAD Min (m3/s)` = spawn_mad_min,
-         # `Spawning MAD Max (m3/s)` = spawn_mad_max,
-         `Rearing Gradient Max (%)` = rear_gradient_max) %>% 
-         # `Rearing MAD Min (m3/s)` = rear_mad_min,
-         # `Rearing MAD Max (m3/s)` = rear_mad_max,
+         `Spawning MAD Min (m3/s)` = spawn_mad_min,
+         `Spawning MAD Max (m3/s)` = spawn_mad_max,
+         `Rearing Gradient Max (%)` = rear_gradient_max,
+         `Rearing MAD Min (m3/s)` = rear_mad_min,
+         `Rearing MAD Max (m3/s)` = rear_mad_max) %>% 
          # `Rearing Wetland Multiplier` = rear_wetland_multiplier,
          # `Rearing Lake Multiplier` = rear_lake_multiplier) %>% 
   t() %>% 
   as_tibble(rownames = "row_names") %>% 
   janitor::row_to_names(row_number = 1) %>% 
-  rename(Variable = Species) %>% 
+  # rename(Variable = Species) %>% 
+  select(Species, all_of(contains('Cutthroat'))) %>% 
+  set_names(c('Variable', 'Value')) %>% 
   my_kable(caption_text = 'Stream gradient and channel width thresholds used to model potentially highest value fish habitat.')
 
 ```
@@ -71,8 +64,9 @@ bcfishpass_spawn_rear_model %>%
 <br>
 
 ```{r tab-fish-spawning-rearing-references}
+
 # bcfishpass_spawn_rear_model_references <- readr::read_csv(file = 'data/width_modelling/model_spawning_rearing_habitat.csv')
-bcfishpass_spawn_rear_model_references <- readr::read_csv(file = 'data/width_modelling/model_spawning_rearing_habitat_ref.csv') %>% 
+bcfishpass_spawn_rear_model_references <- readr::read_csv(file = 'data/model_spawning_rearing_habitat_ref.csv') %>% 
   select(species_code, contains('ref'), -contains(c('multiplier','mad')))
   
 bcfishpass_spawn_rear_model_references %>% 
@@ -94,9 +88,6 @@ bcfishpass_spawn_rear_model_references %>%
   rename(Variable = Species) %>% 
   my_kable(caption_text = 'References for stream gradient and channel width thresholds used to model potentially highest value fish habitat. Preliminary and subject to revisions.')
 ```
-
-
-
 
 
 
@@ -126,15 +117,15 @@ table_thresh_average %>%
 
 ### PSCIS and Modelled Stream Crossing Review
 
-To prepare for Phase 1 and 2 assessments in the study area, past fish passage assessment reports for the Bulkley River and Morice River watershed groups were first reviewed to identify crossing structures not yet assessed or previously ranked as priorities for rehabilitation [@casselman_stanley2010BulkleyFulton; @irvine2018AnalysisPriority; @mccarthy_fernando20152015Inventory; @smith2018AssessingBarriers; @wilson_rabnett2007FishPassage].  To determine which of those crossings had not yet been assessed with Phase 1 and Phase 2 assessments we cross-referenced these reports with the PSCIS database, available background info and viewed sites within the output of the `Fish Habitat Model` and `bcfishpass`.  Outputs for modelled and PSCIS crossings (barriers and potential barriers) that met the following criteria underwent a detailed review to facilitate prioritization for Phase1 - Fish Passage Assessments and Phase 2 - Habitat Confirmations.
+To prepare for Phase 1 and 2 assessments in the study area, past fish passage assessment reports for the Elk River watershed group were first reviewed to identify crossing structures not yet assessed or previously ranked as priorities for rehabilitation in @irvine2016ColumbiaBasin; @vastFishPassage2013 and @grainger2011FishPassage2011.  To determine which of those crossings had not yet been assessed with Phase 1 and Phase 2 assessments we cross-referenced these reports with the Phase 2 report previously completed in the study area [@masseEKConfirmation2015; @vastresourcesolutionsinc_2013FishHabitat] and reviewed outputs from PSCIS as well as `bcfishpass`.  Outputs for modeled and PSCIS crossings (barriers and potential barriers) that met the following criteria underwent a detailed review to facilitate prioritization for Phase1 - Fish Passage Assessments and Phase 2 - Habitat Confirmations.
 
- * Confirmed fish presence upstream of the structure.
+ * Confirmed fish presence upstream of the PSCIS or modelled structure.
  * Stream width documented as > 2.0m in PSCIS.
- * Linear lengths of modelled upstream habitat <8% gradient for ≥1km. 
+ * Habitat value rated as "medium" or “high” in PSCIS.
+ * For PSCIS crossings: linear lengths of modelled upstream habitat <20% gradient for ≥1km 
+ * For modelled crossings crossings: linear lengths of modelled upstream habitat <20% gradient for ≥2km and no anthropogenic barriers (including modelled potential stream crossing structures) documented downstream.
  * Crossings located on streams classified as 3rd order or higher.
- * Crossings located on streams with >5 ha of modeled wetland and/or lake habitat upstream.
- * Habitat value rated as "medium" or “high” in PSCIS.  
- 
+
 
 <br>
 
@@ -189,13 +180,13 @@ tab_barrier_result %>%
 
 ### Cost Benefit Analysis
 
-A cost benefit analysis was conducted for each crossing determined to be a barrier based on an estimate of cost associated with remediation or replacement of the crossing with a structure that facilitates fish passage and the amount of potential habitat that would be made available by remediating fish passage at the site (habitat gain index).  
+A cost benefit analysis was conducted for each crossing determined to be a barrier based on an estimate of cost associated with remediation or replacement of the crossing with a structure that facilitates fish passage and the amount of potential habitat that would be made available by remediation of fish passage at the site (habitat gain index).  
 
 <br>
 
 #### Habitat Gain Index
 
-The habitat gain index is the quantity of modelled habitat upstream of the subject crossing and represents an estimate of habitat gained with remediation of fish passage at the crossing.  For this project, a gradient threshold between accessible and non-accessible habitat was set at 20% (for a minimimum length of 100m) intended to represent the maximum gradient of which the strongest swimmers of anadromous species (steelhead) are likely to be able to migrate upstream.  
+The habitat gain index is the quantity of modeled habitat upstream of the subject crossing and represents an estimate of habitat gained with remediation of fish passage at the crossing.  For this project, a gradient threshold between accessible and non-accessible habitat was set at 20% (for a minimimum length of 100m) intended to represent the maximum gradient of which the strongest swimmers of westslope cutthrout trout are likely to be able to migrate upstream.  
 
 <br>
 
@@ -218,11 +209,11 @@ Potential options to remediate fish passage were selected from @fish_passage_ass
  
  <br>
 
-Cost estimates for structure replacement with bridges and embedded culverts were generated based on the channel width, slope of the culvert, depth of fill, road class and road surface type. Road details were sourced from @flnrordForestTenureRoad2020 and @flnrordDigitalRoadAtlas2020 through `bcfishpass`. Interviews with Phil MacDonald, Engineering Specialist FLNR - Kootenay, Steve Page, Area Engineer - FLNR - Northern Engineering Group and Matt Hawkins - MoTi - Design Supervisor for Highway Design and Survey - Nelson were utilized to helped refine estimates.  
+Cost estimates for structure replacement with bridges and embedded culverts were generated based on the channel width, slope of the culvert, depth of fill, road class and road surface type. Road details were sourced from @flnrordForestTenureRoad2020 and @flnrordDigitalRoadAtlas2020 through `bcfishpass`. Interviews with Phil MacDonald, Engineering Specialist FLNR - Kootenay, Steve Page, Area Engineer - FLNR - Northern Engineering Group and Matt Hawkins - MoTi - Design Supervisor for Highway Design and Survey - Nelson, David Maloney - FLNR - Fish Passage Technical Working Group were utilized to help refine estimates.  
 
 <br>
 
-Base costs for installation of bridges on forest service roads and permit roads with surfaces specified in provincial GIS road layers as rough and loose was estimated at \$12500/linear m and assumed that the road could be closed during construction and a minimum bridge span of 10m. For streams with channel widths <2m, embedded culverts were reported as an effective solution with total installation costs estimated at $25k/crossing (pers. comm. Phil MacDonald, Steve Page). For larger streams (>6m), span width increased proportionally to the size of the stream (ex. for an 8m wide stream a 12m wide span was prescribed).  For crossings with large amounts of fill (>3m), the replacement bridge span was increased by an additional 3m for each 1m of fill >3m to account for cutslopes to the stream at a 1.5:1 ratio. To account for road type, a multiplier table was also generated to estimate incremental cost increases with costs estimated for structure replacement on paved surfaces, railways and arterial/highways costing up to 20 times more than forest service roads due to expenses associate with design/engineering requirements, traffic control and paving.  The cost multiplier table (Table \@ref(tab:tab-cost-mult)) should be considered very approximate with refinement recommended for future projects.  
+Base costs for installation of bridges on forest service roads and permit roads with surfaces specified in provincial GIS road layers as rough and loose was estimated at \$17,500/linear m and assumed that the road could be closed during construction and a minimum bridge span of 10m. For streams with channel widths <2m, embedded culverts were reported as an effective solution with total installation costs estimated at $25k/crossing (pers. comm. Phil MacDonald, Steve Page). For larger streams (>6m), span width increased proportionally to the size of the stream (ex. for an 8m wide stream a 12m wide span was prescribed).  For crossings with large amounts of fill (>3m), the replacement bridge span was increased by an additional 3m for each 1m of fill >3m to account for cutslopes to the stream at a 1.5:1 ratio. To account for road type, a multiplier table was also generated to estimate incremental cost increases with costs estimated for structure replacement on paved surfaces, railways and arterial/highways costing up to 20 times more than forest service roads due to expenses associate with design/engineering requirements, traffic control and paving.  The cost multiplier table (Table \@ref(tab:tab-cost-mult)) should be considered very approximate with refinement recommended for future projects.  
 
 `r if(gitbook_on){knitr::asis_output("<br>")} else knitr::asis_output("\\pagebreak")`
 
@@ -242,9 +233,6 @@ Following fish passage assessments, habitat confirmations were completed in acco
 
 During habitat confirmations, to standardize data collected and facilitate submission of the data to provincial databases, information was collated on ["Site Cards"](https://www2.gov.bc.ca/gov/content/environment/natural-resource-stewardship/laws-policies-standards-guidance/inventory-standards/aquatic-ecosystems). Habitat characteristics recorded included channel widths, wetted widths, residual pool depths, gradients, bankfull depths, stage, temperature, conductivity, pH, cover by type, substrate and channel morphology (among others). When possible, the crew surveyed downstream of the crossing to the point where fish presence had been previously confirmed and upstream to a minimum distance of 600m. Any  potential  obstacles  to  fish  passage  were  inventoried  with  photos, physical  descriptions  and  locations  recorded on site cards.  Surveyed routes were recorded with time-signatures on handheld GPS units.   
 
-<br>
-
-Fish sampling was conducted a subset of sites when biological data was considered to add significant value to the physical habitat assessment information. When possible, electrofishing was utilized within discrete site units both upstream and downstream of the subject crossing with electrofisher settings, water quality parameters (i.e. conductivity, temperature and ph), start location, length of site and wetted widths (average of a minimum of three) recorded.  For each fish captured, fork length and species was recorded, with results included within the fish data submission spreadsheet.  Fish information and habitat data will be submitted to the province under scientific fish collection permit CB20-611971.
 
 <br>
 
@@ -252,25 +240,25 @@ Fish sampling was conducted a subset of sites when biological data was considere
 
 ## Reporting
 
-Reporting was generated with `bookdown` [@bookdown2016] from `Rmarkdown` [@R-rmarkdown] with primarily `R` [@rcoreteam2020languageenvironment] and `SQL` scripts. In addition to numerous spatial layers sourced through the BC Data Catalogue then stored and queried in a local `postgresql` database [data inputs](https://github.com/NewGraphEnvironment/fish_passage_bulkley_2020_reporting/tree/master/data) for this project include: 
+Reporting was generated with `bookdown` [@bookdown2016] from `Rmarkdown` [@R-rmarkdown] with primarily `R` [@rcoreteam2020languageenvironment] and `SQL` scripts. In addition to numerous spatial layers sourced through the BC Data Catalogue then stored and queried in a local `postgresql` database [data inputs](https://github.com/NewGraphEnvironment/fish_passage_elk_2021_reporting/tree/master/data) for this project include: 
 
  + Populated [Fish Data Submission Spreadsheet Template - V 2.0, January 20, 2020 ](https://www2.gov.bc.ca/gov/content/environment/plants-animals-ecosystems/fish/fish-and-fish-habitat-data-information/fish-data-submission/submit-fish-data#submitfish) 
 
  + Populated [pscis_assessment_template_v24.xls](https://www2.gov.bc.ca/gov/content/environment/plants-animals-ecosystems/fish/aquatic-habitat-management/fish-passage/fish-passage-technical/assessment-projects)
  
  
- + [`Fish Habitat Model`/`bcfishpass`](https://github.com/NewGraphEnvironment/fish_passage_bulkley_2020_reporting/blob/master/data/bcfishpass-phase2.csv) outputs.
+ + [`Fish Habitat Model`/`bcfishpass`](https://github.com/smnorris/bcfishpass) outputs.
 
 
- + [Custom CSV file](https://github.com/NewGraphEnvironment/fish_passage_bulkley_2020_reporting/raw/master/data/habitat_confirmations_priorities.csv) detailing Phase 2 site:
+ + [Custom CSV file](https://github.com/NewGraphEnvironment/fish_passage_elk_2021_reporting/raw/master/data/habitat_confirmations_priorities.csv) detailing Phase 2 site:
      - priority level for proceeding to design for replacement
      - length of survey upstream and downstream
      - a conservative estimate of the linear length of mainstem habitat potentially available upstream of the crossing 
      - fish species confirmed as present upstream of the crossing
 
- + [GPS tracks](https://github.com/NewGraphEnvironment/fish_passage_bulkley_2020_reporting/tree/master/data/habitat_confirmation_tracks.gpx) from field surveys.  
+ + [GPS tracks](https://github.com/NewGraphEnvironment/fish_passage_elk_2021_reporting/tree/master/data/habitat_confirmation_tracks.gpx) from field surveys.  
 
- + [Photos](https://github.com/NewGraphEnvironment/fish_passage_bulkley_2020_reporting/tree/master/data/photos) and [photo metadata](https://github.com/NewGraphEnvironment/fish_passage_bulkley_2020_reporting/tree/master/data/photo_metadata.csv)
+ + [Photos](https://github.com/NewGraphEnvironment/fish_passage_elk_2021_reporting/tree/master/data/photos) and [photo metadata](https://github.com/NewGraphEnvironment/fish_passage_elk_2021_reporting/tree/master/data/photo_metadata.csv)
 
 
 ## Mapping

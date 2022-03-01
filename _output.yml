@@ -4,9 +4,9 @@ bookdown::gitbook:
   config:
     toc:
       before: |
-        <li><a href="./">Template</a></li>
+        <li><a href="./">Elk River Watershed Group Fish Passage Restoration Planning 2021</a></li>
       after: |
-        <li><a href="https://github.com/NewGraphEnvironment/mybookdown-template" target="blank">Scripts and Data</a></li>
+        <li><a href="https://github.com/NewGraphEnvironment/fish_passage_elk_2021_reporting" target="blank">Scripts and Data</a></li>
     download: ["Template.pdf", "Template.html"]
     fontsettings:
       theme: night

@@ -1,0 +1,231 @@
+---
+output: html_document
+editor_options: 
+  chunk_output_type: inline
+---
+
+```{r setup-62181, eval = F}
+##this is just here so we can clear our environment for tests
+knitr::opts_chunk$set(echo=FALSE, message=FALSE, warning=FALSE)
+source('R/packages.R')
+source('R/functions.R')
+source('R/tables.R')
+
+```
+
+
+
+```{r  load-data-62181}
+my_site <- 62181
+my_site2 <- 62182
+```
+
+`r fpr_appendix_title2()`
+
+## Site Location {-}
+
+PSCIS crossing `r as.character(my_site)` is located on `r my_pscis_info() %>% pull(stream_name)` on the `r my_overview_info() %>% pull(road_name)` 11km east of Elkford, BC. PSCIS crossing `r as.character(my_site2)` is located approximately 30m downstream of the railway on the `r my_overview_info(site = my_site2) %>% pull(road_name)`.  The `r my_overview_info(site = my_site2) %>% pull(road_name)` is detailed as a local road within the municipal boundaries of the District of Elkford with the Ministry of Transportation and Infrastructure detailed as a custodian partner with the digital road atlas [@flnrord2020DigitalRoad]. The road accesses the Fording River Operations which is a steelmaking coal operation owned by Teck.
+
+
+<br>
+
+## Background {-}
+
+
+`r my_pscis_info() %>% pull(stream_name)` drains in a northern direction to the confluence with the Fording River at a location approximately 10km east of Elkford, BC. At crossing `r as.character(my_site)`, `r my_pscis_info() %>% pull(stream_name)` is a `r my_bcfishpass() %>% pull(stream_order) %>% english::ordinal()` order stream with a watershed area upstream of the crossing of approximately `r round(my_bcfishpass() %>% pull(watershed_upstr_ha)/100,1)`km^2^. The elevation of the watershed ranges from a maximum of 2280 to 1540m at PSCIS crossing `r as.character(my_site)`. `r my_pscis_info() %>% pull(stream_name)` is known to contain `r my_fish_sp()` upstream of the subject culvert [@data_fish_obs; @norris2020bcfishobs]. There are numerous stream crossing structures located on `r my_pscis_info() %>% pull(stream_name)` upstream of `r as.character(my_site)` however there are no crossings assessed as barriers on the mainstem up directly below the location of the wasterock as indicated by aerial imagery.
+
+<br>
+
+The upper end of the watershed is within Phase II of Teck Coal Limited’s – Line Creek Operation area (LCOII).  @hasek_batchelar20212020Line report that waste rock placement in the watershed began in 2015.  A review of aerial imagery from March of 2021 indicated that the total area of waste rock placement within the watershed was approximately 300ha. In order to comply with discharge requirements for total suspended solids (Permit 106970), Teck began operating the Line Creek Operation Dry Creek Water Management System (LCODCWMS) in 2015. The LCODCWMS collects upper Dry Creek water in a headpond which then conveys the water into two lined sedimentation ponds.  Discharge from the sedimentation ponds is subsequently combined and is conveyed to a constructed discharge channel which flows continuously into Dry Creek downstream.  The Line Creek Operations Local Aquatic Effects Monitoring Program (LCOLAEMP) to assess potential effects of Line Creek Operations on Dry Creek, Grace Creek and an Unnamed Creek has been in operation since 2014 as per another LCOII permitting requirement [@hasek_batchelar20212020Line].  A Structured Decision Making (SDM) process was initiated in 2016 to develop recommendations for water qualty site performatnce objective (SPOs) and in-stream flow requirements (IFRs) for Dry Creek, along with an updated LCO Dry Creek Water Management Plan that included water management activities, physical ,works, and LCOII operational procedures with the entent to acheieve the recommneded SPOs and IFRs, to inform monitoring as well as adaptive management recommendations.  The SDM process includes a working group comprised of Ktunaxa Nation Council; BC Ministry of Environment; Ministry of Forests, Lands, Natural Resource Operations and Rural Development, the Ministry of Energy, Mines and Petroleum Resources, Fisheries and Oceans Canada and Teck.  The SDM process develops operational recommendations informed throughout the year by the LCOLAEM with results from 2020 summarized below [@hasek_batchelar20212020Line]. 
+
+
+  1. Aqueous concentrations of nitrate, sulphate, nickel, selenium, total cadmium, and other constituents were greater within Dry Creek than reference and normal ranges with frequent guideline and benchmark exceedances.
+  2. Water collected at the outlet of the LCODCWMS had no increases in acute toxicity in 2020 and water sampled from within Dry Creek had no change in frequency or severity of potential adverse responses in chronic toxicity testing. 
+  3. Multiple metrics of benthic invertebrate community composition that indicate negative water quality effects (decreasing %Ephemeroptera , decreaseing %EPT, increasing %Chironomidae) were noted at multiple Dry Creek sample sites in 2020.
+  4. Benthic invertebrate tissue selenium concentrations were observed to be greater than normal range in samples from all areas
+downstream of the LCODCWMS.  
+  5. In response to 3 and 4, operational changes to the LCODCWMS were implemented in 2020 to minimize the retention time in the pond to reduce bioaccumulation of selenium. Water from the headpond bypassed the sedimentation ponds seasonally, only filling them during freshet and higher-flow periods. 
+  
+<br>
+
+@cope2020UpperFording have conducted three pass removal depletion electrofishing in the lower section of Dry Creek below crossing `r as.character(my_site)` as part of the Upper Fording River Westslope Ctthroat Trout Population Monitoring Project in 2013, 2014, 2015, 2017 and 2019 with fish densities sampled ranging from 2.25 to 16.5 fish/100m^2. 
+
+<br>
+
+
+In 2014, PSCIS stream crossings `r as.character(my_site)` and `r as.character(my_site2)` were the sites of habitat confirmation assessments by @masseenvironmentalconsultantsltd_2015FishHabitat. The crossings were subjectively assessed as passable during the field assessments due to the low gradients and embeddedness of the pipes with the crossings not recommended for replacement at that time.  @masseenvironmentalconsultantsltd_2015FishHabitat did however recommend reassessment ofthe sites every 5 to 10 years due to likely substrate movement at the crossing locations. Upon review of this background reporting, and due to the likely presence of significant quantities of upstream habitat suitable for WCT rearing and spawning based on `bcfishpass` outputs, the Canadian Wildlife Federation assigned these sites as high priorities for follow up. A map of the watershed is provided in map attachment [`r my_bcfishpass() %>% pull(dbm_mof_50k_grid)`](`r my_mapsheet()`).
+
+<br>
+
+## Stream Characteristics at Crossings {-}
+
+At the time of the survey, the PSCIS crossing `r my_site` was embedded, non-backwatered and considered a potential barrier to upstream fish passage according to the provincial metric. The pipes were `r my_pscis_info() %>% pull(diameter_or_span_meters)`m each in diameter with lengths of `r my_pscis_info() %>% pull(length_or_width_meters)`m, culvert slopes of `r my_pscis_info() %>% pull(culvert_slope_percent)`%, a stream width ratio of `r my_pscis_info() %>% pull(stream_width_ratio)` and an outlet drop of `r my_pscis_info() %>% pull(outlet_drop_meters)`m (Table \@ref(tab:tab-culvert-62181)). Water temperature was `r my_habitat_info(sit = my_site2) %>% filter(rowname == 'temperature c') %>% pull(us)`$^\circ$C, pH was `r my_habitat_info(sit = my_site2) %>% filter(rowname == 'p h') %>% pull(us)` and conductivity was `r my_habitat_info(sit = my_site2) %>% filter(rowname == 'conductivity m s cm') %>% pull(us)`uS/cm.  
+
+```{r eval = F}
+my_pscis_info_out %>% pull(assessment_comment)
+```
+
+<br>
+
+PSCIS crossing `r my_site2` was comprised of two pipes. As per the provincial methodology, only data from the pipe with the lowest outlet elevation was entered into the provincial database [@moe2011Fieldassessment].  Although the lower of the two 1.8m diameter pipes was embedded for the majority of its length, it was not embedded near the inlet and there was a significantly sized inlet drop present (0.4m).  The crossing was non-backwatered and considered a barrier to upstream fish passage according to the provincial metric. The pipe lengths were `r my_pscis_info() %>% pull(length_or_width_meters)`m, with the lower elevation pipe slope measured at `r my_pscis_info() %>% pull(culvert_slope_percent)`%.  The stream width ratio was `r my_pscis_info() %>% pull(stream_width_ratio)` and the outlet drop was `r my_pscis_info() %>% pull(outlet_drop_meters)`m (Table \@ref(tab:tab-culvert-62182)).
+
+```{r eval=F}
+##this is useful to get some comments for the report
+hab_site %>% filter(site == my_site & location == 'us') %>% pull(comments)
+my_priority <-  my_priority_info()
+
+```
+
+## Stream Characteristics Downstream {-}
+
+The stream was surveyed downstream from `r as.character(my_site2)` for `r my_priority_info(loc = 'ds', sit = my_site2) %>% pull(survey_length_m)`m `r if(gitbook_on){knitr::asis_output("(Figures \\@ref(fig:photo-62181-01) - \\@ref(fig:photo-62181-02))")}else(knitr::asis_output("(Figure \\@ref(fig:photo-62181-d01))"))`. Overall, total cover amount was rated as `r my_habitat_info2(loc = 'ds', sit = my_site2) %>% filter(rowname == 'total cover') %>% pull(v)` with  `r my_habitat_info2(loc = 'ds', sit = my_site2) %>% filter(v == 'dominant') %>% pull(rowname)` dominant. Cover was also present as `r my_habitat_info2(loc = 'ds', sit = my_site2) %>% filter(v == 'sub-dominant') %>% pull(rowname) %>% knitr::combine_words()` (Table \@ref(tab:tab-habitat-summary-62181)). The average channel width was `r my_habitat_info3(loc = 'ds', sit = my_site2, row = 'avg channel width m')`m, the average wetted width was `r my_habitat_info3(loc = 'ds', sit = my_site2, row = 'avg wetted width m')`m and the average gradient was `r my_habitat_info3(loc = 'ds', sit = my_site2, row = 'average gradient percent')`%. The dominant substrate was `r my_habitat_info3(loc = 'ds', sit = my_site2, row = "bed material dominant")` with `r my_habitat_info3(loc = 'ds', sit = my_site2, row = "bed material subdominant")` subdominant. Habitat was rated as `r my_priority_info(sit = my_site2, loc = 'ds') %>%  pull(hab_value)` as it was considered an important migration corridor with high value habitat for fry/juvenile salmonid rearing.  
+
+<br>
+
+## Stream Characteristics Upstream {-}
+
+```{r eval = F}
+# as a note - we are using my_sit = my_site2 because the detailed info was recorded on that card
+```
+
+
+The stream was surveyed upstream from `r as.character(my_site)` for `r my_priority_info(loc = 'us') %>% pull(survey_length_m)`m `r if(gitbook_on){knitr::asis_output("(Figures \\@ref(fig:photo-62181-03) - \\@ref(fig:photo-62181-04))")} else(knitr::asis_output("(Figure \\@ref(fig:photo-62181-d02))"))`. Within the area surveyed, total cover amount was rated as `r my_habitat_info2(loc = 'us', sit = my_site2) %>% filter(rowname == 'total cover') %>% pull(v)` with  `r my_habitat_info2(loc = 'us', sit = my_site2) %>% filter(v == 'dominant') %>% pull(rowname)` dominant. Cover was also present as `r my_habitat_info2(loc = 'us', sit = my_site2) %>% filter(v == 'sub-dominant') %>% pull(rowname) %>% knitr::combine_words()` (Table \@ref(tab:tab-habitat-summary-62181)). The average channel width was `r my_habitat_info3(loc = 'us', , sit = my_site2, row = 'avg channel width m')`m, the average wetted width was `r my_habitat_info3(loc = 'us', row = 'avg wetted width m')`m and the average gradient was `r my_habitat_info3(loc = 'us', , sit = my_site2, row = 'average gradient percent')`%.  Habitat value was rated as `r my_priority_info(loc = 'us') %>% pull(hab_value)` for salmonid rearing and spawning. 
+
+
+<br>
+
+
+
+Table \@ref(tab:tab-culvert-bcfp-62181) `r text_ref_tab_summary_bcfp()` 
+
+<br>
+
+
+## Structure Remediation and Cost Estimate {-}
+
+Structure replacement with a bridge (`r my_pscis_info() %>% pull(recommended_diameter_or_span_meters)`m span) is recommended to provide access to the habitat located upstream of PSCIS crossing `r as.character(my_site)`. The cost of the work is estimated at \$`r format(my_cost_estimate() %>% pull(cost_est_1000s) * 1000, big.mark = ',')` for a cost benefit of `r as.character(my_cost_estimate() %>% pull(cost_net))` linear m/\$1000 and `r as.character(my_cost_estimate() %>% pull(cost_area_net))`m^2^/\$1000.
+
+
+<br>
+
+
+## Conclusion {-}
+
+There is `r my_priority_info() %>% pull(upstream_habitat_length_km)`km of habitat upstream of crossing `r as.character(my_site)` to PSCIS crossing 123544 located on an unnamed road approximately 300m upstream of Highway 16.  Habitat in this area was rated as `r my_priority_info(sit = my_site, loc = 'us') %>% pull(hab_value)` value for salmonid rearing/spawning.  `r my_overview_info() %>% pull(road_name)` is on private land owned by the Woodmere Nursury.  The crossing was ranked as a `r my_priority_info() %>% pull(priority)` priority for proceeding to design for replacement. Although remediation of fish passage at `r as.character(my_site)` is considered beneficial, detailed habitat confirmation assessments of upstream culverts (PSCIS 123544) could be pursued to scope for additional potential habitat gains possible within the same system.
+
+<br>
+
+```{r tab-culvert-62181, eval = T}
+print_tab_summary()
+
+```
+
+
+<br>
+
+
+```{r tab-culvert-62182, eval = T}
+print_tab_summary(site = my_site2, site_photo_id = my_site2)
+
+```
+
+
+<br>
+
+```{r tab-habitat-summary-62181}
+tab_hab_summary %>% 
+  filter(Site  == my_site2) %>% 
+  # select(-Site) %>% 
+  my_kable(caption_text = paste0('Summary of habitat details for PSCIS crossings ', my_site, ' and ', my_site2, '.'))
+
+```
+
+<br>
+
+```{r tab-culvert-bcfp-62181, eval = T}
+print_tab_summary_bcfp()
+```
+
+
+
+<br>
+
+
+```{r photo-62181-01-prep, eval=T}
+my_photo1 = pull_photo_by_str(site_id = my_site2, str_to_pull = '_d1_')
+
+my_caption1 = paste0('Typical habitat downstream of PSCIS crossing ', my_site2, '.')
+
+```
+
+```{r photo-62181-01, fig.cap= my_caption1, out.width = photo_width, eval=gitbook_on}
+grid::grid.raster(get_img(site = my_site2, photo = my_photo1))
+```
+
+<br>
+
+```{r photo-62181-02-prep}
+my_photo2 = pull_photo_by_str(site_id = my_site2, str_to_pull = '_d2_')
+
+my_caption2 = paste0('Typical habitat downstream of PSCIS crossing ', my_site2, '.')
+```
+
+```{r photo-62181-02, fig.cap= my_caption2, out.width = photo_width, eval=gitbook_on}
+grid::grid.raster(get_img(site = my_site2, photo = my_photo2))
+
+```
+
+<br>
+
+```{r photo-62181-d01, fig.cap = my_caption, fig.show="hold", out.width= c("49.5%","1%","49.5%"), eval=identical(gitbook_on, FALSE)}
+##we could put 2 photos in on box but it is lots of extra work with the crossreferences. pdfs suck anyway.  Don't get too custom with it!!!
+
+# my_photo1 = pull_photo_by_str(str_to_pull = '_d1_')
+# my_caption1 = paste0('Typical habitat downstream of PSCIS crossing ', my_site, '.')
+# 
+# my_photo2 = pull_photo_by_str(str_to_pull = '_u1_')
+# my_caption2 = paste0('Typical habitat upstream of PSCIS crossing ', my_site, '.')
+
+my_caption <- paste0('Left: ', my_caption1, ' Right: ', my_caption2)
+
+knitr::include_graphics(get_img_path(photo = my_photo1))
+knitr::include_graphics("fig/pixel.png")
+knitr::include_graphics(get_img_path(photo = my_photo2))
+```
+
+
+```{r photo-62181-03-prep}
+my_photo1 = pull_photo_by_str(str_to_pull = '_u1_')
+
+my_caption1 = paste0('Typical habitat upstream of PSCIS crossing ', my_site, '.')
+
+```
+
+```{r photo-62181-03, fig.cap= my_caption1, out.width = photo_width, eval=gitbook_on}
+grid::grid.raster(get_img(photo = my_photo1))
+
+```
+
+<br>
+
+```{r photo-62181-04-prep}
+my_photo2 = pull_photo_by_str(str_to_pull = '_u2_')
+
+my_caption2 = paste0('Typical habitat upstream of PSCIS crossing ', my_site, '.')
+
+```
+
+```{r photo-62181-04, fig.cap= my_caption2, out.width = photo_width, eval=gitbook_on}
+grid::grid.raster(get_img(photo = my_photo2))
+```
+
+```{r photo-62181-d02, fig.cap = my_caption, fig.show="hold", out.width= c("49.5%","1%","49.5%"), eval=identical(gitbook_on, FALSE)}
+
+my_caption <- paste0('Left: ', my_caption1, ' Right: ', my_caption2)
+
+knitr::include_graphics(get_img_path(photo = my_photo1))
+knitr::include_graphics("fig/pixel.png")
+knitr::include_graphics(get_img_path(photo = my_photo2))
+```
+
+

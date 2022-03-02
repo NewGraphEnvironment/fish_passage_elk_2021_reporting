@@ -196,7 +196,7 @@ tab_overview %>%
 
 ```
 
-`r if(gitbook_on){knitr::asis_output("")} else knitr::asis_output("\\pagebreak")`
+`r if(gitbook_on){knitr::asis_output("<br>")} else knitr::asis_output("\\pagebreak")`
 
 
 ```{r}

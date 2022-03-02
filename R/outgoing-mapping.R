@@ -73,6 +73,10 @@ get_watershed <- function(dat){
     st_as_sf()
 }
 
+
+
+
+
 ##we needed to remove crossings that are first order - this used to run but doesn't want to anymore
 ##i wonder if it is because the 1st order watershed is the first one on the list so the api kicks us off...
 bcfishpass_phase2_clean <- bcfishpass_phase2 %>%
@@ -86,6 +90,8 @@ wshds %>%
 
 #burn to kml as well so we can see elevations
 st_write(wshds, append = TRUE, driver = 'kml', dsn = "data/inputs_extracted/wshds.kml")
+st_write(lodgepole, append = TRUE, driver = 'kml', dsn = "data/inputs_extracted/lodgepole.kml")
+
 
 ####--------------------burn geojsons from geopackage-----------------------------------------------------
 ##we need geojsons to make the mapping convenient so lets pull everything out of the geopackage and write to geojson files

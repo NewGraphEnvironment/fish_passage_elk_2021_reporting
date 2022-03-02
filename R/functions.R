@@ -137,13 +137,13 @@ pull_photo_by_str <- function(site_id = my_site, str_to_pull = 'barrel'){
     basename()
 }
 
-appendix_title <- function(site = my_site){
-  paste0('# Appendix - ', site, ' - ', my_overview_info() %>% pull(stream_name), ' {-}')
+fpr_appendix_title <- function(site = my_site){
+  paste0('# App - ', site, ' - ', my_overview_info() %>% pull(stream_name), ' {-}')
 }
 
 
 ##when we have 2 crosings
-appendix_title2 <- function(site = my_site, site2 = my_site2){
+fpr_appendix_title2 <- function(site = my_site, site2 = my_site2){
   paste0('# Appendix - ', site, ' & ', site2, ' - ', my_overview_info() %>% pull(stream_name), ' {-}')
 }
 
@@ -546,8 +546,8 @@ my_watershed_area <- function(dat = wsheds, site = my_site){
 }
 
 ##we needed to back off this b/c maps not ready
-my_mapsheet <- function(){
-  paste0('https://hillcrestgeo.ca/outgoing/fishpassage/projects/bulkley/FishPassage_', my_bcfishpass() %>%
+my_mapsheet <- function(wshd = 'elk'){
+  paste0('https://hillcrestgeo.ca/outgoing/fishpassage/projects/', wshd, '/FishPassage_', my_bcfishpass() %>%
            pull(dbm_mof_50k_grid), '.pdf')
 }
 
@@ -599,4 +599,85 @@ fpr_make_tab_cv <- function(dat = pscis){
 
   tab_culvert <- tab_culvert_prep %>%
     purrr::set_names(nm = names_report)
+}
+
+######modelling summary table
+####---------------make the report table-----
+##grab a df with the names of the left hand side of the table
+make_tab_summary_bcfp <- function(dat = bcfishpass,
+                                  xref_table = xref_bcfishpass_names,
+                                  site = my_site){
+  df <- dat %>%
+    mutate(across(where(is.numeric), round, 1)) %>%
+    filter(stream_crossing_id == site) %>%
+    distinct(stream_crossing_id, .keep_all = T)
+  tab_results_left <- xref_table %>%
+    filter(id_side == 1) %>%
+    arrange(id_join)
+  ##get the data
+  tab_pull_left <- df %>%
+    select(pull(tab_results_left,bcfishpass)) %>%
+    # slice(1) %>%
+    t() %>%
+    as.data.frame() %>%
+    tibble::rownames_to_column()
+
+  left <- left_join(tab_pull_left, xref_table, by = c('rowname' = 'bcfishpass'))
+
+  tab_results_right <- xref_table %>%
+    filter(id_side == 2)
+
+  ##get the data
+  tab_pull_right<- df %>%
+    select(pull(tab_results_right,bcfishpass)) %>%
+    # slice(1) %>%
+    t() %>%
+    as.data.frame() %>%
+    tibble::rownames_to_column()
+
+  right <- left_join(tab_pull_right, xref_table, by = c('rowname' = 'bcfishpass'))
+
+  tab_joined <- left_join(
+    select(left, report, V1, id_join),
+    select(right, report, V1, id_join),
+    by = 'id_join'
+  ) %>%
+    select(-id_join) %>%
+    purrr::set_names(c('Habitat', 'Potential', 'remove', 'Remediation Gain')) %>%
+    mutate(Potential = as.numeric(Potential),
+           `Remediation Gain` = as.numeric(`Remediation Gain`)) %>%
+    mutate(`Remediation Gain (%)` = round(`Remediation Gain`/Potential * 100,0),
+           Habitat = stringr::str_replace_all(Habitat, 'Ha', '(ha)'),
+           Habitat = stringr::str_replace_all(Habitat, 'Km', '(km)'),
+           Habitat = stringr::str_replace_all(Habitat, 'Lakereservoir', 'Lake and Reservoir'),
+           Habitat = stringr::str_replace_all(Habitat, 'Spawningrearing ', 'Spawning and Rearing ')) %>%
+    select(-remove)
+  return(tab_joined)
+}
+##this is in two places and should not be - see 0355-tables-reporting-html
+print_tab_summary_bcfp <- function(site = my_site, font = 11, ...){
+  make_tab_summary_bcfp(site = site) %>%
+    kable(caption = paste0('Summary of fish habitat modelling for PSCIS crossing ', site, '.'), booktabs = T) %>%    #
+    kableExtra::add_footnote('Model data is preliminary and subject to adjustments.', notation = 'symbol') %>%
+    kableExtra::kable_styling(c("condensed"), full_width = T, font_size = font)
+}
+
+##summary table of just the culvert info
+print_tab_summary <- function(dat = pscis_phase2, site = my_site, site_photo_id = my_site, font = 11){
+  fpr_make_tab_summary(df = dat %>% filter(pscis_crossing_id == site)) %>%
+    kable(caption = paste0('Summary of fish passage assessment for PSCIS crossing ', site, '.'), booktabs = T) %>%    #
+    kableExtra::add_footnote(label = paste0('Comments: ', dat %>% filter(pscis_crossing_id == site) %>%
+                                              pull(assessment_comment)), notation = 'none') %>% #this grabs the comments out
+    kableExtra::add_footnote(label = paste0('Photos: From top left clockwise: Road/Site Card, Barrel, Outlet, Downstream, Upstream, Inlet.',
+                                            paste0('![](data/photos/', site_photo_id, '/crossing_all.JPG)')), notation = 'none') %>%
+    kableExtra::kable_styling(c("condensed"), full_width = T, font_size = font)
+  # kableExtra::scroll_box(width = "100%", height = "500px") ##not scrolling to simplify our pagedown output
+}
+
+text_ref_tab_summary_bcfp <-  function(site = my_site){
+  paste0('presents preliminary fish passage modelling data for crossing ', site,
+         ' with spawning and rearing habitat estimated for westslope cutthrout trout. ',
+         'Modelled estimates of the total length of westslope cutthrout trout habitat upstream of the crossing before potential barriers are ',
+         my_bcfishpass(site = site, round_dig = 1) %>% pull(wct_spawning_belowupstrbarriers_km), 'km of potential spawning habitat and ',
+         my_bcfishpass(site = site, round_dig = 1) %>% pull(wct_rearing_belowupstrbarriers_km), 'km of potential rearing habitat.')
 }

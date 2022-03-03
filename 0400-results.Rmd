@@ -142,7 +142,13 @@ map <- leaflet(height=500, width=780) %>%
              zoomLevelOffset = -6, width = 100, height = 100)
 
 map %>% 
-  hideGroup(c("Phase 1"))
+  hideGroup(c("Phase 1")) %>% 
+  setView(lat = st_centroid(wshd_study_areas) %>% mutate(lat = sf::st_coordinates(.)[,2]) %>% pull(lat),
+          lng = st_centroid(wshd_study_areas) %>% mutate(lng = sf::st_coordinates(.)[,1])%>% pull(lng),
+          zoom = 8)
+
+ # mutate(long = sf::st_coordinates(.)[,1],
+ #        lat = sf::st_coordinates(.)[,2])
 ```
 
 

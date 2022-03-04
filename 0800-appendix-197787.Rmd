@@ -1,0 +1,351 @@
+
+```{r setup-197787, eval = F}
+##this is just here so we can clear our environment for tests
+knitr::opts_chunk$set(echo=FALSE, message=FALSE, warning=FALSE)
+source('R/packages.R')
+source('R/functions.R')
+source('R/tables.R')
+
+```
+
+
+```{r  load-data-197787}
+my_site <- 197787
+my_site2 <- 197786
+```
+
+`r fpr_appendix_title2()`
+
+## Site Location {-}
+
+PSCIS crossing `r as.character(my_site)` is located on `r my_pscis_info() %>% pull(stream_name)` on the `r my_overview_info() %>% pull(road_name)` approximately 35km south-east of Fernie, BC and accessed from the Lodgepole FSR. PSCIS crossing `r as.character(my_site2)` is located approximately 875 upstream of `r as.character(my_site)` and is also on the `r my_overview_info(site = my_site2) %>% pull(road_name)`.  The `r my_overview_info(site = my_site2) %>% pull(road_name)` (forest file ID 5466) is under the jurisdiction of the Ministry of Forests, Lands, Natural Resource Operations and Rural Development District Manager for the Rocky Mountain Forest District [@flnrord2020ForestTenure]. 
+
+
+<br>
+
+## Background {-}
+
+
+`r my_pscis_info() %>% pull(stream_name)` drains in a generally western direction to the confluence with the Wigwam River before flowing 10km to the Elk River at a location approximately 7km downstream of the Elko Dam. At crossing `r as.character(my_site)`, `r my_pscis_info() %>% pull(stream_name)` is a `r my_bcfishpass() %>% pull(stream_order) %>% english::ordinal()` order stream with a watershed area upstream of the crossing of approximately `r round(my_bcfishpass() %>% pull(watershed_upstr_ha)/100,1)`km^2^. The elevation of the watershed ranges from a maximum of 2280 to 1540m at PSCIS crossing `r as.character(my_site)`. `r my_pscis_info() %>% pull(stream_name)` is known to contain `r my_fish_sp()` upstream of the subject culvert [@data_fish_obs; @norris2020bcfishobs]. The only stream crossing upstream of `r as.character(my_site)` on the mainstem of the stream before extreme gradients is crossing `r as.character(my_site2)`. Lodgepole Lake is located approximately 300m upstream of `r as.character(my_site)` and is approximately 2ha in area.
+
+<br>
+
+
+Due to the potential for significant quantities of upstream habitat suitable for WCT rearing and spawning based on `bcfishpass` outputs, the Canadian Wildlife Federation assigned these sites as high priorities for follow up. A map of the watershed is provided in map attachment [`r my_bcfishpass() %>% pull(dbm_mof_50k_grid)`](`r my_mapsheet()`).
+
+<br>
+
+## Stream Characteristics at Crossings {-}
+
+At the time of the survey, the PSCIS crossing `r my_site` was un-embedded, non-backwatered and considered a potential barrier to upstream fish passage according to the provincial metric. The pipes were `r my_pscis_info() %>% pull(diameter_or_span_meters)`m each in diameter with lengths of `r my_pscis_info() %>% pull(length_or_width_meters)`m, culvert slopes of `r my_pscis_info() %>% pull(culvert_slope_percent)`%, a stream width ratio of `r my_pscis_info() %>% pull(stream_width_ratio)` and an outlet drop of `r my_pscis_info() %>% pull(outlet_drop_meters)`m (Table \@ref(tab:tab-culvert-197787)). Water temperature was `r my_habitat_info(sit = my_site2) %>% filter(rowname == 'temperature c') %>% pull(us)`$^\circ$C, pH was `r my_habitat_info(sit = my_site2) %>% filter(rowname == 'p h') %>% pull(us)` and conductivity was `r my_habitat_info(sit = my_site2) %>% filter(rowname == 'conductivity m s cm') %>% pull(us)`uS/cm.  
+
+```{r eval = F}
+my_pscis_info_out %>% pull(assessment_comment)
+```
+
+<br>
+
+PSCIS crossing `r my_site2` was comprised of two pipes. As per the provincial methodology, because the outlet height of each of the two 1m pipes were equivalent, the diameters of the two pipes were summed for input into PSCIS and the the stream width ratio was calculated as though the structure diameter was 2m [@moe2011Fieldassessment].  The crossing was non-embedded, not backwatered and considered a potential barrier to upstream fish passage according to the provincial metric. The pipe lengths were `r my_pscis_info() %>% pull(length_or_width_meters)`m, with pipe slopes measured at `r my_pscis_info() %>% pull(culvert_slope_percent)`%.  The stream width ratio was `r my_pscis_info() %>% pull(stream_width_ratio)` and the outlet drop was `r my_pscis_info() %>% pull(outlet_drop_meters)`m (Table \@ref(tab:tab-culvert-197786)).
+
+```{r eval=F}
+##this is useful to get some comments for the report
+hab_site %>% filter(site == my_site2 & location == 'us') %>% pull(comments)
+my_priority <-  my_priority_info()
+
+```
+
+## Stream Characteristics Downstream of `r as.character(my_site)` {-}
+
+The stream was surveyed downstream from `r as.character(my_site)` for `r my_priority_info(loc = 'ds') %>% pull(survey_length_m)`m `r if(gitbook_on){knitr::asis_output("(Figures \\@ref(fig:photo-197787-01) - \\@ref(fig:photo-197787-02))")}else(knitr::asis_output("(Figure \\@ref(fig:photo-197787-d01))"))`. Overall, total cover amount was rated as `r my_habitat_info2(loc = 'ds') %>% filter(rowname == 'total cover') %>% pull(v)` with  `r my_habitat_info2(loc = 'ds') %>% filter(v == 'dominant') %>% pull(rowname)` dominant. Cover was also present as `r my_habitat_info2(loc = 'ds') %>% filter(v == 'sub-dominant') %>% pull(rowname) %>% knitr::combine_words()` (Table \@ref(tab:tab-habitat-summary-197787)). The average channel width was `r my_habitat_info3(loc = 'ds', row = 'avg channel width m')`m, the average wetted width was `r my_habitat_info3(loc = 'ds', row = 'avg wetted width m')`m and the average gradient was `r my_habitat_info3(loc = 'ds', row = 'average gradient percent')`%. The dominant substrate was `r my_habitat_info3(loc = 'ds', row = "bed material dominant")` with `r my_habitat_info3(loc = 'ds', row = "bed material subdominant")` subdominant. Habitat value was rated as `r my_priority_info(loc = 'ds') %>%  pull(hab_value)` as it was considered an important migration corridor with moderate value habitat for fry/juvenile salmonid rearing.  
+
+<br>
+
+A 10m high falls was reported as present within the Provincial Obstacles to Fish Passage spatial spatial layer of the provincial Data Catalogue in the mainstem of Lodgepole Creek approximately 12.5km downstream of PSCIS crossing `r as.character(my_site)`  [@moe2020ProvincialObstacles].  The potential presence of this falls was considered relevant for assessment of PSCIS crossing `r as.character(my_site)` so a 1100m section of stream was surveyed spanning the reported falls location (survey track is shown in map attachment [`r my_bcfishpass() %>% pull(dbm_mof_50k_grid)`](`r my_mapsheet()`)). No falls were observed within the area surveyed.
+
+<br>
+
+## Stream Characteristics Upstream of `r as.character(my_site)` and downstream of `r as.character(my_site2)`{-}
+
+```{r eval = F}
+# as a note - we are using my_sit = my_site2 because the detailed info was recorded on that card
+```
+
+
+The stream was surveyed upstream from `r as.character(my_site)` for `r my_priority_info(loc = 'us') %>% pull(survey_length_m)`m to the outlet of Lodgepole Lake where a beaver dam ~1.2m in height was observed `r if(gitbook_on){knitr::asis_output("(Figures \\@ref(fig:photo-197787-03) - \\@ref(fig:photo-197787-06))")} else(knitr::asis_output("(Figures \\@ref(fig:photo-197787-d02) - \\@ref(fig:photo-197787-d03))"))`. Numerous fish (150 - 200m) were observed above the beaver dam.  Within the area surveyed, total cover amount was rated as `r my_habitat_info2(loc = 'us') %>% filter(rowname == 'total cover') %>% pull(v)` with  `r my_habitat_info2(loc = 'us') %>% filter(v == 'dominant') %>% pull(rowname)` dominant. Cover was also present as `r my_habitat_info2(loc = 'us') %>% filter(v == 'sub-dominant') %>% pull(rowname) %>% knitr::combine_words()` (Table \@ref(tab:tab-habitat-summary-197787)). The average channel width was `r my_habitat_info3(loc = 'us', row = 'avg channel width m')`m, the average wetted width was `r my_habitat_info3(loc = 'us', row = 'avg wetted width m')`m and the average gradient was `r my_habitat_info3(loc = 'us', row = 'average gradient percent')`%.  Abundant gravels suitable for spawning were observed between the FSR and the lake outlet. Within this area of the survey the stream primarily had low complexity due to the prevalence of straight riffle type habitat.  Some shallow pools and large woody debris were present. Habitat value was rated as `r my_priority_info(loc = 'us') %>% pull(hab_value)` value due to the presence of spawning gravels as well as the lake which likely provides overwintering habitat for resident westslope cutthrout trout. 
+
+
+<br>
+
+
+The stream was surveyed downstream from `r as.character(my_site2)` for `r my_priority_info(sit = my_site2, loc = 'ds') %>% pull(survey_length_m)`m to the inlet of Lodgepole Lake `r if(gitbook_on){knitr::asis_output("(Figures \\@ref(fig:photo-197787-07) - \\@ref(fig:photo-197787-08))")} else(knitr::asis_output("(Figure \\@ref(fig:photo-197787-d04))"))`. Within the area surveyed, total cover amount was rated as `r my_habitat_info2(loc = 'us') %>% filter(rowname == 'total cover') %>% pull(v)` with  `r my_habitat_info2(loc = 'us') %>% filter(v == 'dominant') %>% pull(rowname)` dominant. Cover was also present as `r my_habitat_info2(loc = 'us') %>% filter(v == 'sub-dominant') %>% pull(rowname) %>% knitr::combine_words()` (Table \@ref(tab:tab-habitat-summary-197787)). The average channel width was `r my_habitat_info3(loc = 'us', row = 'avg channel width m')`m, the average wetted width was `r my_habitat_info3(loc = 'us', row = 'avg wetted width m')`m and the average gradient was `r my_habitat_info3(loc = 'us', row = 'average gradient percent')`%.  Abundant gravels suitable for spawning were observed between the FSR and the lake outlet. The channel dewatered in a section from approximately 160m upstream of the lake to the lake. Substrate in the upstream, watered portion of the stream below the culvert was comprised of gravels suitable for spawning. Several deep pools potentialy suitable for overwintering westslope cutthroat trout were also observed in this section. Two steps 30cm high and 80cmhigh were observed in channel due to small woody debris accumulation. Habitat value was rated as `r my_priority_info(loc = 'us') %>% pull(hab_value)` overall. 
+
+
+## Stream Characteristics Upstream of `r as.character(my_site2)`
+
+The stream was surveyed upstream from `r as.character(my_site2)` for `r my_priority_info(sit = my_site2, loc = 'us') %>% pull(survey_length_m)`m to the base of a waterfall >30m high `r if(gitbook_on){knitr::asis_output("(Figures \\@ref(fig:photo-197787-09) - \\@ref(fig:photo-197787-10))")} else(knitr::asis_output("(Figures \\@ref(fig:photo-197787-d02) - \\@ref(fig:photo-197787-d03))"))`. Within the area surveyed, total cover amount was rated as `r my_habitat_info2(sit = my_site2, loc = 'us') %>% filter(rowname == 'total cover') %>% pull(v)` with  `r my_habitat_info2(sit = my_site2, loc = 'us') %>% filter(v == 'dominant') %>% pull(rowname)` dominant. Cover was also present as `r my_habitat_info2(sit = my_site2, loc = 'us') %>% filter(v == 'sub-dominant') %>% pull(rowname) %>% knitr::combine_words()` (Table \@ref(tab:tab-habitat-summary-197787)). The average channel width was `r my_habitat_info3(sit = my_site2, loc = 'us', row = 'avg channel width m')`m, the average wetted width was `r my_habitat_info3(sit = my_site2, loc = 'us', row = 'avg wetted width m')`m and the average gradient was `r my_habitat_info3(sit = my_site2, loc = 'us', row = 'average gradient percent')`%.  
+Low gradient riffle-pool habitat containing abundant gravels suitable for resident westslope cutthrout trout spawning was present throughout the first approximate 300m of stream surveyed before gradients increased to 6-7% near the top of site. Shallow pools were present intermittently in the area surveyed, created by large woody debris. Habitat value was rated as `r my_priority_info(sit = my_site2, loc = 'us') %>% pull(hab_value)` value with moderate potential for salmonid spawning/rearing.
+
+<br>
+
+Table \@ref(tab:tab-culvert-bcfp-197787) `r text_ref_tab_summary_bcfp()` 
+
+<br>
+
+
+## Structure Remediation and Cost Estimate {-}
+
+Structure replacement with a bridge (`r my_pscis_info() %>% pull(recommended_diameter_or_span_meters)`m span) was recommended to provide access to the stream and lake habitat located upstream of PSCIS crossing `r as.character(my_site)`. The cost of the work was estimated at \$`r format(my_cost_estimate() %>% pull(cost_est_1000s) * 1000, big.mark = ',')` for a cost benefit of `r as.character(my_cost_estimate() %>% pull(cost_net))` linear m/\$1000 and `r as.character(my_cost_estimate() %>% pull(cost_area_net))`m^2^/\$1000.
+
+
+<br>
+
+Structure replacement with a bridge (`r my_pscis_info(site = my_site2) %>% pull(recommended_diameter_or_span_meters)`m span) was recommended to provide access to the habitat located upstream of PSCIS crossing `r as.character(my_site2)`. The cost of the work was estimated at \$`r format(my_cost_estimate(site = my_site2) %>% pull(cost_est_1000s) * 1000, big.mark = ',')` for a cost benefit of `r as.character(my_cost_estimate(site = my_site2) %>% pull(cost_net))` linear m/\$1000 and `r as.character(my_cost_estimate(site = my_site2) %>% pull(cost_area_net))`m^2^/\$1000.
+
+
+## Conclusion {-}
+
+There is `r my_priority_info() %>% pull(upstream_habitat_length_km)`km of habitat upstream of crossing `r as.character(my_site)` to PSCIS crossing `as.character(my_site2)`.  Habitat in the area was surveyed was rated as `r my_priority_info(sit = my_site, loc = 'us') %>% pull(hab_value)` value for salmonid rearing/spawning primarily due to the presence of the 2ha of rearing habitat in Lodgepole Lake.  The beaver dam upstream of the crossing may provide an obstacle to upstream passage for some migrating fish at some flows however they are not considered permanent, are likely important for maintaining water elevations in the lake and may be passable at some flows.  There is `r my_priority_info(sit = my_site2) %>% pull(upstream_habitat_length_km)`km of habitat upstream of crossing `r as.character(my_site2)` before the impassable waterfall with habitat value rated as `r my_priority_info(sit = my_site2, loc = 'us') %>% pull(hab_value)`.  Both crossings are on the `r my_overview_info(site = my_site2) %>% pull(road_name)` under the jurisdiction of the Ministry of Forests, Lands, Natural Resource Operations and Rural Development District Manager for the Rocky Mountain Forest District.  Due to it's status as a "potential" barrier to upstream migration, crossing `r as.character(my_site)` was ranked as a `r my_priority_info() %>% pull(priority)` priority for proceeding to design for replacement. Crossing `r as.character(my_site2)` was ranked as a `r my_priority_info(sit = my_site2) %>% pull(priority)` priority for proceeding to design for replacement due to the streams seasonal disconnection from Lodgepole Lake and the relatively short section of habitat available upstream before the falls. 
+
+<br>
+
+```{r tab-culvert-197787, eval = T}
+print_tab_summary()
+
+```
+
+
+<br>
+
+
+```{r tab-culvert-197786, eval = T}
+print_tab_summary(site = my_site2, site_photo_id = my_site2)
+
+```
+
+
+<br>
+
+```{r tab-habitat-summary-197787}
+tab_hab_summary %>% 
+  filter(Site  == my_site2 |
+          Site  == my_site ) %>% 
+  # select(-Site) %>% 
+  my_kable(caption_text = paste0('Summary of habitat details for PSCIS crossing ', my_site, ' and ', my_site2, '.'))
+
+```
+
+<br>
+
+```{r tab-culvert-bcfp-197787, eval = T}
+print_tab_summary_bcfp()
+```
+
+<br>
+
+```{r tab-culvert-bcfp-197786, eval = T}
+print_tab_summary_bcfp(site = my_site2)
+```
+
+
+<br>
+
+
+```{r photo-197787-01-prep, eval=T}
+my_photo1 = pull_photo_by_str(str_to_pull = '_d1_')
+
+my_caption1 = paste0('Typical habitat downstream of PSCIS crossing ', my_site, '.')
+
+```
+
+```{r photo-197787-01, fig.cap= my_caption1, out.width = photo_width, eval=gitbook_on}
+grid::grid.raster(get_img(site = my_site, photo = my_photo1))
+```
+
+<br>
+
+```{r photo-197787-02-prep}
+my_photo2 = pull_photo_by_str(str_to_pull = '_d2_')
+
+my_caption2 = paste0('Typical habitat downstream of PSCIS crossing ', my_site2, '.')
+```
+
+```{r photo-197787-02, fig.cap= my_caption2, out.width = photo_width, eval=gitbook_on}
+grid::grid.raster(get_img(photo = my_photo2))
+
+```
+
+<br>
+
+```{r photo-197787-d01, fig.cap = my_caption, fig.show="hold", out.width= c("49.5%","1%","49.5%"), eval=identical(gitbook_on, FALSE)}
+##we could put 2 photos in on box but it is lots of extra work with the crossreferences. pdfs suck anyway.  Don't get too custom with it!!!
+
+# my_photo1 = pull_photo_by_str(str_to_pull = '_d1_')
+# my_caption1 = paste0('Typical habitat downstream of PSCIS crossing ', my_site, '.')
+# 
+# my_photo2 = pull_photo_by_str(str_to_pull = '_u1_')
+# my_caption2 = paste0('Typical habitat upstream of PSCIS crossing ', my_site, '.')
+
+my_caption <- paste0('Left: ', my_caption1, ' Right: ', my_caption2)
+
+knitr::include_graphics(get_img_path(photo = my_photo1))
+knitr::include_graphics("fig/pixel.png")
+knitr::include_graphics(get_img_path(photo = my_photo2))
+```
+
+
+```{r photo-197787-03-prep}
+my_photo1 = pull_photo_by_str(str_to_pull = '_u2_')
+
+my_caption1 = paste0('Typical habitat upstream of PSCIS crossing ', my_site, '.')
+
+```
+
+```{r photo-197787-03, fig.cap= my_caption1, out.width = photo_width, eval=gitbook_on}
+grid::grid.raster(get_img(photo = my_photo1))
+
+```
+
+<br>
+
+```{r photo-197787-04-prep}
+my_photo2 = pull_photo_by_str(str_to_pull = '_u1_')
+
+my_caption2 = paste0('Gravels suitable for spawning located upstream of PSCIS crossing ', my_site, '.')
+
+```
+
+```{r photo-197787-04, fig.cap= my_caption2, out.width = photo_width, eval=gitbook_on}
+grid::grid.raster(get_img(photo = my_photo2))
+```
+
+```{r photo-197787-d02, fig.cap = my_caption, fig.show="hold", out.width= c("49.5%","1%","49.5%"), eval=identical(gitbook_on, FALSE)}
+
+my_caption <- paste0('Left: ', my_caption1, ' Right: ', my_caption2)
+
+knitr::include_graphics(get_img_path(photo = my_photo1))
+knitr::include_graphics("fig/pixel.png")
+knitr::include_graphics(get_img_path(photo = my_photo2))
+```
+
+```{r photo-197787-05-prep}
+my_photo1 = pull_photo_by_str(str_to_pull = '_u3_')
+
+my_caption1 = paste0('Beaver dam located upstream of PSCIS crossing ', my_site, ' and just below Lodgepole Lake.')
+
+```
+
+```{r photo-197787-05, fig.cap= my_caption1, out.width = photo_width, eval=gitbook_on}
+grid::grid.raster(get_img(photo = my_photo1))
+
+```
+
+<br>
+
+```{r photo-197787-06-prep}
+my_photo2 = pull_photo_by_str(str_to_pull = '_u4_')
+
+my_caption2 = paste0('Lodgepole Lake located upstream of PSCIS crossing ', my_site, '.')
+
+```
+
+```{r photo-197787-06, fig.cap= my_caption2, out.width = photo_width, eval=gitbook_on}
+grid::grid.raster(get_img(photo = my_photo2))
+```
+
+```{r photo-197787-d03, fig.cap = my_caption, fig.show="hold", out.width= c("49.5%","1%","49.5%"), eval=identical(gitbook_on, FALSE)}
+
+my_caption <- paste0('Left: ', my_caption1, ' Right: ', my_caption2)
+
+knitr::include_graphics(get_img_path(photo = my_photo1))
+knitr::include_graphics("fig/pixel.png")
+knitr::include_graphics(get_img_path(photo = my_photo2))
+```
+
+
+
+
+
+<br>
+
+
+
+
+```{r photo-197787-07-prep}
+my_photo1 = pull_photo_by_str(site_id = my_site2, str_to_pull = '_d1_')
+
+my_caption1 = paste0('Habitat downstream of PSCIS crossing ', my_site2, '.')
+
+```
+
+```{r photo-197787-07, fig.cap= my_caption1, out.width = photo_width, eval=gitbook_on}
+grid::grid.raster(get_img(site = my_site2, photo = my_photo1))
+
+```
+
+<br>
+
+```{r photo-197787-08-prep}
+my_photo2 = pull_photo_by_str(site_id = my_site2, str_to_pull = '_d2_')
+
+my_caption2 = paste0('Dewatered habitat downstream of PSCIS crossing ', my_site2, '.')
+
+```
+
+```{r photo-197787-08, fig.cap= my_caption2, out.width = photo_width, eval=gitbook_on}
+grid::grid.raster(get_img(site = my_site2, photo = my_photo2))
+```
+
+```{r photo-197787-d04, fig.cap = my_caption, fig.show="hold", out.width= c("49.5%","1%","49.5%"), eval=identical(gitbook_on, FALSE)}
+
+my_caption <- paste0('Left: ', my_caption1, ' Right: ', my_caption2)
+
+knitr::include_graphics(get_img_path(site = my_site2, photo = my_photo1))
+knitr::include_graphics("fig/pixel.png")
+knitr::include_graphics(get_img_path(site = my_site2, photo = my_photo2))
+```
+
+
+
+<br>
+
+
+
+
+
+
+
+```{r photo-197787-09-prep}
+my_photo1 = pull_photo_by_str(site_id = my_site2, str_to_pull = '_u1_')
+
+my_caption1 = paste0('Typical habitat upstream of PSCIS crossing ', my_site2, '.')
+
+```
+
+```{r photo-197787-09, fig.cap= my_caption1, out.width = photo_width, eval=gitbook_on}
+grid::grid.raster(get_img(site = my_site2, photo = my_photo1))
+
+```
+
+<br>
+
+```{r photo-197787-10-prep}
+my_photo2 = pull_photo_by_str(site_id = my_site2, str_to_pull = '_u2_')
+
+my_caption2 = paste0('Large falls located ~550m upstream of PSCIS crossing ', my_site2, '.')
+
+```
+
+```{r photo-197787-10, fig.cap= my_caption2, out.width = photo_width, eval=gitbook_on}
+grid::grid.raster(get_img(site = my_site2, photo = my_photo2))
+```
+
+```{r photo-197787-d05, fig.cap = my_caption, fig.show="hold", out.width= c("49.5%","1%","49.5%"), eval=identical(gitbook_on, FALSE)}
+
+my_caption <- paste0('Left: ', my_caption1, ' Right: ', my_caption2)
+
+knitr::include_graphics(get_img_path(site = my_site2, photo = my_photo1))
+knitr::include_graphics("fig/pixel.png")
+knitr::include_graphics(get_img_path(site = my_site2, photo = my_photo2))
+```
+
+

@@ -30,16 +30,19 @@ conn <- DBI::dbConnect(
 #            FROM information_schema.schemata")
 # #
 # # # ##list tables in a schema
-# dbGetQuery(conn,
-#            "SELECT table_name
-#            FROM information_schema.tables
-#            WHERE table_schema='bcfishpass'")
+dbGetQuery(conn,
+           "SELECT table_name
+           FROM information_schema.tables
+           WHERE table_schema='bcfishpass'") %>%
+  filter(table_name %ilike% 'prec')
 # # # # # #
 # # # # # # ##list column names in a table
-# dbGetQuery(conn,
-#            "SELECT column_name,data_type
-#            FROM information_schema.columns
-#            WHERE table_name='fiss_fish_obsrvtn_pnt_sp'")
+dbGetQuery(conn,
+           "SELECT column_name,data_type
+           FROM information_schema.columns
+           WHERE table_name='map'")
+
+
 #
 # dbGetQuery(conn,
 #            "SELECT a.total_lakereservoir_ha
@@ -89,15 +92,16 @@ FROM
   ali.misc AS a
 CROSS JOIN LATERAL
   (SELECT *
-   FROM bcfishpass.crossings
+   FROM bcfishpass.crossings_20220228
    ORDER BY
      a.geometry <-> geom
    LIMIT 1) AS b")
 
 ##get all the data and save it as an sqlite database as a snapshot of what is happening.  we can always hopefully update it
 query <- "SELECT *
-   FROM bcfishpass.crossings
+   FROM bcfishpass.crossings_20220228
    WHERE watershed_group_code IN ('ELKR')"
+
 
 ##import and grab the coordinates - this is already done
 bcfishpass_elkr <- st_read(conn, query =  query) %>%
@@ -112,7 +116,7 @@ bcfishpass_elkr <- st_read(conn, query =  query) %>%
 query <- "select col_description((table_schema||'.'||table_name)::regclass::oid, ordinal_position) as column_comment,
 * from information_schema.columns
 WHERE table_schema = 'bcfishpass'
-and table_name = 'crossings';"
+and table_name = 'crossings_20220228';"
 
 bcfishpass_column_comments <- st_read(conn, query =  query) %>%
   select(column_name, column_comment)
@@ -138,6 +142,7 @@ my_pscis_modelledcrossings_streams_xref <- dat_joined %>%
   select(pscis_crossing_id, stream_crossing_id, modelled_crossing_id, source) %>%
   st_drop_geometry()
 
+
 ##this is how we update our local db.
 ##my time format format(Sys.time(), "%Y%m%d-%H%M%S")
 # mydb <- DBI::dbConnect(RSQLite::SQLite(), "data/bcfishpass.sqlite")
@@ -145,13 +150,17 @@ conn <- rws_connect("data/bcfishpass.sqlite")
 rws_list_tables(conn)
 ##archive the last version for now
 # bcfishpass_archive <- readwritesqlite::rws_read_table("bcfishpass", conn = conn)
-# rws_drop_table("bcfishpass_archive", conn = conn) ##if it exists get rid of it - might be able to just change exists to T in next line
+# # rws_drop_table("bcfishpass_archive", conn = conn) ##if it exists get rid of it - might be able to just change exists to T in next line
 # rws_write(bcfishpass_archive, exists = F, delete = TRUE,
 #           conn = conn, x_name = paste0("bcfishpass_archive_", format(Sys.time(), "%Y-%m-%d-%H%m")))
-# rws_drop_table("bcfishpass", conn = conn) ##now drop the table so you can replace it
+rws_drop_table("bcfishpass", conn = conn) ##now drop the table so you can replace it
 rws_write(bcfishpass_elkr, exists = F, delete = TRUE,
           conn = conn, x_name = "bcfishpass")
 # add the comments
+# bcfishpass_column_comments_archive <- readwritesqlite::rws_read_table("bcfishpass_column_comments", conn = conn)
+# rws_write(bcfishpass_column_comments_archive, exists = F, delete = TRUE,
+#           conn = conn, x_name = paste0("bcfishpass_column_comments_archive_", format(Sys.time(), "%Y-%m-%d-%H%m")))
+rws_drop_table("bcfishpass_column_comments", conn = conn) ##now drop the table so you can replace it
 rws_write(bcfishpass_column_comments, exists = F, delete = TRUE,
           conn = conn, x_name = "bcfishpass_column_comments")
 # rws_drop_table("my_pscis_modelledcrossings_streams_xref", conn = conn)

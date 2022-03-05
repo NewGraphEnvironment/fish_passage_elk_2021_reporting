@@ -26,7 +26,16 @@ PSCIS crossing `r as.character(my_site)` is located on `r my_pscis_info() %>% pu
 ## Background {-}
 
 
-`r my_pscis_info() %>% pull(stream_name)` drains in a generally western direction to the confluence with the Wigwam River before flowing 10km to the Elk River at a location approximately 7km downstream of the Elko Dam. At crossing `r as.character(my_site)`, `r my_pscis_info() %>% pull(stream_name)` is a `r my_bcfishpass() %>% pull(stream_order) %>% english::ordinal()` order stream with a watershed area upstream of the crossing of approximately `r round(my_bcfishpass() %>% pull(watershed_upstr_ha)/100,1)`km^2^. The elevation of the watershed ranges from a maximum of 2280 to 1540m at PSCIS crossing `r as.character(my_site)`. `r my_pscis_info() %>% pull(stream_name)` is known to contain `r my_fish_sp()` upstream of the subject culvert [@data_fish_obs; @norris2020bcfishobs]. The only stream crossing upstream of `r as.character(my_site)` on the mainstem of the stream before extreme gradients is crossing `r as.character(my_site2)`. Lodgepole Lake is located approximately 300m upstream of `r as.character(my_site)` and is approximately 2ha in area.
+`r my_pscis_info() %>% pull(stream_name)` drains in a generally western direction to the confluence with the Wigwam River before flowing 10km to the Elk River at a location approximately 7km downstream of the Elko Dam. At crossing `r as.character(my_site)`, `r my_pscis_info() %>% pull(stream_name)` is a `r my_bcfishpass() %>% pull(stream_order) %>% english::ordinal()` order stream with a watershed area upstream of the crossing of approximately `r fpr_wshd_par()`km^2^. The elevation of the watershed ranges from a maximum of `r fpr_wshd_par(col = 'elev_max')`m to `r fpr_wshd_par(col = 'elev_min')`m  near PSCIS crossing `r as.character(my_site)` (Table \@ref(tab:tab-wshd-197787)). `r my_pscis_info() %>% pull(stream_name)` is known to contain `r my_fish_sp()` upstream of the subject culvert [@data_fish_obs; @norris2020bcfishobs]. The only stream crossing upstream of `r as.character(my_site)` on the mainstem of the stream before extreme gradients is crossing `r as.character(my_site2)`. Lodgepole Lake is located approximately 300m upstream of `r as.character(my_site)` and is approximately 2ha in area. 
+
+<br>
+
+
+```{r tab-wshd-197787}
+fpr_tab_wshd_sum(site_id = my_site) %>% 
+  my_kable(caption_text = paste0('Summary of derived upstream watershed statistics for PSCIS crossing ', my_site, '.'),
+           footnote_text = 'Elev P60 = Elevation at which 60% of the watershed area is above')
+```
 
 <br>
 

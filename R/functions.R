@@ -111,6 +111,22 @@ my_kable <- function(dat, caption_text = '', font = font_set){
     # kableExtra::scroll_box(width = "100%", height = "500px")
 }
 
+my_kable <- function(dat,
+                     caption_text = '',
+                     font = font_set,
+                     footnote_text = NULL){
+  dat2 <- dat %>%
+    kable(caption = caption_text, booktabs = T) %>%
+    kableExtra::kable_styling(c("condensed", "responsive"),
+                              full_width = T,
+                              font_size = font)
+  if(!is.null(footnote_text)){
+    dat2 <- dat2 %>%
+      kableExtra::footnote(symbol = footnote_text)
+  }
+  dat2
+}
+
 get_img <- function(site = my_site, photo = my_photo){
   jpeg::readJPEG(paste0('data/photos/', site, '/', photo))
 }
@@ -138,7 +154,7 @@ pull_photo_by_str <- function(site_id = my_site, str_to_pull = 'barrel'){
 }
 
 fpr_appendix_title <- function(site = my_site){
-  paste0('# App - ', site, ' - ', my_overview_info() %>% pull(stream_name), ' {-}')
+  paste0('# Appendix - ', site, ' - ', my_overview_info() %>% pull(stream_name), ' {-}')
 }
 
 
@@ -570,7 +586,24 @@ my_cost_estimate <- function(dat = tab_cost_est_phase2, site = my_site){
 }
 
 ##this will pull out fish species names from our fish species codes
-my_fish_sp <- function(sit = my_site, col_to_pull = quo(observedspp_upstr), df = bcfishpass_phase2){
+# my_fish_sp <- function(sit = my_site, col_to_pull = quo(observedspp_upstr), df = bcfishpass_phase2){
+#   str_to_pull <- stringr::str_replace_all((my_bcfishpass(dat = df, site = sit) %>% pull(!!col_to_pull)), c("\\{" = "","\\}" = "")) %>%
+#     strsplit(., ",") %>% unlist()
+#   fishbc::freshwaterfish %>%
+#     filter(Code %in% str_to_pull &
+#              !Code %in% c('SST','TR')) %>%
+#     pull(CommonName) %>%
+#     stringr::str_to_lower() %>%
+#     knitr::combine_words()
+# }
+
+
+##this will pull out fish species names from our fish species codes
+# updated with rlang
+my_fish_sp <- function(sit = my_site,
+                       col_to_pull = 'observedspp_upstr',
+                       df = bcfishpass_phase2){
+  col_to_pull <-  sym(col_to_pull)
   str_to_pull <- stringr::str_replace_all((my_bcfishpass(dat = df, site = sit) %>% pull(!!col_to_pull)), c("\\{" = "","\\}" = "")) %>%
     strsplit(., ",") %>% unlist()
   fishbc::freshwaterfish %>%
@@ -658,7 +691,8 @@ make_tab_summary_bcfp <- function(dat = bcfishpass,
 print_tab_summary_bcfp <- function(site = my_site, font = 11, ...){
   make_tab_summary_bcfp(site = site) %>%
     kable(caption = paste0('Summary of fish habitat modelling for PSCIS crossing ', site, '.'), booktabs = T) %>%    #
-    kableExtra::add_footnote('Model data is preliminary and subject to adjustments.', notation = 'symbol') %>%
+    kableExtra::add_footnote(c('Model data is preliminary and subject to adjustments.',
+                               'Modelled rearing habitat estimates do not currently include linear lengths of centrelines within lakes and wetlands.'), notation = 'symbol') %>%
     kableExtra::kable_styling(c("condensed"), full_width = T, font_size = font)
 }
 
@@ -676,8 +710,73 @@ print_tab_summary <- function(dat = pscis_phase2, site = my_site, site_photo_id 
 
 text_ref_tab_summary_bcfp <-  function(site = my_site){
   paste0('presents preliminary fish passage modelling data for crossing ', site,
-         ' with spawning and rearing habitat estimated for westslope cutthrout trout. ',
-         'Modelled estimates of the total length of westslope cutthrout trout habitat upstream of the crossing before potential barriers are ',
-         my_bcfishpass(site = site, round_dig = 1) %>% pull(wct_spawning_belowupstrbarriers_km), 'km of potential spawning habitat and ',
-         my_bcfishpass(site = site, round_dig = 1) %>% pull(wct_rearing_belowupstrbarriers_km), 'km of potential rearing habitat.')
+         ' with linear length of spawning and rearing habitat estimated for westslope cutthrout trout at ',
+         my_bcfishpass(site = site, round_dig = 1) %>% pull(wct_spawning_belowupstrbarriers_km), 'km and ',
+         my_bcfishpass(site = site, round_dig = 1) %>% pull(wct_rearing_belowupstrbarriers_km), 'km respectively.')
+}
+
+##make a function to retrieve the watersheds
+fpr_get_watershed <- function(dat){
+  mapply(fwapgr::fwa_watershed_at_measure,
+         blue_line_key = dat$blue_line_key,
+         downstream_route_measure = dat$downstream_route_measure,
+         SIMPLIFY = F) %>%
+    purrr::set_names(nm = dat$stream_crossing_id) %>%
+    discard(function(x) nrow(x) == 0) %>% ##remove zero row tibbles with https://stackoverflow.com/questions/49696392/remove-list-elements-that-are-zero-row-tibbles
+    data.table::rbindlist(idcol="stream_crossing_id") %>%
+    distinct(stream_crossing_id, .keep_all = T) %>% ##in case there are duplicates we should get rid of
+    st_as_sf()
+}
+
+# workaround function for watershed size
+fpr_wshd_par <- function(site = my_site, col = 'area_km'){
+  col = sym(col)
+  wshds %>%
+    filter(stream_crossing_id == site) %>%
+    pull((!!col))
+}
+
+
+fpr_elev_stats <- function(){
+  wshds %>%
+    pull(stream_crossing_id) %>%
+    map(
+      function(site_ids){
+        wshd <- wshds %>%
+          filter(stream_crossing_id == site_ids)
+
+        nh_elmat <- wshd %>%
+          elevatr::get_elev_raster(., 14) %>%
+          raster::crop(., wshd) %>%
+          rayshader::raster_to_matrix()
+
+        nh_elmat[nh_elmat < 100] = NA #ditch values <100m bc must be errors -something is wrong at the mine
+
+        wshd %>%
+          mutate(
+            elev_min = min(nh_elmat, na.rm = T),
+            elev_max = max(nh_elmat, na.rm = T),
+            elev_mean = mean(nh_elmat, na.rm = T),
+            elev_median = median(nh_elmat, na.rm = T),
+            elev_p60 = quantile(nh_elmat, probs = .4, na.rm = T)) #60% of points are greater than this
+      }
+    ) %>%
+    bind_rows()
+}
+
+# summary stats for each watershed
+fpr_tab_wshd_sum <- function(site_id = NULL){
+  wshds_prep <- wshds %>%
+    st_drop_geometry() %>%
+    select(site = stream_crossing_id, area_km, contains('elev')) %>%
+    mutate(elev_min = case_when(site == 62181 |
+                                  site == 62182 ~ NA_real_,
+                                T ~ elev_min)) %>%
+    purrr::set_names(nm = names(.) %>%
+                       janitor::make_clean_names(case = 'title') %>%
+                       stringr::str_to_title())
+  if(!is.null(site_id)){
+    wshds_prep <- wshds_prep %>%
+      filter(Site == site_id)}
+  wshds_prep
 }

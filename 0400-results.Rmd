@@ -39,9 +39,7 @@ map <- leaflet(height=500, width=780) %>%
   # addProviderTiles(providers$"Esri.DeLorme") %>% 
   addProviderTiles("Esri.WorldTopoMap", group = "Topo") %>%
   addProviderTiles("Esri.WorldImagery", group = "ESRI Aerial") %>% 
-  addPolygons(data = wshds, color = "#0859C6", weight = 1, smoothFactor = 0.5,
-    opacity = 1.0, fillOpacity = 0.25,
-    fillColor = "#00DBFF", label = wshds$stream_crossing_id, group = "Phase 2") %>%
+  
   addPolygons(data = wshd_study_areas %>% 
                 filter(watershed_group_code == 'ELKR'), 
               color = "#C39D50", 
@@ -51,6 +49,16 @@ map <- leaflet(height=500, width=780) %>%
               fillOpacity = 0.2,
               fillColor = "#C39D50", 
               label = 'Elk River Watershed Group') %>%
+  addPolygons(data = wshds, color = "#0859C6", weight = 1, smoothFactor = 0.5,
+    opacity = 1.0, fillOpacity = 0.25,
+    fillColor = "#00DBFF", 
+    label = wshds$stream_crossing_id, 
+    popup = leafpop::popupTable(x = select(wshds %>% st_set_geometry(NULL),
+                                           Site = stream_crossing_id, 
+                                           elev_min:area_km),
+                                feature.id = F,
+                                row.numbers = F),
+    group = "Phase 2") %>%
   # addPolygons(data = wshd_study_areas %>% filter(watershed_group_code == 'MORR'), color = "#C39D50", weight = 1, smoothFactor = 0.5,
   #   opacity = 1.0, fillOpacity = 0,
   #   fillColor = "#C39D50", label = 'Morice River') %>%

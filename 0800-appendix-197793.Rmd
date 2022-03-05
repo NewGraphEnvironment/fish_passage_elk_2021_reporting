@@ -3,11 +3,8 @@
 knitr::opts_chunk$set(echo=FALSE, message=FALSE, warning=FALSE)
 source('R/packages.R')
 source('R/functions.R')
-source('R/functions-phase2.R')
-source('R/tables-phase2.R')
 source('R/tables.R')
-source('R/extract-fish.R')
-source('R/functions-fish.R')
+
 
 
 ```
@@ -31,7 +28,7 @@ PSCIS crossing `r as.character(my_site)` is located on a `r my_pscis_info() %>% 
 ## Background {-}
 
 
-At crossing `r as.character(my_site)`, `r my_pscis_info() %>% pull(stream_name)` is a `r my_bcfishpass() %>% pull(stream_order) %>% english::ordinal()` order stream with a watershed area upstream of the crossing of approximately `r fpr_wshd_par()`km^2^. The elevation of the watershed ranges from a maximum of `r fpr_wshd_par(col = 'elev_max')`m to `r fpr_wshd_par(col = 'elev_min')`m near the crossing (Table \@ref(tab:tab-wshd-197793)). Upstream of `r my_overview_info() %>% pull(road_name)`, no fish have previously been recorded [@moe2020KnownBC]. A Fortis gas pipeline compression station is located approximately 600m north of the crossing adjacent to the Lodgepole FSR.
+At crossing `r as.character(my_site)`, `r my_pscis_info() %>% pull(stream_name)` is a `r my_bcfishpass() %>% pull(stream_order) %>% english::ordinal()` order stream with a watershed area upstream of the crossing of approximately `r fpr_wshd_par()`km^2^. The elevation of the south-west facing watershed ranges from a maximum of `r fpr_wshd_par(col = 'elev_max')`m to `r fpr_wshd_par(col = 'elev_min')`m near the crossing (Table \@ref(tab:tab-wshd-197793)). Upstream of `r my_overview_info() %>% pull(road_name)`, no fish have previously been recorded [@moe2020KnownBC]. A Fortis gas pipeline compression station is located approximately 600m north of the crossing adjacent to the Lodgepole FSR.
 
 <br>
 
@@ -89,7 +86,7 @@ The stream was surveyed immediately upstream from `r as.character(my_site)` for 
 
 ## Structure Remediation and Cost Estimate {-}
 
-Should restoration/maintenance activities proceed at the site replacement of PSCIS crossing `r as.character(my_site)` with a bridge (`r my_pscis_info() %>% pull(recommended_diameter_or_span_meters)`m span) is recommended. The cost of the work is estimated at \$`r format(my_cost_estimate() %>% pull(cost_est_1000s) * 1000, big.mark = ',')` for a cost benefit of `r as.character(my_cost_estimate() %>% pull(cost_net))` linear m/\$1000 and `r as.character(my_cost_estimate() %>% pull(cost_area_net))`m^2^/\$1000.
+Should restoration/maintenance activities proceed at the site, replacement of PSCIS crossing `r as.character(my_site)` with a bridge (`r my_pscis_info() %>% pull(recommended_diameter_or_span_meters)`m span) is recommended. The cost of the work is estimated at \$`r format(my_cost_estimate() %>% pull(cost_est_1000s) * 1000, big.mark = ',')` for a cost benefit of `r as.character(my_cost_estimate() %>% pull(cost_net))` linear m/\$1000 and `r as.character(my_cost_estimate() %>% pull(cost_area_net))`m^2^/\$1000.
 
 
 <br>
@@ -97,7 +94,7 @@ Should restoration/maintenance activities proceed at the site replacement of PSC
 
 ## Conclusion {-}
 
-A conservative estimate of mainstem habitat upstream of crossing `r as.character(my_site)` is `r my_priority_info() %>% pull(upstream_habitat_length_km)`km. Habitat in the areas surveyed upstream of the culvert were rated as `r my_priority_info(sit = my_site, loc = 'us') %>% pull(hab_value)` value for salmonid rearing and spawning due to likely annual seasonal dewatering. Groundwater flow can be intercepted and redirected by pipelines [@waterlineresourcesinc_2013GROUNDWATERTECHNICAL].  Although unconfirmed, the location of the pipeline running adjacent to the stream upstream of crossing 197794 may have impacts on the hydrology of the system intercepting groundwater that historically would have flowed within the channel.  `r my_overview_info() %>% pull(road_name)` is the responsibility of the Ministry of Forests, Lands, Natural Resource Operations and Rural Development - Rocky Mountain Forest District.  Crossing `r as.character(my_site)` was ranked as a `r my_priority_info() %>% pull(priority)` priority for proceeding to design for replacement. 
+A conservative estimate of mainstem habitat upstream of crossing `r as.character(my_site)` is `r my_priority_info() %>% pull(upstream_habitat_length_km)`km. Habitat in the areas surveyed upstream of the culvert were rated as `r my_priority_info(sit = my_site, loc = 'us') %>% pull(hab_value)` value for salmonid rearing and spawning due to likely annual seasonal dewatering within the rocky south-west facing watershed.   `r my_overview_info() %>% pull(road_name)` is the responsibility of the Ministry of Forests, Lands, Natural Resource Operations and Rural Development - Rocky Mountain Forest District.  Crossing `r as.character(my_site)` was ranked as a `r my_priority_info() %>% pull(priority)` priority for proceeding to design for replacement. 
 
 <!-- this is a bit strange but the pages.js will not build beyond this so we leave for now -->
 <!-- `r if(gitbook_on){knitr::asis_output("<br>")} else knitr::asis_output("\\pagebreak")` -->
@@ -124,7 +121,7 @@ tab_hab_summary %>%
 
 
 
-```{r photo-197793-01-prep, eval=F}
+```{r photo-197793-01-prep, eval=T}
 my_photo1 = pull_photo_by_str(str_to_pull = '_barrel')
 
 my_caption1 = paste0('Damage within PSCIS crossing ', my_site, '.')

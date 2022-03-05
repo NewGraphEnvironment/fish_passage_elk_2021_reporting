@@ -25,7 +25,6 @@ tab_map_phase2 <- tab_map %>% filter(source %like% 'phase2')
 # marker_options <- markerOptions(  
 #   zIndexOffset = 1000)
 tracks <- sf::read_sf("./data/habitat_confirmation_tracks.gpx", layer = "tracks")
-wshds <- sf::read_sf('data/fishpass_mapping/fishpass_mapping.gpkg', layer = 'hab_wshds')
   # filter(!pscis_crossing_id %in% c(62423, 62426, 50181, 50159)) ##these ones are not correct - fix later
 
 wshd_study_areas <- sf::read_sf('data/fishpass_mapping/fishpass_mapping.gpkg', layer = 'wshd_study_areas')
@@ -184,7 +183,7 @@ During 2020 field assessments, habitat confirmation assessments were conducted a
 
 <br>
 
-As collaborative decision making was ongoing at the time of reporting, site prioritization can be considered preliminary.  In total, `r hab_site_priorities %>% filter(priority %ilike% 'high') %>% nrow() %>% english::as.english() %>% str_to_title()` crossings were rated as high priorities for proceeding to design for replacement, `r hab_site_priorities %>% filter(priority %ilike% 'Moderate') %>% nrow() %>% english::as.english()` crossings were rated as moderate priorities, and `r hab_site_priorities %>% filter(priority %ilike% 'Low') %>% nrow() %>% english::as.english()` crossings were rated as low priorities. Results are summarized in `r if(gitbook_on){knitr::asis_output("Figure \\@ref(fig:map-interactive) and ")}`Tables \@ref(tab:tab-overview) - \@ref(fig:plot-fish-all) with raw habitat and fish sampling data included in digital format as [Attachment 4](https://github.com/NewGraphEnvironment/fish_passage_elk_2021_reporting/raw/master/data/habitat_confirmations.xls).  A summary of preliminary modelling results illustrating the quantities of westslope cutthrout trout spawning and rearing habitat potentially available upstream of each crossing as estimated by measured/modeled channel width and upstream accessible stream length are presented in Figure \@ref(fig:plot-model-all). Detailed information for each site assessed with Phase 2 assessments (including maps) are presented within site specific appendices to this document.
+As collaborative decision making was ongoing at the time of reporting, site prioritization can be considered preliminary.  In total, `r hab_site_priorities %>% filter(priority %ilike% 'high') %>% nrow() %>% english::as.english() %>% str_to_title()` crossings were rated as high priorities for proceeding to design for replacement, `r hab_site_priorities %>% filter(priority %ilike% 'Moderate') %>% nrow() %>% english::as.english()` crossings were rated as moderate priorities, and `r hab_site_priorities %>% filter(priority %ilike% 'Low') %>% nrow() %>% english::as.english()` crossings were rated as low priorities. Results are summarized in `r if(gitbook_on){knitr::asis_output("Figure \\@ref(fig:map-interactive) and ")}`Table \@ref(tab:tab-overview)) with raw habitat and fish sampling data included in digital format as [Attachment 4](https://github.com/NewGraphEnvironment/fish_passage_elk_2021_reporting/raw/master/data/habitat_confirmations.xls).  A summary of watershed statistics from derived watershed areas andpreliminary modelling results illustrating the quantities of westslope cutthrout trout spawning and rearing habitat potentially available upstream of each crossing as estimated by measured/modeled channel width and upstream accessible stream length are presented in Table \@ref(tab:tab-wshd-sum-all) and Figure \@ref(fig:plot-model-all). Detailed information for each site assessed with Phase 2 assessments (including maps) are presented within site specific appendices to this document.
 
 
 `r if(gitbook_on){knitr::asis_output("<br>")} else knitr::asis_output("\\pagebreak")`
@@ -276,6 +275,16 @@ plot_fish_box_all2 <- function(dat = hab_fish_dens){#, sp = 'RB'
 plot_fish_box_all2()
 ```
 
+
+<br>
+
+
+```{r tab-wshd-sum-all}
+fpr_tab_wshd_sum() %>% 
+  my_kable(caption_text = paste0('Summary of statistics for Phase 2 crossing upstream watershed areas'))
+
+```
+
 <br>
 
 ```{r plot-model-all, fig.cap='Summary of potential habitat upstream of habitat confirmation assessment sites estimated based on modelled channel width and upstream channel length.', eval=T}
@@ -324,15 +333,12 @@ bcfishpass_phase2_plot_prep <- bcfishpass %>%
     # rename('Habitat type' = name,
     #        "Habitat (km)" = value)
   
-  
-  
- bcfishpass_phase2_plot_prep %>% 
+bcfishpass_phase2_plot_prep %>% 
   ggplot(aes(x = stream_crossing_id, y = value)) +
   geom_bar(stat = "identity")+
   facet_wrap(~name, ncol = 2)+
   ggdark::dark_theme_bw(base_size = 11)+
-   theme(axis.text.x=element_text(angle=90, hjust=1, vjust=0.5)) +
+  theme(axis.text.x=element_text(angle=90, hjust=1, vjust=0.5)) +
   labs(x = "Site", y = "Modelled habitat (km)")
-
 
 ```

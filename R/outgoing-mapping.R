@@ -59,20 +59,6 @@ dbDisconnect(conn = conn)
 
 ####------------add the watersheds-------------------------
 
-##having the watersheds derived is nice so lets try
-##make a function to retrieve the watershed info
-get_watershed <- function(dat){
-  mapply(fwapgr::fwa_watershed_at_measure,
-         blue_line_key = dat$blue_line_key,
-         downstream_route_measure = dat$downstream_route_measure,
-         SIMPLIFY = F) %>%
-    purrr::set_names(nm = dat$stream_crossing_id) %>%
-    discard(function(x) nrow(x) == 0) %>% ##remove zero row tibbles with https://stackoverflow.com/questions/49696392/remove-list-elements-that-are-zero-row-tibbles
-    data.table::rbindlist(idcol="stream_crossing_id") %>%
-    distinct(stream_crossing_id, .keep_all = T) %>% ##in case there are duplicates we should get rid of
-    st_as_sf()
-}
-
 
 
 
@@ -82,15 +68,23 @@ get_watershed <- function(dat){
 bcfishpass_phase2_clean <- bcfishpass_phase2 %>%
   filter(stream_order != 1)
 
-wshds <- get_watershed(bcfishpass_phase2_clean)
+wshds <- fpr_get_watershed(bcfishpass_phase2_clean)
+
+
+# calculate stats for each watershed
+wshds <- fpr_elev_stats() %>%
+  mutate(area_km = round(area_ha/100, 1)) %>%
+  mutate(across(contains('elev'), round, 0))
 
 # ##add to the geopackage
 wshds %>%
-  sf::st_write(paste0("./data/fishpass_mapping/", 'fishpass_mapping', ".gpkg"), 'hab_wshds', append = F) ##might want to f the append....
+  sf::st_write(paste0("./data/fishpass_mapping/", 'fishpass_mapping', ".gpkg"), 'hab_wshds',
+               delete_layer = T, append = F) ##might want to f the append....
+
 
 #burn to kml as well so we can see elevations
-st_write(wshds, append = TRUE, driver = 'kml', dsn = "data/inputs_extracted/wshds.kml")
-st_write(lodgepole, append = TRUE, driver = 'kml', dsn = "data/inputs_extracted/lodgepole.kml")
+st_write(wshds, append = F, delete_layer = T, driver = 'kml', dsn = "data/inputs_extracted/wshds.kml")
+
 
 
 ####--------------------burn geojsons from geopackage-----------------------------------------------------

@@ -1,8 +1,4 @@
----
-output: html_document
-editor_options: 
-  chunk_output_type: inline
----
+
 
 ```{r setup-62181, eval = F}
 ##this is just here so we can clear our environment for tests
@@ -25,14 +21,13 @@ my_site2 <- 62182
 PSCIS crossing `r as.character(my_site)` is located on `r my_pscis_info() %>% pull(stream_name)` on the `r my_overview_info() %>% pull(road_name)` 11km east of Elkford, BC. PSCIS crossing `r as.character(my_site2)` is located approximately 30m downstream of the railway on the `r my_overview_info(site = my_site2) %>% pull(road_name)`.  The `r my_overview_info(site = my_site2) %>% pull(road_name)` is detailed as a local road within the municipal boundaries of the District of Elkford with the Ministry of Transportation and Infrastructure detailed as a custodian partner within the digital road atlas [@flnrord2020DigitalRoad]. The road accesses the Fording River Operations which is a steelmaking coal operation owned by Teck Coal Limited.
 
 
-
-
 <br>
 
 ## Background {-}
 
 
-`r my_pscis_info() %>% pull(stream_name)` drains in a northern direction to the confluence with the Fording River at a location approximately 10km east of Elkford, BC. At crossing `r as.character(my_site)`, `r my_pscis_info() %>% pull(stream_name)` is a `r my_bcfishpass() %>% pull(stream_order) %>% english::ordinal()` order stream with a watershed area upstream of the crossing of approximately `r round(my_bcfishpass() %>% pull(watershed_upstr_ha)/100,1)`km^2^. The elevation of the watershed ranges from a maximum of 2280 to 1540m at PSCIS crossing `r as.character(my_site)`. `r my_pscis_info() %>% pull(stream_name)` is known to contain `r my_fish_sp()` upstream of the subject culvert [@data_fish_obs; @norris2020bcfishobs]. There are numerous stream crossing structures located on `r my_pscis_info() %>% pull(stream_name)` upstream of `r as.character(my_site)` however there are no crossings assessed as barriers on the mainstem to directly below the location of the wasterock as indicated by aerial imagery. Dry Creek drains into to the Fording River upstream of Josephine Falls, a 25 m waterfall that limits the upstream passage of fish [@teckcoallimitedlinecreekoperations2009LineCreek].
+`r my_pscis_info() %>% pull(stream_name)` drains in a northern direction to the confluence with the Fording River at a location approximately 10km east of Elkford, BC. At crossing `r as.character(my_site)`, `r my_pscis_info() %>% pull(stream_name)` is a `r my_bcfishpass() %>% pull(stream_order) %>% english::ordinal()` order stream with a watershed area upstream of the crossing of approximately `r fpr_wshd_par()`km^2^. The elevation of the watershed ranges from a maximum of 2280 to 1540m at PSCIS crossing `r as.character(my_site)`. `r my_pscis_info() %>% pull(stream_name)` is known to contain `r my_fish_sp()` upstream of the subject culvert [@data_fish_obs; @norris2020bcfishobs]. There are numerous stream crossing structures located on `r my_pscis_info() %>% pull(stream_name)` upstream of `r as.character(my_site)` however there are no crossings assessed as barriers on the mainstem to directly below the location of the wasterock as indicated by aerial imagery. Dry Creek drains into to the Fording River upstream of Josephine Falls, a 25 m waterfall that limits the upstream passage of fish [@teckcoallimitedlinecreekoperations2009LineCreek].
+
 
 <br>
 

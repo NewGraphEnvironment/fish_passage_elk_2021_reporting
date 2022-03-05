@@ -1,5 +1,5 @@
 --- 
-title: "My Report"
+title: "Elk River Watershed Group Fish Passage Restoration Planning 2021"
 author: |
  |
  | Prepared for
@@ -27,23 +27,34 @@ bibliography: [book.bib, references.bib, packages.bib]
 biblio-style: apalike
 link-citations: no
 github-repo: rstudio/bookdown-demo
-description: "My Description."
-
+description: "2021 Reporting for Fish Passage Restoration Planning Assessments in the Elk River watershed group."
 
 ---
 
 
-```{r setup, include = TRUE, echo =F, message=FALSE, warning=FALSE}
+```{r}
 gitbook_on <- TRUE
 # gitbook_on <- FALSE  ##we just need turn  this on and off to switch between gitbook and pdf via paged.js
 
+```
 
-knitr::opts_chunk$set(echo=F, message=FALSE, warning=FALSE, dpi=60, out.width = "100%")
+
+
+```{r setup, include = TRUE}
+
+source('R/packages.R')
+source('R/functions.R')
+source('R/tables.R')
+
+knitr::opts_chunk$set(echo=identical(gitbook_on, TRUE), message=FALSE, warning=FALSE, dpi=60, out.width = "100%")
+# knitr::knit_hooks$set(webgl = hook_webgl)
 options(scipen=999)
 options(knitr.kable.NA = '--') #'--'
 options(knitr.kable.NAN = '--')
 
 ```
+
+
 
 ```{r settings-gitbook, eval= gitbook_on}
 photo_width <- "100%"
@@ -56,12 +67,6 @@ photo_width <- "80%"
 font_set <- 9
 ```
 
-
-```{r}
-source('R/packages.R')
-source('R/functions.R')
-source('R/tables.R')
-```
 
 
 ```{r include=FALSE}
@@ -80,6 +85,6 @@ Modern civilization has a long journey ahead to acknowledge and address the hist
 
 ```{js, logo-header, echo = FALSE, eval= T}
 title=document.getElementById('header');
-title.innerHTML = '<img src="fig/collaboration.jpg" alt="NewGraph">' + title.innerHTML
+title.innerHTML = '<img src="fig/new graph text only.png" alt="NewGraph">' + title.innerHTML
 ```
 

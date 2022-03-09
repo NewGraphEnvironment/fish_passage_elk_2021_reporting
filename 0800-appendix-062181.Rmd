@@ -191,9 +191,9 @@ grid::grid.raster(get_img(site = my_site2, photo = my_photo2))
 
 my_caption <- paste0('Left: ', my_caption1, ' Right: ', my_caption2)
 
-knitr::include_graphics(get_img_path(photo = my_photo1))
+knitr::include_graphics(get_img_path(site = my_site2, photo = my_photo1))
 knitr::include_graphics("fig/pixel.png")
-knitr::include_graphics(get_img_path(photo = my_photo2))
+knitr::include_graphics(get_img_path(site = my_site2, photo = my_photo2))
 ```
 
 

@@ -40,7 +40,13 @@ fpr_tab_wshd_sum(site_id = my_site) %>%
 <br>
 
 
-Due to the potential for significant quantities of upstream habitat suitable for WCT rearing and spawning based on `bcfishpass` outputs, the Canadian Wildlife Federation assigned these sites as high priorities for follow up. A map of the watershed is provided in map attachment [`r my_bcfishpass() %>% pull(dbm_mof_50k_grid)`](`r my_mapsheet()`).
+Due to the potential for significant quantities of upstream habitat suitable for WCT rearing and spawning based on `bcfishpass` outputs, the Canadian Wildlife Federation assigned these sites as high priorities for follow up. Table \@ref(tab:tab-culvert-bcfp-197787) `r text_ref_tab_summary_bcfp()` A map of the watershed is provided in map attachment [`r my_bcfishpass() %>% pull(dbm_mof_50k_grid)`](`r my_mapsheet()`).
+
+<br>
+
+```{r tab-culvert-bcfp-197787, eval = T}
+print_tab_summary_bcfp()
+```
 
 <br>
 
@@ -96,9 +102,7 @@ Low gradient riffle-pool habitat containing abundant gravels suitable for reside
 
 <br>
 
-Table \@ref(tab:tab-culvert-bcfp-197787) `r text_ref_tab_summary_bcfp()` 
 
-<br>
 
 
 ## Structure Remediation and Cost Estimate {-}
@@ -125,15 +129,6 @@ print_tab_summary()
 
 <br>
 
-
-```{r tab-culvert-197786, eval = T}
-print_tab_summary(site = my_site2, site_photo_id = my_site2)
-
-```
-
-
-<br>
-
 ```{r tab-habitat-summary-197787}
 tab_hab_summary %>% 
   filter(Site  == my_site2 |
@@ -143,11 +138,6 @@ tab_hab_summary %>%
 
 ```
 
-<br>
-
-```{r tab-culvert-bcfp-197787, eval = T}
-print_tab_summary_bcfp()
-```
 
 <br>
 

@@ -7,7 +7,7 @@
 
 `r if(identical(gitbook_on, FALSE)){knitr::asis_output("<br>")}`
 
-Nupqu Limited Partnership was retained by the Canadian Wildlife Federation in the fall of 2020 to plan and conduct fish passage and habitat confirmation assessments at road-stream crossings as part of connectivity restoration planning targeting westslope cutthrout trout within the Elk River watershed group. New Graph Environment Ltd. was sub-contracted by Nupqu Limited Partnership to assist with project delivery.
+Nupqu Limited Partnership was retained by the Canadian Wildlife Federation in the summer of 2021 to conduct fish passage and habitat confirmation assessments at road-stream crossings as part of connectivity restoration planning targeting westslope cutthrout trout within the Elk River watershed group. New Graph Environment Ltd. was sub-contracted by Nupqu Limited Partnership to assist with project delivery. The assessments build on work completed in 2020 which included 72 fish passage assessments and 15 habitat confirmation assessments in the Elk River watershed group [@irvine2021UpperElk]. 
 
 <br>
 

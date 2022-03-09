@@ -1,0 +1,18 @@
+﻿distance,velocity,depth_of_velocity_measure,depth_perc,notes
+6.6,0.25,0.01,,sensor @ 0.01m
+6.6,0.31,,60,0.6D
+6.6,0.02,0,,Surface
+7.2,0.43,0.01,,sensor @ 0.01m
+7.2,0.64,,60,0.6D
+7.2,0.98,0,,Surface
+8.1,0.71,0.01,,sensor @ 0.01m
+8.1,0.01,0.04,,Surface
+8.8,1.43,0.01,,sensor @ 0.01m
+8.8,1.91,,60,06D
+8.8,1.86,0.14,,Surface
+10.6,1.2,0.01,,sensor @ 0.01m. 55cm drop
+10.6,1.15,,60,0.6D
+10.6,1.07,0.1,,Surface
+12.4,1.18,0.01,,sensor @ 0.01m
+12.4,1.6,,60,0.6D
+12.4,1.55,0.07,,Surface

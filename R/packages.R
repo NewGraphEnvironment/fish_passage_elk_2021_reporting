@@ -1,39 +1,40 @@
 # install.packages('pacman')
 
 
-pacman::p_load(
+package_list <- c(
   # plotKML,  #plot kml needed to go ahead of other packages for some reason and wants to reinstall everytime.... not sure why. hash out for now
-  raster, #load this dog before dplyr yo
-  tidyverse,
-  readwritesqlite,
-  sf,
-  readxl,
-  janitor,
-  leafem,
-  leaflet,
-  kableExtra,
-  httr,
-  RPostgres,
-  RPostgreSQL,
-  DBI,
-  magick,
-  bcdata,
-  jpeg,
-  datapasta,
-  knitr,
-  data.table,
-  lubridate,
-  forcats,
-  bookdown,
-  fasstr,
-  tidyhydat,
-
-  elevatr,
-  rayshader,
+  'raster', #load this dog before dplyr yo
+  'tidyverse',
+  'readwritesqlite',
+  'sf',
+  'readxl',
+  'janitor',
+  'leafem',
+  'leaflet',
+  'kableExtra',
+  'httr',
+  'RPostgres',
+  'RPostgreSQL',
+  'DBI',
+  'magick',
+  'bcdata',
+  'jpeg',
+  'datapasta',
+  'knitr',
+  'data.table',
+  'lubridate',
+  'forcats',
+  'bookdown',
+  'fasstr',
+  'tidyhydat',
+  'elevatr',
+  'rayshader',
   # flextable,
-  english,
-  leaflet.extras,
-  ggdark
+  'english',
+  'leaflet.extras',
+  'ggdark',
+  'fwapgr',
+  'citr'
   # pdftools,
   # rgl,
   # geojsonsf,
@@ -42,10 +43,14 @@ pacman::p_load(
   ##leafpop I think
   )
 
+lapply(package_list,
+       require,
+       character.only = TRUE)
+
 # we need the development version of pagedown as of 20200303 https://github.com/rstudio/pagedown/issues/265
 # remotes::install_github('rstudio/pagedown')
 
 
-pacman::p_load_gh("poissonconsulting/fwapgr",
-                  "crsh/citr")
-                  # "poissonconsulting/subfoldr2")
+# pacman::p_load_gh("poissonconsulting/fwapgr",
+#                   "crsh/citr")
+#                   # "poissonconsulting/subfoldr2")

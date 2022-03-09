@@ -63,27 +63,7 @@ dbDisconnect(conn = conn)
 
 
 
-##we needed to remove crossings that are first order - this used to run but doesn't want to anymore
-##i wonder if it is because the 1st order watershed is the first one on the list so the api kicks us off...
-bcfishpass_phase2_clean <- bcfishpass_phase2 %>%
-  filter(stream_order != 1)
 
-wshds <- fpr_get_watershed(bcfishpass_phase2_clean)
-
-
-# calculate stats for each watershed
-wshds <- fpr_elev_stats() %>%
-  mutate(area_km = round(area_ha/100, 1)) %>%
-  mutate(across(contains('elev'), round, 0))
-
-# ##add to the geopackage
-wshds %>%
-  sf::st_write(paste0("./data/fishpass_mapping/", 'fishpass_mapping', ".gpkg"), 'hab_wshds',
-               delete_layer = T, append = F) ##might want to f the append....
-
-
-#burn to kml as well so we can see elevations
-st_write(wshds, append = F, delete_layer = T, driver = 'kml', dsn = "data/inputs_extracted/wshds.kml")
 
 
 

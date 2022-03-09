@@ -9,6 +9,7 @@ preview_chapter('0200-background.Rmd')
 preview_chapter('0300-method.Rmd')
 preview_chapter('0400-results.Rmd')
 preview_chapter('0600-appendix.Rmd')
+preview_chapter('0800-appendix-197793.Rmd')
 preview_chapter('index.Rmd')
 ##this is how we clean up our bib file.  We need to find a way to add together the packages.bib file with the book.bib file first though.
 # citr::tidy_bib_file(
@@ -52,6 +53,8 @@ openHTML('docs/Template.html')
 
 ##move the phase 1 appendix back to main directory
 # file.rename('data/0600-appendix.Rmd', '0600-appendix.Rmd')
+
+# pagedown::chrome_print(rmarkdown::render('input.Rmd', params = list(foo = 1:10)))
 
 
 

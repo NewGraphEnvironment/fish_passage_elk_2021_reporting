@@ -1,0 +1,263 @@
+---
+output: html_document
+editor_options: 
+  chunk_output_type: console
+---
+
+```{r setup-61504, eval = F}
+##this is just here so we can clear our environment for tests
+knitr::opts_chunk$set(echo=FALSE, message=FALSE, warning=FALSE)
+source('R/packages.R')
+source('R/functions.R')
+source('R/tables.R')
+
+```
+
+
+
+```{r  load-data-61504}
+my_site <- 61504
+```
+
+`r fpr_appendix_title()`
+
+## Site Location {-}
+
+PSCIS crossing `r as.character(my_site)` is located on `r my_pscis_info() %>% pull(stream_name)` on the `r my_overview_info() %>% pull(road_name)` 5.5km east of Fernie, BC. The `r my_overview_info(site = my_site) %>% pull(road_name)` is classified as an unpaved local road with the Ministry of Transportation and Infrastructure detailed as a custodian partner within the digital road atlas [@flnrordForestTenureRoad2020]. 
+
+
+<br>
+
+## Background {-}
+
+
+`r my_pscis_info() %>% pull(stream_name)` drains in a western direction from Leach Ridge to the confluence with the Elk River located with the City of Fernie municipal boundaries. At crossing `r as.character(my_site)`, `r my_pscis_info() %>% pull(stream_name)` is a `r my_bcfishpass() %>% pull(stream_order) %>% english::ordinal()` order stream with a watershed area upstream of the crossing of approximately `r fpr_wshd_par()`km^2^. The elevation of the watershed ranges from a maximum of `r fpr_wshd_par(col = 'elev_max')`m to `r fpr_wshd_par(col = 'elev_site')`m  at PSCIS crossing `r as.character(my_site)`. Within `r my_pscis_info() %>% pull(stream_name)` westslope cutthroat trout and bull trout have been recorded upstream of the subject bridge [@data_fish_obs; @norris2020bcfishobs]. There are numerous stream crossing structures located on `r my_pscis_info() %>% pull(stream_name)` upstream of `r as.character(my_site)` however there are no crossings assessed as barriers on the mainstem.
+
+<br>
+
+The site is located to the historic Coal Creek town site where a historic coal mine was located.  The town had an estimated 1000 residents in 1905 and operations at the mine ended on January 30, 1958 [@foster_bachusky2005GhostTowns]. 
+
+<br>
+
+A large flood event on Coal Creek in 1995 caused overbank flooding, channel shifting, bank erosion, coarse sediment deposition, and damage to private and public property near the stream.  Floodplain mapping for the stream was completed in 2014 including an assessment of flood hazards, hydrologic estimates of the 200-year instantaneous design flow, 200-year estimated inundation extents and flood construction levels [@northwesthydraulicconsultants2014CoalCreek].
+
+<br>
+
+@hughes_millions2020CoalCreek report that riprap to stabilize the streambanks and reduce meandering is frequently employed near existing and historical infrastructure on Coal Creek.  Elk River Alliance have drafted a plan to restore the floodpain adjacent to the historic township through removal of invasive species and planting/seeding of native vegetation [@hughes_millions2020CoalCreek]. A major storm event on November 14-15, 2021 caused extensive damage to Coal Creek Road and changed the course of the river near the historic townsite [@tibballs2021PHOTOSAerial]. 
+
+<br>
+
+@elkriveralliance2020ElkRiver conducted redd surveys in  Coal Creek in 2019 along with Morrissey Creek, Lizard Creek and Forsyth Creek. No redds were identified within the 1.3km surveyed within Coal Creek. 
+
+<br>
+
+
+The bridge where PSCIS crossing `r as.character(my_site)` is located on the outside bend of Coal Creek and has been extensively armored with large riprap on the west side of the river upstream of the bridge likely to protect bridge pilings/abutments. At the time of the survey it appeared as though significant amounts of riprap as well as what appeared to be a historic stream abutment was slightly constricting the channel and creating a small cascade (20 - 55cm high) across the stream width adjacent to the downstream end of the bridge abutments. Through connectivity restoration planning activities, this constriction of the channel and presence of cascade was brought to the attention of Canadian Wildlife Federation and the site was assigned a high priority for follow up. A map of the watershed is provided in map attachment [`r my_bcfishpass() %>% pull(dbm_mof_50k_grid)`](`r my_mapsheet()`).
+
+<br>
+
+## Stream Characteristics at Crossing {-}
+
+At the time of the survey, the PSCIS bridge crossing span was measured at `r my_site` `r my_pscis_info() %>% pull(diameter_or_span_meters)`m and the width was `r my_pscis_info() %>% pull(length_or_width_meters)`m.  As an open bottomed structure, the crossing was not considered a barrier or partial barrier to fish passage (Table \@ref(tab:tab-culvert-61504)). Water temperature was `r my_habitat_info(sit = my_site) %>% filter(rowname == 'temperature c') %>% pull(us)`$^\circ$C, pH was `r my_habitat_info(sit = my_site) %>% filter(rowname == 'p h') %>% pull(us)` and conductivity was `r my_habitat_info(sit = my_site) %>% filter(rowname == 'conductivity m s cm') %>% pull(us)`uS/cm. 
+
+<br>
+
+To gather data to help assess the degree to which the cascade potentially hindered upstream fish migration, velocity measurements were taken at five locations even distributed across the wetted width of the cascade using a Hach FH handheld flow meter  `r if(gitbook_on){knitr::asis_output("(Figures \\@ref(fig:photo-61504-01) - \\@ref(fig:photo-61504-02))")}else(knitr::asis_output("(Figure \\@ref(fig:photo-61504-d01))"))`.  Measurements were taken on October 15, 2021 at depths equivalent to 60% of the depth of the water. Light rain was falling at the time of the survey.  Flow velocities at the cascade ranged from `r min(coal_velocity$Velocity)`m/s to `r min(coal_velocity$Velocity)`m/s (Table \@ref(tab:tab-velocity-61504)).  In a swimming performance study conducted in an open-channel flume @blank_etal2020SwimmingPerformance estimated the overall average swim speeds of westlope cutthrout trout (150mm - 290mm in length) at 0.84m/s with a maximum observed swim speed of 3.55m/s. 
+
+
+```{r tab-velocity-61504, eval = T}
+coal_velocity %>% 
+  my_kable(
+           footnote_text = 'Velocities measured at 60% of wetted depth.  Distance was measured from top of bank.',
+           caption_text = paste0('Summary of velocities at debris influenced cascade adjacent to PSCIS crossing ', my_site, '.'))
+
+
+```
+
+
+```{r eval=F}
+##this is useful to get some comments for the report
+hab_site %>% filter(site == my_site & location == 'us') %>% pull(comments)
+my_priority <-  my_priority_info()
+
+```
+
+## Stream Characteristics Downstream {-}
+
+The stream was surveyed downstream from `r as.character(my_site)` for `r my_priority_info(loc = 'ds', sit = my_site) %>% pull(survey_length_m)`m `r if(gitbook_on){knitr::asis_output("(Figures \\@ref(fig:photo-61504-01) - \\@ref(fig:photo-61504-02))")}else(knitr::asis_output("(Figure \\@ref(fig:photo-61504-d01))"))`.  Overall, total cover amount was rated as `r my_habitat_info2(loc = 'ds', sit = my_site) %>% filter(rowname == 'total cover') %>% pull(v)` with  `r my_habitat_info2(loc = 'ds', sit = my_site) %>% filter(v == 'dominant') %>% pull(rowname)` dominant `r my_habitat_info2(loc = 'ds', sit = my_site) %>% filter(v == 'sub-dominant') %>% pull(rowname) %>% knitr::combine_words()` subdominant (Table \@ref(tab:tab-habitat-summary-61504)). The average channel width was `r my_habitat_info3(loc = 'ds', sit = my_site, row = 'avg channel width m')`m, the average wetted width was `r my_habitat_info3(loc = 'ds', sit = my_site, row = 'avg wetted width m')`m and the average gradient was `r my_habitat_info3(loc = 'ds', sit = my_site, row = 'average gradient percent')`%. The dominant substrate was `r my_habitat_info3(loc = 'ds', sit = my_site, row = "bed material dominant")` with `r my_habitat_info3(loc = 'ds', sit = my_site, row = "bed material subdominant")` subdominant. Some pockets of gravel suitable for westslope cutthrout trout spawning were observed. Habitat value was rated as `r my_priority_info(sit = my_site, loc = 'ds') %>%  pull(hab_value)` within the large system with abundant habitat available for fry/juvenile salmonid rearing.  
+
+<br>
+
+## Stream Characteristics Upstream {-}
+
+```{r eval = F}
+# as a note - we are using my_sit = my_site2 because the detailed info was recorded on that card
+```
+
+
+The stream was surveyed upstream from `r as.character(my_site)` for `r my_priority_info(loc = 'us') %>% pull(survey_length_m)`m `r if(gitbook_on){knitr::asis_output("(Figures \\@ref(fig:photo-61504-03) - \\@ref(fig:photo-61504-04))")} else(knitr::asis_output("(Figure \\@ref(fig:photo-61504-d02))"))`. Within the area surveyed, total cover amount was rated as `r my_habitat_info2(loc = 'us', sit = my_site) %>% filter(rowname == 'total cover') %>% pull(v)` with  `r my_habitat_info2(loc = 'us', sit = my_site) %>% filter(v == 'dominant') %>% pull(rowname)` dominant. Cover was also present as `r my_habitat_info2(loc = 'us', sit = my_site) %>% filter(v == 'sub-dominant') %>% pull(rowname) %>% knitr::combine_words()` (Table \@ref(tab:tab-habitat-summary-61504)). The average channel width was `r my_habitat_info3(loc = 'us', , sit = my_site, row = 'avg channel width m')`m, the average wetted width was `r my_habitat_info3(loc = 'us', row = 'avg wetted width m')`m and the average gradient was `r my_habitat_info3(loc = 'us', , sit = my_site, row = 'average gradient percent')`%.  Some deep pools up to ~1.8m deep were available for overwintering westslope cutthroat trout adults and occasional pockets of gravel suitable for spawning were present. The riparian area was comprised of mature black cottonwood with intermittent naturally formed large woody debris structures throughout providing structure and cover. Beaver dams were located within the area surveyed primarily on tributaries or side-channels with one dam noted as partially spanning the main channel.  Habitat value was rated as `r my_priority_info(loc = 'us') %>% pull(hab_value)` for salmonid rearing and spawning. 
+
+
+<br>
+
+
+
+Table \@ref(tab:tab-culvert-bcfp-61504) `r text_ref_tab_summary_bcfp()` 
+
+<br>
+
+
+## Remediation and Cost Estimate {-}
+
+A rough estimate of the cost of works to remove the debris creating cascade adjacent to PSCIS bridge `r as.character(my_site)` is $20,000.
+
+<br>
+
+
+## Conclusion {-}
+
+Although the 30 - 55cm high cascade adjacent to PSCIS bridge `r as.character(my_site)` is unlikely to be a signifcant barrier for the movement of migrating adult westslope cutthrout trout the obstacle may prevent movement upstream by fry and juveniles.  There is an estimated `r my_priority_info() %>% pull(upstream_habitat_length_km)`km of westslope cutthrout trout rearing and/or spawning habitat upstream of crossing `r as.character(my_site)`. Although, small cascades within stream networks are common and often present opportunities for upstream passage (particularly for adult fish) at different flows, removal of debris from the channel adjacent to `r as.character(my_site)` could reduce the risk that the cascade may impact fish migration (particularly for younger life stages). Habitat in the area surveyed was rated as `r my_priority_info(sit = my_site, loc = 'us') %>% pull(hab_value)` value for salmonid rearing/spawning as this is a large system with deep pools and gravels present suitable for spawning. Overall, the site was ranked as a moderate priority for remedial works which would include removal of debris from the channel.
+
+<br>
+
+```{r tab-culvert-61504, eval = T}
+print_tab_summary()
+
+```
+
+
+
+<br>
+
+```{r tab-habitat-summary-61504}
+tab_hab_summary %>% 
+  filter(Site  == my_site) %>% 
+  # select(-Site) %>% 
+  my_kable(caption_text = paste0('Summary of habitat details for PSCIS crossings ', my_site, '.'))
+
+```
+
+<br>
+
+```{r tab-culvert-bcfp-61504, eval = T}
+print_tab_summary_bcfp()
+```
+
+
+
+<br>
+
+
+```{r photo-61504-01-prep, eval=T}
+my_photo1 = pull_photo_by_str(site_id = my_site, str_to_pull = '_u1_')
+
+my_caption1 = paste0('Cascade adjacent to PSCIS crossing ', my_site, '.')
+
+```
+
+```{r photo-61504-01, fig.cap= my_caption1, out.width = photo_width, eval=gitbook_on}
+grid::grid.raster(get_img(site = my_site, photo = my_photo1))
+```
+
+<br>
+
+```{r photo-61504-02-prep}
+my_photo2 = pull_photo_by_str(site_id = my_site, str_to_pull = '_u2_')
+
+my_caption2 = paste0('Flow velocity measurement adjacent to PSCIS crossing ', my_site, '.')
+```
+
+```{r photo-61504-02, fig.cap= my_caption2, out.width = photo_width, eval=gitbook_on}
+grid::grid.raster(get_img(site = my_site, photo = my_photo2))
+
+```
+
+<br>
+
+```{r photo-61504-d01, fig.cap = my_caption, fig.show="hold", out.width= c("49.5%","1%","49.5%"), eval=identical(gitbook_on, FALSE)}
+##we could put 2 photos in on box but it is lots of extra work with the crossreferences. pdfs suck anyway.  Don't get too custom with it!!!
+
+# my_photo1 = pull_photo_by_str(str_to_pull = '_d1_')
+# my_caption1 = paste0('Typical habitat downstream of PSCIS crossing ', my_site, '.')
+# 
+# my_photo2 = pull_photo_by_str(str_to_pull = '_u1_')
+# my_caption2 = paste0('Typical habitat upstream of PSCIS crossing ', my_site, '.')
+
+my_caption <- paste0('Left: ', my_caption1, ' Right: ', my_caption2)
+
+knitr::include_graphics(get_img_path(photo = my_photo1))
+knitr::include_graphics("fig/pixel.png")
+knitr::include_graphics(get_img_path(photo = my_photo2))
+```
+
+
+```{r photo-61504-03-prep}
+my_photo1 = pull_photo_by_str(str_to_pull = '_d1_')
+
+my_caption1 = paste0('Typical habitat downstream of PSCIS crossing ', my_site, '.')
+
+```
+
+```{r photo-61504-03, fig.cap= my_caption1, out.width = photo_width, eval=gitbook_on}
+grid::grid.raster(get_img(photo = my_photo1))
+
+```
+
+<br>
+
+```{r photo-61504-04-prep}
+my_photo2 = pull_photo_by_str(str_to_pull = '_d2_')
+
+my_caption2 = paste0('Typical habitat downstream of PSCIS crossing ', my_site, '.')
+
+```
+
+```{r photo-61504-04, fig.cap= my_caption2, out.width = photo_width, eval=gitbook_on}
+grid::grid.raster(get_img(photo = my_photo2))
+```
+
+```{r photo-61504-d02, fig.cap = my_caption, fig.show="hold", out.width= c("49.5%","1%","49.5%"), eval=identical(gitbook_on, FALSE)}
+
+my_caption <- paste0('Left: ', my_caption1, ' Right: ', my_caption2)
+
+knitr::include_graphics(get_img_path(photo = my_photo1))
+knitr::include_graphics("fig/pixel.png")
+knitr::include_graphics(get_img_path(photo = my_photo2))
+```
+
+
+```{r photo-61504-05-prep}
+my_photo1 = pull_photo_by_str(str_to_pull = '_u3_')
+
+my_caption1 = paste0('Typical habitat upstream of PSCIS crossing ', my_site, '.')
+
+```
+
+```{r photo-61504-05, fig.cap= my_caption1, out.width = photo_width, eval=gitbook_on}
+grid::grid.raster(get_img(photo = my_photo1))
+
+```
+
+<br>
+
+```{r photo-61504-06-prep}
+my_photo2 = pull_photo_by_str(str_to_pull = '_u4_')
+
+my_caption2 = paste0('Typical habitat upstream of PSCIS crossing ', my_site, '.')
+
+```
+
+```{r photo-61504-06, fig.cap= my_caption2, out.width = photo_width, eval=gitbook_on}
+grid::grid.raster(get_img(photo = my_photo2))
+```
+
+```{r photo-61504-d03, fig.cap = my_caption, fig.show="hold", out.width= c("49.5%","1%","49.5%"), eval=identical(gitbook_on, FALSE)}
+
+my_caption <- paste0('Left: ', my_caption1, ' Right: ', my_caption2)
+
+knitr::include_graphics(get_img_path(photo = my_photo1))
+knitr::include_graphics("fig/pixel.png")
+knitr::include_graphics(get_img_path(photo = my_photo2))
+```
+
+

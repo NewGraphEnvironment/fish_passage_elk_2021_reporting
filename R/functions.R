@@ -102,7 +102,7 @@ my_kable_scroll_no_height <- function(dat, caption_text = ''){
     kableExtra::scroll_box(width = "100%")
 }
 
-my_kable <- function(dat, caption_text = '', font = font_set){
+my_kable <- function(dat, caption_text = '', font = font_set, ...){
   dat %>%
     kable(caption = caption_text, booktabs = T) %>%
     kableExtra::kable_styling(c("condensed", "responsive"),
@@ -147,7 +147,7 @@ print_tab_cost_mult <- function(dat = tab_cost_rd_mult_report, ...){
 }
 
 ##here is a shot at a function to pull a photo based on a string subset
-pull_photo_by_str <- function(site_id = my_site, str_to_pull = 'barrel'){
+pull_photo_by_str <- function(site_id = my_site, str_to_pull = 'barrel', ...){
   list.files(path = paste0(getwd(), '/data/photos/', site_id), full.names = T) %>%
     stringr::str_subset(., str_to_pull) %>%
     basename()
@@ -779,4 +779,13 @@ fpr_tab_wshd_sum <- function(site_id = NULL){
     wshds_prep <- wshds_prep %>%
       filter(Site == site_id)}
   wshds_prep
+}
+
+# flip an image
+fpr_flip_img <- function(site = my_site, rotate = 180, ...){
+  photo <- pull_photo_by_str(...)
+  image_read(paste0('data/photos/', site, '/', photo)) %>%
+    image_rotate(rotate) %>%
+    image_write(paste0('data/photos/', site, '/rotated_', photo))
+
 }

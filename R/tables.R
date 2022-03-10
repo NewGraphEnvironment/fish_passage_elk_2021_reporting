@@ -23,6 +23,10 @@ xref_pscis_my_crossing_modelled <- readr::read_csv(
   # mutate(external_crossing_reference = as.numeric(external_crossing_reference)) %>%
   # rename(my_crossing_reference = external_crossing_reference)
 
+# velocity data from Coal
+coal_velocity <- readr::read_csv(file = paste0(getwd(), '/data/coal_velocity.csv')) %>%
+  filter(!is.na(depth_perc)) %>%
+  select(Distance = distance, Velocity = velocity)
 
 pscis_all <- left_join(
   pscis_all_prep,
@@ -1123,7 +1127,7 @@ tab_hab_map <- left_join(
   # mutate(data_link = paste0('<a href =',
   #                           'https://github.com/NewGraphEnvironment/fish_passage_bulkley_2020_reporting/tree/master/docs/sum/', pscis_crossing_id,
   #                           '.html', '>', 'data link', '</a>')) %>%
-  mutate(data_link = paste0('<a href =', 'sum/', pscis_crossing_id, '.html ', 'target="_blank">Culvert Data</a>')) %>%
+  mutate(data_link = paste0('<a href =', 'sum/cv/', pscis_crossing_id, '.html ', 'target="_blank">Culvert Data</a>')) %>%
   mutate(photo_link = paste0('<a href =', 'data/photos/', pscis_crossing_id, '/crossing_all.JPG ',
                              'target="_blank">Culvert Photos</a>')) %>%
   mutate(model_link = paste0('<a href =', 'sum/bcfp/', pscis_crossing_id, '.html ', 'target="_blank">Model Data</a>'))
@@ -1160,7 +1164,7 @@ tab_map <- tab_map_prep %>%
   # sf::st_transform(crs = 4326) %>%
   mutate(priority_phase1 = case_when(priority_phase1 == 'mod' ~ 'moderate',
                                      T ~ priority_phase1)) %>%
-  mutate(data_link = paste0('<a href =', 'sum/', pscis_crossing_id, '.html ', 'target="_blank">Culvert Data</a>')) %>%
+  mutate(data_link = paste0('<a href =', 'sum/cv/', pscis_crossing_id, '.html ', 'target="_blank">Culvert Data</a>')) %>%
   mutate(photo_link = paste0('<a href =', 'data/photos/', amalgamated_crossing_id, '/crossing_all.JPG ',
                              'target="_blank">Culvert Photos</a>')) %>%
   mutate(model_link = paste0('<a href =', 'sum/bcfp/', pscis_crossing_id, '.html ', 'target="_blank">Model Data</a>'))
@@ -1172,10 +1176,7 @@ tab_map <- tab_map_prep %>%
 #                                   '/crossing_all.JPG', '>', 'photo link', '</a>'))
 
 
-# velocity data from Coal
-coal_velocity <- readr::read_csv(file = paste0(getwd(), '/data/coal_velocity.csv')) %>%
-  filter(!is.na(depth_perc)) %>%
-  select(Distance = distance, Velocity = velocity)
+
 
 
 ##clean up the objects

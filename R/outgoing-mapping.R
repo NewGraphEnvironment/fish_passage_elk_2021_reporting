@@ -1,5 +1,6 @@
 source('R/packages.R')
 source('R/functions.R')
+source('R/private_info.R')
 source('R/tables.R')
 
 ##make your geopackage for mapping
@@ -13,7 +14,7 @@ make_geopackage <- function(dat, gpkg_name = 'fishpass_mapping', utm_zone = 11){
 
 dir.create('data/fishpass_mapping')
 
-make_geopackage(dat = hab_fish_collect)
+# make_geopackage(dat = hab_fish_collect)
 make_geopackage(dat = hab_features)
 make_geopackage(dat = hab_site_priorities)
 make_geopackage(dat = phase1_priorities)
@@ -27,6 +28,8 @@ make_geopackage(dat = phase1_priorities)
 ##add the tracks
 sf::read_sf("./data/habitat_confirmation_tracks.gpx", layer = "tracks") %>%
   sf::st_write(paste0("./data/fishpass_mapping/", 'fishpass_mapping', ".gpkg"), 'hab_tracks', append = TRUE)
+
+sf::st_layers(paste0("./data/fishpass_mapping/", 'fishpass_mapping', ".gpkg"))
 
 ##study area watersheds
 conn <- DBI::dbConnect(
@@ -57,7 +60,13 @@ wshd_study_areas %>%
 
 dbDisconnect(conn = conn)
 
-####------------add the watersheds-------------------------
+####------------add the dams
+
+dams_prep <- bcfishpass %>%
+  filter(aggregated_crossings_id == 1100000129 |
+           aggregated_crossings_id == 1100002016 ) %>%
+  select(aggregated_crossings_id)
+
 
 
 

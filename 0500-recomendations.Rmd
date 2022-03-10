@@ -1,3 +1,19 @@
 # Recommendations
 
-Although remediation and replacement of stream crossing structures can have benefits to local fish populations [@saldicaromileStreamHabitatRestoration2004; @roni_etal2008GlobalReview], the costs of remedial works can be significant and the impacts of the work on fisheries communities often complex to evaluate and quantify.  The potential cost benefits, ethical dynamics and feasibility of ecosystem restoration funding allocation towards infrastructure upgrades on transportation right of ways should be explored collaboratively alongside the cost benefits, ethical dynamics and feasibility of alternative/additional investment activities such as transportation corridor relocation/deactivation, land procurement/covenant, cattle exclusion, riparian restoration, habitat complexing, water conservation, commercial/recreational fishing management and research.
+Recommendations for potential incorporation into collaborative watershed connectivity planning for the Elk River watershed group include:
+
+
+ * Continue to acquire background information to clarify current conditions within subject streams and identify limiting factors to help inform prioritization and effectiveness monitoring programs.  
+ 
+ * Develop strategies to explore cost benefits and ethics of stream crossing structure upgrades alongside the cost benefits and ethics of alternative/additional restoration and enhancement investments such as land procurement/covenant, cattle exclusion, riparian restoration, habitat complexing, water conservation, commercial/recreational fishing management, water treatment and research. Look for opportunities to leverage initiatives together for maximum restoration benefits.
+ 
+ * Refine barrier thresholds for road-stream crossing structures to explore metrics specific to life stage and life history types of species of interest. This will further focus efforts of potential remediation actions based on biological attributes (ex. timing of migration, size/direction of fish migrating, etc.) and could result in the consideration of interim "stop-gap" physical works to alter crossing characteristics that can address key connectivity issues yet be significantly less costly than structure replacements (ex. building up of downstream area with rock riffles to decrease the outlet drop size and/or increasing water depth within pipe with baffles and substrate additions).
+ 
+ * Model fish densities (fish/m^2^) vs. habitat/water quality characteristics (i.e. gradient, watershed size, channel size, alkalinity, elevation, etc.) using historically gathered electrofishing data to inform crossing prioritization, future data acquisition needs, and the monitoring of subsequent restoration actions.
+
+  * Continue to develop `bcfishpass`,`bcfishobs`, `fwapg`, `bcdata` and other open source data analysis and presentation tools that are scaleable and facilitate continual improvement.  Tools should continue to be flexible and well documented to allow the future incorporation of alternative fragmentation indicators, habitat gain/value metrics and watershed sensitivity indicators.
+ 
+ * Continue to collaborate with potential partners to build relationships, explore perspectives and develop “road maps” for fish passage restoration in different situations (MoT roads, rail lines, permit roads of different usages, FSRs, etc.) – documenting the people involved, discussions and processes that are undertaken, funding options, synergies, measures of success, etc. 
+
+
+

@@ -1,8 +1,9 @@
 --- 
-title: "Elk River Watershed Group Fish Passage Restoration Planning 2021"
+title: "DRAFT - Elk River Watershed Group Fish Passage Restoration Planning 2021"
 author: |
  |
  | Prepared for
+ | Nupqu Limited Partnership
 
  |
  |
@@ -12,7 +13,7 @@ author: |
 
 date: |
  |
- | Version 0.0.1
+ | Version 0.0.1 - DRAFT
  | `r format(Sys.Date(), "%Y-%m-%d")`
 toc-title: Table of Contents
 site: bookdown::bookdown_site

@@ -19,6 +19,6 @@ hold
 *.sqlite
 *.gpkg
 *.JPG
-
-docs/data/
+!crossing_all.JPG
+!*_k_*
 

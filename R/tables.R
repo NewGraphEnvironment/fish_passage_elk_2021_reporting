@@ -82,7 +82,7 @@ tab_dams_raw <- bcfishpass %>%
   filter(aggregated_crossings_id == 1100000129 |
            aggregated_crossings_id == 1100002016 |
            aggregated_crossings_id == 197542) %>%
-  select(id = aggregated_crossings_id, stream = gnis_stream_name,utm_zone, utm_easting, utm_northing) %>%
+  select(id = aggregated_crossings_id, stream = gnis_stream_name,utm_zone, utm_easting, utm_northing, dbm_mof_50k_grid) %>%
   mutate(barrier_ind = case_when(
     id == 1100000129 ~ 'F',
     T ~ 'T'),

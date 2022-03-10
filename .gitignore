@@ -12,11 +12,13 @@ data/inputs_extracted
 hold
 *.gpkg-wal
 *.gpkg-shm
-*.JPG
 *.jpeg
 20211016b_parker_uav_plan.kmz
 *.kml
 *.PNG
 *.sqlite
 *.gpkg
+*.JPG
+
+docs/data/
 

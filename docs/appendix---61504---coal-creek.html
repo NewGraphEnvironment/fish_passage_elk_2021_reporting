@@ -271,10 +271,10 @@ div.csl-indent {
 <p>At the time of the survey, the PSCIS bridge crossing span was measured at 61504 24m and the width was 4m. As an open bottomed structure, the crossing was not considered a barrier or partial barrier to fish passage (Table <a href="appendix---61504---coal-creek.html#tab:tab-culvert-61504">5.2</a>). Water temperature was 4<span class="math inline">\(^\circ\)</span>C, pH was 8.3 and conductivity was 170uS/cm.</p>
 <p><br></p>
 <p>To gather data to help assess the degree to which the cascade potentially hindered upstream fish migration, velocity measurements were taken at five locations even distributed across the wetted width of the cascade using a Hach FH handheld flow meter (Figures <a href="appendix---61504---coal-creek.html#fig:photo-61504-01">5.1</a> - <a href="appendix---61504---coal-creek.html#fig:photo-61504-02">5.2</a>). Measurements were taken on October 15, 2021 at depths equivalent to 60% of the depth of the water. Light rain was falling at the time of the survey. Flow velocities at the cascade ranged from 0.31m/s to 0.31m/s (Table <a href="appendix---61504---coal-creek.html#tab:tab-velocity-61504">5.1</a>). In a swimming performance study conducted in an open-channel flume <span class="citation">Blank et al. (2020)</span> estimated the overall average swim speeds of westlope cutthrout trout (150mm - 290mm in length) at 0.84m/s with a maximum observed swim speed of 3.55m/s.</p>
-<div class="sourceCode" id="cb95"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb95-1"><a href="appendix---61504---coal-creek.html#cb95-1" aria-hidden="true" tabindex="-1"></a>coal_velocity <span class="sc">%&gt;%</span> </span>
-<span id="cb95-2"><a href="appendix---61504---coal-creek.html#cb95-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">my_kable</span>(</span>
-<span id="cb95-3"><a href="appendix---61504---coal-creek.html#cb95-3" aria-hidden="true" tabindex="-1"></a>           <span class="at">footnote_text =</span> <span class="st">&#39;Velocities measured at 60% of wetted depth.  Distance was measured from top of bank.&#39;</span>,</span>
-<span id="cb95-4"><a href="appendix---61504---coal-creek.html#cb95-4" aria-hidden="true" tabindex="-1"></a>           <span class="at">caption_text =</span> <span class="fu">paste0</span>(<span class="st">&#39;Summary of velocities at debris influenced cascade adjacent to PSCIS crossing &#39;</span>, my_site, <span class="st">&#39;.&#39;</span>))</span></code></pre></div>
+<div class="sourceCode" id="cb50"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb50-1"><a href="appendix---61504---coal-creek.html#cb50-1" aria-hidden="true" tabindex="-1"></a>coal_velocity <span class="sc">%&gt;%</span> </span>
+<span id="cb50-2"><a href="appendix---61504---coal-creek.html#cb50-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">my_kable</span>(</span>
+<span id="cb50-3"><a href="appendix---61504---coal-creek.html#cb50-3" aria-hidden="true" tabindex="-1"></a>           <span class="at">footnote_text =</span> <span class="st">&#39;Velocities measured at 60% of wetted depth.  Distance was measured from top of bank.&#39;</span>,</span>
+<span id="cb50-4"><a href="appendix---61504---coal-creek.html#cb50-4" aria-hidden="true" tabindex="-1"></a>           <span class="at">caption_text =</span> <span class="fu">paste0</span>(<span class="st">&#39;Summary of velocities at debris influenced cascade adjacent to PSCIS crossing &#39;</span>, my_site, <span class="st">&#39;.&#39;</span>))</span></code></pre></div>
 <table class="table table-condensed table-responsive" style="font-size: 11px; margin-left: auto; margin-right: auto;border-bottom: 0;">
 <caption style="font-size: initial !important;">
 <span id="tab:tab-velocity-61504">Table 5.1: </span>Summary of velocities at debris influenced cascade adjacent to PSCIS crossing 61504.
@@ -339,9 +339,9 @@ Velocity
 </tr>
 </tfoot>
 </table>
-<div class="sourceCode" id="cb96"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb96-1"><a href="appendix---61504---coal-creek.html#cb96-1" aria-hidden="true" tabindex="-1"></a><span class="do">##this is useful to get some comments for the report</span></span>
-<span id="cb96-2"><a href="appendix---61504---coal-creek.html#cb96-2" aria-hidden="true" tabindex="-1"></a>hab_site <span class="sc">%&gt;%</span> <span class="fu">filter</span>(site <span class="sc">==</span> my_site <span class="sc">&amp;</span> location <span class="sc">==</span> <span class="st">&#39;us&#39;</span>) <span class="sc">%&gt;%</span> <span class="fu">pull</span>(comments)</span>
-<span id="cb96-3"><a href="appendix---61504---coal-creek.html#cb96-3" aria-hidden="true" tabindex="-1"></a>my_priority <span class="ot">&lt;-</span>  <span class="fu">my_priority_info</span>()</span></code></pre></div>
+<div class="sourceCode" id="cb51"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb51-1"><a href="appendix---61504---coal-creek.html#cb51-1" aria-hidden="true" tabindex="-1"></a><span class="do">##this is useful to get some comments for the report</span></span>
+<span id="cb51-2"><a href="appendix---61504---coal-creek.html#cb51-2" aria-hidden="true" tabindex="-1"></a>hab_site <span class="sc">%&gt;%</span> <span class="fu">filter</span>(site <span class="sc">==</span> my_site <span class="sc">&amp;</span> location <span class="sc">==</span> <span class="st">&#39;us&#39;</span>) <span class="sc">%&gt;%</span> <span class="fu">pull</span>(comments)</span>
+<span id="cb51-3"><a href="appendix---61504---coal-creek.html#cb51-3" aria-hidden="true" tabindex="-1"></a>my_priority <span class="ot">&lt;-</span>  <span class="fu">my_priority_info</span>()</span></code></pre></div>
 </div>
 <div id="stream-characteristics-downstream" class="section level2 unnumbered">
 <h2>Stream Characteristics Downstream</h2>
@@ -350,7 +350,7 @@ Velocity
 </div>
 <div id="stream-characteristics-upstream" class="section level2 unnumbered">
 <h2>Stream Characteristics Upstream</h2>
-<div class="sourceCode" id="cb97"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb97-1"><a href="appendix---61504---coal-creek.html#cb97-1" aria-hidden="true" tabindex="-1"></a><span class="co"># as a note - we are using my_sit = my_site2 because the detailed info was recorded on that card</span></span></code></pre></div>
+<div class="sourceCode" id="cb52"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb52-1"><a href="appendix---61504---coal-creek.html#cb52-1" aria-hidden="true" tabindex="-1"></a><span class="co"># as a note - we are using my_sit = my_site2 because the detailed info was recorded on that card</span></span></code></pre></div>
 <p>The stream was surveyed upstream from 61504 for 520m (Figures <a href="appendix---61504---coal-creek.html#fig:photo-61504-03">5.3</a> - <a href="appendix---61504---coal-creek.html#fig:photo-61504-04">5.4</a>). Within the area surveyed, total cover amount was rated as abundant with boulders dominant. Cover was also present as large woody debris and deep pools (Table <a href="appendix---61504---coal-creek.html#tab:tab-habitat-summary-61504">5.3</a>). The average channel width was 12.1m, the average wetted width was 11.2m and the average gradient was 2.8%. Some deep pools up to ~1.8m deep were available for overwintering westslope cutthroat trout adults and occasional pockets of gravel suitable for spawning were present. The riparian area was comprised of mature black cottonwood with intermittent naturally formed large woody debris structures throughout providing structure and cover. Beaver dams were located within the area surveyed primarily on tributaries or side-channels with one dam noted as partially spanning the main channel. Habitat value was rated as high for salmonid rearing and spawning.</p>
 <p><br></p>
 <p>Table <a href="appendix---61504---coal-creek.html#tab:tab-culvert-bcfp-61504">5.4</a> presents preliminary fish passage modelling data for crossing 61504 with linear length of spawning and rearing habitat estimated for westslope cutthrout trout at 8.5km and 14.5km respectively.</p>
@@ -365,7 +365,7 @@ Velocity
 <h2>Conclusion</h2>
 <p>Although the 30 - 55cm high cascade adjacent to PSCIS bridge 61504 is unlikely to be a signifcant barrier for the movement of migrating adult westslope cutthrout trout the obstacle may prevent movement upstream by fry and juveniles. There is an estimated 14.5km of westslope cutthrout trout rearing and/or spawning habitat upstream of crossing 61504. Although, small cascades within stream networks are common and often present opportunities for upstream passage (particularly for adult fish) at different flows, removal of debris from the channel adjacent to 61504 could reduce the risk that the cascade may impact fish migration (particularly for younger life stages). Habitat in the area surveyed was rated as high value for salmonid rearing/spawning as this is a large system with deep pools and gravels present suitable for spawning. Overall, the site was ranked as a moderate priority for remedial works which would include removal of debris from the channel.</p>
 <p><br></p>
-<div class="sourceCode" id="cb98"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb98-1"><a href="appendix---61504---coal-creek.html#cb98-1" aria-hidden="true" tabindex="-1"></a><span class="fu">print_tab_summary</span>()</span></code></pre></div>
+<div class="sourceCode" id="cb53"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb53-1"><a href="appendix---61504---coal-creek.html#cb53-1" aria-hidden="true" tabindex="-1"></a><span class="fu">print_tab_summary</span>()</span></code></pre></div>
 <table class="table table-condensed" style="font-size: 11px; margin-left: auto; margin-right: auto;">
 <caption style="font-size: initial !important;">
 <span id="tab:tab-culvert-61504">Table 5.2: </span>Summary of fish passage assessment for PSCIS crossing 61504.
@@ -629,10 +629,10 @@ Fix Span / Diameter
 </table></li>
 </ul>
 <p><br></p>
-<div class="sourceCode" id="cb99"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb99-1"><a href="appendix---61504---coal-creek.html#cb99-1" aria-hidden="true" tabindex="-1"></a>tab_hab_summary <span class="sc">%&gt;%</span> </span>
-<span id="cb99-2"><a href="appendix---61504---coal-creek.html#cb99-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(Site  <span class="sc">==</span> my_site) <span class="sc">%&gt;%</span> </span>
-<span id="cb99-3"><a href="appendix---61504---coal-creek.html#cb99-3" aria-hidden="true" tabindex="-1"></a>  <span class="co"># select(-Site) %&gt;% </span></span>
-<span id="cb99-4"><a href="appendix---61504---coal-creek.html#cb99-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">my_kable</span>(<span class="at">caption_text =</span> <span class="fu">paste0</span>(<span class="st">&#39;Summary of habitat details for PSCIS crossings &#39;</span>, my_site, <span class="st">&#39;.&#39;</span>))</span></code></pre></div>
+<div class="sourceCode" id="cb54"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb54-1"><a href="appendix---61504---coal-creek.html#cb54-1" aria-hidden="true" tabindex="-1"></a>tab_hab_summary <span class="sc">%&gt;%</span> </span>
+<span id="cb54-2"><a href="appendix---61504---coal-creek.html#cb54-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(Site  <span class="sc">==</span> my_site) <span class="sc">%&gt;%</span> </span>
+<span id="cb54-3"><a href="appendix---61504---coal-creek.html#cb54-3" aria-hidden="true" tabindex="-1"></a>  <span class="co"># select(-Site) %&gt;% </span></span>
+<span id="cb54-4"><a href="appendix---61504---coal-creek.html#cb54-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">my_kable</span>(<span class="at">caption_text =</span> <span class="fu">paste0</span>(<span class="st">&#39;Summary of habitat details for PSCIS crossings &#39;</span>, my_site, <span class="st">&#39;.&#39;</span>))</span></code></pre></div>
 <table class="table table-condensed table-responsive" style="font-size: 11px; margin-left: auto; margin-right: auto;">
 <caption style="font-size: initial !important;">
 <span id="tab:tab-habitat-summary-61504">Table 5.3: </span>Summary of habitat details for PSCIS crossings 61504.
@@ -730,7 +730,7 @@ high
 </tbody>
 </table>
 <p><br></p>
-<div class="sourceCode" id="cb100"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb100-1"><a href="appendix---61504---coal-creek.html#cb100-1" aria-hidden="true" tabindex="-1"></a><span class="fu">print_tab_summary_bcfp</span>()</span></code></pre></div>
+<div class="sourceCode" id="cb55"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb55-1"><a href="appendix---61504---coal-creek.html#cb55-1" aria-hidden="true" tabindex="-1"></a><span class="fu">print_tab_summary_bcfp</span>()</span></code></pre></div>
 <table class="table table-condensed" style="font-size: 11px; margin-left: auto; margin-right: auto;">
 <caption style="font-size: initial !important;">
 <span id="tab:tab-culvert-bcfp-61504">Table 5.4: </span>Summary of fish habitat modelling for PSCIS crossing 61504.
@@ -949,10 +949,10 @@ WCT Slopeclass30 (km)
 </tfoot>
 </table>
 <p><br></p>
-<div class="sourceCode" id="cb101"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb101-1"><a href="appendix---61504---coal-creek.html#cb101-1" aria-hidden="true" tabindex="-1"></a>my_photo1 <span class="ot">=</span> <span class="fu">pull_photo_by_str</span>(<span class="at">site_id =</span> my_site, <span class="at">str_to_pull =</span> <span class="st">&#39;_u1_&#39;</span>)</span>
-<span id="cb101-2"><a href="appendix---61504---coal-creek.html#cb101-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb101-3"><a href="appendix---61504---coal-creek.html#cb101-3" aria-hidden="true" tabindex="-1"></a>my_caption1 <span class="ot">=</span> <span class="fu">paste0</span>(<span class="st">&#39;Cascade adjacent to PSCIS crossing &#39;</span>, my_site, <span class="st">&#39;.&#39;</span>)</span></code></pre></div>
-<div class="sourceCode" id="cb102"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb102-1"><a href="appendix---61504---coal-creek.html#cb102-1" aria-hidden="true" tabindex="-1"></a>grid<span class="sc">::</span><span class="fu">grid.raster</span>(<span class="fu">get_img</span>(<span class="at">site =</span> my_site, <span class="at">photo =</span> my_photo1))</span></code></pre></div>
+<div class="sourceCode" id="cb56"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb56-1"><a href="appendix---61504---coal-creek.html#cb56-1" aria-hidden="true" tabindex="-1"></a>my_photo1 <span class="ot">=</span> <span class="fu">pull_photo_by_str</span>(<span class="at">site_id =</span> my_site, <span class="at">str_to_pull =</span> <span class="st">&#39;_u1_&#39;</span>)</span>
+<span id="cb56-2"><a href="appendix---61504---coal-creek.html#cb56-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb56-3"><a href="appendix---61504---coal-creek.html#cb56-3" aria-hidden="true" tabindex="-1"></a>my_caption1 <span class="ot">=</span> <span class="fu">paste0</span>(<span class="st">&#39;Cascade adjacent to PSCIS crossing &#39;</span>, my_site, <span class="st">&#39;.&#39;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb57"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb57-1"><a href="appendix---61504---coal-creek.html#cb57-1" aria-hidden="true" tabindex="-1"></a>grid<span class="sc">::</span><span class="fu">grid.raster</span>(<span class="fu">get_img</span>(<span class="at">site =</span> my_site, <span class="at">photo =</span> my_photo1))</span></code></pre></div>
 <div class="figure"><span style="display:block;" id="fig:photo-61504-01"></span>
 <img src="Elk-River-Watershed-Group-Fish-Passage-Restoration-Planning-2021_files/figure-html/photo-61504-01-1.png" alt="Cascade adjacent to PSCIS crossing 61504." width="100%" />
 <p class="caption">
@@ -960,10 +960,10 @@ Figure 5.1: Cascade adjacent to PSCIS crossing 61504.
 </p>
 </div>
 <p><br></p>
-<div class="sourceCode" id="cb103"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb103-1"><a href="appendix---61504---coal-creek.html#cb103-1" aria-hidden="true" tabindex="-1"></a>my_photo2 <span class="ot">=</span> <span class="fu">pull_photo_by_str</span>(<span class="at">site_id =</span> my_site, <span class="at">str_to_pull =</span> <span class="st">&#39;_u2_&#39;</span>)</span>
-<span id="cb103-2"><a href="appendix---61504---coal-creek.html#cb103-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb103-3"><a href="appendix---61504---coal-creek.html#cb103-3" aria-hidden="true" tabindex="-1"></a>my_caption2 <span class="ot">=</span> <span class="fu">paste0</span>(<span class="st">&#39;Flow velocity measurement adjacent to PSCIS crossing &#39;</span>, my_site, <span class="st">&#39;.&#39;</span>)</span></code></pre></div>
-<div class="sourceCode" id="cb104"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb104-1"><a href="appendix---61504---coal-creek.html#cb104-1" aria-hidden="true" tabindex="-1"></a>grid<span class="sc">::</span><span class="fu">grid.raster</span>(<span class="fu">get_img</span>(<span class="at">site =</span> my_site, <span class="at">photo =</span> my_photo2))</span></code></pre></div>
+<div class="sourceCode" id="cb58"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb58-1"><a href="appendix---61504---coal-creek.html#cb58-1" aria-hidden="true" tabindex="-1"></a>my_photo2 <span class="ot">=</span> <span class="fu">pull_photo_by_str</span>(<span class="at">site_id =</span> my_site, <span class="at">str_to_pull =</span> <span class="st">&#39;_u2_&#39;</span>)</span>
+<span id="cb58-2"><a href="appendix---61504---coal-creek.html#cb58-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb58-3"><a href="appendix---61504---coal-creek.html#cb58-3" aria-hidden="true" tabindex="-1"></a>my_caption2 <span class="ot">=</span> <span class="fu">paste0</span>(<span class="st">&#39;Flow velocity measurement adjacent to PSCIS crossing &#39;</span>, my_site, <span class="st">&#39;.&#39;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb59"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb59-1"><a href="appendix---61504---coal-creek.html#cb59-1" aria-hidden="true" tabindex="-1"></a>grid<span class="sc">::</span><span class="fu">grid.raster</span>(<span class="fu">get_img</span>(<span class="at">site =</span> my_site, <span class="at">photo =</span> my_photo2))</span></code></pre></div>
 <div class="figure"><span style="display:block;" id="fig:photo-61504-02"></span>
 <img src="Elk-River-Watershed-Group-Fish-Passage-Restoration-Planning-2021_files/figure-html/photo-61504-02-1.png" alt="Flow velocity measurement adjacent to PSCIS crossing 61504." width="100%" />
 <p class="caption">
@@ -971,23 +971,23 @@ Figure 5.2: Flow velocity measurement adjacent to PSCIS crossing 61504.
 </p>
 </div>
 <p><br></p>
-<div class="sourceCode" id="cb105"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb105-1"><a href="appendix---61504---coal-creek.html#cb105-1" aria-hidden="true" tabindex="-1"></a><span class="do">##we could put 2 photos in on box but it is lots of extra work with the crossreferences. pdfs suck anyway.  Don&#39;t get too custom with it!!!</span></span>
-<span id="cb105-2"><a href="appendix---61504---coal-creek.html#cb105-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb105-3"><a href="appendix---61504---coal-creek.html#cb105-3" aria-hidden="true" tabindex="-1"></a><span class="co"># my_photo1 = pull_photo_by_str(str_to_pull = &#39;_d1_&#39;)</span></span>
-<span id="cb105-4"><a href="appendix---61504---coal-creek.html#cb105-4" aria-hidden="true" tabindex="-1"></a><span class="co"># my_caption1 = paste0(&#39;Typical habitat downstream of PSCIS crossing &#39;, my_site, &#39;.&#39;)</span></span>
-<span id="cb105-5"><a href="appendix---61504---coal-creek.html#cb105-5" aria-hidden="true" tabindex="-1"></a><span class="co"># </span></span>
-<span id="cb105-6"><a href="appendix---61504---coal-creek.html#cb105-6" aria-hidden="true" tabindex="-1"></a><span class="co"># my_photo2 = pull_photo_by_str(str_to_pull = &#39;_u1_&#39;)</span></span>
-<span id="cb105-7"><a href="appendix---61504---coal-creek.html#cb105-7" aria-hidden="true" tabindex="-1"></a><span class="co"># my_caption2 = paste0(&#39;Typical habitat upstream of PSCIS crossing &#39;, my_site, &#39;.&#39;)</span></span>
-<span id="cb105-8"><a href="appendix---61504---coal-creek.html#cb105-8" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb105-9"><a href="appendix---61504---coal-creek.html#cb105-9" aria-hidden="true" tabindex="-1"></a>my_caption <span class="ot">&lt;-</span> <span class="fu">paste0</span>(<span class="st">&#39;Left: &#39;</span>, my_caption1, <span class="st">&#39; Right: &#39;</span>, my_caption2)</span>
-<span id="cb105-10"><a href="appendix---61504---coal-creek.html#cb105-10" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb105-11"><a href="appendix---61504---coal-creek.html#cb105-11" aria-hidden="true" tabindex="-1"></a>knitr<span class="sc">::</span><span class="fu">include_graphics</span>(<span class="fu">get_img_path</span>(<span class="at">photo =</span> my_photo1))</span>
-<span id="cb105-12"><a href="appendix---61504---coal-creek.html#cb105-12" aria-hidden="true" tabindex="-1"></a>knitr<span class="sc">::</span><span class="fu">include_graphics</span>(<span class="st">&quot;fig/pixel.png&quot;</span>)</span>
-<span id="cb105-13"><a href="appendix---61504---coal-creek.html#cb105-13" aria-hidden="true" tabindex="-1"></a>knitr<span class="sc">::</span><span class="fu">include_graphics</span>(<span class="fu">get_img_path</span>(<span class="at">photo =</span> my_photo2))</span></code></pre></div>
-<div class="sourceCode" id="cb106"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb106-1"><a href="appendix---61504---coal-creek.html#cb106-1" aria-hidden="true" tabindex="-1"></a>my_photo1 <span class="ot">=</span> <span class="fu">pull_photo_by_str</span>(<span class="at">str_to_pull =</span> <span class="st">&#39;_d1_&#39;</span>)</span>
-<span id="cb106-2"><a href="appendix---61504---coal-creek.html#cb106-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb106-3"><a href="appendix---61504---coal-creek.html#cb106-3" aria-hidden="true" tabindex="-1"></a>my_caption1 <span class="ot">=</span> <span class="fu">paste0</span>(<span class="st">&#39;Typical habitat downstream of PSCIS crossing &#39;</span>, my_site, <span class="st">&#39;.&#39;</span>)</span></code></pre></div>
-<div class="sourceCode" id="cb107"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb107-1"><a href="appendix---61504---coal-creek.html#cb107-1" aria-hidden="true" tabindex="-1"></a>grid<span class="sc">::</span><span class="fu">grid.raster</span>(<span class="fu">get_img</span>(<span class="at">photo =</span> my_photo1))</span></code></pre></div>
+<div class="sourceCode" id="cb60"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb60-1"><a href="appendix---61504---coal-creek.html#cb60-1" aria-hidden="true" tabindex="-1"></a><span class="do">##we could put 2 photos in on box but it is lots of extra work with the crossreferences. pdfs suck anyway.  Don&#39;t get too custom with it!!!</span></span>
+<span id="cb60-2"><a href="appendix---61504---coal-creek.html#cb60-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb60-3"><a href="appendix---61504---coal-creek.html#cb60-3" aria-hidden="true" tabindex="-1"></a><span class="co"># my_photo1 = pull_photo_by_str(str_to_pull = &#39;_d1_&#39;)</span></span>
+<span id="cb60-4"><a href="appendix---61504---coal-creek.html#cb60-4" aria-hidden="true" tabindex="-1"></a><span class="co"># my_caption1 = paste0(&#39;Typical habitat downstream of PSCIS crossing &#39;, my_site, &#39;.&#39;)</span></span>
+<span id="cb60-5"><a href="appendix---61504---coal-creek.html#cb60-5" aria-hidden="true" tabindex="-1"></a><span class="co"># </span></span>
+<span id="cb60-6"><a href="appendix---61504---coal-creek.html#cb60-6" aria-hidden="true" tabindex="-1"></a><span class="co"># my_photo2 = pull_photo_by_str(str_to_pull = &#39;_u1_&#39;)</span></span>
+<span id="cb60-7"><a href="appendix---61504---coal-creek.html#cb60-7" aria-hidden="true" tabindex="-1"></a><span class="co"># my_caption2 = paste0(&#39;Typical habitat upstream of PSCIS crossing &#39;, my_site, &#39;.&#39;)</span></span>
+<span id="cb60-8"><a href="appendix---61504---coal-creek.html#cb60-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb60-9"><a href="appendix---61504---coal-creek.html#cb60-9" aria-hidden="true" tabindex="-1"></a>my_caption <span class="ot">&lt;-</span> <span class="fu">paste0</span>(<span class="st">&#39;Left: &#39;</span>, my_caption1, <span class="st">&#39; Right: &#39;</span>, my_caption2)</span>
+<span id="cb60-10"><a href="appendix---61504---coal-creek.html#cb60-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb60-11"><a href="appendix---61504---coal-creek.html#cb60-11" aria-hidden="true" tabindex="-1"></a>knitr<span class="sc">::</span><span class="fu">include_graphics</span>(<span class="fu">get_img_path</span>(<span class="at">photo =</span> my_photo1))</span>
+<span id="cb60-12"><a href="appendix---61504---coal-creek.html#cb60-12" aria-hidden="true" tabindex="-1"></a>knitr<span class="sc">::</span><span class="fu">include_graphics</span>(<span class="st">&quot;fig/pixel.png&quot;</span>)</span>
+<span id="cb60-13"><a href="appendix---61504---coal-creek.html#cb60-13" aria-hidden="true" tabindex="-1"></a>knitr<span class="sc">::</span><span class="fu">include_graphics</span>(<span class="fu">get_img_path</span>(<span class="at">photo =</span> my_photo2))</span></code></pre></div>
+<div class="sourceCode" id="cb61"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb61-1"><a href="appendix---61504---coal-creek.html#cb61-1" aria-hidden="true" tabindex="-1"></a>my_photo1 <span class="ot">=</span> <span class="fu">pull_photo_by_str</span>(<span class="at">str_to_pull =</span> <span class="st">&#39;_d1_&#39;</span>)</span>
+<span id="cb61-2"><a href="appendix---61504---coal-creek.html#cb61-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb61-3"><a href="appendix---61504---coal-creek.html#cb61-3" aria-hidden="true" tabindex="-1"></a>my_caption1 <span class="ot">=</span> <span class="fu">paste0</span>(<span class="st">&#39;Typical habitat downstream of PSCIS crossing &#39;</span>, my_site, <span class="st">&#39;.&#39;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb62"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb62-1"><a href="appendix---61504---coal-creek.html#cb62-1" aria-hidden="true" tabindex="-1"></a>grid<span class="sc">::</span><span class="fu">grid.raster</span>(<span class="fu">get_img</span>(<span class="at">photo =</span> my_photo1))</span></code></pre></div>
 <div class="figure"><span style="display:block;" id="fig:photo-61504-03"></span>
 <img src="Elk-River-Watershed-Group-Fish-Passage-Restoration-Planning-2021_files/figure-html/photo-61504-03-1.png" alt="Typical habitat downstream of PSCIS crossing 61504." width="100%" />
 <p class="caption">
@@ -995,25 +995,25 @@ Figure 5.3: Typical habitat downstream of PSCIS crossing 61504.
 </p>
 </div>
 <p><br></p>
-<div class="sourceCode" id="cb108"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb108-1"><a href="appendix---61504---coal-creek.html#cb108-1" aria-hidden="true" tabindex="-1"></a>my_photo2 <span class="ot">=</span> <span class="fu">pull_photo_by_str</span>(<span class="at">str_to_pull =</span> <span class="st">&#39;_d2_&#39;</span>)</span>
-<span id="cb108-2"><a href="appendix---61504---coal-creek.html#cb108-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb108-3"><a href="appendix---61504---coal-creek.html#cb108-3" aria-hidden="true" tabindex="-1"></a>my_caption2 <span class="ot">=</span> <span class="fu">paste0</span>(<span class="st">&#39;Typical habitat downstream of PSCIS crossing &#39;</span>, my_site, <span class="st">&#39;.&#39;</span>)</span></code></pre></div>
-<div class="sourceCode" id="cb109"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb109-1"><a href="appendix---61504---coal-creek.html#cb109-1" aria-hidden="true" tabindex="-1"></a>grid<span class="sc">::</span><span class="fu">grid.raster</span>(<span class="fu">get_img</span>(<span class="at">photo =</span> my_photo2))</span></code></pre></div>
+<div class="sourceCode" id="cb63"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb63-1"><a href="appendix---61504---coal-creek.html#cb63-1" aria-hidden="true" tabindex="-1"></a>my_photo2 <span class="ot">=</span> <span class="fu">pull_photo_by_str</span>(<span class="at">str_to_pull =</span> <span class="st">&#39;_d2_&#39;</span>)</span>
+<span id="cb63-2"><a href="appendix---61504---coal-creek.html#cb63-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb63-3"><a href="appendix---61504---coal-creek.html#cb63-3" aria-hidden="true" tabindex="-1"></a>my_caption2 <span class="ot">=</span> <span class="fu">paste0</span>(<span class="st">&#39;Typical habitat downstream of PSCIS crossing &#39;</span>, my_site, <span class="st">&#39;.&#39;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb64"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb64-1"><a href="appendix---61504---coal-creek.html#cb64-1" aria-hidden="true" tabindex="-1"></a>grid<span class="sc">::</span><span class="fu">grid.raster</span>(<span class="fu">get_img</span>(<span class="at">photo =</span> my_photo2))</span></code></pre></div>
 <div class="figure"><span style="display:block;" id="fig:photo-61504-04"></span>
 <img src="Elk-River-Watershed-Group-Fish-Passage-Restoration-Planning-2021_files/figure-html/photo-61504-04-1.png" alt="Typical habitat downstream of PSCIS crossing 61504." width="100%" />
 <p class="caption">
 Figure 5.4: Typical habitat downstream of PSCIS crossing 61504.
 </p>
 </div>
-<div class="sourceCode" id="cb110"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb110-1"><a href="appendix---61504---coal-creek.html#cb110-1" aria-hidden="true" tabindex="-1"></a>my_caption <span class="ot">&lt;-</span> <span class="fu">paste0</span>(<span class="st">&#39;Left: &#39;</span>, my_caption1, <span class="st">&#39; Right: &#39;</span>, my_caption2)</span>
-<span id="cb110-2"><a href="appendix---61504---coal-creek.html#cb110-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb110-3"><a href="appendix---61504---coal-creek.html#cb110-3" aria-hidden="true" tabindex="-1"></a>knitr<span class="sc">::</span><span class="fu">include_graphics</span>(<span class="fu">get_img_path</span>(<span class="at">photo =</span> my_photo1))</span>
-<span id="cb110-4"><a href="appendix---61504---coal-creek.html#cb110-4" aria-hidden="true" tabindex="-1"></a>knitr<span class="sc">::</span><span class="fu">include_graphics</span>(<span class="st">&quot;fig/pixel.png&quot;</span>)</span>
-<span id="cb110-5"><a href="appendix---61504---coal-creek.html#cb110-5" aria-hidden="true" tabindex="-1"></a>knitr<span class="sc">::</span><span class="fu">include_graphics</span>(<span class="fu">get_img_path</span>(<span class="at">photo =</span> my_photo2))</span></code></pre></div>
-<div class="sourceCode" id="cb111"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb111-1"><a href="appendix---61504---coal-creek.html#cb111-1" aria-hidden="true" tabindex="-1"></a>my_photo1 <span class="ot">=</span> <span class="fu">pull_photo_by_str</span>(<span class="at">str_to_pull =</span> <span class="st">&#39;_u3_&#39;</span>)</span>
-<span id="cb111-2"><a href="appendix---61504---coal-creek.html#cb111-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb111-3"><a href="appendix---61504---coal-creek.html#cb111-3" aria-hidden="true" tabindex="-1"></a>my_caption1 <span class="ot">=</span> <span class="fu">paste0</span>(<span class="st">&#39;Typical habitat upstream of PSCIS crossing &#39;</span>, my_site, <span class="st">&#39;.&#39;</span>)</span></code></pre></div>
-<div class="sourceCode" id="cb112"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb112-1"><a href="appendix---61504---coal-creek.html#cb112-1" aria-hidden="true" tabindex="-1"></a>grid<span class="sc">::</span><span class="fu">grid.raster</span>(<span class="fu">get_img</span>(<span class="at">photo =</span> my_photo1))</span></code></pre></div>
+<div class="sourceCode" id="cb65"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb65-1"><a href="appendix---61504---coal-creek.html#cb65-1" aria-hidden="true" tabindex="-1"></a>my_caption <span class="ot">&lt;-</span> <span class="fu">paste0</span>(<span class="st">&#39;Left: &#39;</span>, my_caption1, <span class="st">&#39; Right: &#39;</span>, my_caption2)</span>
+<span id="cb65-2"><a href="appendix---61504---coal-creek.html#cb65-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb65-3"><a href="appendix---61504---coal-creek.html#cb65-3" aria-hidden="true" tabindex="-1"></a>knitr<span class="sc">::</span><span class="fu">include_graphics</span>(<span class="fu">get_img_path</span>(<span class="at">photo =</span> my_photo1))</span>
+<span id="cb65-4"><a href="appendix---61504---coal-creek.html#cb65-4" aria-hidden="true" tabindex="-1"></a>knitr<span class="sc">::</span><span class="fu">include_graphics</span>(<span class="st">&quot;fig/pixel.png&quot;</span>)</span>
+<span id="cb65-5"><a href="appendix---61504---coal-creek.html#cb65-5" aria-hidden="true" tabindex="-1"></a>knitr<span class="sc">::</span><span class="fu">include_graphics</span>(<span class="fu">get_img_path</span>(<span class="at">photo =</span> my_photo2))</span></code></pre></div>
+<div class="sourceCode" id="cb66"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb66-1"><a href="appendix---61504---coal-creek.html#cb66-1" aria-hidden="true" tabindex="-1"></a>my_photo1 <span class="ot">=</span> <span class="fu">pull_photo_by_str</span>(<span class="at">str_to_pull =</span> <span class="st">&#39;_u3_&#39;</span>)</span>
+<span id="cb66-2"><a href="appendix---61504---coal-creek.html#cb66-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb66-3"><a href="appendix---61504---coal-creek.html#cb66-3" aria-hidden="true" tabindex="-1"></a>my_caption1 <span class="ot">=</span> <span class="fu">paste0</span>(<span class="st">&#39;Typical habitat upstream of PSCIS crossing &#39;</span>, my_site, <span class="st">&#39;.&#39;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb67"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb67-1"><a href="appendix---61504---coal-creek.html#cb67-1" aria-hidden="true" tabindex="-1"></a>grid<span class="sc">::</span><span class="fu">grid.raster</span>(<span class="fu">get_img</span>(<span class="at">photo =</span> my_photo1))</span></code></pre></div>
 <div class="figure"><span style="display:block;" id="fig:photo-61504-05"></span>
 <img src="Elk-River-Watershed-Group-Fish-Passage-Restoration-Planning-2021_files/figure-html/photo-61504-05-1.png" alt="Typical habitat upstream of PSCIS crossing 61504." width="100%" />
 <p class="caption">
@@ -1021,29 +1021,29 @@ Figure 5.5: Typical habitat upstream of PSCIS crossing 61504.
 </p>
 </div>
 <p><br></p>
-<div class="sourceCode" id="cb113"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb113-1"><a href="appendix---61504---coal-creek.html#cb113-1" aria-hidden="true" tabindex="-1"></a>my_photo2 <span class="ot">=</span> <span class="fu">pull_photo_by_str</span>(<span class="at">str_to_pull =</span> <span class="st">&#39;_u4_&#39;</span>)</span>
-<span id="cb113-2"><a href="appendix---61504---coal-creek.html#cb113-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb113-3"><a href="appendix---61504---coal-creek.html#cb113-3" aria-hidden="true" tabindex="-1"></a>my_caption2 <span class="ot">=</span> <span class="fu">paste0</span>(<span class="st">&#39;Typical habitat upstream of PSCIS crossing &#39;</span>, my_site, <span class="st">&#39;.&#39;</span>)</span></code></pre></div>
-<div class="sourceCode" id="cb114"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb114-1"><a href="appendix---61504---coal-creek.html#cb114-1" aria-hidden="true" tabindex="-1"></a>grid<span class="sc">::</span><span class="fu">grid.raster</span>(<span class="fu">get_img</span>(<span class="at">photo =</span> my_photo2))</span></code></pre></div>
+<div class="sourceCode" id="cb68"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb68-1"><a href="appendix---61504---coal-creek.html#cb68-1" aria-hidden="true" tabindex="-1"></a>my_photo2 <span class="ot">=</span> <span class="fu">pull_photo_by_str</span>(<span class="at">str_to_pull =</span> <span class="st">&#39;_u4_&#39;</span>)</span>
+<span id="cb68-2"><a href="appendix---61504---coal-creek.html#cb68-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb68-3"><a href="appendix---61504---coal-creek.html#cb68-3" aria-hidden="true" tabindex="-1"></a>my_caption2 <span class="ot">=</span> <span class="fu">paste0</span>(<span class="st">&#39;Typical habitat upstream of PSCIS crossing &#39;</span>, my_site, <span class="st">&#39;.&#39;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb69"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb69-1"><a href="appendix---61504---coal-creek.html#cb69-1" aria-hidden="true" tabindex="-1"></a>grid<span class="sc">::</span><span class="fu">grid.raster</span>(<span class="fu">get_img</span>(<span class="at">photo =</span> my_photo2))</span></code></pre></div>
 <div class="figure"><span style="display:block;" id="fig:photo-61504-06"></span>
 <img src="Elk-River-Watershed-Group-Fish-Passage-Restoration-Planning-2021_files/figure-html/photo-61504-06-1.png" alt="Typical habitat upstream of PSCIS crossing 61504." width="100%" />
 <p class="caption">
 Figure 5.6: Typical habitat upstream of PSCIS crossing 61504.
 </p>
 </div>
-<div class="sourceCode" id="cb115"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb115-1"><a href="appendix---61504---coal-creek.html#cb115-1" aria-hidden="true" tabindex="-1"></a>my_caption <span class="ot">&lt;-</span> <span class="fu">paste0</span>(<span class="st">&#39;Left: &#39;</span>, my_caption1, <span class="st">&#39; Right: &#39;</span>, my_caption2)</span>
-<span id="cb115-2"><a href="appendix---61504---coal-creek.html#cb115-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb115-3"><a href="appendix---61504---coal-creek.html#cb115-3" aria-hidden="true" tabindex="-1"></a>knitr<span class="sc">::</span><span class="fu">include_graphics</span>(<span class="fu">get_img_path</span>(<span class="at">photo =</span> my_photo1))</span>
-<span id="cb115-4"><a href="appendix---61504---coal-creek.html#cb115-4" aria-hidden="true" tabindex="-1"></a>knitr<span class="sc">::</span><span class="fu">include_graphics</span>(<span class="st">&quot;fig/pixel.png&quot;</span>)</span>
-<span id="cb115-5"><a href="appendix---61504---coal-creek.html#cb115-5" aria-hidden="true" tabindex="-1"></a>knitr<span class="sc">::</span><span class="fu">include_graphics</span>(<span class="fu">get_img_path</span>(<span class="at">photo =</span> my_photo2))</span></code></pre></div>
+<div class="sourceCode" id="cb70"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb70-1"><a href="appendix---61504---coal-creek.html#cb70-1" aria-hidden="true" tabindex="-1"></a>my_caption <span class="ot">&lt;-</span> <span class="fu">paste0</span>(<span class="st">&#39;Left: &#39;</span>, my_caption1, <span class="st">&#39; Right: &#39;</span>, my_caption2)</span>
+<span id="cb70-2"><a href="appendix---61504---coal-creek.html#cb70-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb70-3"><a href="appendix---61504---coal-creek.html#cb70-3" aria-hidden="true" tabindex="-1"></a>knitr<span class="sc">::</span><span class="fu">include_graphics</span>(<span class="fu">get_img_path</span>(<span class="at">photo =</span> my_photo1))</span>
+<span id="cb70-4"><a href="appendix---61504---coal-creek.html#cb70-4" aria-hidden="true" tabindex="-1"></a>knitr<span class="sc">::</span><span class="fu">include_graphics</span>(<span class="st">&quot;fig/pixel.png&quot;</span>)</span>
+<span id="cb70-5"><a href="appendix---61504---coal-creek.html#cb70-5" aria-hidden="true" tabindex="-1"></a>knitr<span class="sc">::</span><span class="fu">include_graphics</span>(<span class="fu">get_img_path</span>(<span class="at">photo =</span> my_photo2))</span></code></pre></div>
 
-<div class="sourceCode" id="cb116"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb116-1"><a href="appendix---61504---coal-creek.html#cb116-1" aria-hidden="true" tabindex="-1"></a><span class="do">##this is just here so we can clear our environment for tests</span></span>
-<span id="cb116-2"><a href="appendix---61504---coal-creek.html#cb116-2" aria-hidden="true" tabindex="-1"></a>knitr<span class="sc">::</span>opts_chunk<span class="sc">$</span><span class="fu">set</span>(<span class="at">echo=</span><span class="cn">FALSE</span>, <span class="at">message=</span><span class="cn">FALSE</span>, <span class="at">warning=</span><span class="cn">FALSE</span>)</span>
-<span id="cb116-3"><a href="appendix---61504---coal-creek.html#cb116-3" aria-hidden="true" tabindex="-1"></a><span class="fu">source</span>(<span class="st">&#39;R/packages.R&#39;</span>)</span>
-<span id="cb116-4"><a href="appendix---61504---coal-creek.html#cb116-4" aria-hidden="true" tabindex="-1"></a><span class="fu">source</span>(<span class="st">&#39;R/functions.R&#39;</span>)</span>
-<span id="cb116-5"><a href="appendix---61504---coal-creek.html#cb116-5" aria-hidden="true" tabindex="-1"></a><span class="fu">source</span>(<span class="st">&#39;R/tables.R&#39;</span>)</span></code></pre></div>
-<div class="sourceCode" id="cb117"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb117-1"><a href="appendix---61504---coal-creek.html#cb117-1" aria-hidden="true" tabindex="-1"></a>my_site <span class="ot">&lt;-</span> <span class="dv">62181</span></span>
-<span id="cb117-2"><a href="appendix---61504---coal-creek.html#cb117-2" aria-hidden="true" tabindex="-1"></a>my_site2 <span class="ot">&lt;-</span> <span class="dv">62182</span></span></code></pre></div>
+<div class="sourceCode" id="cb71"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb71-1"><a href="appendix---61504---coal-creek.html#cb71-1" aria-hidden="true" tabindex="-1"></a><span class="do">##this is just here so we can clear our environment for tests</span></span>
+<span id="cb71-2"><a href="appendix---61504---coal-creek.html#cb71-2" aria-hidden="true" tabindex="-1"></a>knitr<span class="sc">::</span>opts_chunk<span class="sc">$</span><span class="fu">set</span>(<span class="at">echo=</span><span class="cn">FALSE</span>, <span class="at">message=</span><span class="cn">FALSE</span>, <span class="at">warning=</span><span class="cn">FALSE</span>)</span>
+<span id="cb71-3"><a href="appendix---61504---coal-creek.html#cb71-3" aria-hidden="true" tabindex="-1"></a><span class="fu">source</span>(<span class="st">&#39;R/packages.R&#39;</span>)</span>
+<span id="cb71-4"><a href="appendix---61504---coal-creek.html#cb71-4" aria-hidden="true" tabindex="-1"></a><span class="fu">source</span>(<span class="st">&#39;R/functions.R&#39;</span>)</span>
+<span id="cb71-5"><a href="appendix---61504---coal-creek.html#cb71-5" aria-hidden="true" tabindex="-1"></a><span class="fu">source</span>(<span class="st">&#39;R/tables.R&#39;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb72"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb72-1"><a href="appendix---61504---coal-creek.html#cb72-1" aria-hidden="true" tabindex="-1"></a>my_site <span class="ot">&lt;-</span> <span class="dv">62181</span></span>
+<span id="cb72-2"><a href="appendix---61504---coal-creek.html#cb72-2" aria-hidden="true" tabindex="-1"></a>my_site2 <span class="ot">&lt;-</span> <span class="dv">62182</span></span></code></pre></div>
 </div>
 </div>
             </section>

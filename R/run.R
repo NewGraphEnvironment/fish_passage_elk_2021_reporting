@@ -43,13 +43,13 @@ preview_chapter('index.Rmd')
 #################################################################################################
 
 ##   then make our printable pdf
-rmarkdown::render_site(output_format = 'pagedown::html_paged',
-                       encoding = 'UTF-8')
-##  move it to the docs folder so that it can be seen by the download button
-file.rename('Template.html', 'docs/Template.html')
-
-##now we need to print the docs/Elk.html file to Elk.pdf with chrome.  We should automate this step.  Do in browser for now
-openHTML('docs/Template.html')
+# rmarkdown::render_site(output_format = 'pagedown::html_paged',
+#                        encoding = 'UTF-8')
+# ##  move it to the docs folder so that it can be seen by the download button
+# file.rename('Template.html', 'docs/Template.html')
+#
+# ##now we need to print the docs/Elk.html file to Elk.pdf with chrome.  We should automate this step.  Do in browser for now
+# openHTML('docs/Template.html')
 
 ##move the phase 1 appendix back to main directory
 # file.rename('data/0600-appendix.Rmd', '0600-appendix.Rmd')

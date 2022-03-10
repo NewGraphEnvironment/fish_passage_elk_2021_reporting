@@ -89,7 +89,7 @@ tab_dams_raw <- bcfishpass %>%
     Notes = case_when(
       id == 1100000129 ~ 'Remnant dam not located in main channel.',
       id == 1100002016 ~ 'Large dam (15m  high at 55% grade) located in main channel. No fish ladder.',
-      id == 197542 ~ 'Two small dams (30cm and 40cm high) located just upstream (7m and 20m) of Dicken Road. Likely easily passable by adult WCT but barrier to fry and small juveniles. If culvert replaces these could be fixed concurrently.'
+      id == 197542 ~ 'Two small dams (30cm and 40cm high) located just upstream (7m and 20m) of Dicken Road. Likely easily passable by adult WCT but barrier to fry and small juveniles. If culvert replaced these could potentially be fixed at the same time.'
     )
   )
 

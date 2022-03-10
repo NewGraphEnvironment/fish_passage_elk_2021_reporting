@@ -3,6 +3,7 @@ title: "Elk River Watershed Group Fish Passage Restoration Planning 2021"
 author: |
  |
  | Prepared for
+ | Nupqu Limited Partnership
 
  |
  |
@@ -94,6 +95,34 @@ title.innerHTML = '<img src="fig/new graph text only.png" alt="NewGraph">' + tit
 
 
 
+# Executive Summary {.front-matter .unnumbered} 
+
+Nupqu Limited Partnership was retained by the Canadian Wildlife Federation in the summer of 2021 to conduct fish passage and habitat confirmation assessments at road-stream crossings and documented dam locations as part of connectivity restoration planning targeting westslope cutthrout trout within the Elk River watershed group. New Graph Environment Ltd. was sub-contracted by Nupqu Limited Partnership to assist with project delivery. The assessments conducted in 2021 compliment work completed in 2020 which included 72 fish passage assessments and 15 habitat confirmation assessments in the Elk River watershed group.  Reporting from 2020 can be viewed interactively online at https://newgraphenvironment.github.io/fish_passage_elk_2020_reporting_cwf/ [@irvine2021UpperElk].
+
+<br>
+
+
+The health and viability of freshwater fish populations can depend on access to tributary and off channel areas which provide refuge during high flows, opportunities for foraging, overwintering habitat, spawning habitat and summer rearing habitat [@Bramblett_2002; @swalesRoleOffChannelPonds1989; @diebel_etal2015EffectsRoad].  Culverts can present barriers to fish migration due to low water depth, increased water velocity, turbulence, a vertical drop at the culvert outlet and/or maintenance issues [@slaneyFishHabitatRehabilitation1997; @cote_etal2005Fishpassage].  Also of relevance to aquatic connectivity, there are a multitude of dam structures historically installed throughout the province for numerous purposes such as water extraction and hydropower generation. Provided connectivity planning incorporates a watershed based approach and effectively assesses the degree to which fish migration impacts the productivity of local fish populations, there are numerous opportunities to responsibly restore connectivity by ensuring that fish passage considerations are incorporated into repair, replacement, relocation and deactivation designs for both stream crossing barrier and dam barrier structures.
+
+
+<br>
+
+
+Phase 1 assessments were conducted at `r pscis_phase1 %>% nrow()` sites with `r pscis_phase1 %>% filter(barrier_result == 'Passable') %>% nrow()` crossings considered "passable", `r pscis_phase1 %>% filter(barrier_result == 'Potential') %>% nrow() %>% english::as.english()` crossing considered "potential" barriers and `r pscis_phase1 %>% filter(barrier_result == 'Barrier') %>% nrow() ` crossing considered "barriers" according to threshold values based on culvert embedment, outlet drop, slope, diameter (relative to channel size) and length [@fish_passage_assessments].  Additionally, although all were considered fully passable, `r pscis_phase1 %>% filter(barrier_result == 'Unknown') %>% nrow() %>% english::as.english()` crossings assessed were fords and thus assigned "unknown" status according to the provincial protocol. In addition, three historic dam locations were assessed for fish passage including sites on `r tab_dams_raw %>% arrange(id) %>% pull(stream) %>% knitr::combine_words()`.
+
+<br>
+
+During 2021 field assessments, habitat confirmation assessments were conducted at `r hab_site_priorities %>% nrow()` sites in the Elk River watershed group with a total of approximately `r habitat_confirmations_priorities %>% pull(survey_length_m) %>% sum() %>% round(-3)/1000`km of stream assessed. As collaborative decision making was ongoing at the time of reporting, site prioritization can be considered preliminary.  `r hab_site_priorities %>% filter(priority %ilike% 'high') %>% nrow() %>% english::as.english() %>% str_to_title()` crossings were rated as high priorities for proceeding to design for replacement, `r hab_site_priorities %>% filter(priority %ilike% 'Moderate') %>% nrow() %>% english::as.english()` crossings were rated as moderate priorities, and `r hab_site_priorities %>% filter(priority %ilike% 'Low') %>% nrow() %>% english::as.english()` crossings were rated as low priorities.  Only summary tables and raw data is provided for surveys conducted within the Flathead River sub-basin (Parker Creek, Morris Creek, Fuel Creek and Kisoo Creek) with additional reporting potentially provided in the future under separate cover. Detailed information for each site assessed with Phase 2 assessments on streams that drain into the Elk River are presented within site specific appendices to this document.
+
+<br>
+
+Effective connectivity planning incorporates a watershed based approach and develops an understanding of subject aquatic systems to a level where the connectivity restoration actions that are prioritized are highly likely to increase the productivity of local fish populations.  Baseline and follow up monitoring to assess productivity and limiting factors at sites of remedial works is important to foster this understanding. 
+
+
+<!--chapter:end:0040-executive_summary.Rmd-->
+
+
+
 # Introduction {#intro}
 
 `r if(identical(gitbook_on, FALSE))knitr::asis_output("This report is available as pdf and as an online [interactive report](https://newgraphenvironment.github.io/fish_passage_elk_2021_reporting/) at https://newgraphenvironment.github.io/fish_passage_elk_2021_reporting/. We recommend viewing online as the web-hosted html version contains more features and is more easily navigable.")` 
@@ -101,12 +130,12 @@ title.innerHTML = '<img src="fig/new graph text only.png" alt="NewGraph">' + tit
 
 `r if(identical(gitbook_on, FALSE)){knitr::asis_output("<br>")}`
 
-Nupqu Limited Partnership was retained by the Canadian Wildlife Federation in the summer of 2021 to conduct fish passage and habitat confirmation assessments at road-stream crossings as part of connectivity restoration planning targeting westslope cutthrout trout within the Elk River watershed group. New Graph Environment Ltd. was sub-contracted by Nupqu Limited Partnership to assist with project delivery. The assessments build on work completed in 2020 which included 72 fish passage assessments and 15 habitat confirmation assessments in the Elk River watershed group [@irvine2021UpperElk]. 
+Nupqu Limited Partnership was retained by the Canadian Wildlife Federation in the summer of 2021 to conduct fish passage and habitat confirmation assessments at road-stream crossings and documented dam locations as part of connectivity restoration planning targeting westslope cutthrout trout within the Elk River watershed group. New Graph Environment Ltd. was sub-contracted by Nupqu Limited Partnership to assist with project delivery. The assessments conducted in 2021 compliment work completed in 2020 which included 72 fish passage assessments and 15 habitat confirmation assessments in the Elk River watershed group.  Reporting from 2020 can be viewed interactively online at https://newgraphenvironment.github.io/fish_passage_elk_2020_reporting_cwf/ [@irvine2021UpperElk].
 
 <br>
 
 
-The health and viability of freshwater fish populations can depend on access to tributary and off channel areas which provide refuge during high flows, opportunities for foraging, overwintering habitat, spawning habitat and summer rearing habitat [@Bramblett_2002; @swalesRoleOffChannelPonds1989; @diebel_etal2015EffectsRoad].  Culverts can present barriers to fish migration due to low water depth, increased water velocity, turbulence, a vertical drop at the culvert outlet and/or maintenance issues [@slaneyFishHabitatRehabilitation1997; @cote_etal2005Fishpassage]. As road crossing structures are commonly upgraded or removed there are numerous opportunities to restore connectivity by ensuring that fish passage considerations are incorporated into repair, replacement, relocation and deactivation designs. 
+The health and viability of freshwater fish populations can depend on access to tributary and off channel areas which provide refuge during high flows, opportunities for foraging, overwintering habitat, spawning habitat and summer rearing habitat [@Bramblett_2002; @swalesRoleOffChannelPonds1989; @diebel_etal2015EffectsRoad].  Culverts can present barriers to fish migration due to low water depth, increased water velocity, turbulence, a vertical drop at the culvert outlet and/or maintenance issues [@slaneyFishHabitatRehabilitation1997; @cote_etal2005Fishpassage].  Also of relevance to aquatic connectivity, there are a multitude of dam structures historically installed throughout the province for numerous purposes such as water extraction and hydropower generation. Provided connectivity planning incorporates a watershed based approach and effectively assesses the degree to which fish migration impacts the productivity of local fish populations, there are numerous opportunities to responsibly restore connectivity by ensuring that fish passage considerations are incorporated into repair, replacement, relocation and deactivation designs for both stream crossing barrier and dam barrier structures.
 
 
 
@@ -131,15 +160,11 @@ The Canadian Wildlife Federation has been working on a watershed connectivity re
 
 ## Project Location
 
-To focus the project within habitat considered high value for conservation of westslope cutthrout trout, the study area included the upper Elk River watershed upstream of the Kookanusa Reservoir (Figure \@ref(fig:overview-map)).  
+To focus the project within habitat considered high value for conservation of westslope cutthrout trout, the study area included the Elk River watershed group. The Elk River has a mean annual discharge of `r round(fasstr::calc_longterm_mean(station_number = "08NK016")$LTMAD,1)` m^3^/s at station 08NK016 near Sparwood and `r round(fasstr::calc_longterm_mean(station_number = "08NK002")$LTMAD,1)` m^3^/s at station 08NK016 near Fernie with flow patterns typical of high elevation watersheds on the west side of the Rocky Mountains which receive large amounts of precipitation as snow leading to peak levels of discharge during snowmelt, typically from May to July (Figures \@ref(fig:hydrology-plot) - \@ref(fig:hydrology-stats2)) [@canada2020NationalWater]. 
 
 <br>
 
-The Elk River has a mean annual discharge of `r round(fasstr::calc_longterm_mean(station_number = "08NK016")$LTMAD,1)` m^3^/s at station 08NK016 near Sparwood and `r round(fasstr::calc_longterm_mean(station_number = "08NK002")$LTMAD,1)` m^3^/s at station 08NK016 near Fernie with flow patterns typical of high elevation watersheds on the west side of the Rocky Mountains which receive large amounts of precipitation as snow leading to peak levels of discharge during snowmelt, typically from May to July (Figures \@ref(fig:hydrology-plot) - \@ref(fig:hydrology-stats2)) [@canada2020NationalWater]. 
-
-<br>
-
-```{r overview-map, fig.cap = 'Overview map of Study Areas',eval=T}
+```{r overview-map, fig.cap = 'Overview map of Study Areas',eval=F}
 knitr::include_graphics("fig/logo.png")
 ```
 
@@ -221,7 +246,8 @@ Fish species recorded in the Elk River watershed group are detailed in Table \@r
 fiss_species_table <- readr::read_csv(file = paste0(getwd(), '/data/inputs_extracted/02_prep_report/fiss_species_table.csv'))
   # filter(`Species Code` != 'CT') %>% 
 fiss_species_table %>%  
-  my_kable(caption_text = 'Fish species recorded in the study areas (FISS 2020).')
+  rename(Elk = `Upper Elk`) %>% 
+  my_kable(caption_text = 'Fish species recorded in the study area (FISS 2020).')
 
 
 ```
@@ -302,14 +328,14 @@ Priorities for site assessment locations were provided by Canadian Wildlife Fede
 
 <br>
 
-### Accessible Habitat 
+### Accessible Habitat Modelling
 
 `bcfishpass` calculates the average gradient of BC Freshwater Atlas stream network lines at minimum 100m long intervals starting from the downstream end of the streamline segment and working upstream.  The network lines are broken into max gradient categories with new segments created if and when the average slope of the stream line segment exceeds user provided thresholds. For this project, the user provided gradient thresholds used to delineate "potentially accessible habitat" were based on estimated max gradients that westslope cutthrout trout (20%) are likely to be capable of ascending. `bcfishpass` identifes natural barriers (ex. steep gradients for extended distances) and hydroelectric dams to classifying the accessibility upstream by fish [@norris2021smnorrisbcfishpass]. On potentially accessible streams, scripts identify known barriers (ex. waterfalls >5m high) and additional anthropogenic features which are primarily road/railway stream crossings (i.e. culverts) that are potentially barriers. To prioritize these features for assessment or remediation, scripts report on how much modelled potentially accessible aquatic habitat the barriers may obstruct. The model can be refined with known fish observations upstream of identified barriers and for each crossing location, the area of lake and wetland habitat upstream, species documented upstream/downstream, an estimate of watershed area (on 2nd order and higher streams), estimates of discharge, mean annual precipitation weighted to upstream watershed area and channel width.  This, information, can be used to provides an indication of the potential quantity and quality of habitat potentially gained should fish passage be restored by comparing to user defined thresholds for the aforementioned parameters. 
 
 <br>
 
 
-`bcfishpass` and associated tools have been designed to be flexible in analysis, accepting user defined gradient, channel width and stream discharge categories [@moeStreamInventorySample].  Although currently in draft form, and subject to development revisions, Canadian Wildlife Federation assigned gradient and discharge thresholds for habitat with the highest intrinsic value for westslope cutthrout trout have been estimated and applied to model habitat upstream of stream crossing locations with thresholds estimated based on a literature review and professional opinion (Table \@ref(tab:tab-fish-spawning-rearing)).   
+`bcfishpass` and associated tools have been designed to be flexible in analysis, accepting user defined gradient, channel width and stream discharge categories [@moeStreamInventorySample].  Although currently in draft form, and subject to development revisions, Canadian Wildlife Federation assigned gradient and discharge thresholds for habitat with the highest intrinsic value for westslope cutthrout trout have been estimated and applied to model habitat upstream of stream crossing locations with thresholds estimated based on a literature review and professional opinion (Table \@ref(tab:tab-fish-spawning-rearing)). Results from modelling are presented for habitat confirmation sites in appendices using output parameters present in 
 
 
 
@@ -344,6 +370,17 @@ bcfishpass_spawn_rear_model %>%
   filter(!Variable %ilike% 'Width') %>% 
   my_kable(caption_text = 'Stream gradient and channel width thresholds used to model potentially highest value westslope cutthrout trout habitat.')
 
+```
+
+
+<br>
+
+```{r tab-bcfp-def}
+xref_bcfishpass_names %>% 
+  filter(id_side == 1) %>% 
+  arrange(id_join) %>%  
+  select(Attribute = report, Definition = column_comment) %>% 
+  my_kable(caption_text = 'bcfishpass outputs and associated definitions')
 ```
 
 <!-- <br> -->
@@ -676,10 +713,11 @@ map <- leaflet(height=500, width=780) %>%
                  opacity=0.75, color = '#e216c4',
                fillOpacity = 0.75, weight=5, group = "Phase 2") %>%
   addAwesomeMarkers(
-    lng = photo_metadata$gps_longitude,lat = photo_metadata$gps_latitude,
-                    popup = leafpop::popupImage(photo_metadata$url, src = "remote"),
-                    clusterOptions = markerClusterOptions(),
-                    group = "Phase 2") %>%
+    lng = photo_metadata$gps_longitude,
+    lat = photo_metadata$gps_latitude,
+    popup = leafpop::popupImage(photo_metadata$url, src = "remote"),
+    clusterOptions = markerClusterOptions(),
+    group = "Phase 2") %>%
     addCircleMarkers(
     data=tab_hab_map,
     label = tab_hab_map$pscis_crossing_id,
@@ -732,7 +770,7 @@ map %>%
 
 ## Phase 1
 
-Field assessments were conducted between `r format(min(pscis_phase1$date), format="%B %d %Y")` and `r format(max(pscis_phase1$date), format="%B %d %Y")` by Allan Irvine, R.P.Bio., Kyle Prince, P.Biol., Stevie Syer, Rafael Acosta Lugo and Brody Klenk. A total of `r n_distinct(pscis_phase1$my_crossing_reference)` Phase 1 assessments were conducted with `r pscis_phase1 %>% filter(barrier_result == 'Passable') %>% nrow()` crossings considered "passable", `r pscis_phase1 %>% filter(barrier_result == 'Potential') %>% nrow() %>% english::as.english()` crossing considered "potential" barriers and `r pscis_phase1 %>% filter(barrier_result == 'Barrier') %>% nrow() ` crossing considered "barriers" according to threshold values based on culvert embedment, outlet drop, slope, diameter (relative to channel size) and length [@fish_passage_assessments].  Additionally, although all were considered fully passable, `r pscis_phase1 %>% filter(barrier_result == 'Unknown') %>% nrow() %>% english::as.english()` crossings assessed were fords with a barrier ranking of "unknown". Georeferenced field maps are presented in `r if(gitbook_on){knitr::asis_output("[here](https://hillcrestgeo.ca/outgoing/fishpassage/projects/elk/) and available for bulk download as [Attachment 1](https://hillcrestgeo.ca/outgoing/fishpassage/projects/elk/archive/2021-01-31/elk_2021-01-31.zip).")} else knitr::asis_output("[Attachment 1](https://hillcrestgeo.ca/outgoing/fishpassage/projects/elk/archive/2021-01-31/elk_2021-01-31.zip).")` A summary of crossings assessed, a cost benefit analysis and priority ranking for follow up for Phase 1 sites presented in Table \@ref(tab:cost-est-phase-1). Detailed data with photos are presented in `r if(gitbook_on){knitr::asis_output("[Appendix - Phase 1 Fish Passage Assessment Data and Photos]")} else knitr::asis_output("[Attachment 3](https://github.com/NewGraphEnvironment/fish_passage_bulkley_2020_reporting/raw/master/docs/Attachment_3_Phase_1_Data_and_Photos.pdf)")`.
+Field assessments were conducted between `r format(min(pscis_phase1$date), format="%B %d %Y")` and `r format(max(pscis_phase1$date), format="%B %d %Y")` by Allan Irvine, R.P.Bio., Kyle Prince, P.Biol., Stevie Syer, Rafael Acosta Lugo and Brody Klenk. A total of `r n_distinct(pscis_phase1$my_crossing_reference)` Phase 1 assessments were conducted at `r pscis_phase1 %>% nrow()` sites with `r pscis_phase1 %>% filter(barrier_result == 'Passable') %>% nrow()` crossings considered "passable", `r pscis_phase1 %>% filter(barrier_result == 'Potential') %>% nrow() %>% english::as.english()` crossing considered "potential" barriers and `r pscis_phase1 %>% filter(barrier_result == 'Barrier') %>% nrow() ` crossing considered "barriers" according to threshold values based on culvert embedment, outlet drop, slope, diameter (relative to channel size) and length [@fish_passage_assessments].  Additionally, although all were considered fully passable, `r pscis_phase1 %>% filter(barrier_result == 'Unknown') %>% nrow() %>% english::as.english()` crossings assessed were fords. Georeferenced field maps are presented in `r if(gitbook_on){knitr::asis_output("[here](https://hillcrestgeo.ca/outgoing/fishpassage/projects/elk/) and available for bulk download as [Attachment 1](https://hillcrestgeo.ca/outgoing/fishpassage/projects/elk/archive/2021-01-31/elk_2021-01-31.zip).")} else knitr::asis_output("[Attachment 1](https://hillcrestgeo.ca/outgoing/fishpassage/projects/elk/archive/2021-01-31/elk_2021-01-31.zip).")` A summary of crossings assessed, a cost benefit analysis and priority ranking for follow up for Phase 1 sites presented in Table \@ref(tab:cost-est-phase-1). Detailed data with photos are presented in `r if(gitbook_on){knitr::asis_output("[Appendix - Phase 1 Fish Passage Assessment Data and Photos]")} else knitr::asis_output("[Attachment 3](https://github.com/NewGraphEnvironment/fish_passage_elk_2021_reporting/raw/master/docs/Attachment_3_Phase_1_Data_and_Photos.pdf)")`.
 
 
 <br>
@@ -754,16 +792,102 @@ if(gitbook_on){
 
 <br>
 
-## Phase 2
+## Dam Assessments
+Three historic dam locations were assessed for fish passage including sites on `r tab_dams_raw %>% arrange(id) %>% pull(stream) %>% knitr::combine_words()`.  Results are presented in Table \@ref(tab:tab-dams)
 
-During 2020 field assessments, habitat confirmation assessments were conducted at `r hab_site_priorities %>% nrow()` sites in the Elk River watershed group with a total of approximately `r habitat_confirmations_priorities %>% pull(survey_length_m) %>% sum() %>% round(-3)/1000`km of stream assessed.  Georeferenced field maps are presented in `r if(gitbook_on){knitr::asis_output("[here](https://hillcrestgeo.ca/outgoing/fishpassage/projects/elk/) and available for bulk download as [Attachment 1](https://hillcrestgeo.ca/outgoing/fishpassage/projects/elk/archive/2021-01-31/elk_2021-01-31.zip).")} else knitr::asis_output("[Attachment 1](https://hillcrestgeo.ca/outgoing/fishpassage/projects/elk/archive/2021-01-31/elk_2021-01-31.zip).")`
+```{r tab-dams}
+tab_dams_raw %>% 
+  select(-utm_zone) %>% 
+  arrange(id) %>% 
+  purrr::set_names(nm = c('Site', 'Stream', 'Easting', 'Northing', 'Mapsheet', 'Barrier', 'Notes')) %>% 
+  my_kable(caption_text = 'Results from fish passability assessments at dams.',
+           footnote_text = 'UTM Zone 11')
+```
+
+<br>
+```{r photo-dams-01-prep, eval=T}
+my_site = 197542
+my_photo1 = pull_photo_by_str(str_to_pull = '_1_')
+
+my_caption1 = paste0('Small dam ~7m upstream of PSCIS crossing ', my_site, ' on Hartley Creek.')
+
+```
+
+```{r photo-dams-01, fig.cap= my_caption1, out.width = photo_width, eval=gitbook_on}
+grid::grid.raster(get_img(photo = my_photo1))
+```
 
 <br>
 
-As collaborative decision making was ongoing at the time of reporting, site prioritization can be considered preliminary.  `r hab_site_priorities %>% filter(priority %ilike% 'high') %>% nrow() %>% english::as.english() %>% str_to_title()` crossings were rated as high priorities for proceeding to design for replacement, `r hab_site_priorities %>% filter(priority %ilike% 'Moderate') %>% nrow() %>% english::as.english()` crossings were rated as moderate priorities, and `r hab_site_priorities %>% filter(priority %ilike% 'Low') %>% nrow() %>% english::as.english()` crossings were rated as low priorities. Results are summarized in `r if(gitbook_on){knitr::asis_output("Figure \\@ref(fig:map-interactive) and ")}`Table \@ref(tab:tab-overview)) with raw habitat and fish sampling data included in digital format as [Attachment 4](https://github.com/NewGraphEnvironment/fish_passage_elk_2021_reporting/raw/master/data/habitat_confirmations.xls).  A summary of watershed statistics from derived watershed areas andpreliminary modelling results illustrating the quantities of westslope cutthrout trout spawning and rearing habitat potentially available upstream of each crossing as estimated by upstream accessible stream length are presented in Table \@ref(tab:tab-wshd-sum-all) and Figure \@ref(fig:plot-model-all). Only summary tables and raw data is provided for surveys conducted within the Flathead River sub-basin with detailed reporting potentially provided under separate cover. Detailed information for each site assessed with Phase 2 assessments (including georeferenced maps) on streams that drain into the Elk River are presented within site specific appendices to this document.
+```{r photo-dams-02-prep}
+my_photo2 = pull_photo_by_str(str_to_pull = '_2_')
+
+my_caption2 = paste0('Small dam ~20m upstream of PSCIS crossing ', my_site, ' on Hartley Creek.')
+```
+
+```{r photo-dams-02, fig.cap= my_caption2, out.width = photo_width, eval=gitbook_on}
+grid::grid.raster(get_img(photo = my_photo2))
+
+```
+
+<br>
+
+```{r photo-dams-d01, fig.cap = my_caption, fig.show="hold", out.width= c("49.5%","1%","49.5%"), eval=identical(gitbook_on, FALSE)}
+
+my_caption <- paste0('Left: ', my_caption1, ' Right: ', my_caption2)
+
+knitr::include_graphics(get_img_path(photo = my_photo1))
+knitr::include_graphics("fig/pixel.png")
+knitr::include_graphics(get_img_path(photo = my_photo2))
+```
 
 
-`r if(gitbook_on){knitr::asis_output("<br>")} else knitr::asis_output("\\pagebreak")`
+```{r photo-dams-03-prep}
+my_site = 1063 #old id
+my_photo1 = pull_photo_by_str(str_to_pull = '_1_')
+
+my_caption1 = paste0('Teck Coal Limited dam (15m high and 55% gradient) on Harmer Creek.')
+```
+
+```{r photo-dams-03, fig.cap= my_caption1, out.width = photo_width, eval=gitbook_on}
+grid::grid.raster(get_img(photo = my_photo1))
+
+```
+
+<br>
+
+```{r photo-dams-04-prep}
+my_site2 = 2606
+my_photo2 = pull_photo_by_str(site_id = my_site2,str_to_pull = '_1_')
+
+my_caption2 = paste0('Historic dam structure adjacent to Boivin Creek.')
+
+```
+
+```{r photo-dams-04, fig.cap= my_caption2, out.width = photo_width, eval=gitbook_on}
+grid::grid.raster(get_img(site = my_site2, photo = my_photo2))
+```
+
+```{r photo-dams-d02, fig.cap = my_caption, fig.show="hold", out.width= c("49.5%","1%","49.5%"), eval=identical(gitbook_on, FALSE)}
+
+my_caption <- paste0('Left: ', my_caption1, ' Right: ', my_caption2)
+
+knitr::include_graphics(get_img_path(photo = my_photo1))
+knitr::include_graphics("fig/pixel.png")
+knitr::include_graphics(get_img_path(site = my_site2, photo = my_photo2))
+```
+
+
+
+## Phase 2
+
+During 2021 field assessments, habitat confirmation assessments were conducted at `r hab_site_priorities %>% nrow()` sites in the Elk River watershed group with a total of approximately `r habitat_confirmations_priorities %>% pull(survey_length_m) %>% sum() %>% round(-3)/1000`km of stream assessed.  Georeferenced field maps are presented in `r if(gitbook_on){knitr::asis_output("[here](https://hillcrestgeo.ca/outgoing/fishpassage/projects/elk/) and available for bulk download as [Attachment 1](https://hillcrestgeo.ca/outgoing/fishpassage/projects/elk/archive/2021-01-31/elk_2021-01-31.zip).")} else knitr::asis_output("[Attachment 1](https://hillcrestgeo.ca/outgoing/fishpassage/projects/elk/archive/2021-01-31/elk_2021-01-31.zip).")`
+
+<br>
+
+As collaborative decision making was ongoing at the time of reporting, site prioritization can be considered preliminary.  `r hab_site_priorities %>% filter(priority %ilike% 'high') %>% nrow() %>% english::as.english() %>% str_to_title()` crossings were rated as high priorities for proceeding to design for replacement, `r hab_site_priorities %>% filter(priority %ilike% 'Moderate') %>% nrow() %>% english::as.english()` crossings were rated as moderate priorities, and `r hab_site_priorities %>% filter(priority %ilike% 'Low') %>% nrow() %>% english::as.english()` crossings were rated as low priorities. Results are summarized in `r if(gitbook_on){knitr::asis_output("Figure \\@ref(fig:map-interactive) and ")}`Table \@ref(tab:tab-overview)) with raw habitat and fish sampling data included in digital format as [Attachment 4](https://github.com/NewGraphEnvironment/fish_passage_elk_2021_reporting/raw/master/data/habitat_confirmations.xls).  A summary of watershed statistics from derived watershed areas andpreliminary modelling results illustrating the quantities of westslope cutthrout trout spawning and rearing habitat potentially available upstream of each crossing as estimated by upstream accessible stream length are presented in Table \@ref(tab:tab-wshd-sum-all) and Figure \@ref(fig:plot-model-all). Only summary tables and raw data is provided for surveys conducted within the Flathead River sub-basin (Parker Creek, Morris Creek, Fuel Creek and Kisoo Creek) with detailed reporting potentially provided in the future under separate cover. Detailed information for each site assessed with Phase 2 assessments (including georeferenced maps) on streams that drain into the Elk River are presented within site specific appendices to this document.
+
+
 
 `r if(gitbook_on){knitr::asis_output("<br>")} else knitr::asis_output("\\pagebreak")`
 
@@ -925,7 +1049,24 @@ bcfishpass_phase2_plot_prep %>%
 
 # Recommendations
 
-Although remediation and replacement of stream crossing structures can have benefits to local fish populations [@saldicaromileStreamHabitatRestoration2004; @roni_etal2008GlobalReview], the costs of remedial works can be significant and the impacts of the work on fisheries communities often complex to evaluate and quantify.  The potential cost benefits, ethical dynamics and feasibility of ecosystem restoration funding allocation towards infrastructure upgrades on transportation right of ways should be explored collaboratively alongside the cost benefits, ethical dynamics and feasibility of alternative/additional investment activities such as transportation corridor relocation/deactivation, land procurement/covenant, cattle exclusion, riparian restoration, habitat complexing, water conservation, commercial/recreational fishing management and research.
+Recommendations for potential incorporation into collaborative watershed connectivity planning for the Elk River watershed group include:
+
+
+ * Continue to acquire background information to clarify current conditions within subject streams and identify limiting factors to help inform prioritization and effectiveness monitoring programs.  
+ 
+ * Develop strategies to explore cost benefits and ethics of stream crossing structure upgrades alongside the cost benefits and ethics of alternative/additional restoration and enhancement investments such as land procurement/covenant, cattle exclusion, riparian restoration, habitat complexing, water conservation, commercial/recreational fishing management, water treatment and research. Look for opportunities to leverage initiatives together for maximum restoration benefits.
+ 
+ * Refine barrier thresholds for road-stream crossing structures to explore metrics specific to life stage and life history types of species of interest. This will further focus efforts of potential remediation actions based on biological attributes (ex. timing of migration, size/direction of fish migrating, etc.) and could result in the consideration of interim "stop-gap" physical works to alter crossing characteristics that can address key connectivity issues yet be significantly less costly than structure replacements (ex. building up of downstream area with rock riffles to decrease the outlet drop size and/or increasing water depth within pipe with baffles and substrate additions).
+ 
+ * Model fish densities (fish/m^2^) vs. habitat/water quality characteristics (i.e. gradient, watershed size, channel size, alkalinity, elevation, etc.) using historically gathered electrofishing data to inform crossing prioritization, future data acquisition needs, and the monitoring of subsequent restoration actions.
+
+  * Continue to develop `bcfishpass`,`bcfishobs`, `fwapg`, `bcdata` and other open source data analysis and presentation tools that are scaleable and facilitate continual improvement.  Tools should continue to be flexible and well documented to allow the future incorporation of alternative fragmentation indicators, habitat gain/value metrics and watershed sensitivity indicators.
+ 
+ * Continue to collaborate with potential partners to build relationships, explore perspectives and develop “road maps” for fish passage restoration in different situations (MoT roads, rail lines, permit roads of different usages, FSRs, etc.) – documenting the people involved, discussions and processes that are undertaken, funding options, synergies, measures of success, etc. 
+
+ * Effective connectivity planning incorporates a watershed based approach and develops an understanding of subject aquatic systems to a level where the connectivity restoration actions that are prioritized are highly likely to increase the productivity of local fish populations.  For this reason it is recommended that baseline and follow up monitoring assess productivity and limiting factors at sites of potential remedial works to foster this understanding. 
+
+
 
 <!--chapter:end:0500-recomendations.Rmd-->
 
@@ -1760,6 +1901,13 @@ print_tab_summary()
 
 ```
 
+
+<br>
+
+```{r tab-culvert-197786, eval = T}
+print_tab_summary(site = my_site2, site_photo_id = my_site2)
+
+```
 
 <br>
 

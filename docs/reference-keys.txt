@@ -1,16 +1,21 @@
-fig:overview-map
 fig:hydrology-plot
 fig:hydrology-stats1
 fig:hydrology-stats2
 tab:fiss-species-table
 fig:fish-wct-bar
 tab:tab-fish-spawning-rearing
+tab:tab-bcfp-def
 tab:tab-hab-value
 tab:tab-barrier-scoring
 tab:tab-barrier-result
 tab:tab-cost-mult
 fig:map-interactive
 tab:cost-est-phase-1
+tab:tab-dams
+fig:photo-dams-01
+fig:photo-dams-02
+fig:photo-dams-03
+fig:photo-dams-04
 tab:tab-overview
 tab:unnamed-chunk-4
 tab:cost-est-phase-2
@@ -46,6 +51,7 @@ fig:photo-62505-04
 tab:tab-wshd-197787
 tab:tab-culvert-bcfp-197787
 tab:tab-culvert-197787
+tab:tab-culvert-197786
 tab:tab-habitat-summary-197787
 tab:tab-culvert-bcfp-197786
 fig:photo-197787-01
@@ -91,7 +97,7 @@ fisheries
 westslope-cutthrout-trout
 methods
 planning
-accessible-habitat
+accessible-habitat-modelling
 pscis-and-modelled-stream-crossing-review
 fish-passage-assessments
 barrier-scoring
@@ -102,6 +108,7 @@ reporting
 mapping
 results-and-discussion
 phase-1
+dam-assessments
 phase-2
 recommendations
 stream-characteristics-upstream-of-197786

@@ -209,6 +209,7 @@ div.csl-indent {
 
 <li class="divider"></li>
 <li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Acknowledgement</a></li>
+<li class="chapter" data-level="" data-path="executive-summary.html"><a href="executive-summary.html"><i class="fa fa-check"></i>Executive Summary</a></li>
 <li class="chapter" data-level="1" data-path="intro.html"><a href="intro.html"><i class="fa fa-check"></i><b>1</b> Introduction</a></li>
 <li class="chapter" data-level="2" data-path="background.html"><a href="background.html"><i class="fa fa-check"></i><b>2</b> Background</a></li>
 <li class="chapter" data-level="3" data-path="methods.html"><a href="methods.html"><i class="fa fa-check"></i><b>3</b> Methods</a></li>
@@ -255,11 +256,11 @@ div.csl-indent {
 <h2><span class="header-section-number">3.1</span> Planning</h2>
 <p>Priorities for site assessment locations were provided by Canadian Wildlife Federation with some additional sites selected by field crews based on background literature, fisheries information, PSCIS, <code>bcfishpass</code> <span class="citation">(Norris [2020] 2021)</span> outputs and field reconnaissance. <code>bcfishpass</code> is an open-source code repository that models aquatic connectivity based on a suite of hard coded (maximum stream slope downstream, PSCIS barrier information, <a href="https://github.com/smnorris/bcdams">dam locations</a> and user defined parameters (<a href="https://github.com/smnorris/bcfishpass/tree/main/parameters">gradient/width/discharge</a>). Details of the general methodology can be found <a href="https://github.com/smnorris/bcfishpass">here</a> and will be updated over time as the tools evolve. Once a development environment is properly setup, the software builds a local <code>postgresql</code> database through the utilization of other open-source tools such as <a href="https://github.com/smnorris/bcdata"><code>bcdata</code></a> <span class="citation">(Norris [2016] 2021)</span>, <a href="https://github.com/smnorris/bcfishobs"><code>bcfishobs</code></a> <span class="citation">(Norris [2018] 2021)</span>, and <a href="https://github.com/smnorris/fwapg"><code>fwapg</code></a> <span class="citation">(Norris [2019] 2021)</span> to provide connectivity models developed from analysis of the BC Freshwater Atlas, road layers, fisheries information, Pacific Climate Impacts Consortium stream discharge data, measured and <a href="https://www.poissonconsulting.ca/temporary-hidden-link/859859031/channel-width-21b/">modeled estimates of channel width</a> and numerous other standardized datasets downloaded directly from the <a href="https://catalogue.data.gov.bc.ca/">BC Data Catalogue</a> application programming interface using <code>bcdata</code>.</p>
 <p><br></p>
-<div id="accessible-habitat" class="section level3" number="3.1.1">
-<h3><span class="header-section-number">3.1.1</span> Accessible Habitat</h3>
+<div id="accessible-habitat-modelling" class="section level3" number="3.1.1">
+<h3><span class="header-section-number">3.1.1</span> Accessible Habitat Modelling</h3>
 <p><code>bcfishpass</code> calculates the average gradient of BC Freshwater Atlas stream network lines at minimum 100m long intervals starting from the downstream end of the streamline segment and working upstream. The network lines are broken into max gradient categories with new segments created if and when the average slope of the stream line segment exceeds user provided thresholds. For this project, the user provided gradient thresholds used to delineate “potentially accessible habitat” were based on estimated max gradients that westslope cutthrout trout (20%) are likely to be capable of ascending. <code>bcfishpass</code> identifes natural barriers (ex. steep gradients for extended distances) and hydroelectric dams to classifying the accessibility upstream by fish <span class="citation">(Norris [2020] 2021)</span>. On potentially accessible streams, scripts identify known barriers (ex. waterfalls &gt;5m high) and additional anthropogenic features which are primarily road/railway stream crossings (i.e. culverts) that are potentially barriers. To prioritize these features for assessment or remediation, scripts report on how much modelled potentially accessible aquatic habitat the barriers may obstruct. The model can be refined with known fish observations upstream of identified barriers and for each crossing location, the area of lake and wetland habitat upstream, species documented upstream/downstream, an estimate of watershed area (on 2nd order and higher streams), estimates of discharge, mean annual precipitation weighted to upstream watershed area and channel width. This, information, can be used to provides an indication of the potential quantity and quality of habitat potentially gained should fish passage be restored by comparing to user defined thresholds for the aforementioned parameters.</p>
 <p><br></p>
-<p><code>bcfishpass</code> and associated tools have been designed to be flexible in analysis, accepting user defined gradient, channel width and stream discharge categories <span class="citation">(MoE 2020e)</span>. Although currently in draft form, and subject to development revisions, Canadian Wildlife Federation assigned gradient and discharge thresholds for habitat with the highest intrinsic value for westslope cutthrout trout have been estimated and applied to model habitat upstream of stream crossing locations with thresholds estimated based on a literature review and professional opinion (Table <a href="methods.html#tab:tab-fish-spawning-rearing">3.1</a>).</p>
+<p><code>bcfishpass</code> and associated tools have been designed to be flexible in analysis, accepting user defined gradient, channel width and stream discharge categories <span class="citation">(MoE 2020e)</span>. Although currently in draft form, and subject to development revisions, Canadian Wildlife Federation assigned gradient and discharge thresholds for habitat with the highest intrinsic value for westslope cutthrout trout have been estimated and applied to model habitat upstream of stream crossing locations with thresholds estimated based on a literature review and professional opinion (Table <a href="methods.html#tab:tab-fish-spawning-rearing">3.1</a>). Results from modelling are presented for habitat confirmation sites in appendices using output parameters present in</p>
 <p><br></p>
 <div class="sourceCode" id="cb28"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb28-1"><a href="methods.html#cb28-1" aria-hidden="true" tabindex="-1"></a><span class="co">#`r if(identical(gitbook_on, FALSE)){knitr::asis_output(&quot;&lt;br&gt;&lt;br&gt;&lt;br&gt;&quot;)}`</span></span>
 <span id="cb28-2"><a href="methods.html#cb28-2" aria-hidden="true" tabindex="-1"></a><span class="co"># with references provided in Table \@ref(tab:tab-fish-spawning-rearing-references). </span></span>
@@ -352,42 +353,169 @@ Rearing MAD Max (m3/s)
 </tr>
 </tbody>
 </table>
+<p><br></p>
+<div class="sourceCode" id="cb29"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb29-1"><a href="methods.html#cb29-1" aria-hidden="true" tabindex="-1"></a>xref_bcfishpass_names <span class="sc">%&gt;%</span> </span>
+<span id="cb29-2"><a href="methods.html#cb29-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(id_side <span class="sc">==</span> <span class="dv">1</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb29-3"><a href="methods.html#cb29-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">arrange</span>(id_join) <span class="sc">%&gt;%</span>  </span>
+<span id="cb29-4"><a href="methods.html#cb29-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(<span class="at">Attribute =</span> report, <span class="at">Definition =</span> column_comment) <span class="sc">%&gt;%</span> </span>
+<span id="cb29-5"><a href="methods.html#cb29-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">my_kable</span>(<span class="at">caption_text =</span> <span class="st">&#39;bcfishpass outputs and associated definitions&#39;</span>)</span></code></pre></div>
+<table class="table table-condensed table-responsive" style="font-size: 11px; margin-left: auto; margin-right: auto;">
+<caption style="font-size: initial !important;">
+<span id="tab:tab-bcfp-def">Table 3.2: </span>bcfishpass outputs and associated definitions
+</caption>
+<thead>
+<tr>
+<th style="text-align:left;">
+Attribute
+</th>
+<th style="text-align:left;">
+Definition
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+WCT Spawning (km)
+</td>
+<td style="text-align:left;">
+Length of stream upstream of point modelled as potential Westslope Cutthroat spawning habitat
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+WCT Rearing (km)
+</td>
+<td style="text-align:left;">
+Length of stream upstream of point modelled as potential Westslope Cutthroat rearing habitat
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+WCT Stream (km)
+</td>
+<td style="text-align:left;">
+Westslope Cuthroat Trout model, total length of streams and rivers potentially accessible upstream of point (does not include network connectors in lakes etc)
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+WCT Network (km)
+</td>
+<td style="text-align:left;">
+Westslope Cuthroat Trout model, total length of stream network potentially accessible upstream of point
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+WCT Lake Reservoir (ha)
+</td>
+<td style="text-align:left;">
+Westslope Cuthroat Trout model, total area lakes and reservoirs potentially accessible upstream of point
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+WCT Wetland (ha)
+</td>
+<td style="text-align:left;">
+Westslope Cuthroat Trout model, total area wetlands potentially accessible upstream of point
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+WCT Slopeclass03 Waterbodies (km)
+</td>
+<td style="text-align:left;">
+Westslope Cutthroat Trout model, length of stream connectors (in waterbodies) potentially accessible upstream of point with slope 0-3%
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+WCT Slopeclass03 (km)
+</td>
+<td style="text-align:left;">
+Westslope Cutthroat Trout model, length of stream potentially accessible upstream of point with slope 0-3%
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+WCT Slopeclass05 (km)
+</td>
+<td style="text-align:left;">
+Westslope Cutthroat Trout model, length of stream potentially accessible upstream of point with slope 3-5%
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+WCT Slopeclass08 (km)
+</td>
+<td style="text-align:left;">
+Westslope Cutthroat Trout model, length of stream potentially accessible upstream of point with slope 5-8%
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+WCT Slopeclass15 (km)
+</td>
+<td style="text-align:left;">
+Westslope Cutthroat Trout model, length of stream potentially accessible upstream of point with slope 8-15%
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+WCT Slopeclass22 (km)
+</td>
+<td style="text-align:left;">
+Westslope Cutthroat Trout model, length of stream potentially accessible upstream of point with slope 15-22%
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+WCT Slopeclass30 (km)
+</td>
+<td style="text-align:left;">
+Westslope Cutthroat Trout model, length of stream potentially accessible upstream of point with slope 22-30%
+</td>
+</tr>
+</tbody>
+</table>
 <!-- <br> -->
-<div class="sourceCode" id="cb29"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb29-1"><a href="methods.html#cb29-1" aria-hidden="true" tabindex="-1"></a><span class="co"># bcfishpass_spawn_rear_model_references &lt;- readr::read_csv(file = &#39;data/width_modelling/model_spawning_rearing_habitat.csv&#39;)</span></span>
-<span id="cb29-2"><a href="methods.html#cb29-2" aria-hidden="true" tabindex="-1"></a>bcfishpass_spawn_rear_model_references <span class="ot">&lt;-</span> readr<span class="sc">::</span><span class="fu">read_csv</span>(<span class="at">file =</span> <span class="st">&#39;data/model_spawning_rearing_habitat_ref.csv&#39;</span>) <span class="sc">%&gt;%</span> </span>
-<span id="cb29-3"><a href="methods.html#cb29-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(species_code, <span class="fu">contains</span>(<span class="st">&#39;ref&#39;</span>), <span class="sc">-</span><span class="fu">contains</span>(<span class="fu">c</span>(<span class="st">&#39;multiplier&#39;</span>,<span class="st">&#39;mad&#39;</span>)))</span>
-<span id="cb29-4"><a href="methods.html#cb29-4" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb29-5"><a href="methods.html#cb29-5" aria-hidden="true" tabindex="-1"></a>bcfishpass_spawn_rear_model_references <span class="sc">%&gt;%</span> </span>
-<span id="cb29-6"><a href="methods.html#cb29-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">Species =</span> fishbc<span class="sc">::</span><span class="fu">fbc_common_name</span>(species_code)) <span class="sc">%&gt;%</span> </span>
-<span id="cb29-7"><a href="methods.html#cb29-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(Species, </span>
-<span id="cb29-8"><a href="methods.html#cb29-8" aria-hidden="true" tabindex="-1"></a>         <span class="st">`</span><span class="at">Spawning Gradient  Max (%)</span><span class="st">`</span><span class="ot">=</span> spawn_gradient_max_ref,</span>
-<span id="cb29-9"><a href="methods.html#cb29-9" aria-hidden="true" tabindex="-1"></a>         <span class="st">`</span><span class="at">Spawning Width Min (m)</span><span class="st">`</span> <span class="ot">=</span> spawn_channel_width_min_ref,</span>
-<span id="cb29-10"><a href="methods.html#cb29-10" aria-hidden="true" tabindex="-1"></a>         <span class="co"># `Spawning Width Max (m)` = spawn_channel_width_max_ref,</span></span>
-<span id="cb29-11"><a href="methods.html#cb29-11" aria-hidden="true" tabindex="-1"></a>         <span class="co"># `Spawning MAD Min (m3/s)` = spawn_mad_min,</span></span>
-<span id="cb29-12"><a href="methods.html#cb29-12" aria-hidden="true" tabindex="-1"></a>         <span class="co"># `Spawning MAD Max (m3/s)` = spawn_mad_max,</span></span>
-<span id="cb29-13"><a href="methods.html#cb29-13" aria-hidden="true" tabindex="-1"></a>         <span class="st">`</span><span class="at">Rearing Gradient Max (%)</span><span class="st">`</span> <span class="ot">=</span> rear_gradient_max_ref) <span class="sc">%&gt;%</span> </span>
-<span id="cb29-14"><a href="methods.html#cb29-14" aria-hidden="true" tabindex="-1"></a>         <span class="co"># `Rearing Wetland Multiplier` = rear_wetland_multiplier,</span></span>
-<span id="cb29-15"><a href="methods.html#cb29-15" aria-hidden="true" tabindex="-1"></a>         <span class="co"># `Rearing Lake Multiplier` = rear_lake_multiplier) %&gt;% </span></span>
-<span id="cb29-16"><a href="methods.html#cb29-16" aria-hidden="true" tabindex="-1"></a>         <span class="co"># `Rearing MAD Min (m3/s)` = rear_mad_min,</span></span>
-<span id="cb29-17"><a href="methods.html#cb29-17" aria-hidden="true" tabindex="-1"></a>         <span class="co"># `Rearing MAD Max (m3/s)` = rear_mad_max) %&gt;% </span></span>
-<span id="cb29-18"><a href="methods.html#cb29-18" aria-hidden="true" tabindex="-1"></a>  <span class="fu">t</span>() <span class="sc">%&gt;%</span> </span>
-<span id="cb29-19"><a href="methods.html#cb29-19" aria-hidden="true" tabindex="-1"></a>  <span class="fu">as_tibble</span>(<span class="at">rownames =</span> <span class="st">&quot;row_names&quot;</span>) <span class="sc">%&gt;%</span> </span>
-<span id="cb29-20"><a href="methods.html#cb29-20" aria-hidden="true" tabindex="-1"></a>  janitor<span class="sc">::</span><span class="fu">row_to_names</span>(<span class="at">row_number =</span> <span class="dv">1</span>) <span class="sc">%&gt;%</span> </span>
-<span id="cb29-21"><a href="methods.html#cb29-21" aria-hidden="true" tabindex="-1"></a>  <span class="fu">rename</span>(<span class="at">Variable =</span> Species) <span class="sc">%&gt;%</span> </span>
-<span id="cb29-22"><a href="methods.html#cb29-22" aria-hidden="true" tabindex="-1"></a>  <span class="fu">my_kable</span>(<span class="at">caption_text =</span> <span class="st">&#39;References for stream gradient and channel width thresholds used to model potentially highest value fish habitat. Preliminary and subject to revisions.&#39;</span>)</span></code></pre></div>
-<div class="sourceCode" id="cb30"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb30-1"><a href="methods.html#cb30-1" aria-hidden="true" tabindex="-1"></a><span class="co">#to quantify upstream habitat potentially available for salmonids and facilitate stream line symbology based on stream morphology.</span></span>
-<span id="cb30-2"><a href="methods.html#cb30-2" aria-hidden="true" tabindex="-1"></a><span class="co"># while high gradient sections typically  present  upstream  migration  barriers  and  less  available  habitat.  Additionally, the size of the stream (indicated by channel width) is an important determinant for habitat suitability for different species as well as specific life stages of those species. </span></span>
-<span id="cb30-3"><a href="methods.html#cb30-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb30-4"><a href="methods.html#cb30-4" aria-hidden="true" tabindex="-1"></a><span class="co"># `bcfishpass` was used to categorize and sum potentially accessible stream segments in the study area watersheds within gradient and width categories for each stream segment. </span></span>
-<span id="cb30-5"><a href="methods.html#cb30-5" aria-hidden="true" tabindex="-1"></a><span class="co"># (0 - 3%, 3 - 5%, 5 - 8%, 8 - 15%, 15 - 20%) with these outputs further amalgamated to summarize and symbolize potential upstream habitat in three categories: riffle/cascade (0 - 5%), step-pool (5 - 15%) and step-pool very steep (15-20%) (Table \@ref(tab:tablethreshaverage)).  </span></span>
-<span id="cb30-6"><a href="methods.html#cb30-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb30-7"><a href="methods.html#cb30-7" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb30-8"><a href="methods.html#cb30-8" aria-hidden="true" tabindex="-1"></a><span class="co">#threshold and average gradient table</span></span>
-<span id="cb30-9"><a href="methods.html#cb30-9" aria-hidden="true" tabindex="-1"></a>table_thresh_average <span class="ot">&lt;-</span> tibble<span class="sc">::</span><span class="fu">tibble</span>(<span class="st">`</span><span class="at">Gradient</span><span class="st">`</span> <span class="ot">=</span> <span class="fu">c</span>(<span class="st">&#39;0 - 5%&#39;</span>, <span class="st">&#39;5 - 15%&#39;</span>, <span class="st">&#39;15 - 20%&#39;</span>, <span class="st">&#39;&gt;20%&#39;</span>),</span>
-<span id="cb30-10"><a href="methods.html#cb30-10" aria-hidden="true" tabindex="-1"></a>                                       <span class="st">`</span><span class="at">Channel Type</span><span class="st">`</span> <span class="ot">=</span> <span class="fu">c</span>(<span class="st">&#39;Riffle and cascade pool&#39;</span>, <span class="st">&#39;Step pool&#39;</span>, <span class="st">&#39;Step pool - very steep&#39;</span>, <span class="st">&#39;Non WCT habitat&#39;</span>))</span>
-<span id="cb30-11"><a href="methods.html#cb30-11" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb30-12"><a href="methods.html#cb30-12" aria-hidden="true" tabindex="-1"></a>table_thresh_average <span class="sc">%&gt;%</span> </span>
-<span id="cb30-13"><a href="methods.html#cb30-13" aria-hidden="true" tabindex="-1"></a>    <span class="fu">my_kable</span>(<span class="at">caption_text =</span> <span class="st">&#39;Stream gradient categories (threshold and average) and associated channel type.&#39;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb30"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb30-1"><a href="methods.html#cb30-1" aria-hidden="true" tabindex="-1"></a><span class="co"># bcfishpass_spawn_rear_model_references &lt;- readr::read_csv(file = &#39;data/width_modelling/model_spawning_rearing_habitat.csv&#39;)</span></span>
+<span id="cb30-2"><a href="methods.html#cb30-2" aria-hidden="true" tabindex="-1"></a>bcfishpass_spawn_rear_model_references <span class="ot">&lt;-</span> readr<span class="sc">::</span><span class="fu">read_csv</span>(<span class="at">file =</span> <span class="st">&#39;data/model_spawning_rearing_habitat_ref.csv&#39;</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb30-3"><a href="methods.html#cb30-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(species_code, <span class="fu">contains</span>(<span class="st">&#39;ref&#39;</span>), <span class="sc">-</span><span class="fu">contains</span>(<span class="fu">c</span>(<span class="st">&#39;multiplier&#39;</span>,<span class="st">&#39;mad&#39;</span>)))</span>
+<span id="cb30-4"><a href="methods.html#cb30-4" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb30-5"><a href="methods.html#cb30-5" aria-hidden="true" tabindex="-1"></a>bcfishpass_spawn_rear_model_references <span class="sc">%&gt;%</span> </span>
+<span id="cb30-6"><a href="methods.html#cb30-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">Species =</span> fishbc<span class="sc">::</span><span class="fu">fbc_common_name</span>(species_code)) <span class="sc">%&gt;%</span> </span>
+<span id="cb30-7"><a href="methods.html#cb30-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(Species, </span>
+<span id="cb30-8"><a href="methods.html#cb30-8" aria-hidden="true" tabindex="-1"></a>         <span class="st">`</span><span class="at">Spawning Gradient  Max (%)</span><span class="st">`</span><span class="ot">=</span> spawn_gradient_max_ref,</span>
+<span id="cb30-9"><a href="methods.html#cb30-9" aria-hidden="true" tabindex="-1"></a>         <span class="st">`</span><span class="at">Spawning Width Min (m)</span><span class="st">`</span> <span class="ot">=</span> spawn_channel_width_min_ref,</span>
+<span id="cb30-10"><a href="methods.html#cb30-10" aria-hidden="true" tabindex="-1"></a>         <span class="co"># `Spawning Width Max (m)` = spawn_channel_width_max_ref,</span></span>
+<span id="cb30-11"><a href="methods.html#cb30-11" aria-hidden="true" tabindex="-1"></a>         <span class="co"># `Spawning MAD Min (m3/s)` = spawn_mad_min,</span></span>
+<span id="cb30-12"><a href="methods.html#cb30-12" aria-hidden="true" tabindex="-1"></a>         <span class="co"># `Spawning MAD Max (m3/s)` = spawn_mad_max,</span></span>
+<span id="cb30-13"><a href="methods.html#cb30-13" aria-hidden="true" tabindex="-1"></a>         <span class="st">`</span><span class="at">Rearing Gradient Max (%)</span><span class="st">`</span> <span class="ot">=</span> rear_gradient_max_ref) <span class="sc">%&gt;%</span> </span>
+<span id="cb30-14"><a href="methods.html#cb30-14" aria-hidden="true" tabindex="-1"></a>         <span class="co"># `Rearing Wetland Multiplier` = rear_wetland_multiplier,</span></span>
+<span id="cb30-15"><a href="methods.html#cb30-15" aria-hidden="true" tabindex="-1"></a>         <span class="co"># `Rearing Lake Multiplier` = rear_lake_multiplier) %&gt;% </span></span>
+<span id="cb30-16"><a href="methods.html#cb30-16" aria-hidden="true" tabindex="-1"></a>         <span class="co"># `Rearing MAD Min (m3/s)` = rear_mad_min,</span></span>
+<span id="cb30-17"><a href="methods.html#cb30-17" aria-hidden="true" tabindex="-1"></a>         <span class="co"># `Rearing MAD Max (m3/s)` = rear_mad_max) %&gt;% </span></span>
+<span id="cb30-18"><a href="methods.html#cb30-18" aria-hidden="true" tabindex="-1"></a>  <span class="fu">t</span>() <span class="sc">%&gt;%</span> </span>
+<span id="cb30-19"><a href="methods.html#cb30-19" aria-hidden="true" tabindex="-1"></a>  <span class="fu">as_tibble</span>(<span class="at">rownames =</span> <span class="st">&quot;row_names&quot;</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb30-20"><a href="methods.html#cb30-20" aria-hidden="true" tabindex="-1"></a>  janitor<span class="sc">::</span><span class="fu">row_to_names</span>(<span class="at">row_number =</span> <span class="dv">1</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb30-21"><a href="methods.html#cb30-21" aria-hidden="true" tabindex="-1"></a>  <span class="fu">rename</span>(<span class="at">Variable =</span> Species) <span class="sc">%&gt;%</span> </span>
+<span id="cb30-22"><a href="methods.html#cb30-22" aria-hidden="true" tabindex="-1"></a>  <span class="fu">my_kable</span>(<span class="at">caption_text =</span> <span class="st">&#39;References for stream gradient and channel width thresholds used to model potentially highest value fish habitat. Preliminary and subject to revisions.&#39;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb31"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb31-1"><a href="methods.html#cb31-1" aria-hidden="true" tabindex="-1"></a><span class="co">#to quantify upstream habitat potentially available for salmonids and facilitate stream line symbology based on stream morphology.</span></span>
+<span id="cb31-2"><a href="methods.html#cb31-2" aria-hidden="true" tabindex="-1"></a><span class="co"># while high gradient sections typically  present  upstream  migration  barriers  and  less  available  habitat.  Additionally, the size of the stream (indicated by channel width) is an important determinant for habitat suitability for different species as well as specific life stages of those species. </span></span>
+<span id="cb31-3"><a href="methods.html#cb31-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb31-4"><a href="methods.html#cb31-4" aria-hidden="true" tabindex="-1"></a><span class="co"># `bcfishpass` was used to categorize and sum potentially accessible stream segments in the study area watersheds within gradient and width categories for each stream segment. </span></span>
+<span id="cb31-5"><a href="methods.html#cb31-5" aria-hidden="true" tabindex="-1"></a><span class="co"># (0 - 3%, 3 - 5%, 5 - 8%, 8 - 15%, 15 - 20%) with these outputs further amalgamated to summarize and symbolize potential upstream habitat in three categories: riffle/cascade (0 - 5%), step-pool (5 - 15%) and step-pool very steep (15-20%) (Table \@ref(tab:tablethreshaverage)).  </span></span>
+<span id="cb31-6"><a href="methods.html#cb31-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb31-7"><a href="methods.html#cb31-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb31-8"><a href="methods.html#cb31-8" aria-hidden="true" tabindex="-1"></a><span class="co">#threshold and average gradient table</span></span>
+<span id="cb31-9"><a href="methods.html#cb31-9" aria-hidden="true" tabindex="-1"></a>table_thresh_average <span class="ot">&lt;-</span> tibble<span class="sc">::</span><span class="fu">tibble</span>(<span class="st">`</span><span class="at">Gradient</span><span class="st">`</span> <span class="ot">=</span> <span class="fu">c</span>(<span class="st">&#39;0 - 5%&#39;</span>, <span class="st">&#39;5 - 15%&#39;</span>, <span class="st">&#39;15 - 20%&#39;</span>, <span class="st">&#39;&gt;20%&#39;</span>),</span>
+<span id="cb31-10"><a href="methods.html#cb31-10" aria-hidden="true" tabindex="-1"></a>                                       <span class="st">`</span><span class="at">Channel Type</span><span class="st">`</span> <span class="ot">=</span> <span class="fu">c</span>(<span class="st">&#39;Riffle and cascade pool&#39;</span>, <span class="st">&#39;Step pool&#39;</span>, <span class="st">&#39;Step pool - very steep&#39;</span>, <span class="st">&#39;Non WCT habitat&#39;</span>))</span>
+<span id="cb31-11"><a href="methods.html#cb31-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb31-12"><a href="methods.html#cb31-12" aria-hidden="true" tabindex="-1"></a>table_thresh_average <span class="sc">%&gt;%</span> </span>
+<span id="cb31-13"><a href="methods.html#cb31-13" aria-hidden="true" tabindex="-1"></a>    <span class="fu">my_kable</span>(<span class="at">caption_text =</span> <span class="st">&#39;Stream gradient categories (threshold and average) and associated channel type.&#39;</span>)</span></code></pre></div>
 <p><br></p>
 </div>
 <div id="pscis-and-modelled-stream-crossing-review" class="section level3" number="3.1.2">
@@ -406,15 +534,15 @@ Rearing MAD Max (m3/s)
 </div>
 <div id="fish-passage-assessments" class="section level2" number="3.2">
 <h2><span class="header-section-number">3.2</span> Fish Passage Assessments</h2>
-<p>In the field, crossings prioritized for follow-up were first assessed for fish passage following the procedures outlined in “Field Assessment for Determining Fish Passage Status of Closed Bottomed Structures” <span class="citation">(MoE 2011a)</span>. Crossings surveyed included closed bottom structures (CBS), open bottom structures (OBS) and crossings considered “other” (i.e. fords). Photos were taken at surveyed crossings and when possible included images of the road, crossing inlet, crossing outlet, crossing barrel, channel downstream and channel upstream of the crossing and any other relevant features. The following information was recorded for all surveyed crossings: date of inspection, crossing reference, crew member initials, Universal Transverse Mercator (UTM) coordinates, stream name, road name and kilometer, road tenure information, crossing type, crossing subtype, culvert diameter or span for OBS, culvert length or width for OBS. A more detailed “full assessment” was completed for all closed bottom structures and included the following parameters: presence/absence of continuous culvert embedment (yes/no), average depth of embedment, whether or not the culvert bed resembled the native stream bed, presence of and percentage backwatering, fill depth, outlet drop, outlet pool depth, inlet drop, culvert slope, average downstream channel width, stream slope, presence/absence of beaver activity, presence/absence of fish at time of survey, type of valley fill, and a habitat value rating. Habitat value ratings were based on channel morphology, flow characteristics (perennial, intermittent, ephemeral), fish migration patterns, the presence/absence of deep pools, un-embedded boulders, substrate, woody debris, undercut banks, aquatic vegetation and overhanging riparian vegetation (Table <a href="methods.html#tab:tab-hab-value">3.2</a>). For crossings determined to be potential barriers or barriers based on the data (see <a href="methods.html#barrier-scoring">Barrier Scoring</a>), a culvert fix and recommended diameter/span was proposed.</p>
+<p>In the field, crossings prioritized for follow-up were first assessed for fish passage following the procedures outlined in “Field Assessment for Determining Fish Passage Status of Closed Bottomed Structures” <span class="citation">(MoE 2011a)</span>. Crossings surveyed included closed bottom structures (CBS), open bottom structures (OBS) and crossings considered “other” (i.e. fords). Photos were taken at surveyed crossings and when possible included images of the road, crossing inlet, crossing outlet, crossing barrel, channel downstream and channel upstream of the crossing and any other relevant features. The following information was recorded for all surveyed crossings: date of inspection, crossing reference, crew member initials, Universal Transverse Mercator (UTM) coordinates, stream name, road name and kilometer, road tenure information, crossing type, crossing subtype, culvert diameter or span for OBS, culvert length or width for OBS. A more detailed “full assessment” was completed for all closed bottom structures and included the following parameters: presence/absence of continuous culvert embedment (yes/no), average depth of embedment, whether or not the culvert bed resembled the native stream bed, presence of and percentage backwatering, fill depth, outlet drop, outlet pool depth, inlet drop, culvert slope, average downstream channel width, stream slope, presence/absence of beaver activity, presence/absence of fish at time of survey, type of valley fill, and a habitat value rating. Habitat value ratings were based on channel morphology, flow characteristics (perennial, intermittent, ephemeral), fish migration patterns, the presence/absence of deep pools, un-embedded boulders, substrate, woody debris, undercut banks, aquatic vegetation and overhanging riparian vegetation (Table <a href="methods.html#tab:tab-hab-value">3.3</a>). For crossings determined to be potential barriers or barriers based on the data (see <a href="methods.html#barrier-scoring">Barrier Scoring</a>), a culvert fix and recommended diameter/span was proposed.</p>
 <p><br></p>
-<div class="sourceCode" id="cb31"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb31-1"><a href="methods.html#cb31-1" aria-hidden="true" tabindex="-1"></a>tab_habvalue <span class="sc">%&gt;%</span> </span>
-<span id="cb31-2"><a href="methods.html#cb31-2" aria-hidden="true" tabindex="-1"></a>  knitr<span class="sc">::</span><span class="fu">kable</span>(<span class="at">caption =</span> <span class="st">&#39;Habitat value criteria (Fish Passage Technical Working Group, 2011).&#39;</span>, <span class="at">booktabs =</span> T) <span class="sc">%&gt;%</span> </span>
-<span id="cb31-3"><a href="methods.html#cb31-3" aria-hidden="true" tabindex="-1"></a>    kableExtra<span class="sc">::</span><span class="fu">column_spec</span>(<span class="at">column =</span> <span class="dv">1</span>, <span class="at">width_min =</span> <span class="st">&#39;1.5in&#39;</span>) <span class="sc">%&gt;%</span> </span>
-<span id="cb31-4"><a href="methods.html#cb31-4" aria-hidden="true" tabindex="-1"></a>    kableExtra<span class="sc">::</span><span class="fu">kable_styling</span>(<span class="fu">c</span>(<span class="st">&quot;condensed&quot;</span>), <span class="at">full_width =</span> T, <span class="at">font_size =</span> font_set) </span></code></pre></div>
+<div class="sourceCode" id="cb32"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb32-1"><a href="methods.html#cb32-1" aria-hidden="true" tabindex="-1"></a>tab_habvalue <span class="sc">%&gt;%</span> </span>
+<span id="cb32-2"><a href="methods.html#cb32-2" aria-hidden="true" tabindex="-1"></a>  knitr<span class="sc">::</span><span class="fu">kable</span>(<span class="at">caption =</span> <span class="st">&#39;Habitat value criteria (Fish Passage Technical Working Group, 2011).&#39;</span>, <span class="at">booktabs =</span> T) <span class="sc">%&gt;%</span> </span>
+<span id="cb32-3"><a href="methods.html#cb32-3" aria-hidden="true" tabindex="-1"></a>    kableExtra<span class="sc">::</span><span class="fu">column_spec</span>(<span class="at">column =</span> <span class="dv">1</span>, <span class="at">width_min =</span> <span class="st">&#39;1.5in&#39;</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb32-4"><a href="methods.html#cb32-4" aria-hidden="true" tabindex="-1"></a>    kableExtra<span class="sc">::</span><span class="fu">kable_styling</span>(<span class="fu">c</span>(<span class="st">&quot;condensed&quot;</span>), <span class="at">full_width =</span> T, <span class="at">font_size =</span> font_set) </span></code></pre></div>
 <table class="table table-condensed" style="font-size: 11px; margin-left: auto; margin-right: auto;">
 <caption style="font-size: initial !important;">
-<span id="tab:tab-hab-value">Table 3.2: </span>Habitat value criteria (Fish Passage Technical Working Group, 2011).
+<span id="tab:tab-hab-value">Table 3.3: </span>Habitat value criteria (Fish Passage Technical Working Group, 2011).
 </caption>
 <thead>
 <tr>
@@ -456,20 +584,20 @@ No suitable spawning habitat, and habitat with low rearing potential (e.g., loca
 <p><br></p>
 <div id="barrier-scoring" class="section level3" number="3.2.1">
 <h3><span class="header-section-number">3.2.1</span> Barrier Scoring</h3>
-<p>Fish passage potential was determined for each stream crossing identified as a closed bottom structure as per <span class="citation">MoE (2011a)</span>. The combined scores from five criteria: depth and degree to which the structure is embedded, outlet drop, stream width ratio, culvert slope, and culvert length were used to screen whether each culvert was a likely barrier to some fish species and life stages (Table <a href="methods.html#tab:tab-barrier-scoring">3.3</a>, Table <a href="methods.html#tab:tab-barrier-result">3.4</a>. These criteria were developed based on data obtained from various studies and reflect an estimation for the passage of a juvenile salmon or small resident rainbow trout <span class="citation">(Clarkin et al. 2005 ; Bell 1991; Thompson 2013)</span>.</p>
+<p>Fish passage potential was determined for each stream crossing identified as a closed bottom structure as per <span class="citation">MoE (2011a)</span>. The combined scores from five criteria: depth and degree to which the structure is embedded, outlet drop, stream width ratio, culvert slope, and culvert length were used to screen whether each culvert was a likely barrier to some fish species and life stages (Table <a href="methods.html#tab:tab-barrier-scoring">3.4</a>, Table <a href="methods.html#tab:tab-barrier-result">3.5</a>. These criteria were developed based on data obtained from various studies and reflect an estimation for the passage of a juvenile salmon or small resident rainbow trout <span class="citation">(Clarkin et al. 2005 ; Bell 1991; Thompson 2013)</span>.</p>
 <p><br></p>
-<div class="sourceCode" id="cb32"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb32-1"><a href="methods.html#cb32-1" aria-hidden="true" tabindex="-1"></a>tab <span class="ot">&lt;-</span> <span class="fu">as_tibble</span>(<span class="fu">t</span>(tab_barrier_scoring)) <span class="sc">%&gt;%</span> </span>
-<span id="cb32-2"><a href="methods.html#cb32-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">V4 =</span> <span class="fu">names</span>(tab_barrier_scoring)) <span class="sc">%&gt;%</span> </span>
-<span id="cb32-3"><a href="methods.html#cb32-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(V4, <span class="fu">everything</span>()) <span class="sc">%&gt;%</span> </span>
-<span id="cb32-4"><a href="methods.html#cb32-4" aria-hidden="true" tabindex="-1"></a>  janitor<span class="sc">::</span><span class="fu">row_to_names</span>(<span class="dv">1</span>) <span class="sc">%&gt;%</span>  <span class="do">##turn the table sideways</span></span>
-<span id="cb32-5"><a href="methods.html#cb32-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">Risk =</span> <span class="fu">case_when</span>(Risk <span class="sc">==</span> <span class="st">&#39;Value&#39;</span> <span class="sc">~</span> <span class="st">&#39;  Value&#39;</span>,</span>
-<span id="cb32-6"><a href="methods.html#cb32-6" aria-hidden="true" tabindex="-1"></a>                          T <span class="sc">~</span> Risk))</span>
-<span id="cb32-7"><a href="methods.html#cb32-7" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb32-8"><a href="methods.html#cb32-8" aria-hidden="true" tabindex="-1"></a>tab <span class="sc">%&gt;%</span> </span>
-<span id="cb32-9"><a href="methods.html#cb32-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">my_kable</span>(<span class="at">caption_text =</span> <span class="st">&#39;Fish Barrier Risk Assessment (MoE 2011).&#39;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb33"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb33-1"><a href="methods.html#cb33-1" aria-hidden="true" tabindex="-1"></a>tab <span class="ot">&lt;-</span> <span class="fu">as_tibble</span>(<span class="fu">t</span>(tab_barrier_scoring)) <span class="sc">%&gt;%</span> </span>
+<span id="cb33-2"><a href="methods.html#cb33-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">V4 =</span> <span class="fu">names</span>(tab_barrier_scoring)) <span class="sc">%&gt;%</span> </span>
+<span id="cb33-3"><a href="methods.html#cb33-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(V4, <span class="fu">everything</span>()) <span class="sc">%&gt;%</span> </span>
+<span id="cb33-4"><a href="methods.html#cb33-4" aria-hidden="true" tabindex="-1"></a>  janitor<span class="sc">::</span><span class="fu">row_to_names</span>(<span class="dv">1</span>) <span class="sc">%&gt;%</span>  <span class="do">##turn the table sideways</span></span>
+<span id="cb33-5"><a href="methods.html#cb33-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">Risk =</span> <span class="fu">case_when</span>(Risk <span class="sc">==</span> <span class="st">&#39;Value&#39;</span> <span class="sc">~</span> <span class="st">&#39;  Value&#39;</span>,</span>
+<span id="cb33-6"><a href="methods.html#cb33-6" aria-hidden="true" tabindex="-1"></a>                          T <span class="sc">~</span> Risk))</span>
+<span id="cb33-7"><a href="methods.html#cb33-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb33-8"><a href="methods.html#cb33-8" aria-hidden="true" tabindex="-1"></a>tab <span class="sc">%&gt;%</span> </span>
+<span id="cb33-9"><a href="methods.html#cb33-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">my_kable</span>(<span class="at">caption_text =</span> <span class="st">&#39;Fish Barrier Risk Assessment (MoE 2011).&#39;</span>)</span></code></pre></div>
 <table class="table table-condensed table-responsive" style="font-size: 11px; margin-left: auto; margin-right: auto;">
 <caption style="font-size: initial !important;">
-<span id="tab:tab-barrier-scoring">Table 3.3: </span>Fish Barrier Risk Assessment (MoE 2011).
+<span id="tab:tab-barrier-scoring">Table 3.4: </span>Fish Barrier Risk Assessment (MoE 2011).
 </caption>
 <thead>
 <tr>
@@ -631,11 +759,11 @@ Value
 </tbody>
 </table>
 <p><br></p>
-<div class="sourceCode" id="cb33"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb33-1"><a href="methods.html#cb33-1" aria-hidden="true" tabindex="-1"></a>tab_barrier_result <span class="sc">%&gt;%</span> </span>
-<span id="cb33-2"><a href="methods.html#cb33-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">my_kable</span>(<span class="at">caption_text =</span> <span class="st">&#39;Fish Barrier Scoring Results (MoE 2011).&#39;</span>) </span></code></pre></div>
+<div class="sourceCode" id="cb34"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb34-1"><a href="methods.html#cb34-1" aria-hidden="true" tabindex="-1"></a>tab_barrier_result <span class="sc">%&gt;%</span> </span>
+<span id="cb34-2"><a href="methods.html#cb34-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">my_kable</span>(<span class="at">caption_text =</span> <span class="st">&#39;Fish Barrier Scoring Results (MoE 2011).&#39;</span>) </span></code></pre></div>
 <table class="table table-condensed table-responsive" style="font-size: 11px; margin-left: auto; margin-right: auto;">
 <caption style="font-size: initial !important;">
-<span id="tab:tab-barrier-result">Table 3.4: </span>Fish Barrier Scoring Results (MoE 2011).
+<span id="tab:tab-barrier-result">Table 3.5: </span>Fish Barrier Scoring Results (MoE 2011).
 </caption>
 <thead>
 <tr>
@@ -684,7 +812,7 @@ barrier
 <h4><span class="header-section-number">3.2.2.1</span> Habitat Gain Index</h4>
 <p>The habitat gain index is the quantity of modeled habitat upstream of the subject crossing and represents an estimate of habitat gained with remediation of fish passage at the crossing. For this project, a gradient threshold between accessible and non-accessible habitat was set at 20% (for a minimum length of 100m) to represent the maximum gradient of which the strongest swimmers of westslope cutthrout trout are likely to be able to migrate upstream.</p>
 <p><br></p>
-<p>For reporting of Phase 1 - fish passage assessments within the body of this report (Table <a href="methods.html#tab:tab-barrier-scoring">3.3</a>), a “total” value of habitat &lt;20% output from <code>bcfishpass</code> was used to estimate the amount of habitat upstream of each crossing less than 20% gradient before a falls of height &gt;5m - as recorded in <span class="citation">MoE (2020c)</span> or documented in other <code>bcfishpass</code> online documentation. To generate areas of habitat upstream, the estimated linear length was multiplied by the downstream channel width measured as part of the fish passage assessment protocol. Although these estimates are not generally conservative, have low accuracy and do not account for upstream stream crossing structures they do allow a rough screening to help facilitate the decision making process for selecting the best candidates for follow up with more detailed Phase 2 assessments.</p>
+<p>For reporting of Phase 1 - fish passage assessments within the body of this report (Table <a href="methods.html#tab:tab-barrier-scoring">3.4</a>), a “total” value of habitat &lt;20% output from <code>bcfishpass</code> was used to estimate the amount of habitat upstream of each crossing less than 20% gradient before a falls of height &gt;5m - as recorded in <span class="citation">MoE (2020c)</span> or documented in other <code>bcfishpass</code> online documentation. To generate areas of habitat upstream, the estimated linear length was multiplied by the downstream channel width measured as part of the fish passage assessment protocol. Although these estimates are not generally conservative, have low accuracy and do not account for upstream stream crossing structures they do allow a rough screening to help facilitate the decision making process for selecting the best candidates for follow up with more detailed Phase 2 assessments.</p>
 <p><br></p>
 <p>For Phase 2 - habitat confirmation sites, conservative estimates of the linear quantity of habitat suitable for rearing and spawning of westslope cutthrout trout to be potentially gained by fish passage restoration, mainstem and large tributary streams (&gt;1st order streams) segments upstream of each crossing with freshwater atlas stream layer gradients &lt;8% and modelled at &gt;2m wide (likely of highest value for rearing and spawning westslope cutthrout trout), below natural/manmade barriers and downstream of documented culvert barriers were measured by hand with the measure tool within QGIS <span class="citation">(QGIS Development Team 2009)</span>. To generate estimates of the area of habitat upstream of these sites, the length of habitat was multiplied by the upstream average channel width that was measured in the field.</p>
 <p><br></p>
@@ -699,14 +827,14 @@ barrier
 <p><br></p>
 <p>Cost estimates for structure replacement with bridges and embedded culverts were generated based on the channel width, slope of the culvert, depth of fill, road class and road surface type. Road details were sourced from <span class="citation">FLNRORD (2020c)</span> and <span class="citation">FLNRORD (2020a)</span> through <code>bcfishpass</code>. Interviews with Phil MacDonald, Engineering Specialist FLNR - Kootenay, Steve Page, Area Engineer - FLNR - Northern Engineering Group and Matt Hawkins - MoTi - Design Supervisor for Highway Design and Survey - Nelson, David Maloney - FLNR - Fish Passage Technical Working Group were utilized to help refine estimates.</p>
 <p><br></p>
-<p>Base costs for installation of bridges on forest service roads and permit roads with surfaces specified in provincial GIS road layers as rough and loose was roughly estimated at $20,000/linear m and assumed that the road could be closed during construction. For streams with channel widths &lt;2m, embedded culverts were reported as an effective solution with total installation costs roughly estimated at $40k/crossing so as to take into account the rising costs of materials and labour since the original estimate of $25k/crossing was communicated in early 2021 (pers. comm. Phil MacDonald, Steve Page). For larger streams (&gt;6m), estimates of bridge span width increased proportionally to the size of the stream (ex. for an 8m wide stream a 14m wide span was estimated vs. the 12m wide span estimated for a 6m wide stream). For crossings with large amounts of fill (&gt;3m), the replacement bridge span was increased by an additional 3m for each 1m of fill &gt;3m to account for cutslopes to the stream at a 1.5:1 ratio. To account for road type, a multiplier table was also generated to estimate incremental cost increases with dollar amounts estimated for structure replacement on paved surfaces, railways and arterial/highways up to 30 times more than forest service roads due to expenses associated with design/engineering requirements, traffic control and paving. The cost multiplier table (Table <a href="methods.html#tab:tab-cost-mult">3.5</a>) should be considered very approximate with refinement recommended for future projects.</p>
+<p>Base costs for installation of bridges on forest service roads and permit roads with surfaces specified in provincial GIS road layers as rough and loose was roughly estimated at $20,000/linear m and assumed that the road could be closed during construction. For streams with channel widths &lt;2m, embedded culverts were reported as an effective solution with total installation costs roughly estimated at $40k/crossing so as to take into account the rising costs of materials and labour since the original estimate of $25k/crossing was communicated in early 2021 (pers. comm. Phil MacDonald, Steve Page). For larger streams (&gt;6m), estimates of bridge span width increased proportionally to the size of the stream (ex. for an 8m wide stream a 14m wide span was estimated vs. the 12m wide span estimated for a 6m wide stream). For crossings with large amounts of fill (&gt;3m), the replacement bridge span was increased by an additional 3m for each 1m of fill &gt;3m to account for cutslopes to the stream at a 1.5:1 ratio. To account for road type, a multiplier table was also generated to estimate incremental cost increases with dollar amounts estimated for structure replacement on paved surfaces, railways and arterial/highways up to 30 times more than forest service roads due to expenses associated with design/engineering requirements, traffic control and paving. The cost multiplier table (Table <a href="methods.html#tab:tab-cost-mult">3.6</a>) should be considered very approximate with refinement recommended for future projects.</p>
 <p><br></p>
-<div class="sourceCode" id="cb34"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb34-1"><a href="methods.html#cb34-1" aria-hidden="true" tabindex="-1"></a><span class="co"># print_tab_cost_mult(caption_text = &#39;Cost multiplier table based on road class and surface type.&#39;)</span></span>
-<span id="cb34-2"><a href="methods.html#cb34-2" aria-hidden="true" tabindex="-1"></a>tab_cost_rd_mult_report <span class="sc">%&gt;%</span></span>
-<span id="cb34-3"><a href="methods.html#cb34-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">my_kable</span>(<span class="at">caption_text =</span> <span class="st">&#39;Cost multiplier table based on road class and surface type.&#39;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb35"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb35-1"><a href="methods.html#cb35-1" aria-hidden="true" tabindex="-1"></a><span class="co"># print_tab_cost_mult(caption_text = &#39;Cost multiplier table based on road class and surface type.&#39;)</span></span>
+<span id="cb35-2"><a href="methods.html#cb35-2" aria-hidden="true" tabindex="-1"></a>tab_cost_rd_mult_report <span class="sc">%&gt;%</span></span>
+<span id="cb35-3"><a href="methods.html#cb35-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">my_kable</span>(<span class="at">caption_text =</span> <span class="st">&#39;Cost multiplier table based on road class and surface type.&#39;</span>)</span></code></pre></div>
 <table class="table table-condensed table-responsive" style="font-size: 11px; margin-left: auto; margin-right: auto;">
 <caption style="font-size: initial !important;">
-<span id="tab:tab-cost-mult">Table 3.5: </span>Cost multiplier table based on road class and surface type.
+<span id="tab:tab-cost-mult">Table 3.6: </span>Cost multiplier table based on road class and surface type.
 </caption>
 <thead>
 <tr>
@@ -1039,7 +1167,7 @@ Rail
 </div>
 <div id="habitat-confirmation-assessments" class="section level2" number="3.3">
 <h2><span class="header-section-number">3.3</span> Habitat Confirmation Assessments</h2>
-<p>Following fish passage assessments, habitat confirmations were completed in accordance with procedures outlined in the document “A Checklist for Fish Habitat Confirmation Prior to the Rehabilitation of a Stream Crossing” <span class="citation">(Fish Passage Technical Working Group 2011)</span>. The main objective of the field surveys was to document upstream habitat quantity and quality as well as to determine if any other obstructions exist above or below the crossing. Habitat value was assessed based on channel morphology, flow characteristics (perennial, intermittent, ephemeral), the presence/absence of deep pools, un-embedded boulders, substrate, woody debris, undercut banks, aquatic vegetation and overhanging riparian vegetation. Criteria used to rank habitat value was based on guidelines in <span class="citation">Fish Passage Technical Working Group (2011)</span> (Table <a href="methods.html#tab:tab-hab-value">3.2</a>).</p>
+<p>Following fish passage assessments, habitat confirmations were completed in accordance with procedures outlined in the document “A Checklist for Fish Habitat Confirmation Prior to the Rehabilitation of a Stream Crossing” <span class="citation">(Fish Passage Technical Working Group 2011)</span>. The main objective of the field surveys was to document upstream habitat quantity and quality as well as to determine if any other obstructions exist above or below the crossing. Habitat value was assessed based on channel morphology, flow characteristics (perennial, intermittent, ephemeral), the presence/absence of deep pools, un-embedded boulders, substrate, woody debris, undercut banks, aquatic vegetation and overhanging riparian vegetation. Criteria used to rank habitat value was based on guidelines in <span class="citation">Fish Passage Technical Working Group (2011)</span> (Table <a href="methods.html#tab:tab-hab-value">3.3</a>).</p>
 <p><br></p>
 <p>During habitat confirmations, to standardize data collected and facilitate submission of the data to provincial databases, information was collated on <a href="https://www2.gov.bc.ca/gov/content/environment/natural-resource-stewardship/laws-policies-standards-guidance/inventory-standards/aquatic-ecosystems">“Site Cards”</a>. Habitat characteristics recorded included channel widths, wetted widths, residual pool depths, gradients, bankfull depths, stage, temperature, conductivity, pH, cover by type, substrate and channel morphology (among others). When possible, the crew surveyed downstream of the crossing to the point where fish presence had been previously confirmed and upstream to a minimum distance of 600m. Any potential obstacles to fish passage were inventoried with photos, physical descriptions and locations recorded on site cards. Surveyed routes were recorded with time-signatures on handheld GPS units.</p>
 <p><br></p>

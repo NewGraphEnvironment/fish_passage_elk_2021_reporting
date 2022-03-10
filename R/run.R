@@ -93,15 +93,11 @@ files_destination <- paste0('hold/', files_to_move)
 mapply(file.rename, from = files_to_move, to = files_destination)
 
 
-
-##this is hacky but hash out the following from the functions.R file print_tab_summary_all function
-# kableExtra::add_footnote(label = '<br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>', escape = F, notation = 'none')
-
 ##   then make our printable pdf
 rmarkdown::render_site(output_format = 'pagedown::html_paged', encoding = 'UTF-8')
 
 ##  move it to the docs folder so that it can be in the same place as the report
-file.rename('Bulkley.html', 'docs/Attachment_3_Phase_1_Data_and_Photos.html')
+file.rename('Elk2021.html', 'docs/Attachment_3_Phase_1_Data_and_Photos.html')
 
 ##move the files from the hold file back to the main file
 mapply(file.rename, from = files_destination, to = files_to_move)

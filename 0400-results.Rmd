@@ -114,10 +114,11 @@ map <- leaflet(height=500, width=780) %>%
                  opacity=0.75, color = '#e216c4',
                fillOpacity = 0.75, weight=5, group = "Phase 2") %>%
   addAwesomeMarkers(
-    lng = photo_metadata$gps_longitude,lat = photo_metadata$gps_latitude,
-                    popup = leafpop::popupImage(photo_metadata$url, src = "remote"),
-                    clusterOptions = markerClusterOptions(),
-                    group = "Phase 2") %>%
+    lng = photo_metadata$gps_longitude,
+    lat = photo_metadata$gps_latitude,
+    popup = leafpop::popupImage(photo_metadata$url, src = "remote"),
+    clusterOptions = markerClusterOptions(),
+    group = "Phase 2") %>%
     addCircleMarkers(
     data=tab_hab_map,
     label = tab_hab_map$pscis_crossing_id,
@@ -170,7 +171,7 @@ map %>%
 
 ## Phase 1
 
-Field assessments were conducted between `r format(min(pscis_phase1$date), format="%B %d %Y")` and `r format(max(pscis_phase1$date), format="%B %d %Y")` by Allan Irvine, R.P.Bio., Kyle Prince, P.Biol., Stevie Syer, Rafael Acosta Lugo and Brody Klenk. A total of `r n_distinct(pscis_phase1$my_crossing_reference)` Phase 1 assessments were conducted with `r pscis_phase1 %>% filter(barrier_result == 'Passable') %>% nrow()` crossings considered "passable", `r pscis_phase1 %>% filter(barrier_result == 'Potential') %>% nrow() %>% english::as.english()` crossing considered "potential" barriers and `r pscis_phase1 %>% filter(barrier_result == 'Barrier') %>% nrow() ` crossing considered "barriers" according to threshold values based on culvert embedment, outlet drop, slope, diameter (relative to channel size) and length [@fish_passage_assessments].  Additionally, although all were considered fully passable, `r pscis_phase1 %>% filter(barrier_result == 'Unknown') %>% nrow() %>% english::as.english()` crossings assessed were fords with a barrier ranking of "unknown". Georeferenced field maps are presented in `r if(gitbook_on){knitr::asis_output("[here](https://hillcrestgeo.ca/outgoing/fishpassage/projects/elk/) and available for bulk download as [Attachment 1](https://hillcrestgeo.ca/outgoing/fishpassage/projects/elk/archive/2021-01-31/elk_2021-01-31.zip).")} else knitr::asis_output("[Attachment 1](https://hillcrestgeo.ca/outgoing/fishpassage/projects/elk/archive/2021-01-31/elk_2021-01-31.zip).")` A summary of crossings assessed, a cost benefit analysis and priority ranking for follow up for Phase 1 sites presented in Table \@ref(tab:cost-est-phase-1). Detailed data with photos are presented in `r if(gitbook_on){knitr::asis_output("[Appendix - Phase 1 Fish Passage Assessment Data and Photos]")} else knitr::asis_output("[Attachment 3](https://github.com/NewGraphEnvironment/fish_passage_bulkley_2020_reporting/raw/master/docs/Attachment_3_Phase_1_Data_and_Photos.pdf)")`.
+Field assessments were conducted between `r format(min(pscis_phase1$date), format="%B %d %Y")` and `r format(max(pscis_phase1$date), format="%B %d %Y")` by Allan Irvine, R.P.Bio., Kyle Prince, P.Biol., Stevie Syer, Rafael Acosta Lugo and Brody Klenk. A total of `r n_distinct(pscis_phase1$my_crossing_reference)` Phase 1 assessments were conducted at `r pscis_phase1 %>% nrow()` sites with `r pscis_phase1 %>% filter(barrier_result == 'Passable') %>% nrow()` crossings considered "passable", `r pscis_phase1 %>% filter(barrier_result == 'Potential') %>% nrow() %>% english::as.english()` crossing considered "potential" barriers and `r pscis_phase1 %>% filter(barrier_result == 'Barrier') %>% nrow() ` crossing considered "barriers" according to threshold values based on culvert embedment, outlet drop, slope, diameter (relative to channel size) and length [@fish_passage_assessments].  Additionally, although all were considered fully passable, `r pscis_phase1 %>% filter(barrier_result == 'Unknown') %>% nrow() %>% english::as.english()` crossings assessed were fords. Georeferenced field maps are presented in `r if(gitbook_on){knitr::asis_output("[here](https://hillcrestgeo.ca/outgoing/fishpassage/projects/elk/) and available for bulk download as [Attachment 1](https://hillcrestgeo.ca/outgoing/fishpassage/projects/elk/archive/2021-01-31/elk_2021-01-31.zip).")} else knitr::asis_output("[Attachment 1](https://hillcrestgeo.ca/outgoing/fishpassage/projects/elk/archive/2021-01-31/elk_2021-01-31.zip).")` A summary of crossings assessed, a cost benefit analysis and priority ranking for follow up for Phase 1 sites presented in Table \@ref(tab:cost-est-phase-1). Detailed data with photos are presented in `r if(gitbook_on){knitr::asis_output("[Appendix - Phase 1 Fish Passage Assessment Data and Photos]")} else knitr::asis_output("[Attachment 3](https://github.com/NewGraphEnvironment/fish_passage_elk_2021_reporting/raw/master/docs/Attachment_3_Phase_1_Data_and_Photos.pdf)")`.
 
 
 <br>
@@ -192,16 +193,102 @@ if(gitbook_on){
 
 <br>
 
-## Phase 2
+## Dam Assessments
+Three historic dam locations were assessed for fish passage including sites on `r tab_dams_raw %>% arrange(id) %>% pull(stream) %>% knitr::combine_words()`.  Results are presented in Table \@ref(tab:tab-dams)
 
-During 2020 field assessments, habitat confirmation assessments were conducted at `r hab_site_priorities %>% nrow()` sites in the Elk River watershed group with a total of approximately `r habitat_confirmations_priorities %>% pull(survey_length_m) %>% sum() %>% round(-3)/1000`km of stream assessed.  Georeferenced field maps are presented in `r if(gitbook_on){knitr::asis_output("[here](https://hillcrestgeo.ca/outgoing/fishpassage/projects/elk/) and available for bulk download as [Attachment 1](https://hillcrestgeo.ca/outgoing/fishpassage/projects/elk/archive/2021-01-31/elk_2021-01-31.zip).")} else knitr::asis_output("[Attachment 1](https://hillcrestgeo.ca/outgoing/fishpassage/projects/elk/archive/2021-01-31/elk_2021-01-31.zip).")`
+```{r tab-dams}
+tab_dams_raw %>% 
+  select(-utm_zone) %>% 
+  arrange(id) %>% 
+  purrr::set_names(nm = c('Site', 'Stream', 'Easting', 'Northing', 'Mapsheet', 'Barrier', 'Notes')) %>% 
+  my_kable(caption_text = 'Results from fish passability assessments at dams.',
+           footnote_text = 'UTM Zone 11')
+```
+
+<br>
+```{r photo-dams-01-prep, eval=T}
+my_site = 197542
+my_photo1 = pull_photo_by_str(str_to_pull = '_1_')
+
+my_caption1 = paste0('Small dam ~7m upstream of PSCIS crossing ', my_site, ' on Hartley Creek.')
+
+```
+
+```{r photo-dams-01, fig.cap= my_caption1, out.width = photo_width, eval=gitbook_on}
+grid::grid.raster(get_img(photo = my_photo1))
+```
 
 <br>
 
-As collaborative decision making was ongoing at the time of reporting, site prioritization can be considered preliminary.  `r hab_site_priorities %>% filter(priority %ilike% 'high') %>% nrow() %>% english::as.english() %>% str_to_title()` crossings were rated as high priorities for proceeding to design for replacement, `r hab_site_priorities %>% filter(priority %ilike% 'Moderate') %>% nrow() %>% english::as.english()` crossings were rated as moderate priorities, and `r hab_site_priorities %>% filter(priority %ilike% 'Low') %>% nrow() %>% english::as.english()` crossings were rated as low priorities. Results are summarized in `r if(gitbook_on){knitr::asis_output("Figure \\@ref(fig:map-interactive) and ")}`Table \@ref(tab:tab-overview)) with raw habitat and fish sampling data included in digital format as [Attachment 4](https://github.com/NewGraphEnvironment/fish_passage_elk_2021_reporting/raw/master/data/habitat_confirmations.xls).  A summary of watershed statistics from derived watershed areas andpreliminary modelling results illustrating the quantities of westslope cutthrout trout spawning and rearing habitat potentially available upstream of each crossing as estimated by upstream accessible stream length are presented in Table \@ref(tab:tab-wshd-sum-all) and Figure \@ref(fig:plot-model-all). Only summary tables and raw data is provided for surveys conducted within the Flathead River sub-basin with detailed reporting potentially provided under separate cover. Detailed information for each site assessed with Phase 2 assessments (including georeferenced maps) on streams that drain into the Elk River are presented within site specific appendices to this document.
+```{r photo-dams-02-prep}
+my_photo2 = pull_photo_by_str(str_to_pull = '_2_')
+
+my_caption2 = paste0('Small dam ~20m upstream of PSCIS crossing ', my_site, ' on Hartley Creek.')
+```
+
+```{r photo-dams-02, fig.cap= my_caption2, out.width = photo_width, eval=gitbook_on}
+grid::grid.raster(get_img(photo = my_photo2))
+
+```
+
+<br>
+
+```{r photo-dams-d01, fig.cap = my_caption, fig.show="hold", out.width= c("49.5%","1%","49.5%"), eval=identical(gitbook_on, FALSE)}
+
+my_caption <- paste0('Left: ', my_caption1, ' Right: ', my_caption2)
+
+knitr::include_graphics(get_img_path(photo = my_photo1))
+knitr::include_graphics("fig/pixel.png")
+knitr::include_graphics(get_img_path(photo = my_photo2))
+```
 
 
-`r if(gitbook_on){knitr::asis_output("<br>")} else knitr::asis_output("\\pagebreak")`
+```{r photo-dams-03-prep}
+my_site = 1063 #old id
+my_photo1 = pull_photo_by_str(str_to_pull = '_1_')
+
+my_caption1 = paste0('Teck Coal Limited dam (15m high and 55% gradient) on Harmer Creek.')
+```
+
+```{r photo-dams-03, fig.cap= my_caption1, out.width = photo_width, eval=gitbook_on}
+grid::grid.raster(get_img(photo = my_photo1))
+
+```
+
+<br>
+
+```{r photo-dams-04-prep}
+my_site2 = 2606
+my_photo2 = pull_photo_by_str(site_id = my_site2,str_to_pull = '_1_')
+
+my_caption2 = paste0('Historic dam structure adjacent to Boivin Creek.')
+
+```
+
+```{r photo-dams-04, fig.cap= my_caption2, out.width = photo_width, eval=gitbook_on}
+grid::grid.raster(get_img(site = my_site2, photo = my_photo2))
+```
+
+```{r photo-dams-d02, fig.cap = my_caption, fig.show="hold", out.width= c("49.5%","1%","49.5%"), eval=identical(gitbook_on, FALSE)}
+
+my_caption <- paste0('Left: ', my_caption1, ' Right: ', my_caption2)
+
+knitr::include_graphics(get_img_path(photo = my_photo1))
+knitr::include_graphics("fig/pixel.png")
+knitr::include_graphics(get_img_path(site = my_site2, photo = my_photo2))
+```
+
+
+
+## Phase 2
+
+During 2021 field assessments, habitat confirmation assessments were conducted at `r hab_site_priorities %>% nrow()` sites in the Elk River watershed group with a total of approximately `r habitat_confirmations_priorities %>% pull(survey_length_m) %>% sum() %>% round(-3)/1000`km of stream assessed.  Georeferenced field maps are presented in `r if(gitbook_on){knitr::asis_output("[here](https://hillcrestgeo.ca/outgoing/fishpassage/projects/elk/) and available for bulk download as [Attachment 1](https://hillcrestgeo.ca/outgoing/fishpassage/projects/elk/archive/2021-01-31/elk_2021-01-31.zip).")} else knitr::asis_output("[Attachment 1](https://hillcrestgeo.ca/outgoing/fishpassage/projects/elk/archive/2021-01-31/elk_2021-01-31.zip).")`
+
+<br>
+
+As collaborative decision making was ongoing at the time of reporting, site prioritization can be considered preliminary.  `r hab_site_priorities %>% filter(priority %ilike% 'high') %>% nrow() %>% english::as.english() %>% str_to_title()` crossings were rated as high priorities for proceeding to design for replacement, `r hab_site_priorities %>% filter(priority %ilike% 'Moderate') %>% nrow() %>% english::as.english()` crossings were rated as moderate priorities, and `r hab_site_priorities %>% filter(priority %ilike% 'Low') %>% nrow() %>% english::as.english()` crossings were rated as low priorities. Results are summarized in `r if(gitbook_on){knitr::asis_output("Figure \\@ref(fig:map-interactive) and ")}`Table \@ref(tab:tab-overview)) with raw habitat and fish sampling data included in digital format as [Attachment 4](https://github.com/NewGraphEnvironment/fish_passage_elk_2021_reporting/raw/master/data/habitat_confirmations.xls).  A summary of watershed statistics from derived watershed areas andpreliminary modelling results illustrating the quantities of westslope cutthrout trout spawning and rearing habitat potentially available upstream of each crossing as estimated by upstream accessible stream length are presented in Table \@ref(tab:tab-wshd-sum-all) and Figure \@ref(fig:plot-model-all). Only summary tables and raw data is provided for surveys conducted within the Flathead River sub-basin (Parker Creek, Morris Creek, Fuel Creek and Kisoo Creek) with detailed reporting potentially provided in the future under separate cover. Detailed information for each site assessed with Phase 2 assessments (including georeferenced maps) on streams that drain into the Elk River are presented within site specific appendices to this document.
+
+
 
 `r if(gitbook_on){knitr::asis_output("<br>")} else knitr::asis_output("\\pagebreak")`
 

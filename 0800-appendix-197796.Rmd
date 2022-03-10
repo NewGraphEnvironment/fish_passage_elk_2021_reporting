@@ -170,7 +170,7 @@ grid::grid.raster(get_img(photo = my_photo1))
 <br>
 
 ```{r photo-197796-04-prep}
-my_photo2 = pull_photo_by_str(str_to_pull = '_upstream_')
+my_photo2 = pull_photo_by_str(str_to_pull = '_upstream')
 
 my_caption2 = paste0('2.4m high rock falls located ~60m upstream of PSCIS crossing ', my_site, '.')
 

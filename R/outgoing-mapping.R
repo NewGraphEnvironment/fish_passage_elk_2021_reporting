@@ -18,6 +18,8 @@ dir.create('data/fishpass_mapping')
 make_geopackage(dat = hab_features)
 make_geopackage(dat = hab_site_priorities)
 make_geopackage(dat = phase1_priorities)
+make_geopackage(dat = tab_dams_raw)
+
 
 ##we do this manually
 #   st_transform(crs = 3005) %>%
@@ -62,10 +64,6 @@ dbDisconnect(conn = conn)
 
 ####------------add the dams
 
-dams_prep <- bcfishpass %>%
-  filter(aggregated_crossings_id == 1100000129 |
-           aggregated_crossings_id == 1100002016 ) %>%
-  select(aggregated_crossings_id)
 
 
 

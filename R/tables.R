@@ -77,6 +77,23 @@ photo_metadata <- readwritesqlite::rws_read_table("photo_metadata", conn = conn)
 # fiss_sum <- readwritesqlite::rws_read_table("fiss_sum", conn = conn)
 rws_disconnect(conn)
 
+##build the dams table
+tab_dams_raw <- bcfishpass %>%
+  filter(aggregated_crossings_id == 1100000129 |
+           aggregated_crossings_id == 1100002016 |
+           aggregated_crossings_id == 197542) %>%
+  select(id = aggregated_crossings_id, stream = gnis_stream_name,utm_zone, utm_easting, utm_northing) %>%
+  mutate(barrier_ind = case_when(
+    id == 1100000129 ~ 'F',
+    T ~ 'T'),
+    Notes = case_when(
+      id == 1100000129 ~ 'Remnant dam not located in main channel.',
+      id == 1100002016 ~ 'Large dam (15m  high at 55% grade) located in main channel. No fish ladder.',
+      id == 197542 ~ 'Two small dams (30cm and 40cm high) located just upstream (7m and 20m) of Dicken Road. Likely easily passable by adult WCT but barrier to fry and small juveniles. If culvert replaces these could be fixed concurrently.'
+    )
+  )
+
+
 ##this is not working or needed yet
 # bcfishpass_rd <- bcfishpass %>%
 #   select(pscis_crossing_id = stream_crossing_id, my_crossing_reference, crossing_id, distance, road_name_full,

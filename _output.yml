@@ -7,7 +7,7 @@ bookdown::gitbook:
         <li><a href="./">Elk River Watershed Group Fish Passage Restoration Planning 2021</a></li>
       after: |
         <li><a href="https://github.com/NewGraphEnvironment/fish_passage_elk_2021_reporting" target="blank">Scripts and Data</a></li>
-    download: ["Template.pdf", "Template.html"]
+    download: ["ELK2021.pdf"]
     fontsettings:
       theme: night
       family: sans

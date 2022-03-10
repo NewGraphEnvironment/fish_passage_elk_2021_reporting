@@ -104,7 +104,8 @@ wshds <- left_join(wshds %>% mutate(stream_crossing_id = as.numeric(stream_cross
 # calculate stats for each watershed
 wshds <- fpr_elev_stats() %>%
   mutate(area_km = round(area_ha/100, 1)) %>%
-  mutate(across(contains('elev'), round, 0))
+  mutate(across(contains('elev'), round, 0)) %>%
+  arrange(stream_crossing_id)
 
 
 # ##add to the geopackage

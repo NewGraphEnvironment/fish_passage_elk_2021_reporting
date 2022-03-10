@@ -129,6 +129,13 @@ print_tab_summary()
 
 <br>
 
+```{r tab-culvert-197786, eval = T}
+print_tab_summary(site = my_site2, site_photo_id = my_site2)
+
+```
+
+<br>
+
 ```{r tab-habitat-summary-197787}
 tab_hab_summary %>% 
   filter(Site  == my_site2 |

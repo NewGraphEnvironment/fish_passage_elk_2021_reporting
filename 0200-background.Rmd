@@ -16,15 +16,11 @@ The Canadian Wildlife Federation has been working on a watershed connectivity re
 
 ## Project Location
 
-To focus the project within habitat considered high value for conservation of westslope cutthrout trout, the study area included the upper Elk River watershed upstream of the Kookanusa Reservoir (Figure \@ref(fig:overview-map)).  
+To focus the project within habitat considered high value for conservation of westslope cutthrout trout, the study area included the Elk River watershed group. The Elk River has a mean annual discharge of `r round(fasstr::calc_longterm_mean(station_number = "08NK016")$LTMAD,1)` m^3^/s at station 08NK016 near Sparwood and `r round(fasstr::calc_longterm_mean(station_number = "08NK002")$LTMAD,1)` m^3^/s at station 08NK016 near Fernie with flow patterns typical of high elevation watersheds on the west side of the Rocky Mountains which receive large amounts of precipitation as snow leading to peak levels of discharge during snowmelt, typically from May to July (Figures \@ref(fig:hydrology-plot) - \@ref(fig:hydrology-stats2)) [@canada2020NationalWater]. 
 
 <br>
 
-The Elk River has a mean annual discharge of `r round(fasstr::calc_longterm_mean(station_number = "08NK016")$LTMAD,1)` m^3^/s at station 08NK016 near Sparwood and `r round(fasstr::calc_longterm_mean(station_number = "08NK002")$LTMAD,1)` m^3^/s at station 08NK016 near Fernie with flow patterns typical of high elevation watersheds on the west side of the Rocky Mountains which receive large amounts of precipitation as snow leading to peak levels of discharge during snowmelt, typically from May to July (Figures \@ref(fig:hydrology-plot) - \@ref(fig:hydrology-stats2)) [@canada2020NationalWater]. 
-
-<br>
-
-```{r overview-map, fig.cap = 'Overview map of Study Areas',eval=T}
+```{r overview-map, fig.cap = 'Overview map of Study Areas',eval=F}
 knitr::include_graphics("fig/logo.png")
 ```
 
@@ -106,7 +102,8 @@ Fish species recorded in the Elk River watershed group are detailed in Table \@r
 fiss_species_table <- readr::read_csv(file = paste0(getwd(), '/data/inputs_extracted/02_prep_report/fiss_species_table.csv'))
   # filter(`Species Code` != 'CT') %>% 
 fiss_species_table %>%  
-  my_kable(caption_text = 'Fish species recorded in the study areas (FISS 2020).')
+  rename(Elk = `Upper Elk`) %>% 
+  my_kable(caption_text = 'Fish species recorded in the study area (FISS 2020).')
 
 
 ```

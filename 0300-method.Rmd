@@ -28,7 +28,7 @@ Priorities for site assessment locations were provided by Canadian Wildlife Fede
 
 
 
-```{r tab-bcfp-grad, eval= F}
+```{r tab-bcfp-grad, eval= T}
 #to quantify upstream habitat potentially available for salmonids and facilitate stream line symbology based on stream morphology.
 # while high gradient sections typically  present  upstream  migration  barriers  and  less  available  habitat.  Additionally, the size of the stream (indicated by channel width) is an important determinant for habitat suitability for different species as well as specific life stages of those species. 
 

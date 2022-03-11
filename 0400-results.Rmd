@@ -110,6 +110,7 @@ map <- leaflet(height=500, width=780) %>%
     opacity = 1.0,
     group = "Phase 1"
     ) %>% 
+  
     addPolylines(data=tracks,  
                  opacity=0.75, color = '#e216c4',
                fillOpacity = 0.75, weight=5, group = "Phase 2") %>%
@@ -119,6 +120,7 @@ map <- leaflet(height=500, width=780) %>%
     popup = leafpop::popupImage(photo_metadata$url, src = "remote"),
     clusterOptions = markerClusterOptions(),
     group = "Phase 2") %>%
+  
     addCircleMarkers(
     data=tab_hab_map,
     label = tab_hab_map$pscis_crossing_id,

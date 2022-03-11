@@ -48,7 +48,8 @@ rmarkdown::render_site(output_format = 'bookdown::gitbook',
 #################################################################################################
 ##move the phase 1 appendix out of the main directory to a backup file or else the file is too big
 
-{file.rename('0600-appendix.Rmd', 'hold/0600-appendix.Rmd')
+
+file.rename('0600-appendix.Rmd', 'hold/0600-appendix.Rmd')
 
 ##   then make our printable pdf
 rmarkdown::render_site(output_format = 'pagedown::html_paged', encoding = 'UTF-8')
@@ -64,7 +65,7 @@ pagedown::chrome_print(
 
 # get rid of the html as its too big and not needed
 file.remove(paste0(getwd(), "/Elk2021.html"))
-}
+
 
 
 

@@ -15,7 +15,7 @@ author: |
 
 date: |
  |
- | Version 0.1.0 - DRAFT
+ | Version 0.1.1 - DRAFT
  | `r format(Sys.Date(), "%Y-%m-%d")`
 toc-title: Table of Contents
 site: bookdown::bookdown_site
@@ -36,8 +36,8 @@ description: "2021 Reporting for Fish Passage Restoration Planning Assessments i
 
 
 ```{r switch-gitbook-html, echo=FALSE}
-# gitbook_on <- TRUE
-gitbook_on <- FALSE  ##we just need turn  this on and off to switch between gitbook and pdf via paged.js
+gitbook_on <- TRUE
+# gitbook_on <- FALSE  ##we just need turn  this on and off to switch between gitbook and pdf via paged.js
 
 ```
 
@@ -336,7 +336,7 @@ Priorities for site assessment locations were provided by Canadian Wildlife Fede
 
 
 
-```{r tab-bcfp-grad, eval= F}
+```{r tab-bcfp-grad, eval= T}
 #to quantify upstream habitat potentially available for salmonids and facilitate stream line symbology based on stream morphology.
 # while high gradient sections typically  present  upstream  migration  barriers  and  less  available  habitat.  Additionally, the size of the stream (indicated by channel width) is an important determinant for habitat suitability for different species as well as specific life stages of those species. 
 
@@ -1060,6 +1060,12 @@ Recommendations for potential incorporation into collaborative watershed connect
 
 
 <!--chapter:end:0500-recomendations.Rmd-->
+
+# Appendix - Phase 1 Fish Passage Assessment Data and Photos {-}
+
+`r if(gitbook_on){knit(text = unlist(tabs_phase1))} else knit(text = unlist(tabs_phase1_pdf))`
+
+<!--chapter:end:0600-appendix.Rmd-->
 
 ---
 output: html_document

@@ -45,6 +45,8 @@ fpr_tab_wshd_sum(site_id = my_site) %>%
 PSCIS crossing `r as.character(my_site)` was prioritized for assessment due to it's location within provincial park boundaries and the associated positive implications for restoration potential.  In addition, the site was noted as having a significantly sized outlet drop, good flow during the dryest part of the year and a location directly adjacent to Lizard Creek which contains confirmed spawning habitat for westslope cutthrout trout. Table \@ref(tab:tab-bcfp-62505) presents preliminary fish passage modelling data for crossing 62505 with linear length of habitat <8% upstream estimated at 0.4km and an additional 0.5km of habitat modeled between 8 - 15%. A map of the watershed is provided in map attachment [`r my_bcfishpass() %>% pull(dbm_mof_50k_grid)`](`r my_mapsheet()`).  
 
 
+`r if(identical(gitbook_on, FALSE)){knitr::asis_output("\\pagebreak")}`
+
 <br>
 
 ```{r tab-bcfp-62505, eval = T}
@@ -96,10 +98,8 @@ Should restoration/maintenance activities proceed at the site, replacement of PS
 
 There was `r my_priority_info() %>% pull(upstream_habitat_length_km)`km of viable juvenile rearing habitat upstream of crossing `r as.character(my_site)`. Habitat in the areas surveyed upstream of the culvert were rated as `r my_priority_info(sit = my_site, loc = 'us') %>% pull(hab_value)` value for salmonid rearing.   `r my_overview_info() %>% pull(road_name)`, at the crossing location, is located within the Mount Fernie Provincial Park Boundary and is the responsibility of the Ministry of Environment and Climate Change Strategy.  As the crossing is located approximately 75m  upstream from the confluence with Lizard Creek where westslope cutthrout trout spawning is known to occur, remediation of fish passage at the site could provide sdditional habitat for fry and juveniles migrating from the mainstem of Lizard Creek.  Crossing `r as.character(my_site)` was ranked as a `r my_priority_info() %>% pull(priority)` priority for proceeding to design for replacement. 
 
-<!-- this is a bit strange but the pages.js will not build beyond this so we leave for now -->
-<!-- `r if(gitbook_on){knitr::asis_output("<br>")} else knitr::asis_output("\\pagebreak")` -->
 
-<br>
+`r if(gitbook_on){knitr::asis_output("<br>")} else knitr::asis_output("\\pagebreak")`
 
 ```{r tab-culvert-62505, eval = T}
 print_tab_summary()

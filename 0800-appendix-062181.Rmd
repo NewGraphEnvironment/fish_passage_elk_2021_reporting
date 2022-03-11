@@ -31,6 +31,17 @@ PSCIS crossing `r as.character(my_site)` is located on `r my_pscis_info() %>% pu
 
 <br>
 
+
+```{r tab-wshd-62181}
+fpr_tab_wshd_sum(site_id = my_site) %>% 
+  my_kable(caption_text = paste0('Summary of derived upstream watershed statistics for PSCIS crossing ', my_site, '.'),
+           footnote_text = 'Elev P60 = Elevation at which 60% of the watershed area is above')
+
+```
+
+
+<br>
+
 The upper end of the watershed is within Phase II of Teck Coal Limited’s (Teck) – Line Creek Operation area (LCOII).  @hasek_batchelar20212020Line report that waste rock placement in the watershed began in 2015.  A review of aerial imagery from March of 2021 indicated that the total area of waste rock placement within the watershed was approximately 300ha. In order to comply with discharge requirements for total suspended solids (Permit 106970), Teck began operating the Line Creek Operation Dry Creek Water Management System (LCODCWMS) in 2015. The LCODCWMS collects upper Dry Creek water in a headpond which then conveys the water into two lined sedimentation ponds.  Discharge from the sedimentation ponds is subsequently combined and is conveyed to a constructed discharge channel which flows continuously into Dry Creek downstream.  The Line Creek Operations Local Aquatic Effects Monitoring Program (LCOLAEMP) to assess potential effects of Line Creek Operations on Dry Creek, Grace Creek and an Unnamed Creek has been in operation since 2014 as per another LCOII permitting requirement [@hasek_batchelar20212020Line].  A Structured Decision Making (SDM) process was initiated in 2016 to develop recommendations for water qualty site performatnce objective (SPOs) and in-stream flow requirements (IFRs) for Dry Creek, along with an updated LCO Dry Creek Water Management Plan that included water management activities, physical ,works, and LCOII operational procedures with the entent to acheieve the recommneded SPOs and IFRs, to inform monitoring as well as adaptive management recommendations.  The SDM process includes a working group comprised of Ktunaxa Nation Council; BC Ministry of Environment; Ministry of Forests, Lands, Natural Resource Operations and Rural Development; the Ministry of Energy, Mines and Petroleum Resources; Fisheries and Oceans Canada and Teck.  The SDM process develops operational recommendations informed throughout the year by the LCOLAEM with results from 2020 summarized below [@hasek_batchelar20212020Line]. 
 
 
@@ -48,16 +59,27 @@ A pipeline and power line corridor (Dry Creek Water Conveyance and Supplementati
 <br>
 
 
-@cope2020UpperFording have conducted three pass removal depletion electrofishing in the lower section of Dry Creek below crossing `r as.character(my_site)` as part of the Upper Fording River Westslope Ctthroat Trout Population Monitoring Project in 2013, 2014, 2015, 2017 and 2019 with fish densities sampled ranging from 2.25 to 16.5 fish/100m^2. Sampling was continued in 2020 along with redd surveys in the lower reach of the stream with results presented in @thorley_etal2021UpperFording.  Analysis by @thorley_etal2021UpperFording indicates that there was a substantial decline in the number of adult westslope cutthroat trout in the Upper Fording River between 2017 and 2019 with no evidence of further decline between 2019 and 2020 suggesting the mortality may have been due to a short-term event opposed to chronic conditions.   
+@cope2020UpperFording have conducted three pass removal depletion electrofishing in the lower section of Dry Creek below crossing `r as.character(my_site)` as part of the Upper Fording River Westslope Ctthroat Trout Population Monitoring Project in 2013, 2014, 2015, 2017 and 2019 with fish densities sampled ranging from 2.25 to 16.5 fish/100m^2^. Sampling was continued in 2020 along with redd surveys in the lower reach of the stream with results presented in @thorley_etal2021UpperFording.  Analysis by @thorley_etal2021UpperFording indicates that there was a substantial decline in the number of adult westslope cutthroat trout in the Upper Fording River between 2017 and 2019 with no evidence of further decline between 2019 and 2020 suggesting the mortality may have been due to a short-term event opposed to chronic conditions.   
 
 <br>
 
 
-In 2014, PSCIS stream crossings `r as.character(my_site)` and `r as.character(my_site2)` were the sites of habitat confirmation assessments by @masseenvironmentalconsultantsltd_2015FishHabitat. The crossings were subjectively assessed as passable during the field assessments due to the low gradients and embeddedness of the pipes with the crossings not recommended for replacement at that time.  @masseenvironmentalconsultantsltd_2015FishHabitat did however recommend reassessment of the sites every 5 to 10 years due to likely substrate movement at the crossing locations. Upon review of this background reporting, and due to the likely presence of significant quantities of upstream habitat suitable for WCT rearing and spawning based on `bcfishpass` outputs, the Canadian Wildlife Federation assigned these sites as high priorities for follow up. A map of the watershed is provided in map attachment [`r my_bcfishpass() %>% pull(dbm_mof_50k_grid)`](`r my_mapsheet()`).
+In 2014, PSCIS stream crossings `r as.character(my_site)` and `r as.character(my_site2)` were the sites of habitat confirmation assessments by @masseenvironmentalconsultantsltd_2015FishHabitat. The crossings were subjectively assessed as passable during the field assessments due to the low gradients and embeddedness of the pipes with the crossings not recommended for replacement at that time.  @masseenvironmentalconsultantsltd_2015FishHabitat did however recommend reassessment of the sites every 5 to 10 years due to likely substrate movement at the crossing locations. Upon review of this background reporting, and due to the likely presence of significant quantities of upstream habitat suitable for WCT rearing and spawning based on `bcfishpass` outputs, the Canadian Wildlife Federation assigned these sites as high priorities for follow up (Table \@ref(tab:tab-culvert-bcfp-62181)). A map of the watershed is provided in map attachment [`r my_bcfishpass() %>% pull(dbm_mof_50k_grid)`](`r my_mapsheet()`).
+
+
+`r if(identical(gitbook_on, FALSE)){knitr::asis_output("\\pagebreak")}`
 
 <br>
+
+
+
+```{r tab-culvert-bcfp-62181, eval = T}
+print_tab_summary_bcfp()
+```
 
 Permit 107517, issued to Teck in November 2014 under provisions of the *Environmental Management Act* required development of a Tributary Management Plan for tributaries to the Elk and Fording Rivers that will incorporate protection and rehabilitation goals for tributaries to support achieving the area-based objectives of the Elk Valley Water Quality Plan [@teckcoallimited2020TributaryManagement; @teckresourceslimited2014ElkValley].  As part of the Tributary Management Plan, design work for  fish passage improvement at the Highway and Railway is scheduled for 2021-2022 based on pre-construction data that was scheduled to be collected in 2021.  Construction of restoration works has been slated for 2023 based on progress of a partnership and agreement on design between the Ministry of Transportation and Infrastructure, CP Railway and Teck [@teckcoallimited2020TributaryManagement].
+
+<br>
 
 
 ## Stream Characteristics at Crossings {-}
@@ -95,11 +117,6 @@ The stream was surveyed downstream from `r as.character(my_site2)` for `r my_pri
 The stream was surveyed upstream from `r as.character(my_site)` for `r my_priority_info(loc = 'us') %>% pull(survey_length_m)`m `r if(gitbook_on){knitr::asis_output("(Figures \\@ref(fig:photo-62181-03) - \\@ref(fig:photo-62181-04))")} else(knitr::asis_output("(Figure \\@ref(fig:photo-62181-d02))"))`. Environmental monitoring system sample location E288270 (EQuiS: LC_DC1) was located approximately 100m upstream of the railway at the bridge on the Fording FSR. In the area surveyed, total cover amount was rated as `r my_habitat_info2(loc = 'us', sit = my_site2) %>% filter(rowname == 'total cover') %>% pull(v)` with  `r my_habitat_info2(loc = 'us', sit = my_site2) %>% filter(v == 'dominant') %>% pull(rowname)` dominant. Cover was also present as `r my_habitat_info2(loc = 'us', sit = my_site2) %>% filter(v == 'sub-dominant') %>% pull(rowname) %>% knitr::combine_words()` (Table \@ref(tab:tab-habitat-summary-62181)). The average channel width was `r my_habitat_info3(loc = 'us', , sit = my_site2, row = 'avg channel width m')`m, the average wetted width was `r my_habitat_info3(loc = 'us', row = 'avg wetted width m')`m and the average gradient was `r my_habitat_info3(loc = 'us', , sit = my_site2, row = 'average gradient percent')`%.  Habitat value was rated as `r my_priority_info(loc = 'us') %>% pull(hab_value)` for salmonid rearing and spawning due to good flow, larger channel size, occasional pockets of gravel and the presence of intermittent pools. 
 
 
-<br>
-
-
-
-Table \@ref(tab:tab-culvert-bcfp-62181) `r text_ref_tab_summary_bcfp()` 
 
 <br>
 
@@ -141,12 +158,6 @@ tab_hab_summary %>%
   # select(-Site) %>% 
   my_kable(caption_text = paste0('Summary of habitat details for PSCIS crossings ', my_site, ' and ', my_site2, '.'))
 
-```
-
-<br>
-
-```{r tab-culvert-bcfp-62181, eval = T}
-print_tab_summary_bcfp()
 ```
 
 

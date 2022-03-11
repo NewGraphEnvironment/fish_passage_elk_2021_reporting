@@ -45,6 +45,8 @@ fpr_tab_wshd_sum(site_id = my_site) %>%
 PSCIS crossing `r as.character(my_site)` was earmarked for assessment by Canadian Wildlife Federation along with PSCIS site 197795 due to analysis of `bcfishpass` modelling which indicated potentially large quantities of habitat suitable for westslope cutthrout trout spawning and rearing within the greater watershed including upstream of PSCIS bridge crossing 197795 which was located `r round(my_bcfishpass(dat = bcfishpass, site = 197795) %>% pull(downstream_route_measure)*0.001, 1)`km upstream from the confluence with Lodgepole Creek. Upstream of crossing `r my_site`, there was 0.5km of habitat modelled as less than 8% gradient (Table \@ref(tab:tab-culvert-bcfp-197796). Evidence of a recent forest fire was apparent on the west side of the valley.  A map of the watershed is provided in map attachment [`r my_bcfishpass() %>% pull(dbm_mof_50k_grid)`](`r my_mapsheet()`).  
 
 
+`r if(identical(gitbook_on, FALSE)){knitr::asis_output("\\pagebreak")}`
+
 <br>
 
 
@@ -95,10 +97,7 @@ Should restoration/maintenance activities proceed at the site, replacement of PS
 
 There was `r as.character(my_site)` is `r my_priority_info() %>% pull(upstream_habitat_length_km)`km of habitat upstream of crossing rated as `r my_priority_info(sit = my_site, loc = 'us') %>% pull(hab_value)` value for salmonid rearing and spawning. Although unconfirmed, this road within the Wigwam Flats - Mt. Broadwood/Sportsmans Ridge access management area is likely the responsibility of the Ministry of Forests, Lands, Natural Resource Operations and Rural Development - Rocky Mountain Forest District.  Crossing `r as.character(my_site)` was observed to have extensive damage within the structure and was ranked as a `r my_priority_info() %>% pull(priority)` priority for proceeding to design for replacement. The site could also be considered for removal and road deactivation once silviculture obligations have been met in the area.
 
-<!-- this is a bit strange but the pages.js will not build beyond this so we leave for now -->
-<!-- `r if(gitbook_on){knitr::asis_output("<br>")} else knitr::asis_output("\\pagebreak")` -->
-
-<br>
+`r if(gitbook_on){knitr::asis_output("<br>")} else knitr::asis_output("\\pagebreak")`
 
 ```{r tab-culvert-197796, eval = T}
 print_tab_summary()

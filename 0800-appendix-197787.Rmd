@@ -42,6 +42,8 @@ fpr_tab_wshd_sum(site_id = my_site) %>%
 
 Due to the potential for significant quantities of upstream habitat suitable for WCT rearing and spawning based on `bcfishpass` outputs, the Canadian Wildlife Federation assigned these sites as high priorities for follow up. Table \@ref(tab:tab-culvert-bcfp-197787) `r text_ref_tab_summary_bcfp()` A map of the watershed is provided in map attachment [`r my_bcfishpass() %>% pull(dbm_mof_50k_grid)`](`r my_mapsheet()`).
 
+`r if(identical(gitbook_on, FALSE)){knitr::asis_output("\\pagebreak")}`
+
 <br>
 
 ```{r tab-culvert-bcfp-197787, eval = T}
@@ -119,7 +121,7 @@ Structure replacement with a bridge (`r my_pscis_info(site = my_site2) %>% pull(
 
 There is `r my_priority_info() %>% pull(upstream_habitat_length_km)`km of habitat upstream of crossing `r as.character(my_site)` to PSCIS crossing `as.character(my_site2)`.  Habitat in the area was surveyed was rated as `r my_priority_info(sit = my_site, loc = 'us') %>% pull(hab_value)` value for salmonid rearing/spawning primarily due to the presence of the 2ha of rearing habitat in Lodgepole Lake.  The beaver dam upstream of the crossing may provide an obstacle to upstream passage for some migrating fish at some flows however they are not considered permanent, are likely important for maintaining water elevations in the lake and may be passable at some flows.  There is `r my_priority_info(sit = my_site2) %>% pull(upstream_habitat_length_km)`km of habitat upstream of crossing `r as.character(my_site2)` before the impassable waterfall with habitat value rated as `r my_priority_info(sit = my_site2, loc = 'us') %>% pull(hab_value)`.  Both crossings are on the `r my_overview_info(site = my_site2) %>% pull(road_name)` under the jurisdiction of the Ministry of Forests, Lands, Natural Resource Operations and Rural Development District Manager for the Rocky Mountain Forest District.  Due to it's status as a "potential" barrier to upstream migration, crossing `r as.character(my_site)` was ranked as a `r my_priority_info() %>% pull(priority)` priority for proceeding to design for replacement. Crossing `r as.character(my_site2)` was ranked as a `r my_priority_info(sit = my_site2) %>% pull(priority)` priority for proceeding to design for replacement due to the streams seasonal disconnection from Lodgepole Lake and the relatively short section of habitat available upstream before the falls. 
 
-<br>
+`r if(gitbook_on){knitr::asis_output("<br>")} else knitr::asis_output("\\pagebreak")`
 
 ```{r tab-culvert-197787, eval = T}
 print_tab_summary()

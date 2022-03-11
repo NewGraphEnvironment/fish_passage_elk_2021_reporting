@@ -41,21 +41,22 @@ gitbook_on <- TRUE
 
 
 
-```{r setup, include = TRUE}
+```{r setup, echo=identical(gitbook_on, TRUE), include = TRUE}
 knitr::opts_chunk$set(echo=identical(gitbook_on, TRUE), message=FALSE, warning=FALSE, dpi=60, out.width = "100%")
 # knitr::knit_hooks$set(webgl = hook_webgl)
 options(scipen=999)
 options(knitr.kable.NA = '--') #'--'
 options(knitr.kable.NAN = '--')
+```
+
+```{r load-data}
 
 
 source('R/packages.R')
 source('R/functions.R')
 source('R/private_info.R')
 source('R/tables.R')
-
 ```
-
 
 
 ```{r settings-gitbook, eval= gitbook_on}

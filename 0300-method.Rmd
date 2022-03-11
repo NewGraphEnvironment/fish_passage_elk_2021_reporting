@@ -227,6 +227,7 @@ Cost estimates for structure replacement with bridges and embedded culverts were
 
 Base costs for installation of bridges on forest service roads and permit roads with surfaces specified in provincial GIS road layers as rough and loose was roughly estimated at \$20,000/linear m and assumed that the road could be closed during construction. For streams with channel widths <2m, embedded culverts were reported as an effective solution with total installation costs roughly estimated at \$40k/crossing so as to take into account the rising costs of materials and labour since the original estimate of \$25k/crossing was communicated in early 2021 (pers. comm. Phil MacDonald, Steve Page). For larger streams (>6m), estimates of bridge span width increased proportionally to the size of the stream (ex. for an 8m wide stream a 14m wide span was estimated vs. the 12m wide span estimated for a 6m wide stream).  For crossings with large amounts of fill (>3m), the replacement bridge span was increased by an additional 3m for each 1m of fill >3m to account for cutslopes to the stream at a 1.5:1 ratio. To account for road type, a multiplier table was also generated to estimate incremental cost increases with dollar amounts estimated for structure replacement on paved surfaces, railways and arterial/highways up to 30 times more than forest service roads due to expenses associated with design/engineering requirements, traffic control and paving.  The cost multiplier table (Table \@ref(tab:tab-cost-mult)) should be considered very approximate with refinement recommended for future projects.  
 
+
 `r if(gitbook_on){knitr::asis_output("<br>")} else knitr::asis_output("\\pagebreak")`
 
 ```{r tab-cost-mult}
@@ -270,7 +271,7 @@ Reporting was generated with `bookdown` [@bookdown2016] from `Rmarkdown` [@R-rma
 
  + [GPS tracks](https://github.com/NewGraphEnvironment/fish_passage_elk_2021_reporting/tree/master/data/habitat_confirmation_tracks.gpx) from field surveys.  
 
- + [Photos](https://github.com/NewGraphEnvironment/fish_passage_elk_2021_reporting/tree/master/data/photos) and [photo metadata](https://github.com/NewGraphEnvironment/fish_passage_elk_2021_reporting/tree/master/data/photo_metadata.csv)
+ + [Photos](https://github.com/NewGraphEnvironment/fish_passage_elk_2021_reporting/tree/master/data/photos) and photo metadata.
 
 
 ## Mapping

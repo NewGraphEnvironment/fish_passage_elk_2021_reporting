@@ -1,5 +1,5 @@
 --- 
-title: "Elk River Watershed Group Fish Passage Restoration Planning 2021"
+title: "DRAFT - Elk River Watershed Group Fish Passage Restoration Planning 2021"
 author: |
  |
  | Prepared for
@@ -13,7 +13,7 @@ author: |
 
 date: |
  |
- | Version 0.0.1
+ | Version 0.0.1 - DRAFT
  | `r format(Sys.Date(), "%Y-%m-%d")`
 toc-title: Table of Contents
 site: bookdown::bookdown_site
@@ -41,21 +41,22 @@ gitbook_on <- TRUE
 
 
 
-```{r setup, include = TRUE}
+```{r setup, echo=identical(gitbook_on, TRUE), include = TRUE}
 knitr::opts_chunk$set(echo=identical(gitbook_on, TRUE), message=FALSE, warning=FALSE, dpi=60, out.width = "100%")
 # knitr::knit_hooks$set(webgl = hook_webgl)
 options(scipen=999)
 options(knitr.kable.NA = '--') #'--'
 options(knitr.kable.NAN = '--')
+```
+
+```{r load-data}
 
 
 source('R/packages.R')
 source('R/functions.R')
 source('R/private_info.R')
 source('R/tables.R')
-
 ```
-
 
 
 ```{r settings-gitbook, eval= gitbook_on}
@@ -135,7 +136,7 @@ Nupqu Limited Partnership was retained by the Canadian Wildlife Federation in th
 <br>
 
 
-The health and viability of freshwater fish populations can depend on access to tributary and off channel areas which provide refuge during high flows, opportunities for foraging, overwintering habitat, spawning habitat and summer rearing habitat [@Bramblett_2002; @swalesRoleOffChannelPonds1989; @diebel_etal2015EffectsRoad].  Culverts can present barriers to fish migration due to low water depth, increased water velocity, turbulence, a vertical drop at the culvert outlet and/or maintenance issues [@slaneyFishHabitatRehabilitation1997; @cote_etal2005Fishpassage].  Also of relevance to aquatic connectivity, there are a multitude of dam structures historically installed throughout the province for numerous purposes such as water extraction and hydropower generation. Provided connectivity planning incorporates a watershed based approach and effectively assesses the degree to which fish migration impacts the productivity of local fish populations, there are numerous opportunities to responsibly restore connectivity by ensuring that fish passage considerations are incorporated into repair, replacement, relocation and deactivation designs for both stream crossing barrier and dam barrier structures.
+The health and viability of freshwater fish populations can depend on access to tributary and off channel areas which provide refuge during high flows, opportunities for foraging, overwintering habitat, spawning habitat and summer rearing habitat [@Bramblett_2002; @swalesRoleOffChannelPonds1989; @diebel_etal2015EffectsRoad].  Culverts can present barriers to fish migration due to low water depth, increased water velocity, turbulence, a vertical drop at the culvert outlet and/or maintenance issues [@slaneyFishHabitatRehabilitation1997; @cote_etal2005Fishpassage].  Also of relevance to aquatic connectivity, there are a multitude of dam structures historically installed throughout the province for numerous purposes such as water extraction and hydropower generation. There are numerous opportunities to restore connectivity by ensuring that fish passage considerations are incorporated into repair, replacement, relocation and deactivation designs for both stream crossing barrier and dam barrier structures.  
 
 
 
@@ -502,7 +503,7 @@ tab_barrier_result %>%
 
 ### Cost Benefit Analysis
 
-A cost benefit analysis was conducted for each crossing determined to be a barrier based on an estimate of cost associated with remediation or replacement of the crossing with a structure that facilitates fish passage and the amount of potential habitat that would be made available by remediation of fish passage at the site (habitat gain index). 
+A cost benefit analysis was conducted for each crossing determined to be a barrier based on an estimate of cost associated with remediation or replacement of the crossing with a structure that facilitates fish passage and estimates of the linear length and area of potential habitat that would be made available by remediation of fish passage at the site (habitat gain index). 
 
 <br>
 
@@ -536,6 +537,7 @@ Cost estimates for structure replacement with bridges and embedded culverts were
 <br>
 
 Base costs for installation of bridges on forest service roads and permit roads with surfaces specified in provincial GIS road layers as rough and loose was roughly estimated at \$20,000/linear m and assumed that the road could be closed during construction. For streams with channel widths <2m, embedded culverts were reported as an effective solution with total installation costs roughly estimated at \$40k/crossing so as to take into account the rising costs of materials and labour since the original estimate of \$25k/crossing was communicated in early 2021 (pers. comm. Phil MacDonald, Steve Page). For larger streams (>6m), estimates of bridge span width increased proportionally to the size of the stream (ex. for an 8m wide stream a 14m wide span was estimated vs. the 12m wide span estimated for a 6m wide stream).  For crossings with large amounts of fill (>3m), the replacement bridge span was increased by an additional 3m for each 1m of fill >3m to account for cutslopes to the stream at a 1.5:1 ratio. To account for road type, a multiplier table was also generated to estimate incremental cost increases with dollar amounts estimated for structure replacement on paved surfaces, railways and arterial/highways up to 30 times more than forest service roads due to expenses associated with design/engineering requirements, traffic control and paving.  The cost multiplier table (Table \@ref(tab:tab-cost-mult)) should be considered very approximate with refinement recommended for future projects.  
+
 
 `r if(gitbook_on){knitr::asis_output("<br>")} else knitr::asis_output("\\pagebreak")`
 
@@ -580,7 +582,7 @@ Reporting was generated with `bookdown` [@bookdown2016] from `Rmarkdown` [@R-rma
 
  + [GPS tracks](https://github.com/NewGraphEnvironment/fish_passage_elk_2021_reporting/tree/master/data/habitat_confirmation_tracks.gpx) from field surveys.  
 
- + [Photos](https://github.com/NewGraphEnvironment/fish_passage_elk_2021_reporting/tree/master/data/photos) and [photo metadata](https://github.com/NewGraphEnvironment/fish_passage_elk_2021_reporting/tree/master/data/photo_metadata.csv)
+ + [Photos](https://github.com/NewGraphEnvironment/fish_passage_elk_2021_reporting/tree/master/data/photos) and photo metadata.
 
 
 ## Mapping
@@ -778,7 +780,9 @@ Field assessments were conducted between `r format(min(pscis_phase1$date), forma
 "Barrier" and "Potential Barrier" rankings used in this project followed @fish_passage_assessments and reflect an assessment of passability for juvenile salmon or small resident rainbow trout at any flows potentially present throughout the year [@clarkinNationalInventoryAssessment2005 ;@bellFisheriesHandbookEngineering1991; @thompsonAssessingFishPassage2013].  As noted in @bourne_etal2011Barriersfish, with a detailed review of different criteria in @kemp_ohanley2010Proceduresevaluating, passability of barriers can be quantified in many different ways. Fish physiology (i.e. species, length, swim speeds) can make defining passability complex but with important implications for evaluating connectivity and prioritizing remediation candidates [@bourne_etal2011Barriersfish; @shaw_etal2016Importancepartial; @mahlum_etal2014EvaluatingBarrier; @kemp_ohanley2010Proceduresevaluating].  @washingtondepartmentoffishwildlife2009FishPassage present criteria for assigning passability scores to culverts that have already been assessed as barriers in coarser level assessments.  These passability scores provide additional information to feed into decision making processes related to the prioritization of remediation site candidates and have potential for application in British Columbia.  
 
 
-`r if(gitbook_on){knitr::asis_output("<br>")} else knitr::asis_output("<br><br><br><br>")`
+`r if(identical(gitbook_on, FALSE)){knitr::asis_output("\\pagebreak")}`
+
+<br>
 
 
 ```{r cost-est-phase-1}
@@ -885,7 +889,7 @@ During 2021 field assessments, habitat confirmation assessments were conducted a
 
 <br>
 
-As collaborative decision making was ongoing at the time of reporting, site prioritization can be considered preliminary.  `r hab_site_priorities %>% filter(priority %ilike% 'high') %>% nrow() %>% english::as.english() %>% str_to_title()` crossings were rated as high priorities for proceeding to design for replacement, `r hab_site_priorities %>% filter(priority %ilike% 'Moderate') %>% nrow() %>% english::as.english()` crossings were rated as moderate priorities, and `r hab_site_priorities %>% filter(priority %ilike% 'Low') %>% nrow() %>% english::as.english()` crossings were rated as low priorities. Results are summarized in `r if(gitbook_on){knitr::asis_output("Figure \\@ref(fig:map-interactive) and ")}`Table \@ref(tab:tab-overview)) with raw habitat and fish sampling data included in digital format as [Attachment 4](https://github.com/NewGraphEnvironment/fish_passage_elk_2021_reporting/raw/master/data/habitat_confirmations.xls).  A summary of watershed statistics from derived watershed areas andpreliminary modelling results illustrating the quantities of westslope cutthrout trout spawning and rearing habitat potentially available upstream of each crossing as estimated by upstream accessible stream length are presented in Table \@ref(tab:tab-wshd-sum-all) and Figure \@ref(fig:plot-model-all). Only summary tables and raw data is provided for surveys conducted within the Flathead River sub-basin (Parker Creek, Morris Creek, Fuel Creek and Kisoo Creek) with detailed reporting potentially provided in the future under separate cover. Detailed information for each site assessed with Phase 2 assessments (including georeferenced maps) on streams that drain into the Elk River are presented within site specific appendices to this document.
+As collaborative decision making was ongoing at the time of reporting, site prioritization can be considered preliminary.  `r hab_site_priorities %>% filter(priority %ilike% 'high') %>% nrow() %>% english::as.english() %>% str_to_title()` crossings were rated as high priorities for proceeding to design for replacement, `r hab_site_priorities %>% filter(priority %ilike% 'Moderate') %>% nrow() %>% english::as.english()` crossings were rated as moderate priorities, and `r hab_site_priorities %>% filter(priority %ilike% 'Low') %>% nrow() %>% english::as.english()` crossings were rated as low priorities. Results are summarized in `r if(gitbook_on){knitr::asis_output("Figure \\@ref(fig:map-interactive) and ")}`Table \@ref(tab:tab-overview)) with raw habitat and fish sampling data included in digital format as [Attachment 4](https://github.com/NewGraphEnvironment/fish_passage_elk_2021_reporting/raw/master/data/habitat_confirmations.xls).  A summary of watershed statistics from derived watershed areas and preliminary modeling results illustrating the quantities of westslope cutthrout trout spawning and rearing habitat potentially available upstream of each crossing as estimated by upstream accessible stream length are presented in Table \@ref(tab:tab-wshd-sum-all) and Figure \@ref(fig:plot-model-all). Only summary tables and raw data is provided for surveys conducted within the Flathead River sub-basin (Parker Creek, Morris Creek, Fuel Creek and Kisoo Creek) with detailed reporting potentially provided in the future under separate cover. Detailed information for each site assessed with Phase 2 assessments (including georeferenced maps) on streams that drain into the Elk River are presented within site specific appendices to this document.
 
 
 
@@ -898,7 +902,8 @@ tab_overview %>%
   select(-Tenure) %>%
   my_tab_overview_scroll(caption_text = 'Overview of habitat confirmation sites.')
 } else tab_overview %>% 
-  select(-Tenure) 
+  select(-Tenure) %>% 
+  my_kable(caption_text = 'Overview of habitat confirmation sites.')
 
 ```
 
@@ -1022,6 +1027,7 @@ bcfishpass_phase2_plot_prep <- bcfishpass %>%
   mutate(across(where(is.numeric), round, 1)) %>%
     filter(stream_crossing_id %in% (pscis_phase2 %>% pull(pscis_crossing_id))) %>% 
   select(stream_crossing_id, all_of(bcfp_xref_plot$bcfishpass)) %>% 
+  rename(wct_stream_belowupstrbarriers_km    = wct_belowupstrbarriers_stream_km) %>% 
   # filter(stream_crossing_id != 197665) %>% 
   mutate(stream_crossing_id = as.factor(stream_crossing_id)) %>% 
   pivot_longer(cols = wct_stream_km:wct_rearing_belowupstrbarriers_km)  %>% 
@@ -1029,9 +1035,10 @@ bcfishpass_phase2_plot_prep <- bcfishpass %>%
     value > 0.0 &
            !is.na(value)
          ) %>% 
-  mutate(name = stringr::str_replace_all(name, '_belowupstrbarriers_km', 'belowupstrbarriers km'),
+  mutate(name = stringr::str_replace_all(name, '_belowupstrbarriers_km', ' belowupstrbarriers km'),
          name = stringr::str_replace_all(name, '_rearing', ' rearing'),
-         name = stringr::str_replace_all(name, '_spawning', ' spawning'))
+         name = stringr::str_replace_all(name, '_spawning', ' spawning'),
+         name = stringr::str_replace_all(name, '_stream', ' stream'))
     # rename('Habitat type' = name,
     #        "Habitat (km)" = value)
   
@@ -1130,7 +1137,18 @@ A large flood event on Coal Creek in 1995 caused overbank flooding, channel shif
 <br>
 
 
-The bridge where PSCIS crossing `r as.character(my_site)` is located on the outside bend of Coal Creek and has been extensively armored with large riprap on the west side of the river upstream of the bridge likely to protect bridge pilings/abutments. At the time of the survey it appeared as though significant amounts of riprap as well as what appeared to be a historic stream abutment was slightly constricting the channel and creating a small cascade (20 - 55cm high) across the stream width adjacent to the downstream end of the bridge abutments. Through connectivity restoration planning activities, this constriction of the channel and presence of cascade was brought to the attention of Canadian Wildlife Federation and the site was assigned a high priority for follow up. A map of the watershed is provided in map attachment [`r my_bcfishpass() %>% pull(dbm_mof_50k_grid)`](`r my_mapsheet()`).
+The bridge where PSCIS crossing `r as.character(my_site)` is located on the outside bend of Coal Creek and has been extensively armored with large riprap on the west side of the river upstream of the bridge likely to protect bridge pilings/abutments. At the time of the survey it appeared as though significant amounts of riprap as well as what appeared to be a historic stream abutment was slightly constricting the channel and creating a small cascade (20 - 55cm high) across the stream width adjacent to the downstream end of the bridge abutments. Through connectivity restoration planning activities, this constriction of the channel and presence of cascade was brought to the attention of Canadian Wildlife Federation and the site was assigned a high priority for follow up. Table \@ref(tab:tab-culvert-bcfp-61504) `r text_ref_tab_summary_bcfp()` A map of the watershed is provided in map attachment [`r my_bcfishpass() %>% pull(dbm_mof_50k_grid)`](`r my_mapsheet()`).
+
+
+`r if(identical(gitbook_on, FALSE)){knitr::asis_output("\\pagebreak")}`
+
+<br>
+
+
+```{r tab-culvert-bcfp-61504, eval = T}
+print_tab_summary_bcfp()
+```
+
 
 <br>
 
@@ -1143,6 +1161,11 @@ At the time of the survey, the PSCIS bridge crossing span was measured at `r my_
 To gather data to help assess the degree to which the cascade potentially hindered upstream fish migration, velocity measurements were taken at five locations even distributed across the wetted width of the cascade using a Hach FH handheld flow meter  `r if(gitbook_on){knitr::asis_output("(Figures \\@ref(fig:photo-61504-01) - \\@ref(fig:photo-61504-02))")}else(knitr::asis_output("(Figure \\@ref(fig:photo-61504-d01))"))`.  Measurements were taken on October 15, 2021 at depths equivalent to 60% of the depth of the water. Light rain was falling at the time of the survey.  Flow velocities at the cascade ranged from `r min(coal_velocity$Velocity)`m/s to `r min(coal_velocity$Velocity)`m/s (Table \@ref(tab:tab-velocity-61504)).  In a swimming performance study conducted in an open-channel flume @blank_etal2020SwimmingPerformance estimated the overall average swim speeds of westlope cutthrout trout (150mm - 290mm in length) at 0.84m/s with a maximum observed swim speed of 3.55m/s. 
 
 
+
+`r if(identical(gitbook_on, FALSE)){knitr::asis_output("\\pagebreak")}`
+
+<br>
+
 ```{r tab-velocity-61504, eval = T}
 coal_velocity %>% 
   my_kable(
@@ -1151,6 +1174,8 @@ coal_velocity %>%
 
 
 ```
+
+<br>
 
 
 ```{r eval=F}
@@ -1168,19 +1193,10 @@ The stream was surveyed downstream from `r as.character(my_site)` for `r my_prio
 
 ## Stream Characteristics Upstream {-}
 
-```{r eval = F}
-# as a note - we are using my_sit = my_site2 because the detailed info was recorded on that card
-```
-
-
 The stream was surveyed upstream from `r as.character(my_site)` for `r my_priority_info(loc = 'us') %>% pull(survey_length_m)`m `r if(gitbook_on){knitr::asis_output("(Figures \\@ref(fig:photo-61504-03) - \\@ref(fig:photo-61504-04))")} else(knitr::asis_output("(Figure \\@ref(fig:photo-61504-d02))"))`. Within the area surveyed, total cover amount was rated as `r my_habitat_info2(loc = 'us', sit = my_site) %>% filter(rowname == 'total cover') %>% pull(v)` with  `r my_habitat_info2(loc = 'us', sit = my_site) %>% filter(v == 'dominant') %>% pull(rowname)` dominant. Cover was also present as `r my_habitat_info2(loc = 'us', sit = my_site) %>% filter(v == 'sub-dominant') %>% pull(rowname) %>% knitr::combine_words()` (Table \@ref(tab:tab-habitat-summary-61504)). The average channel width was `r my_habitat_info3(loc = 'us', , sit = my_site, row = 'avg channel width m')`m, the average wetted width was `r my_habitat_info3(loc = 'us', row = 'avg wetted width m')`m and the average gradient was `r my_habitat_info3(loc = 'us', , sit = my_site, row = 'average gradient percent')`%.  Some deep pools up to ~1.8m deep were available for overwintering westslope cutthroat trout adults and occasional pockets of gravel suitable for spawning were present. The riparian area was comprised of mature black cottonwood with intermittent naturally formed large woody debris structures throughout providing structure and cover. Beaver dams were located within the area surveyed primarily on tributaries or side-channels with one dam noted as partially spanning the main channel.  Habitat value was rated as `r my_priority_info(loc = 'us') %>% pull(hab_value)` for salmonid rearing and spawning. 
 
 
-<br>
 
-
-
-Table \@ref(tab:tab-culvert-bcfp-61504) `r text_ref_tab_summary_bcfp()` 
 
 <br>
 
@@ -1213,12 +1229,6 @@ tab_hab_summary %>%
   # select(-Site) %>% 
   my_kable(caption_text = paste0('Summary of habitat details for PSCIS crossings ', my_site, '.'))
 
-```
-
-<br>
-
-```{r tab-culvert-bcfp-61504, eval = T}
-print_tab_summary_bcfp()
 ```
 
 
@@ -1263,6 +1273,10 @@ grid::grid.raster(get_img(site = my_site, photo = my_photo2))
 
 my_caption <- paste0('Left: ', my_caption1, ' Right: ', my_caption2)
 
+
+my_photo2 = pull_photo_by_str(site_id = my_site, str_to_pull = '_u5_')
+
+
 knitr::include_graphics(get_img_path(photo = my_photo1))
 knitr::include_graphics("fig/pixel.png")
 knitr::include_graphics(get_img_path(photo = my_photo2))
@@ -1298,9 +1312,13 @@ grid::grid.raster(get_img(photo = my_photo2))
 
 my_caption <- paste0('Left: ', my_caption1, ' Right: ', my_caption2)
 
+my_photo1 = pull_photo_by_str(site_id = my_site, str_to_pull = '_d6_')
+my_photo2 = pull_photo_by_str(site_id = my_site, str_to_pull = '_d7_')
+
 knitr::include_graphics(get_img_path(photo = my_photo1))
 knitr::include_graphics("fig/pixel.png")
 knitr::include_graphics(get_img_path(photo = my_photo2))
+
 ```
 
 
@@ -1375,6 +1393,17 @@ PSCIS crossing `r as.character(my_site)` is located on `r my_pscis_info() %>% pu
 
 <br>
 
+
+```{r tab-wshd-62181}
+fpr_tab_wshd_sum(site_id = my_site) %>% 
+  my_kable(caption_text = paste0('Summary of derived upstream watershed statistics for PSCIS crossing ', my_site, '.'),
+           footnote_text = 'Elev P60 = Elevation at which 60% of the watershed area is above')
+
+```
+
+
+<br>
+
 The upper end of the watershed is within Phase II of Teck Coal Limited’s (Teck) – Line Creek Operation area (LCOII).  @hasek_batchelar20212020Line report that waste rock placement in the watershed began in 2015.  A review of aerial imagery from March of 2021 indicated that the total area of waste rock placement within the watershed was approximately 300ha. In order to comply with discharge requirements for total suspended solids (Permit 106970), Teck began operating the Line Creek Operation Dry Creek Water Management System (LCODCWMS) in 2015. The LCODCWMS collects upper Dry Creek water in a headpond which then conveys the water into two lined sedimentation ponds.  Discharge from the sedimentation ponds is subsequently combined and is conveyed to a constructed discharge channel which flows continuously into Dry Creek downstream.  The Line Creek Operations Local Aquatic Effects Monitoring Program (LCOLAEMP) to assess potential effects of Line Creek Operations on Dry Creek, Grace Creek and an Unnamed Creek has been in operation since 2014 as per another LCOII permitting requirement [@hasek_batchelar20212020Line].  A Structured Decision Making (SDM) process was initiated in 2016 to develop recommendations for water qualty site performatnce objective (SPOs) and in-stream flow requirements (IFRs) for Dry Creek, along with an updated LCO Dry Creek Water Management Plan that included water management activities, physical ,works, and LCOII operational procedures with the entent to acheieve the recommneded SPOs and IFRs, to inform monitoring as well as adaptive management recommendations.  The SDM process includes a working group comprised of Ktunaxa Nation Council; BC Ministry of Environment; Ministry of Forests, Lands, Natural Resource Operations and Rural Development; the Ministry of Energy, Mines and Petroleum Resources; Fisheries and Oceans Canada and Teck.  The SDM process develops operational recommendations informed throughout the year by the LCOLAEM with results from 2020 summarized below [@hasek_batchelar20212020Line]. 
 
 
@@ -1392,16 +1421,27 @@ A pipeline and power line corridor (Dry Creek Water Conveyance and Supplementati
 <br>
 
 
-@cope2020UpperFording have conducted three pass removal depletion electrofishing in the lower section of Dry Creek below crossing `r as.character(my_site)` as part of the Upper Fording River Westslope Ctthroat Trout Population Monitoring Project in 2013, 2014, 2015, 2017 and 2019 with fish densities sampled ranging from 2.25 to 16.5 fish/100m^2. Sampling was continued in 2020 along with redd surveys in the lower reach of the stream with results presented in @thorley_etal2021UpperFording.  Analysis by @thorley_etal2021UpperFording indicates that there was a substantial decline in the number of adult westslope cutthroat trout in the Upper Fording River between 2017 and 2019 with no evidence of further decline between 2019 and 2020 suggesting the mortality may have been due to a short-term event opposed to chronic conditions.   
+@cope2020UpperFording have conducted three pass removal depletion electrofishing in the lower section of Dry Creek below crossing `r as.character(my_site)` as part of the Upper Fording River Westslope Ctthroat Trout Population Monitoring Project in 2013, 2014, 2015, 2017 and 2019 with fish densities sampled ranging from 2.25 to 16.5 fish/100m^2^. Sampling was continued in 2020 along with redd surveys in the lower reach of the stream with results presented in @thorley_etal2021UpperFording.  Analysis by @thorley_etal2021UpperFording indicates that there was a substantial decline in the number of adult westslope cutthroat trout in the Upper Fording River between 2017 and 2019 with no evidence of further decline between 2019 and 2020 suggesting the mortality may have been due to a short-term event opposed to chronic conditions.   
 
 <br>
 
 
-In 2014, PSCIS stream crossings `r as.character(my_site)` and `r as.character(my_site2)` were the sites of habitat confirmation assessments by @masseenvironmentalconsultantsltd_2015FishHabitat. The crossings were subjectively assessed as passable during the field assessments due to the low gradients and embeddedness of the pipes with the crossings not recommended for replacement at that time.  @masseenvironmentalconsultantsltd_2015FishHabitat did however recommend reassessment of the sites every 5 to 10 years due to likely substrate movement at the crossing locations. Upon review of this background reporting, and due to the likely presence of significant quantities of upstream habitat suitable for WCT rearing and spawning based on `bcfishpass` outputs, the Canadian Wildlife Federation assigned these sites as high priorities for follow up. A map of the watershed is provided in map attachment [`r my_bcfishpass() %>% pull(dbm_mof_50k_grid)`](`r my_mapsheet()`).
+In 2014, PSCIS stream crossings `r as.character(my_site)` and `r as.character(my_site2)` were the sites of habitat confirmation assessments by @masseenvironmentalconsultantsltd_2015FishHabitat. The crossings were subjectively assessed as passable during the field assessments due to the low gradients and embeddedness of the pipes with the crossings not recommended for replacement at that time.  @masseenvironmentalconsultantsltd_2015FishHabitat did however recommend reassessment of the sites every 5 to 10 years due to likely substrate movement at the crossing locations. Upon review of this background reporting, and due to the likely presence of significant quantities of upstream habitat suitable for WCT rearing and spawning based on `bcfishpass` outputs, the Canadian Wildlife Federation assigned these sites as high priorities for follow up (Table \@ref(tab:tab-culvert-bcfp-62181)). A map of the watershed is provided in map attachment [`r my_bcfishpass() %>% pull(dbm_mof_50k_grid)`](`r my_mapsheet()`).
+
+
+`r if(identical(gitbook_on, FALSE)){knitr::asis_output("\\pagebreak")}`
 
 <br>
+
+
+
+```{r tab-culvert-bcfp-62181, eval = T}
+print_tab_summary_bcfp()
+```
 
 Permit 107517, issued to Teck in November 2014 under provisions of the *Environmental Management Act* required development of a Tributary Management Plan for tributaries to the Elk and Fording Rivers that will incorporate protection and rehabilitation goals for tributaries to support achieving the area-based objectives of the Elk Valley Water Quality Plan [@teckcoallimited2020TributaryManagement; @teckresourceslimited2014ElkValley].  As part of the Tributary Management Plan, design work for  fish passage improvement at the Highway and Railway is scheduled for 2021-2022 based on pre-construction data that was scheduled to be collected in 2021.  Construction of restoration works has been slated for 2023 based on progress of a partnership and agreement on design between the Ministry of Transportation and Infrastructure, CP Railway and Teck [@teckcoallimited2020TributaryManagement].
+
+<br>
 
 
 ## Stream Characteristics at Crossings {-}
@@ -1439,11 +1479,6 @@ The stream was surveyed downstream from `r as.character(my_site2)` for `r my_pri
 The stream was surveyed upstream from `r as.character(my_site)` for `r my_priority_info(loc = 'us') %>% pull(survey_length_m)`m `r if(gitbook_on){knitr::asis_output("(Figures \\@ref(fig:photo-62181-03) - \\@ref(fig:photo-62181-04))")} else(knitr::asis_output("(Figure \\@ref(fig:photo-62181-d02))"))`. Environmental monitoring system sample location E288270 (EQuiS: LC_DC1) was located approximately 100m upstream of the railway at the bridge on the Fording FSR. In the area surveyed, total cover amount was rated as `r my_habitat_info2(loc = 'us', sit = my_site2) %>% filter(rowname == 'total cover') %>% pull(v)` with  `r my_habitat_info2(loc = 'us', sit = my_site2) %>% filter(v == 'dominant') %>% pull(rowname)` dominant. Cover was also present as `r my_habitat_info2(loc = 'us', sit = my_site2) %>% filter(v == 'sub-dominant') %>% pull(rowname) %>% knitr::combine_words()` (Table \@ref(tab:tab-habitat-summary-62181)). The average channel width was `r my_habitat_info3(loc = 'us', , sit = my_site2, row = 'avg channel width m')`m, the average wetted width was `r my_habitat_info3(loc = 'us', row = 'avg wetted width m')`m and the average gradient was `r my_habitat_info3(loc = 'us', , sit = my_site2, row = 'average gradient percent')`%.  Habitat value was rated as `r my_priority_info(loc = 'us') %>% pull(hab_value)` for salmonid rearing and spawning due to good flow, larger channel size, occasional pockets of gravel and the presence of intermittent pools. 
 
 
-<br>
-
-
-
-Table \@ref(tab:tab-culvert-bcfp-62181) `r text_ref_tab_summary_bcfp()` 
 
 <br>
 
@@ -1485,12 +1520,6 @@ tab_hab_summary %>%
   # select(-Site) %>% 
   my_kable(caption_text = paste0('Summary of habitat details for PSCIS crossings ', my_site, ' and ', my_site2, '.'))
 
-```
-
-<br>
-
-```{r tab-culvert-bcfp-62181, eval = T}
-print_tab_summary_bcfp()
 ```
 
 
@@ -1626,6 +1655,8 @@ fpr_tab_wshd_sum(site_id = my_site) %>%
 PSCIS crossing `r as.character(my_site)` was prioritized for assessment due to it's location within provincial park boundaries and the associated positive implications for restoration potential.  In addition, the site was noted as having a significantly sized outlet drop, good flow during the dryest part of the year and a location directly adjacent to Lizard Creek which contains confirmed spawning habitat for westslope cutthrout trout. Table \@ref(tab:tab-bcfp-62505) presents preliminary fish passage modelling data for crossing 62505 with linear length of habitat <8% upstream estimated at 0.4km and an additional 0.5km of habitat modeled between 8 - 15%. A map of the watershed is provided in map attachment [`r my_bcfishpass() %>% pull(dbm_mof_50k_grid)`](`r my_mapsheet()`).  
 
 
+`r if(identical(gitbook_on, FALSE)){knitr::asis_output("\\pagebreak")}`
+
 <br>
 
 ```{r tab-bcfp-62505, eval = T}
@@ -1677,10 +1708,8 @@ Should restoration/maintenance activities proceed at the site, replacement of PS
 
 There was `r my_priority_info() %>% pull(upstream_habitat_length_km)`km of viable juvenile rearing habitat upstream of crossing `r as.character(my_site)`. Habitat in the areas surveyed upstream of the culvert were rated as `r my_priority_info(sit = my_site, loc = 'us') %>% pull(hab_value)` value for salmonid rearing.   `r my_overview_info() %>% pull(road_name)`, at the crossing location, is located within the Mount Fernie Provincial Park Boundary and is the responsibility of the Ministry of Environment and Climate Change Strategy.  As the crossing is located approximately 75m  upstream from the confluence with Lizard Creek where westslope cutthrout trout spawning is known to occur, remediation of fish passage at the site could provide sdditional habitat for fry and juveniles migrating from the mainstem of Lizard Creek.  Crossing `r as.character(my_site)` was ranked as a `r my_priority_info() %>% pull(priority)` priority for proceeding to design for replacement. 
 
-<!-- this is a bit strange but the pages.js will not build beyond this so we leave for now -->
-<!-- `r if(gitbook_on){knitr::asis_output("<br>")} else knitr::asis_output("\\pagebreak")` -->
 
-<br>
+`r if(gitbook_on){knitr::asis_output("<br>")} else knitr::asis_output("\\pagebreak")`
 
 ```{r tab-culvert-62505, eval = T}
 print_tab_summary()
@@ -1817,6 +1846,8 @@ fpr_tab_wshd_sum(site_id = my_site) %>%
 
 Due to the potential for significant quantities of upstream habitat suitable for WCT rearing and spawning based on `bcfishpass` outputs, the Canadian Wildlife Federation assigned these sites as high priorities for follow up. Table \@ref(tab:tab-culvert-bcfp-197787) `r text_ref_tab_summary_bcfp()` A map of the watershed is provided in map attachment [`r my_bcfishpass() %>% pull(dbm_mof_50k_grid)`](`r my_mapsheet()`).
 
+`r if(identical(gitbook_on, FALSE)){knitr::asis_output("\\pagebreak")}`
+
 <br>
 
 ```{r tab-culvert-bcfp-197787, eval = T}
@@ -1894,7 +1925,7 @@ Structure replacement with a bridge (`r my_pscis_info(site = my_site2) %>% pull(
 
 There is `r my_priority_info() %>% pull(upstream_habitat_length_km)`km of habitat upstream of crossing `r as.character(my_site)` to PSCIS crossing `as.character(my_site2)`.  Habitat in the area was surveyed was rated as `r my_priority_info(sit = my_site, loc = 'us') %>% pull(hab_value)` value for salmonid rearing/spawning primarily due to the presence of the 2ha of rearing habitat in Lodgepole Lake.  The beaver dam upstream of the crossing may provide an obstacle to upstream passage for some migrating fish at some flows however they are not considered permanent, are likely important for maintaining water elevations in the lake and may be passable at some flows.  There is `r my_priority_info(sit = my_site2) %>% pull(upstream_habitat_length_km)`km of habitat upstream of crossing `r as.character(my_site2)` before the impassable waterfall with habitat value rated as `r my_priority_info(sit = my_site2, loc = 'us') %>% pull(hab_value)`.  Both crossings are on the `r my_overview_info(site = my_site2) %>% pull(road_name)` under the jurisdiction of the Ministry of Forests, Lands, Natural Resource Operations and Rural Development District Manager for the Rocky Mountain Forest District.  Due to it's status as a "potential" barrier to upstream migration, crossing `r as.character(my_site)` was ranked as a `r my_priority_info() %>% pull(priority)` priority for proceeding to design for replacement. Crossing `r as.character(my_site2)` was ranked as a `r my_priority_info(sit = my_site2) %>% pull(priority)` priority for proceeding to design for replacement due to the streams seasonal disconnection from Lodgepole Lake and the relatively short section of habitat available upstream before the falls. 
 
-<br>
+`r if(gitbook_on){knitr::asis_output("<br>")} else knitr::asis_output("\\pagebreak")`
 
 ```{r tab-culvert-197787, eval = T}
 print_tab_summary()
@@ -2180,6 +2211,8 @@ fpr_tab_wshd_sum(site_id = my_site) %>%
 PSCIS crossing `r as.character(my_site)` was earmarked for assessment by Canadian Wildlife Federation due to `bsfishpass` modelling which indicated potentially large quantities of habitat suitable for westslope cutthrout trout spawning and rearing upstream. Table \@ref(tab:tab-bcfp-197793) `r text_ref_tab_summary_bcfp()` A map of the watershed is provided in map attachment [`r my_bcfishpass() %>% pull(dbm_mof_50k_grid)`](`r my_mapsheet()`).  
 
 
+`r if(identical(gitbook_on, FALSE)){knitr::asis_output("\\pagebreak")}`
+
 <br>
 
 ```{r tab-bcfp-197793, eval = T}
@@ -2231,10 +2264,7 @@ Should restoration/maintenance activities proceed at the site, replacement of PS
 
 A conservative estimate of mainstem habitat upstream of crossing `r as.character(my_site)` is `r my_priority_info() %>% pull(upstream_habitat_length_km)`km. Habitat in the areas surveyed upstream of the culvert were rated as `r my_priority_info(sit = my_site, loc = 'us') %>% pull(hab_value)` value for salmonid rearing and spawning due to likely annual seasonal dewatering within the rocky south-west facing watershed.   `r my_overview_info() %>% pull(road_name)` is the responsibility of the Ministry of Forests, Lands, Natural Resource Operations and Rural Development - Rocky Mountain Forest District.  Crossing `r as.character(my_site)` was ranked as a `r my_priority_info() %>% pull(priority)` priority for proceeding to design for replacement. 
 
-<!-- this is a bit strange but the pages.js will not build beyond this so we leave for now -->
-<!-- `r if(gitbook_on){knitr::asis_output("<br>")} else knitr::asis_output("\\pagebreak")` -->
-
-<br>
+`r if(gitbook_on){knitr::asis_output("<br>")} else knitr::asis_output("\\pagebreak")`
 
 ```{r tab-culvert-197793, eval = T}
 print_tab_summary()
@@ -2374,6 +2404,8 @@ fpr_tab_wshd_sum(site_id = my_site) %>%
 PSCIS crossing `r as.character(my_site)` was earmarked for assessment by Canadian Wildlife Federation along with PSCIS site 197795 due to analysis of `bcfishpass` modelling which indicated potentially large quantities of habitat suitable for westslope cutthrout trout spawning and rearing within the greater watershed including upstream of PSCIS bridge crossing 197795 which was located `r round(my_bcfishpass(dat = bcfishpass, site = 197795) %>% pull(downstream_route_measure)*0.001, 1)`km upstream from the confluence with Lodgepole Creek. Upstream of crossing `r my_site`, there was 0.5km of habitat modelled as less than 8% gradient (Table \@ref(tab:tab-culvert-bcfp-197796). Evidence of a recent forest fire was apparent on the west side of the valley.  A map of the watershed is provided in map attachment [`r my_bcfishpass() %>% pull(dbm_mof_50k_grid)`](`r my_mapsheet()`).  
 
 
+`r if(identical(gitbook_on, FALSE)){knitr::asis_output("\\pagebreak")}`
+
 <br>
 
 
@@ -2424,10 +2456,7 @@ Should restoration/maintenance activities proceed at the site, replacement of PS
 
 There was `r as.character(my_site)` is `r my_priority_info() %>% pull(upstream_habitat_length_km)`km of habitat upstream of crossing rated as `r my_priority_info(sit = my_site, loc = 'us') %>% pull(hab_value)` value for salmonid rearing and spawning. Although unconfirmed, this road within the Wigwam Flats - Mt. Broadwood/Sportsmans Ridge access management area is likely the responsibility of the Ministry of Forests, Lands, Natural Resource Operations and Rural Development - Rocky Mountain Forest District.  Crossing `r as.character(my_site)` was observed to have extensive damage within the structure and was ranked as a `r my_priority_info() %>% pull(priority)` priority for proceeding to design for replacement. The site could also be considered for removal and road deactivation once silviculture obligations have been met in the area.
 
-<!-- this is a bit strange but the pages.js will not build beyond this so we leave for now -->
-<!-- `r if(gitbook_on){knitr::asis_output("<br>")} else knitr::asis_output("\\pagebreak")` -->
-
-<br>
+`r if(gitbook_on){knitr::asis_output("<br>")} else knitr::asis_output("\\pagebreak")`
 
 ```{r tab-culvert-197796, eval = T}
 print_tab_summary()
@@ -2566,8 +2595,10 @@ fpr_tab_wshd_sum(site_id = my_site) %>%
 
 PSCIS crossing `r as.character(my_site)` was surveyed with a phase 1 assessment opportunistically during field assessments in the area and was prioritized for follow up with a habitat confirmation as it was considered the crossing with the highest potential for remediation located within the Bighorn Creek watershed area.  The site was noted as having a significantly sized outlet drop and good flow with a location very close to the mainstem of Bighorn Creek which contains confirmed spawning habitat for westslope cutthrout trout. Table \@ref(tab:tab-culvert-bcfp-197787) `r text_ref_tab_summary_bcfp()`.  Additionally, 0.6km of habitat <8% gradient was modelled as located upstream. A map of the watershed is provided in map attachment [`r my_bcfishpass() %>% pull(dbm_mof_50k_grid)`](`r my_mapsheet()`).  
 
+`r if(identical(gitbook_on, FALSE)){knitr::asis_output("\\pagebreak")}`
 
 <br>
+
 
 ```{r tab-bcfp-197844, eval = T}
 print_tab_summary_bcfp()
@@ -2618,10 +2649,7 @@ Should restoration/maintenance activities proceed at the site, replacement of PS
 
 There was `r my_priority_info() %>% pull(upstream_habitat_length_km)`km of viable juvenile rearing habitat upstream of crossing `r as.character(my_site)`. Habitat in the areas surveyed upstream of the culvert were rated as `r my_priority_info(sit = my_site, loc = 'us') %>% pull(hab_value)` value for salmonid rearing.   `r my_overview_info() %>% pull(road_name)`, at the crossing location, is located within the Mount Fernie Provincial Park Boundary and is the responsibility of the Ministry of Environment and Climate Change Strategy.  As the crossing is located approximately 75m  upstream from the confluence with Lizard Creek where westslope cutthrout trout spawning is known to occur, remediation of fish passage at the site could provide sdditional habitat for fry and juveniles migrating from the mainstem of Lizard Creek.  Crossing `r as.character(my_site)` was ranked as a `r my_priority_info() %>% pull(priority)` priority for proceeding to design for replacement. 
 
-<!-- this is a bit strange but the pages.js will not build beyond this so we leave for now -->
-<!-- `r if(gitbook_on){knitr::asis_output("<br>")} else knitr::asis_output("\\pagebreak")` -->
-
-<br>
+`r if(gitbook_on){knitr::asis_output("<br>")} else knitr::asis_output("\\pagebreak")`
 
 ```{r tab-culvert-197844, eval = T}
 print_tab_summary()

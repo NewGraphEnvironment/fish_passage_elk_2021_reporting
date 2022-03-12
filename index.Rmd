@@ -5,7 +5,7 @@ author: |
  |
  |
  | Prepared for
- | Nupqu Limited Partnership
+ | Nupqu Resource Limited Partnership
  |
  |
  |
@@ -15,7 +15,7 @@ author: |
 
 date: |
  |
- | Version 0.1.1 - DRAFT
+ | Version 0.1.2 - DRAFT
  | `r format(Sys.Date(), "%Y-%m-%d")`
 toc-title: Table of Contents
 site: bookdown::bookdown_site
@@ -52,8 +52,6 @@ options(knitr.kable.NAN = '--')
 ```
 
 ```{r load-data}
-
-
 source('R/packages.R')
 source('R/functions.R')
 source('R/private_info.R')

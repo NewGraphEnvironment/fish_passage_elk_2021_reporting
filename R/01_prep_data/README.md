@@ -2,7 +2,7 @@ Workflows for pre-processing of field data so it aligns with requirements for PS
 
 <br>
 
-If the line `source('R/private_info.R')` is at the top of the file then the file requires connecting to a local or remote postgresql database and cannot be completed without obtaining the required info first.
+If the line `source('R/private_info.R')` is at the top of the file then the file requires connecting to a local or remote postgresql database and a google api key for grabbing elevations cannot be completed without obtaining the required info first.
 
 <br>
 

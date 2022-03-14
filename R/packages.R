@@ -29,13 +29,14 @@ package_list <- c(
   'tidyhydat',
   'elevatr',
   'rayshader',
+  'exifr',
   # flextable,
   'english',
   'leaflet.extras',
   'ggdark',
   'fwapgr',
-  'citr'
-  # pdftools,
+  'geojsonio',
+  'pdftools'
   # rgl,
   # geojsonsf,
   # bit64 ##to make integer column type for pg
@@ -51,6 +52,9 @@ lapply(package_list,
 # remotes::install_github('rstudio/pagedown')
 
 
-# pacman::p_load_gh("poissonconsulting/fwapgr",
-#                   "crsh/citr")
-#                   # "poissonconsulting/subfoldr2")
+pacman::p_load_gh("poissonconsulting/fwapgr",
+                  'poissonconsulting/poisspatial',
+                  "crsh/citr",
+                  'rstudio/pagedown',
+                  "poissonconsulting/fishbc")
+# "poissonconsulting/subfoldr2")

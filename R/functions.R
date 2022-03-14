@@ -241,23 +241,23 @@ fpr_import_pscis <- function(workbook_name = 'pscis_phase1.xlsm'){ ##new templat
                      sheet = 'PSCIS Assessment Worksheet') %>%
     # purrr::set_names(janitor::make_clean_names(names(.))) %>%
     fpr_trim_xlsheet() %>% ##recently added function above and pulled the altools package as it was a week link
-    rename(date = date_of_assessment_yyyy_mm_dd) %>%
-    mutate(date = janitor::excel_numeric_to_date(as.numeric(date))) %>%
-    filter(!is.na(date)) %>%
+    dplyr::rename(date = date_of_assessment_yyyy_mm_dd) %>%
+    dplyr:: mutate(date = janitor::excel_numeric_to_date(as.numeric(date))) %>%
+    dplyr::filter(!is.na(date)) %>%
     readr::type_convert() %>%  ##guess the type!!
-    mutate(source = workbook_name) %>%
-    mutate(across(all_of(sig_fig0), round, 0)) %>%
-    mutate(across(all_of(sig_fig1), round, 1)) %>%
-    mutate(across(all_of(sig_fig2), round, 2)) %>%
+    dplyr::mutate(source = workbook_name) %>%
+    dplyr::mutate(dplyr::across(dplyr::all_of(sig_fig0), round, 0)) %>%
+    dplyr::mutate(dplyr::across(dplyr::all_of(sig_fig1), round, 1)) %>%
+    dplyr::mutate(dplyr::across(dplyr::all_of(sig_fig2), round, 2)) %>%
     tibble::rowid_to_column() %>%
-    mutate(rowid = rowid + 4,
-           pscis_crossing_id = as.numeric(pscis_crossing_id),
-           my_crossing_reference = as.numeric(my_crossing_reference)
-           ) %>%
-    mutate(
-      aggregated_crossings_id = case_when(!is.na(pscis_crossing_id) ~ pscis_crossing_id,
-                                          my_crossing_reference > 200000000 ~ my_crossing_reference,  ##date based id's are greater than this number
-                                          T ~ my_crossing_reference + 1000000000)
+    dplyr::mutate(rowid = rowid + 4,
+                  pscis_crossing_id = as.numeric(pscis_crossing_id),
+                  my_crossing_reference = as.numeric(my_crossing_reference)
+    ) %>%
+    dplyr::mutate(
+      aggregated_crossings_id = dplyr::case_when(!is.na(pscis_crossing_id) ~ pscis_crossing_id,
+                                                 my_crossing_reference > 200000000 ~ my_crossing_reference,  ##date based id's are greater than this number
+                                                 T ~ my_crossing_reference + 1000000000)
     )
 }
 

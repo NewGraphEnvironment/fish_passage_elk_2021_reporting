@@ -20,6 +20,13 @@ make_geopackage(dat = hab_site_priorities)
 make_geopackage(dat = phase1_priorities)
 make_geopackage(dat = tab_dams_raw)
 
+# filter out the phase 1s that also have phase2 for mapping
+phase1_priorities_filtered <- phase1_priorities %>%
+  filter(!pscis_crossing_id %in% (hab_site_priorities %>% pull(site)))
+
+make_geopackage(dat = phase1_priorities_filtered)
+
+
 
 ##we do this manually
 #   st_transform(crs = 3005) %>%

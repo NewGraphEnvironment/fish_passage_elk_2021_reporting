@@ -957,7 +957,7 @@ tab_hab_map <- left_join(
   #                           'https://github.com/NewGraphEnvironment/fish_passage_bulkley_2020_reporting/tree/master/docs/sum/', pscis_crossing_id,
   #                           '.html', '>', 'data link', '</a>')) %>%
   mutate(data_link = paste0('<a href =', 'sum/cv/', pscis_crossing_id, '.html ', 'target="_blank">Culvert Data</a>')) %>%
-  mutate(photo_link = paste0('<a href =', 'data/photos/', pscis_crossing_id, '/crossing_all.JPG ',
+  mutate(photo_link = paste0('<a href =', 'https://raw.githubusercontent.com/NewGraphEnvironment/fish_passage_elk_2021_reporting/master/data/photos/', pscis_crossing_id, '/crossing_all.JPG ',
                              'target="_blank">Culvert Photos</a>')) %>%
   mutate(model_link = paste0('<a href =', 'sum/bcfp/', pscis_crossing_id, '.html ', 'target="_blank">Model Data</a>'))
 # mutate(photo_link = paste0('<a href =', 'data/photos/', pscis_crossing_id,

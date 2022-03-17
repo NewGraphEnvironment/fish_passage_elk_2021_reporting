@@ -15,7 +15,7 @@ author: |
 
 date: |
  |
- | Version 0.1.3 - DRAFT
+ | Version 0.1.4 - DRAFT
  | `r format(Sys.Date(), "%Y-%m-%d")`
 toc-title: Table of Contents
 site: bookdown::bookdown_site
@@ -36,8 +36,8 @@ description: "2021 Reporting for Fish Passage Restoration Planning Assessments i
 
 
 ```{r switch-gitbook-pagedown, echo=FALSE}
-gitbook_on <- TRUE
-# gitbook_on <- FALSE  ##we just need turn  this on and off to switch between gitbook and pdf via paged.js
+# gitbook_on <- TRUE
+gitbook_on <- FALSE  ##we just need turn  this on and off to switch between gitbook and pdf via paged.js
 
 ```
 
@@ -754,7 +754,7 @@ map %>%
 
 ## Phase 1
 
-Field assessments were conducted between `r format(min(pscis_phase1$date), format="%B %d %Y")` and `r format(max(pscis_phase1$date), format="%B %d %Y")` by Allan Irvine, R.P.Bio., Kyle Prince, P.Biol., Stevie Syer, Rafael Acosta Lugo and Brody Klenk. A total of `r n_distinct(pscis_phase1$my_crossing_reference)` Phase 1 assessments were conducted at `r pscis_phase1 %>% nrow()` sites with `r pscis_phase1 %>% filter(barrier_result == 'Passable') %>% nrow()` crossings considered "passable", `r pscis_phase1 %>% filter(barrier_result == 'Potential') %>% nrow() %>% english::as.english()` crossing considered "potential" barriers and `r pscis_phase1 %>% filter(barrier_result == 'Barrier') %>% nrow() ` crossing considered "barriers" according to threshold values based on culvert embedment, outlet drop, slope, diameter (relative to channel size) and length [@fish_passage_assessments].  Additionally, although all were considered fully passable, `r pscis_phase1 %>% filter(barrier_result == 'Unknown') %>% nrow() %>% english::as.english()` crossings assessed were fords. Georeferenced field maps are presented in `r if(gitbook_on){knitr::asis_output("[here](https://hillcrestgeo.ca/outgoing/fishpassage/projects/elk/) and available for bulk download as [Attachment 1](https://hillcrestgeo.ca/outgoing/fishpassage/projects/elk/archive/2021-01-31/elk_2021-01-31.zip).")} else knitr::asis_output("[Attachment 1](https://hillcrestgeo.ca/outgoing/fishpassage/projects/elk/archive/2021-01-31/elk_2021-01-31.zip).")` A summary of crossings assessed, a cost benefit analysis and priority ranking for follow up for Phase 1 sites presented in Table \@ref(tab:cost-est-phase-1). Detailed data with photos are presented in `r if(gitbook_on){knitr::asis_output("[Appendix - Phase 1 Fish Passage Assessment Data and Photos]")} else knitr::asis_output("[Attachment 3](https://github.com/NewGraphEnvironment/fish_passage_elk_2021_reporting/raw/master/docs/Attachment_3_Phase_1_Data_and_Photos.pdf)")`.
+Field assessments were conducted between `r format(min(pscis_phase1$date), format="%B %d %Y")` and `r format(max(pscis_phase1$date), format="%B %d %Y")` by Allan Irvine, R.P.Bio., Kyle Prince, P.Biol., Stevie Syer, Rafael Acosta Lugo and Brody Klenk. A total of `r n_distinct(pscis_phase1$my_crossing_reference)` Phase 1 assessments were conducted at `r pscis_phase1 %>% nrow()` sites with `r pscis_phase1 %>% filter(barrier_result == 'Passable') %>% nrow()` crossings considered "passable", `r pscis_phase1 %>% filter(barrier_result == 'Potential') %>% nrow() %>% english::as.english()` crossing considered "potential" barriers and `r pscis_phase1 %>% filter(barrier_result == 'Barrier') %>% nrow() ` crossing considered "barriers" according to threshold values based on culvert embedment, outlet drop, slope, diameter (relative to channel size) and length [@fish_passage_assessments].  Additionally, although all were considered fully passable, `r pscis_phase1 %>% filter(barrier_result == 'Unknown') %>% nrow() %>% english::as.english()` crossings assessed were fords. Georeferenced field maps are presented in `r if(gitbook_on){knitr::asis_output("[here](https://hillcrestgeo.ca/outgoing/fishpassage/projects/elk/) and available for bulk download as [Attachment 1](https://hillcrestgeo.ca/outgoing/fishpassage/projects/elk/archive/2022-03-17/elk_2022-03-17.zip).")} else knitr::asis_output("[Attachment 1](https://hillcrestgeo.ca/outgoing/fishpassage/projects/elk/archive/2022-03-17/elk_2021-03-17.zip).")` A summary of crossings assessed, a cost benefit analysis and priority ranking for follow up for Phase 1 sites presented in Table \@ref(tab:cost-est-phase-1). Detailed data with photos are presented in `r if(gitbook_on){knitr::asis_output("[Appendix - Phase 1 Fish Passage Assessment Data and Photos]")} else knitr::asis_output("[Attachment 3](https://github.com/NewGraphEnvironment/fish_passage_elk_2021_reporting/raw/master/docs/Attachment_3_Phase_1_Data_and_Photos.pdf)")`.
 
 
 <br>
@@ -1058,12 +1058,6 @@ Recommendations for potential incorporation into collaborative watershed connect
 
 
 <!--chapter:end:0500-recomendations.Rmd-->
-
-# Appendix - Phase 1 Fish Passage Assessment Data and Photos {-}
-
-`r if(gitbook_on){knit(text = unlist(tabs_phase1))} else knit(text = unlist(tabs_phase1_pdf))`
-
-<!--chapter:end:0600-appendix.Rmd-->
 
 ---
 output: html_document
@@ -2228,7 +2222,7 @@ The stream was surveyed downstream from the culvert for `r my_priority_info(loc 
 
 ## Stream Characteristics Upstream {-}
 
-The stream was surveyed immediately upstream from `r as.character(my_site)` for approximately `r my_priority_info(loc = 'us') %>% pull(survey_length_m)`m to a bridge (PSCIS 197794) on the Fortis gas pipline  `r if(gitbook_on){knitr::asis_output("(Figures \\@ref(fig:photo-197793-03) - \\@ref(fig:photo-197793-04))")} else(knitr::asis_output("(Figure \\@ref(fig:photo-197793-d02))"))`. Within the area surveyed, total cover amount was rated as `r my_habitat_info2(loc = 'us') %>% filter(rowname == 'total cover') %>% pull(v)` with  `r my_habitat_info2(loc = 'us') %>% filter(v == 'dominant') %>% pull(rowname)` dominant. Cover was also present as `r my_habitat_info2(loc = 'us') %>% filter(v == 'sub-dominant') %>% pull(rowname) %>% knitr::combine_words()` (Table \@ref(tab:tab-habitat-summary-197793)). The average channel width was `r my_habitat_info3(loc = 'us', row = 'avg channel width m')`m, the average wetted width was `r my_habitat_info3(loc = 'us', row = 'avg wetted width m')`m and the average gradient was `r my_habitat_info3(loc = 'us', row = 'average gradient percent')`%.  The dominant substrate was `r my_habitat_info3(loc = 'us', row = "bed material dominant")` with `r my_habitat_info3(loc = 'us', row = "bed material subdominant")` subdominant. Extensive areas of gravels suitable for spawning resident salmonids were present and there was evidence of high flows, significant erosion and a deeply incised channel and eroding banks. Habitat value was rated as `r my_priority_info(loc = 'us') %>% pull(hab_value)` value resident salmonid rearing and spawning. 
+The stream was surveyed immediately upstream from `r as.character(my_site)` for approximately `r my_priority_info(loc = 'us') %>% pull(survey_length_m)`m to a bridge (PSCIS 197794) on the Fortis gas pipline  `r if(gitbook_on){knitr::asis_output("(Figures \\@ref(fig:photo-197793-03) - \\@ref(fig:photo-197793-04))")} else(knitr::asis_output("(Figure \\@ref(fig:photo-197793-d02))"))`. Within the area surveyed, total cover amount was rated as `r my_habitat_info2(loc = 'us') %>% filter(rowname == 'total cover') %>% pull(v)` with  `r my_habitat_info2(loc = 'us') %>% filter(v == 'dominant') %>% pull(rowname)` dominant. Cover was also present as `r my_habitat_info2(loc = 'us') %>% filter(v == 'sub-dominant') %>% pull(rowname) %>% knitr::combine_words()` (Table \@ref(tab:tab-habitat-summary-197793)). The average channel width was `r my_habitat_info3(loc = 'us', row = 'avg channel width m')`m and the average gradient was `r my_habitat_info3(loc = 'us', row = 'average gradient percent')`%.  The dominant substrate was `r my_habitat_info3(loc = 'us', row = "bed material dominant")` with `r my_habitat_info3(loc = 'us', row = "bed material subdominant")` subdominant. Extensive areas of gravels suitable for spawning resident salmonids were present and there was evidence of high flows, significant erosion and a deeply incised channel and eroding banks. Habitat value was rated as `r my_priority_info(loc = 'us') %>% pull(hab_value)` for salmonid rearing and spawning due to the complete lack of water. 
 
 <br>
 

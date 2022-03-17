@@ -15,7 +15,7 @@ author: |
 
 date: |
  |
- | Version 0.1.3 - DRAFT
+ | Version 0.1.4 - DRAFT
  | `r format(Sys.Date(), "%Y-%m-%d")`
 toc-title: Table of Contents
 site: bookdown::bookdown_site
@@ -36,8 +36,8 @@ description: "2021 Reporting for Fish Passage Restoration Planning Assessments i
 
 
 ```{r switch-gitbook-pagedown, echo=FALSE}
-gitbook_on <- TRUE
-# gitbook_on <- FALSE  ##we just need turn  this on and off to switch between gitbook and pdf via paged.js
+# gitbook_on <- TRUE
+gitbook_on <- FALSE  ##we just need turn  this on and off to switch between gitbook and pdf via paged.js
 
 ```
 

@@ -35,11 +35,21 @@ preview_chapter('index.Rmd')
 #################################################################################################
 ##go to the index.Rmd and change gitbook_on <- TRUE
 #################################################################################################
+{
+  # These files are included in the gitbook version already so we move them out of the build
+files_to_move <- list.files(pattern = ".Rmd$") %>%
+  stringr::str_subset(., '2200|2300|2400', negate = F) #move the attachments out
+files_destination <- paste0('hold/', files_to_move)
+
+##move the files
+mapply(file.rename, from = files_to_move, to = files_destination)
 
 rmarkdown::render_site(output_format = 'bookdown::gitbook',
                        encoding = 'UTF-8')
 
-
+##move the files from the hold file back to the main file
+mapply(file.rename, from = files_destination, to = files_to_move)
+}
 
 # pdf version
 
@@ -47,6 +57,7 @@ rmarkdown::render_site(output_format = 'bookdown::gitbook',
 ##go to the index.Rmd and change gitbook_on <- FALSE
 #################################################################################################
 ##move the phase 1 appendix out of the main directory to a backup file or else the file is too big
+# make sure the pdf is not open in your viewer!!!
 
 {
   file.rename('0600-appendix.Rmd', 'hold/0600-appendix.Rmd')
@@ -96,14 +107,14 @@ mapply(file.rename, from = files_destination, to = files_to_move)
 
 pagedown::chrome_print(
   paste0(getwd(),'/Elk2021.html'),
-  output = paste0(getwd(),'/docs/Attachment_3_Phase_1_Data_and_Photos_prep.pdf')
+  output = paste0(getwd(),'/docs/Attachment_2_Phase_1_Data_and_Photos_prep.pdf')
 )
 
 ##now get rid of the first 10 pages
-length <- pdftools::pdf_length(paste0(getwd(), "/docs/Attachment_3_Phase_1_Data_and_Photos_prep.pdf"))
+length <- pdftools::pdf_length(paste0(getwd(), "/docs/Attachment_2_Phase_1_Data_and_Photos_prep.pdf"))
 
-pdftools::pdf_subset(paste0(getwd(), "/docs/Attachment_3_Phase_1_Data_and_Photos_prep.pdf"),
-           pages = 11:length, output = paste0(getwd(), "/docs/Attachment_3_Phase_1_Data_and_Photos.pdf"))
+pdftools::pdf_subset(paste0(getwd(), "/docs/Attachment_2_Phase_1_Data_and_Photos_prep.pdf"),
+           pages = 11:length, output = paste0(getwd(), "/docs/Attachment_2_Phase_1_Data_and_Photos.pdf"))
 
 ##clean out the old file
 file.remove(paste0(getwd(), "/docs/Attachment_3_Phase_1_Data_and_Photos_prep.pdf"))

@@ -20,7 +20,7 @@ my_site <- 197844
 
 ## Site Location {-}
 
-PSCIS crossing `r as.character(my_site)` is located on a `r my_pscis_info() %>% pull(stream_name)` 2.5km west of Fernie on `r my_overview_info() %>% pull(road_name)`.  The crossing is located within the Mount Fernie Provincial Park Boundary and approximately 75m  upstream from the confluence with Lizard Creek and the responsibility of the Ministry of Environment and Climate Change Strategy. The area is a popular recreational destination for hikers and mountain bikers.
+PSCIS crossing `r as.character(my_site)` is located on a `r my_pscis_info() %>% pull(stream_name)` on the `r my_overview_info() %>% pull(road_name)`.  The site is located approximately 11km west of the junction with the Wigwam FSR at a point approximately 30k south of Morrissey. `r my_overview_info() %>% pull(road_name)`(forest file ID 5466) is ultimately the responsibility of Ministry of Forests, Lands, Natural Resource Operations and Rural Development - Rocky Mountain Forest District. Although unconfirmed, Canfor may have a road use permit for this section of FSR.
 
 
 <br>
@@ -96,7 +96,7 @@ Should restoration/maintenance activities proceed at the site, replacement of PS
 
 ## Conclusion {-}
 
-There was `r my_priority_info() %>% pull(upstream_habitat_length_km)`km of viable juvenile rearing habitat upstream of crossing `r as.character(my_site)`. Habitat in the areas surveyed upstream of the culvert were rated as `r my_priority_info(sit = my_site, loc = 'us') %>% pull(hab_value)` value for salmonid rearing.   `r my_overview_info() %>% pull(road_name)`, at the crossing location, is located within the Mount Fernie Provincial Park Boundary and is the responsibility of the Ministry of Environment and Climate Change Strategy.  As the crossing is located approximately 75m  upstream from the confluence with Lizard Creek where westslope cutthrout trout spawning is known to occur, remediation of fish passage at the site could provide sdditional habitat for fry and juveniles migrating from the mainstem of Lizard Creek.  Crossing `r as.character(my_site)` was ranked as a `r my_priority_info() %>% pull(priority)` priority for proceeding to design for replacement. 
+There was `r my_priority_info() %>% pull(upstream_habitat_length_km)`km of steep but viable juvenile rearing habitat surveyed upstream of crossing `r as.character(my_site)` before a 1.1m high rock drop considered to likely represent the upstream limit of fish migration.  Habitat in the area surveyed was rated as `r my_priority_info(sit = my_site, loc = 'us') %>% pull(hab_value)` value for salmonid rearing with frequent pockets of gravel suitable for spawning.   Although Canfor may have a road use permit for this section of FSR, `r my_overview_info() %>% pull(road_name)` is detailed as the responsibility of Ministry of Forests, Lands, Natural Resource Operations and Rural Development - Rocky Mountain Forest District [@flnrordForestTenureRoad2020]. Crossing `r as.character(my_site)` was ranked as a `r my_priority_info() %>% pull(priority)` priority for proceeding to design for replacement. 
 
 `r if(gitbook_on){knitr::asis_output("<br>")} else knitr::asis_output("\\pagebreak")`
 

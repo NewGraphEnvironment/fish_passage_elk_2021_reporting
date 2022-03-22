@@ -20,7 +20,7 @@ my_site <- 197796
 
 ## Site Location {-}
 
-PSCIS crossing `r as.character(my_site)` is located on a `r my_pscis_info() %>% pull(stream_name)` 30km south-east Fernie on an unnamed spur road.  The site was located within the Wigwam Flats - Mt. Broadwood/Sportsmans Ridge access management area with a locked gate to prevent entry by motorized vehicles [@geobc2021MapWigwam].  The access gate is located crossing is located approximately 3km up from the junction of the Lodgepole FSR and the Wigwam FSR. The culvert was located `r round(my_bcfishpass() %>% pull(downstream_route_measure)*0.001, 1)`km upstream from the confluence with Lodgepole Creek. No information was available regarding road tenure.
+PSCIS crossing `r as.character(my_site)` is located on a `r my_pscis_info() %>% pull(stream_name)` 30km south-east Fernie on an unnamed spur road.  The site was located within the Wigwam Flats - Mt. Broadwood/Sportsmans Ridge access management area with a locked gate to prevent entry by motorized vehicles [@geobc2021MapWigwam].  The access gate is located approximately 3km up from the junction of the Lodgepole FSR and the Wigwam FSR. The culvert was located `r round(my_bcfishpass() %>% pull(downstream_route_measure)*0.001, 1)`km upstream from the confluence with Lodgepole Creek. No information was available regarding road tenure.
 
 
 <br>
@@ -95,7 +95,7 @@ Should restoration/maintenance activities proceed at the site, replacement of PS
 
 ## Conclusion {-}
 
-There was `r as.character(my_site)` is `r my_priority_info() %>% pull(upstream_habitat_length_km)`km of habitat upstream of crossing rated as `r my_priority_info(sit = my_site, loc = 'us') %>% pull(hab_value)` value for salmonid rearing and spawning. Although unconfirmed, this road within the Wigwam Flats - Mt. Broadwood/Sportsmans Ridge access management area is likely the responsibility of the Ministry of Forests, Lands, Natural Resource Operations and Rural Development - Rocky Mountain Forest District.  Crossing `r as.character(my_site)` was observed to have extensive damage within the structure and was ranked as a `r my_priority_info() %>% pull(priority)` priority for proceeding to design for replacement. The site could also be considered for removal and road deactivation once silviculture obligations have been met in the area.
+There was `r as.character(my_site)` is `r my_priority_info() %>% pull(upstream_habitat_length_km)`km of habitat upstream of crossing rated as `r my_priority_info(sit = my_site, loc = 'us') %>% pull(hab_value)` value for salmonid rearing and spawning. The road is within the Wigwam Flats - Mt. Broadwood/Sportsmans Ridge access management area and no information was available regarding road tenure. Crossing `r as.character(my_site)` was observed to have extensive damage within the structure and was ranked as a `r my_priority_info() %>% pull(priority)` priority for proceeding to design for replacement. The site could also be considered for removal and road deactivation once silviculture obligations have been met in the area.
 
 `r if(gitbook_on){knitr::asis_output("<br>")} else knitr::asis_output("\\pagebreak")`
 

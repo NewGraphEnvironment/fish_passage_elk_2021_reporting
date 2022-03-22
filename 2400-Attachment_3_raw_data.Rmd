@@ -2,6 +2,6 @@
 
 # **Attachment 3 - Habitat Assessment Data** {-}
 
-Raw habitat assessment data included in digital format as [Attachment 3 - https://github.com/NewGraphEnvironment/fish_passage_elk_2021_reporting/raw/master/data/habitat_confirmations.xls](https://github.com/NewGraphEnvironment/fish_passage_elk_2021_reporting/raw/master/data/habitat_confirmations.xls))
+Raw habitat assessment data included in digital format as [Attachment 3 - https://github.com/NewGraphEnvironment/fish_passage_elk_2021_reporting/raw/master/data/habitat_confirmations.xls](https://github.com/NewGraphEnvironment/fish_passage_elk_2021_reporting/raw/master/data/habitat_confirmations.xls)
 
 

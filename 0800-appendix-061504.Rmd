@@ -23,7 +23,7 @@ my_site <- 61504
 
 ## Site Location {-}
 
-PSCIS crossing `r as.character(my_site)` is located on `r my_pscis_info() %>% pull(stream_name)` on the `r my_overview_info() %>% pull(road_name)` 5.5km east of Fernie, BC. The `r my_overview_info(site = my_site) %>% pull(road_name)` is classified as an unpaved local road with the Ministry of Transportation and Infrastructure detailed as a custodian partner within the digital road atlas [@flnrordForestTenureRoad2020]. 
+PSCIS crossing `r as.character(my_site)` is located on `r my_pscis_info() %>% pull(stream_name)` on the `r my_overview_info() %>% pull(road_name)` 5.5km east of Fernie, BC. `r my_overview_info(site = my_site) %>% pull(road_name)` is classified as an unpaved local road with the Ministry of Transportation and Infrastructure detailed as a custodian partner within the digital road atlas [@flnrordForestTenureRoad2020]. Phil MacDonald (BC Timber Sales Road Manager) has indicated that most the drainage is private land managed forest owned by CanWel Fibre Group. 
 
 
 <br>
@@ -43,7 +43,7 @@ A large flood event on Coal Creek in 1995 caused overbank flooding, channel shif
 
 <br>
 
-@hughes_millions2020CoalCreek report that riprap to stabilize the streambanks and reduce meandering is frequently employed near existing and historical infrastructure on Coal Creek.  Elk River Alliance have drafted a plan to restore the floodpain adjacent to the historic township through removal of invasive species and planting/seeding of native vegetation [@hughes_millions2020CoalCreek]. A major storm event on November 14-15, 2021 caused extensive damage to Coal Creek Road and changed the course of the river near the historic townsite [@tibballs2021PHOTOSAerial]. 
+@hughes_millions2020CoalCreek report that riprap to stabilize the streambanks and reduce meandering is frequently employed near existing and historical infrastructure on Coal Creek.  Elk River Alliance have drafted a plan to restore the floodpain adjacent to the historic township through removal of invasive species and planting/seeding of native vegetation [@hughes_millions2020CoalCreek]. A major storm event on November 14-15, 2021 caused extensive damage to Coal Creek Road and changed the course of the river near the historic townsite [@tibballs2021PHOTOSAerial]. This event may have washed out this crossing since the confirmation was completed.
 
 <br>
 
@@ -125,7 +125,7 @@ A rough estimate of the cost of works to remove the debris creating cascade adja
 
 ## Conclusion {-}
 
-Although the 30 - 55cm high cascade adjacent to PSCIS bridge `r as.character(my_site)` is unlikely to be a signifcant barrier for the movement of migrating adult westslope cutthrout trout the obstacle may prevent movement upstream by fry and juveniles.  There is an estimated `r my_priority_info() %>% pull(upstream_habitat_length_km)`km of westslope cutthrout trout rearing and/or spawning habitat upstream of crossing `r as.character(my_site)`. Although, small cascades within stream networks are common and often present opportunities for upstream passage (particularly for adult fish) at different flows, removal of debris from the channel adjacent to `r as.character(my_site)` could reduce the risk that the cascade may impact fish migration (particularly for younger life stages). Habitat in the area surveyed was rated as `r my_priority_info(sit = my_site, loc = 'us') %>% pull(hab_value)` value for salmonid rearing/spawning as this is a large system with deep pools and gravels present suitable for spawning. Overall, the site was ranked as a moderate priority for remedial works which would include removal of debris from the channel.
+Although the 30 - 55cm high cascade adjacent to PSCIS bridge `r as.character(my_site)` is unlikely to be a signifcant barrier for the movement of migrating adult westslope cutthrout trout the obstacle may prevent movement upstream by fry and juveniles.  There is an estimated `r my_priority_info() %>% pull(upstream_habitat_length_km)`km of westslope cutthrout trout rearing and/or spawning habitat upstream of crossing `r as.character(my_site)`. Although, small cascades within stream networks are common and often present opportunities for upstream passage (particularly for adult fish) at different flows, removal of debris from the channel adjacent to `r as.character(my_site)` could reduce the risk that the cascade may impact fish migration (particularly for younger life stages). Habitat in the area surveyed was rated as `r my_priority_info(sit = my_site, loc = 'us') %>% pull(hab_value)` value for salmonid rearing/spawning as this is a large system with deep pools and gravels present suitable for spawning. Overall, the site was ranked as a high priority for remedial works which would include removal of debris from the channel. However, as noted earlier, a major storm event in November 2021 caused extensive damage to Coal Creek Road and this flood event may have washed out the crossing since the confirmation was completed. A reassessment of the entire Coal Creek Road system once repairs have been completed is recommended.
 
 <br>
 

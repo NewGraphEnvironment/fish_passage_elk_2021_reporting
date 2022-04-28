@@ -58,6 +58,8 @@ mapply(file.rename, from = files_destination, to = files_to_move)
 #################################################################################################
 ##move the phase 1 appendix out of the main directory to a backup file or else the file is too big
 # make sure the pdf is not open in your viewer!!!
+filename_html <- 'Elk2021'
+
 
 {
   file.rename('0600-appendix.Rmd', 'hold/0600-appendix.Rmd')
@@ -73,6 +75,10 @@ mapply(file.rename, from = files_destination, to = files_to_move)
     paste0(getwd(),'/Elk2021.html'),
     output = paste0(getwd(),'/docs/Elk2021.pdf')
   )
+
+  tools::compactPDF(paste0(getwd(), "/docs/", filename_html, ".pdf"),
+                    gs_quality = 'printer',
+                    gs_cmd = "C:/Program Files/gs/gs9.56.1/bin/gswin64.exe")
 
   # get rid of the html as its too big and not needed
   file.remove(paste0(getwd(), "/Elk2021.html"))

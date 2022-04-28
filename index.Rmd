@@ -13,7 +13,7 @@ author: |
 
 date: |
  |
- | Version 1.0.1
+ | Version 1.0.2
  | `r format(Sys.Date(), "%Y-%m-%d")`
 toc-title: Table of Contents
 site: bookdown::bookdown_site
@@ -34,8 +34,8 @@ description: "2021 Reporting for Fish Passage Restoration Planning Assessments i
 
 
 ```{r switch-gitbook-pagedown, echo=FALSE}
-gitbook_on <- TRUE
-# gitbook_on <- FALSE  ##we just need turn  this on and off to switch between gitbook and pdf via paged.js
+# gitbook_on <- TRUE
+gitbook_on <- FALSE  ##we just need turn  this on and off to switch between gitbook and pdf via paged.js
 
 ```
 
@@ -86,6 +86,6 @@ Modern civilization has a long journey ahead to acknowledge and address the hist
 
 ```{js, logo-header, echo = FALSE, eval= T}
 title=document.getElementById('header');
-title.innerHTML = '<img src="fig/new graph text only.png" alt="NewGraph">' + title.innerHTML
+title.innerHTML = '<img src="fig/logo.png" alt="NewGraph">' + title.innerHTML
 ```
 

@@ -53,7 +53,7 @@ pscis_all_sf <- pscis_all %>%
 
 
 pscis_all_sf <- poisspatial::ps_elevation_google(pscis_all_sf,
-                                        key = google_api_key,
+                                        key = Sys.getenv('GOOG_API_KEY'),
                                         Z = 'elev') %>%
   mutate(elev = round(elev, 0))
 

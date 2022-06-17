@@ -1,3 +1,9 @@
+# fish_passage_elk_2021_reporting 1.0.3
+
+  * update R to 4.2.0
+  * call google api key from environmental variable.
+  * no content changes
+
 # fish_passage_elk_2021_reporting 1.0.2
 
 * updated logo

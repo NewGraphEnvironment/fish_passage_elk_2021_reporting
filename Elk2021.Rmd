@@ -34,8 +34,8 @@ description: "2021 Reporting for Fish Passage Restoration Planning Assessments i
 
 
 ```{r switch-gitbook-pagedown, echo=FALSE}
-# gitbook_on <- TRUE
-gitbook_on <- FALSE  ##we just need turn  this on and off to switch between gitbook and pdf via paged.js
+gitbook_on <- TRUE
+# gitbook_on <- FALSE  ##we just need turn  this on and off to switch between gitbook and pdf via paged.js
 
 ```
 
@@ -1056,6 +1056,12 @@ Recommendations for potential incorporation into collaborative watershed connect
 
 
 <!--chapter:end:0500-recomendations.Rmd-->
+
+# Appendix - Phase 1 Fish Passage Assessment Data and Photos {-}
+
+`r if(gitbook_on){knit(text = unlist(tabs_phase1))} else knit(text = unlist(tabs_phase1_pdf))`
+
+<!--chapter:end:0600-appendix.Rmd-->
 
 ---
 output: html_document
@@ -2742,34 +2748,4 @@ xfun::session_info()
 ```
 
 <!--chapter:end:2100-session-info.Rmd-->
-
-
-
-# **Attachment 1 - Maps** {-}
-
-All georeferenced field maps are presented at https://hillcrestgeo.ca/outgoing/fishpassage/projects/elk/archive/2022-03-17 and available for bulk download as [Attachment 1 - https://hillcrestgeo.ca/outgoing/fishpassage/projects/elk/archive/2022-03-17/elk_2022-03-17.zip](https://hillcrestgeo.ca/outgoing/fishpassage/projects/elk/archive/2022-03-17/elk_2022-03-17.zip).
-
-
-
-<!--chapter:end:2200-Attachment_1_Maps.Rmd-->
-
-
-
-# **Attachment 2 - Phase 1 Data and Photos** {-}
-
-Data and photos for all Phase 1 (fish passage assessments) are provided in [Attachment 2 - https://github.com/NewGraphEnvironment/fish_passage_elk_2021_reporting/raw/master/docs/Attachment_2.pdf](https://github.com/NewGraphEnvironment/fish_passage_elk_2021_reporting/raw/master/docs/Attachment_2.pdf)
-
-
-
-<!--chapter:end:2300-Attachment_2_Phase_1.Rmd-->
-
-
-
-# **Attachment 3 - Habitat Assessment Data** {-}
-
-Raw habitat assessment data included in digital format as [Attachment 3 - https://github.com/NewGraphEnvironment/fish_passage_elk_2021_reporting/raw/master/data/habitat_confirmations.xls](https://github.com/NewGraphEnvironment/fish_passage_elk_2021_reporting/raw/master/data/habitat_confirmations.xls)
-
-
-
-<!--chapter:end:2400-Attachment_3_raw_data.Rmd-->
 

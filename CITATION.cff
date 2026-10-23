@@ -1,0 +1,24 @@
+cff-version: 1.2.0
+message: If you cite this report, please cite it as below.
+title: Elk River Watershed Group Fish Passage Restoration Planning 2021
+authors:
+- family-names: Irvine
+  given-names: Allan
+  orcid: https://orcid.org/0000-0002-3495-2128
+date-released: '2022-06-17'
+url: https://www.newgraphenvironment.com/fish_passage_elk_2021_reporting/
+repository-code: https://github.com/NewGraphEnvironment/fish_passage_elk_2021_reporting
+preferred-citation:
+  type: report
+  title: Elk River Watershed Group Fish Passage Restoration Planning 2021
+  authors:
+  - family-names: Irvine
+    given-names: Allan
+    orcid: https://orcid.org/0000-0002-3495-2128
+  institution:
+    name: New Graph Environment Ltd.
+  year: 2022
+  date-published: '2022-06-17'
+  url: https://www.newgraphenvironment.com/fish_passage_elk_2021_reporting/
+  repository-code: https://github.com/NewGraphEnvironment/fish_passage_elk_2021_reporting
+
